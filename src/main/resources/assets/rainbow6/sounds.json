@@ -1,0 +1,18 @@
+{
+  "barricade_break": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:barricade_break"
+      }]
+  },
+  "barricade_place": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:barricade_place"
+      }]
+  }
+}

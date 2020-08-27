@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "facing=north,bottom=true,window=false": { "model": "rainbow6:block/barricade_bottom" },
+    "facing=south,bottom=true,window=false": { "model": "rainbow6:block/barricade_bottom" ,"y": 180},
+    "facing=west,bottom=true,window=false": { "model": "rainbow6:block/barricade_bottom" ,"y":270},
+    "facing=east,bottom=true,window=false": { "model": "rainbow6:block/barricade_bottom", "y":90},
+    "facing=up,bottom=true,window=false": { "model": "rainbow6:block/barricade_bottom", "x":-90},
+    "facing=down,bottom=true,window=false": { "model": "rainbow6:block/barricade_bottom", "x":90,"y":180},
+
+    "facing=north,bottom=false,window=false": { "model": "rainbow6:block/barricade_top" },
+    "facing=south,bottom=false,window=false": { "model": "rainbow6:block/barricade_top" ,"y": 180},
+    "facing=west,bottom=false,window=false": { "model": "rainbow6:block/barricade_top" ,"y":270},
+    "facing=east,bottom=false,window=false": { "model": "rainbow6:block/barricade_top", "y":90},
+    "facing=up,bottom=false,window=false": { "model": "rainbow6:block/barricade_top", "x":-90},
+    "facing=down,bottom=false,window=false": { "model": "rainbow6:block/barricade_top", "x":90,"y":180},
+
+    "facing=north,bottom=true,window=true": { "model": "rainbow6:block/barricade_bottom_window" },
+    "facing=south,bottom=true,window=true": { "model": "rainbow6:block/barricade_bottom_window" ,"y": 180},
+    "facing=west,bottom=true,window=true": { "model": "rainbow6:block/barricade_bottom_window" ,"y":270},
+    "facing=east,bottom=true,window=true": { "model": "rainbow6:block/barricade_bottom_window", "y":90},
+    "facing=up,bottom=true,window=true": { "model": "rainbow6:block/barricade_bottom_window", "x":-90},
+    "facing=down,bottom=true,window=true": { "model": "rainbow6:block/barricade_bottom_window", "x":90,"y":180},
+
+    "facing=north,bottom=false,window=true": { "model": "rainbow6:block/barricade_top_window" },
+    "facing=south,bottom=false,window=true": { "model": "rainbow6:block/barricade_top_window" ,"y": 180},
+    "facing=west,bottom=false,window=true": { "model": "rainbow6:block/barricade_top_window" ,"y":270},
+    "facing=east,bottom=false,window=true": { "model": "rainbow6:block/barricade_top_window", "y":90},
+    "facing=up,bottom=false,window=true": { "model": "rainbow6:block/barricade_top_window", "x":-90},
+    "facing=down,bottom=false,window=true": { "model": "rainbow6:block/barricade_top_window", "x":90,"y":180}
+  }
+}

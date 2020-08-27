@@ -1,0 +1,22 @@
+{
+  "parent":"block/block",
+  "textures": {
+    "particle": "rainbow6:block/barricade",
+    "wide": "rainbow6:block/barricade_wide",
+    "high": "rainbow6:block/barricade_high_top",
+    "front": "rainbow6:block/barricade_front_top"
+  },
+  "elements": [
+    {   "from": [ 0, 0, -1 ],
+      "to": [ 16, 16, 0 ],
+      "faces": {
+        "down":  {"uv": [ 0, 0, 16, 16 ], "texture": "#wide"},
+        "up":    {"uv": [ 0, 0, 16, 16 ], "texture": "#wide"},
+        "north": {"uv": [ 0, 0, 16, 16 ], "texture": "#front"},
+        "south": {"uv": [ 0, 0, 16, 16 ], "texture": "#front"},
+        "west":  {"uv": [ 0, 0, 16, 16 ], "texture": "#high"},
+        "east":  {"uv": [ 0, 0, 16, 16 ], "texture": "#high"}
+      }
+    }
+  ]
+}
