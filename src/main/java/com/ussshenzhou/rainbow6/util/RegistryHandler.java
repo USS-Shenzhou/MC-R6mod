@@ -14,14 +14,16 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onBlockReg(RegistryEvent.Register<Block> event){
         event.getRegistry().registerAll(
-                ModBlocks.barricade
+                ModBlocks.barricade,
+                ModBlocks.ironBlock
         );
     }
     @SubscribeEvent
     public static void onItemReg(RegistryEvent.Register<Item> event){
         event.getRegistry().registerAll(
                 ModItems.barricadeItem,
-                ModItems.logo
+                ModItems.logo,
+                ModItems.ironBlock
         );
     }
 
