@@ -1,8 +1,10 @@
 package com.ussshenzhou.rainbow6.util;
 
 import com.ussshenzhou.rainbow6.blocks.ModBlocks;
+import com.ussshenzhou.rainbow6.entities.ModEntityTypes;
 import com.ussshenzhou.rainbow6.items.ModItems;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -23,7 +25,8 @@ public class RegistryHandler {
         event.getRegistry().registerAll(
                 ModItems.barricadeItem,
                 ModItems.logo,
-                ModItems.ironBlock
+                ModItems.ironBlock,
+                ModItems.impactGrenade
         );
     }
 
@@ -31,7 +34,14 @@ public class RegistryHandler {
     public static void onSoundsReg(RegistryEvent.Register<SoundEvent> event){
         event.getRegistry().registerAll(
                 ModSounds.BARRICADE_BREAK,
-                ModSounds.BARRICADE_PLACE
+                ModSounds.BARRICADE_PLACE,
+                ModSounds.IMPACTGRENADE_THROW
+        );
+    }
+    @SubscribeEvent
+    public static void onEntityTypeRegistry(RegistryEvent.Register<EntityType<?>> event){
+        event.getRegistry().registerAll(
+                ModEntityTypes.impactgrenadeentitytype
         );
     }
 }

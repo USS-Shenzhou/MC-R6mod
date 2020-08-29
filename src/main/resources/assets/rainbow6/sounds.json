@@ -14,5 +14,13 @@
       {
         "name": "rainbow6:barricade_place"
       }]
+  },
+  "impactgrenade_throw": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:impactgrenade_throw"
+      }]
   }
 }
