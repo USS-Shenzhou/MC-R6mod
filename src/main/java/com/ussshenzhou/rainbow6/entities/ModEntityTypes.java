@@ -4,11 +4,11 @@ import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 
 public class ModEntityTypes {
-    /*public static EntityType c4entitytype = EntityType.Builder.<c4entity>create(c4entity::new,EntityClassification.MISC)
+    public static EntityType nitroCellEntityType = EntityType.Builder.<NitroCellEntity>create(NitroCellEntity::new,EntityClassification.MISC)
             .size(0.25f,0.12f)
-            .build("c4")
-            .setRegistryName("rainbow6","c4");*/
-    public static EntityType impactgrenadeentitytype = EntityType.Builder.<ImpactGrenadeEntity>create(ImpactGrenadeEntity::new,EntityClassification.MISC)
+            .build("nitrocell")
+            .setRegistryName("rainbow6","nitrocell");
+    public static EntityType impactGrenadeEntityType = EntityType.Builder.<ImpactGrenadeEntity>create(ImpactGrenadeEntity::new,EntityClassification.MISC)
             .size(0.15f,0.15f)
             .build("impactgrenade")
             .setRegistryName("rainbow6","impactgrenade");

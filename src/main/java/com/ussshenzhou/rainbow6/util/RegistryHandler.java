@@ -26,7 +26,9 @@ public class RegistryHandler {
                 ModItems.barricadeItem,
                 ModItems.logo,
                 ModItems.ironBlock,
-                ModItems.impactGrenade
+                ModItems.impactGrenade,
+                ModItems.nitroCell,
+                ModItems.nitroCellExploder
         );
     }
 
@@ -35,13 +37,16 @@ public class RegistryHandler {
         event.getRegistry().registerAll(
                 ModSounds.BARRICADE_BREAK,
                 ModSounds.BARRICADE_PLACE,
-                ModSounds.IMPACTGRENADE_THROW
+                ModSounds.IMPACT_GRENADE_THROW,
+                ModSounds.NITRO_CELL_THROW,
+                ModSounds.NITRO_CELL_HIT
         );
     }
     @SubscribeEvent
     public static void onEntityTypeRegistry(RegistryEvent.Register<EntityType<?>> event){
         event.getRegistry().registerAll(
-                ModEntityTypes.impactgrenadeentitytype
+                ModEntityTypes.impactGrenadeEntityType,
+                ModEntityTypes.nitroCellEntityType
         );
     }
 }

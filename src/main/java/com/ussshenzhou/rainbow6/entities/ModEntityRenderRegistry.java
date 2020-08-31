@@ -9,8 +9,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ModEntityRenderRegistry {
     @SubscribeEvent
     public static void registryEntityRenders(final FMLClientSetupEvent event) {
-        //RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.c4entitytype, c4renderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.impactgrenadeentitytype, ImpactGrenadeEntityRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.nitroCellEntityType, NitroCellEntityRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.impactGrenadeEntityType, ImpactGrenadeEntityRenderer::new);
         //RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.gumineentitytype,guminerenderer::new);
         //RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.RemoteGasGrenadeEntityType,RemoteGasGrenadeRenderer::new);
     }

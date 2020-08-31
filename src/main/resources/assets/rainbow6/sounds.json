@@ -15,12 +15,28 @@
         "name": "rainbow6:barricade_place"
       }]
   },
-  "impactgrenade_throw": {
+  "impact_grenade_throw": {
     "category": "player",
     "replace": "true",
     "sounds": [
       {
-        "name": "rainbow6:impactgrenade_throw"
+        "name": "rainbow6:impact_grenade_throw"
+      }]
+  },
+  "nitro_cell_throw": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:nitro_cell_throw"
+      }]
+  },
+  "nitro_cell_hit": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:nitro_cell_hit"
       }]
   }
 }
