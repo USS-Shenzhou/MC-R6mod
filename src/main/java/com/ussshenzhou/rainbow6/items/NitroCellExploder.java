@@ -16,7 +16,7 @@ import java.util.function.Predicate;
 public class NitroCellExploder extends Item {
     public NitroCellExploder(){
         super(new Properties().group(ModItemGroups.Group1));
-        this.setRegistryName("c4_exploder");
+        this.setRegistryName("nitrocell_exploder");
     }
     private static final Predicate<NitroCellEntity> ifexist = new Predicate<NitroCellEntity>() {
         @Override
