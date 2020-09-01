@@ -125,6 +125,11 @@ public class Barricade extends Block {
         }
     }
 
+    public void cancelPlace(PlayerEntity player){
+        ItemStack returnStack = new ItemStack(ModItems.barricadeItem);
+        player.addItemStackToInventory(returnStack);
+    }
+
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (placer instanceof PlayerEntity){
@@ -133,12 +138,11 @@ public class Barricade extends Block {
             worldIn.setBlockState(pos,Blocks.AIR.getDefaultState());
             //invalid up-or-down direction
             if (direction == Direction.UP||direction == Direction.DOWN){
-                ItemStack returnStack = new ItemStack(ModItems.barricadeItem);
-                ((PlayerEntity)placer).addItemStackToInventory(returnStack);
+                cancelPlace((PlayerEntity)placer);
             }
             else{
                 //a window
-                if (worldIn.getBlockState(pos.offset(direction.getOpposite(),1).add(0,-1,0)).getBlock() instanceof AirBlock||worldIn.getBlockState(pos.add(0,-1,0)).getBlock() instanceof AirBlock){
+                if (worldIn.getBlockState(pos.offset(direction,1).add(0,-1,0)).getBlock() instanceof AirBlock||worldIn.getBlockState(pos.add(0,-1,0)).getBlock() instanceof AirBlock){
                     //a window without glass
                     if (!(worldIn.getBlockState(pos.offset(direction.getOpposite(),1)).getBlock() instanceof PaneBlock)){
                         //move pos to the right X/Z-place for barricade
@@ -150,8 +154,15 @@ public class Barricade extends Block {
                         //move pos to the right Y-place for barricade
                         pos=pos.add(0,1,0);
                     }
-                    worldIn.setBlockState(pos,state.with(BOTTOM,false).with(WINDOW,true).with(DIRECTION,direction));
-                    worldIn.setBlockState(pos.add(0,-1,0),state.with(BOTTOM,true).with(WINDOW,true).with(DIRECTION,direction));
+                    //only can be placed on a window correctly
+                    if (worldIn.getBlockState(pos).getBlock() instanceof AirBlock && worldIn.getBlockState(pos.add(0,-1,0)).getBlock() instanceof AirBlock){
+                        worldIn.setBlockState(pos,state.with(BOTTOM,false).with(WINDOW,true).with(DIRECTION,direction));
+                        worldIn.setBlockState(pos.add(0,-1,0),state.with(BOTTOM,true).with(WINDOW,true).with(DIRECTION,direction));
+                        worldIn.playSound(pos.getX(),pos.getY()-0.5,pos.getZ(),ModSounds.BARRICADE_PLACE, SoundCategory.PLAYERS,1.0f,1.0f,true);
+                    }
+                    else {
+                        cancelPlace((PlayerEntity)placer);
+                    }
                 }
                 //a door
                 else {
@@ -161,10 +172,16 @@ public class Barricade extends Block {
                         //move pos to the right Y-place for barricade
                         pos=pos.add(0,1,0);
                     }
-                    worldIn.setBlockState(pos,state.with(BOTTOM,false).with(WINDOW,false).with(DIRECTION,direction));
-                    worldIn.setBlockState(pos.add(0,-1,0),state.with(BOTTOM,true).with(WINDOW,false).with(DIRECTION,direction));
+                    //only can be placed on a door correctly
+                    if (worldIn.getBlockState(pos).getBlock() instanceof AirBlock && worldIn.getBlockState(pos.add(0,-1,0)).getBlock() instanceof AirBlock){
+                        worldIn.setBlockState(pos,state.with(BOTTOM,false).with(WINDOW,false).with(DIRECTION,direction));
+                        worldIn.setBlockState(pos.add(0,-1,0),state.with(BOTTOM,true).with(WINDOW,false).with(DIRECTION,direction));
+                        worldIn.playSound(pos.getX(),pos.getY()-0.5,pos.getZ(),ModSounds.BARRICADE_PLACE, SoundCategory.PLAYERS,1.0f,1.0f,true);
+                    }
+                    else {
+                        cancelPlace((PlayerEntity)placer);
+                    }
                 }
-                worldIn.playSound(pos.getX(),pos.getY()-0.5,pos.getZ(),ModSounds.BARRICADE_PLACE, SoundCategory.PLAYERS,1.0f,1.0f,true);
             }
         }
     }
