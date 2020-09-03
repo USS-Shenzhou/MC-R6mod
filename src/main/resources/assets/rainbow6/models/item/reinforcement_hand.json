@@ -1,0 +1,32 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "rainbow6:item/reinforcement_hand"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 5],
+			"to": [16, 5, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 13]},
+			"faces": {
+				"north": {"uv": [0, 0, 8, 2.5], "texture": "#0"},
+				"east": {"uv": [8, 8, 10.5, 10.5], "texture": "#0"},
+				"south": {"uv": [0, 2.5, 8, 5], "texture": "#0"},
+				"west": {"uv": [8, 0, 10.5, 2.5], "texture": "#0"},
+				"up": {"uv": [8, 7.5, 0, 5], "texture": "#0"},
+				"down": {"uv": [8, 7.5, 0, 10], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [-6.25, 7.5, 0],
+			"scale": [1.5, 1, 1]
+		},
+		"firstperson_righthand": {
+			"translation": [-8.75, 4.5, 0],
+			"scale": [1.9, 1, 0.68]
+		}
+	}
+}

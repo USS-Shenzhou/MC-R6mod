@@ -65,7 +65,7 @@ public class NitroCellEntity extends ProjectileItemEntity {
     private static final DataParameter<Boolean> IGNITED = EntityDataManager.createKey(NitroCellEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Integer> STATE = EntityDataManager.createKey(NitroCellEntity.class, DataSerializers.VARINT);
     private int fuseTime = 1;
-    private float explosionRadius = 2.2f;
+    private float explosionRadius = 2.0f;
     private int timeSinceIgnited = 1;
 
     @Override

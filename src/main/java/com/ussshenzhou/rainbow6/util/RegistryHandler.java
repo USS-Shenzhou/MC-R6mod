@@ -3,13 +3,20 @@ package com.ussshenzhou.rainbow6.util;
 import com.ussshenzhou.rainbow6.blocks.ModBlocks;
 import com.ussshenzhou.rainbow6.entities.ModEntityTypes;
 import com.ussshenzhou.rainbow6.items.ModItems;
+import com.ussshenzhou.rainbow6.tileentities.ModTileEntityTypes;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class RegistryHandler {
@@ -17,15 +24,17 @@ public class RegistryHandler {
     public static void onBlockReg(RegistryEvent.Register<Block> event){
         event.getRegistry().registerAll(
                 ModBlocks.barricade,
-                ModBlocks.ironBlock
+                ModBlocks.ironBlock,
+                ModBlocks.reinforcement
         );
     }
     @SubscribeEvent
     public static void onItemReg(RegistryEvent.Register<Item> event){
         event.getRegistry().registerAll(
-                ModItems.barricadeItem,
                 ModItems.logo,
+                ModItems.barricadeItem,
                 ModItems.ironBlock,
+                ModItems.reinforcement,
                 ModItems.impactGrenade,
                 ModItems.nitroCell,
                 ModItems.nitroCellExploder
@@ -35,18 +44,32 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onSoundsReg(RegistryEvent.Register<SoundEvent> event){
         event.getRegistry().registerAll(
+                ModSounds.MUTE,
                 ModSounds.BARRICADE_BREAK,
                 ModSounds.BARRICADE_PLACE,
                 ModSounds.IMPACT_GRENADE_THROW,
                 ModSounds.NITRO_CELL_THROW,
-                ModSounds.NITRO_CELL_HIT
+                ModSounds.NITRO_CELL_HIT,
+                ModSounds.REINFORCEMENT_PLACE
         );
     }
     @SubscribeEvent
-    public static void onEntityTypeRegistry(RegistryEvent.Register<EntityType<?>> event){
+    public static void onEntityTypeReg(RegistryEvent.Register<EntityType<?>> event){
         event.getRegistry().registerAll(
                 ModEntityTypes.impactGrenadeEntityType,
                 ModEntityTypes.nitroCellEntityType
         );
     }
+    @SubscribeEvent
+    public static void onTileEntityReg(RegistryEvent.Register<TileEntityType<?>> event){
+        event.getRegistry().registerAll(
+                ModTileEntityTypes.reinforcementTileEntityType
+        );
+    }
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void onRenderTypeSetup(FMLClientSetupEvent event) {
+        RenderTypeLookup.setRenderLayer(ModBlocks.barricade, RenderType.getCutout());
+    }
+
 }

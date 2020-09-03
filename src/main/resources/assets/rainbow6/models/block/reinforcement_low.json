@@ -1,0 +1,8 @@
+{
+	"loader": "forge:obj",
+	"model": "rainbow6:models/obj/reinforcement_low.obj",
+	"flip-v": true,
+	"textures": {
+		"particle": "rainbow6:block/reinforcement_particle"
+	}
+}

@@ -29,7 +29,7 @@ public class IronBlock extends Block {
     public IronBlock() {
         super(Properties.create(Material.IRON)
                 .harvestLevel(3)
-                .hardnessAndResistance(30.0f,6f)
+                .hardnessAndResistance(40.0f,6f)
         );
         this.setRegistryName("ironblock");
     }

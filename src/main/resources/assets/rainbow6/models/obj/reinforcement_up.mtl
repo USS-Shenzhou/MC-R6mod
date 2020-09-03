@@ -1,0 +1,8 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# 创建的文件:03.09.2020 10:07:01
+
+newmtl reinforcement_up_m_2_0
+    map_Kd rainbow6:block/reinforcement_up
+
+newmtl reinforcement_up_m_3
+	map_Kd rainbow6:item/reinforcement_gui

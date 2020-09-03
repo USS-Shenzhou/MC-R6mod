@@ -1,4 +1,12 @@
 {
+  "mute": {
+    "category": "block",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:mute"
+      }]
+  },
   "barricade_break": {
     "category": "player",
     "replace": "true",
@@ -37,6 +45,14 @@
     "sounds": [
       {
         "name": "rainbow6:nitro_cell_hit"
+      }]
+  },
+  "reinforcement_place": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:reinforcement_place"
       }]
   }
 }
