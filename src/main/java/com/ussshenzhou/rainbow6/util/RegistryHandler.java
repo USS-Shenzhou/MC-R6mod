@@ -66,10 +66,10 @@ public class RegistryHandler {
                 ModTileEntityTypes.reinforcementTileEntityType
         );
     }
-    @OnlyIn(Dist.CLIENT)
+    /*@OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(ModBlocks.barricade, RenderType.getCutout());
-    }
+    }*/
 
 }
