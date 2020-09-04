@@ -28,7 +28,7 @@ public class ReinforcementTileEntity extends TileEntity implements ITickableTile
                         world.setBlockState(U_Pos, ModBlocks.reinforcement.getDefaultState().with(BlockStateProperties.FACING, dir));
                     }
                     break;
-                case 115:
+                case 96:
                     if (world.getBlockState(LL_Pos)==Blocks.AIR.getDefaultState() && !world.getBlockState(pos).get(Reinforcement.upper)){
                         world.setBlockState(LL_Pos,ModBlocks.reinforcement.getDefaultState().with(BlockStateProperties.FACING,dir));
                     }
