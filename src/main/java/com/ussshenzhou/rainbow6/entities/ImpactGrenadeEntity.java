@@ -41,7 +41,7 @@ public class ImpactGrenadeEntity extends ProjectileItemEntity {
             BlockPos pos = this.getPosition().add(normalize(this.getMotion().getX()),normalize(this.getMotion().getY()),normalize(this.getMotion().getZ()));
             LOGGER.info(world.getBlockState(pos).getBlock());
             if (world.getBlockState(pos).getBlock().toString().contains(isPlanks)){
-                explosion=1.36f;
+                explosion=1.32f;
             }
             this.explode();
         }
