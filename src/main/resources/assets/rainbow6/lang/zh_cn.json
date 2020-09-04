@@ -1,0 +1,13 @@
+{
+  "itemGroup.Rainbow6:Minesiege": "彩虹六号：我的世界",
+
+  "block.rainbow6.barricade": "放置方块以封阻门窗",
+  "item.rainbow6.logo": "logo",
+  "block.rainbow6.ironblock": "布景用封窗铁板",
+  "item.rainbow6.impactgrenade": "冲击手榴弹",
+  "item.rainbow6.nitrocell": "遥控炸药",
+  "block.rainbow6.reinforcement": "放置方块以加固墙面",
+  "item.rainbow6.nitrocell_exploder": "遥控炸药引爆器",
+
+  "block.rainbow6.blackmirror": "黑镜"
+}

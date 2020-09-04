@@ -1,0 +1,13 @@
+{
+  "itemGroup.Rainbow6:Minesiege": "Rainbow6:Minesiege",
+
+  "block.rainbow6.barricade": "Place block to barricade",
+  "item.rainbow6.logo": "logo",
+  "block.rainbow6.ironblock": "IronBlock for map-making",
+  "item.rainbow6.impactgrenade": "Impact Grenade",
+  "item.rainbow6.nitrocell": "Nitro Cell",
+  "block.rainbow6.reinforcement": "Place block to reinforce",
+  "item.rainbow6.nitrocell_exploder": "Nitro Cell Exploder",
+
+  "block.rainbow6.blackmirror": "Black Mirror"
+}
