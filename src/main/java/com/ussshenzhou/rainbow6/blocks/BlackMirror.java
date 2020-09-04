@@ -87,7 +87,31 @@ public class BlackMirror extends Block {
             //wall to deploy MUST NOT harder than Terracotta
             float maxDeployableResistance = 4.2f;
             //this long-long shit just to get the ExplosionResistance of the front block, please tell me if there is a easier method.
-            if (direction == Direction.UP||direction == Direction.DOWN||worldIn.getBlockState(pos.offset(direction.getOpposite())).getExplosionResistance(worldIn,pos.offset(direction.getOpposite()),null,new Explosion(worldIn,null,pos.offset(direction.getOpposite()).getX(),pos.offset(direction.getOpposite()).getY(),pos.offset(direction.getOpposite()).getZ(),0,false, Explosion.Mode.DESTROY))>=maxDeployableResistance){
+            boolean isDeployableResistance = worldIn.getBlockState(pos.offset(direction.getOpposite())).getExplosionResistance(worldIn,pos.offset(direction.getOpposite()),null,new Explosion(worldIn,null,pos.offset(direction.getOpposite()).getX(),pos.offset(direction.getOpposite()).getY(),pos.offset(direction.getOpposite()).getZ(),0,false, Explosion.Mode.DESTROY))>=maxDeployableResistance;
+            //also detect the right-part's position is empty or not.
+            BlockPos rPos = pos;
+            switch(direction){
+                case NORTH:
+                    rPos=pos.add(-1,0,0);
+                    break;
+                case SOUTH:
+                    rPos=pos.add(1,0,0);
+                    break;
+                case EAST:
+                    rPos=pos.add(0,0,-1);
+                    break;
+                case WEST:
+                    rPos=pos.add(0,0,1);
+                    break;
+                default:
+            }
+            boolean rightIsNotEmpty = !worldIn.getBlockState(rPos).isAir(worldIn,rPos);
+            //an exception
+            if (worldIn.getBlockState(rPos).getBlock() instanceof Reinforcement){
+                rightIsNotEmpty=false;
+            }
+
+            if (direction == Direction.UP||direction == Direction.DOWN||isDeployableResistance||rightIsNotEmpty){
                 if (!worldIn.isRemote){
                     worldIn.removeBlock(pos,false);
                     worldIn.removeTileEntity(pos);
