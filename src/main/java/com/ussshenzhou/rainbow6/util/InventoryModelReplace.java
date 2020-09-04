@@ -28,6 +28,7 @@ public class InventoryModelReplace {
     @SubscribeEvent
     public static void onModelLoad(FMLClientSetupEvent event){
         ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.reinforcement.getRegistryName()+"_hand","inventory"));
+        ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.blackMirrorItem.getRegistryName()+"_hand","inventory"));
     }
     @SubscribeEvent
     public static void onModelBake(ModelBakeEvent event){
@@ -76,13 +77,69 @@ public class InventoryModelReplace {
 
             @Override
             public IBakedModel handlePerspective(ItemCameraTransforms.TransformType cameraTransformType, MatrixStack mat) {
-                IBakedModel modelToUse = reinforcementDefaultModel;
+                IBakedModel reinforcementModelToUse = reinforcementDefaultModel;
                 if (cameraTransformType == ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND){
-                    modelToUse = reinforcementHandModel;
+                    reinforcementModelToUse = reinforcementHandModel;
                 }
-                return ForgeHooksClient.handlePerspective(modelToUse,cameraTransformType,mat);
+                return ForgeHooksClient.handlePerspective(reinforcementModelToUse,cameraTransformType,mat);
             }
+
+
         };
+        ResourceLocation blackMirrorItem = ModItems.blackMirrorItem.getRegistryName();
+        ResourceLocation blackMirrorItemHand = new ModelResourceLocation(blackMirrorItem+"_hand","inventory");
+        ResourceLocation blackMirrorItemInventory = new ModelResourceLocation(blackMirrorItem,"inventory");
+        IBakedModel blackMirrorItemHandModel = modelMap.get(blackMirrorItemHand);
+        IBakedModel blackMirrorItemDefaultModel = modelMap.get(blackMirrorItemInventory);
+
+        IBakedModel blackMirrorItemModelWrapper = new IBakedModel() {
+            @Override
+            public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, Random rand) {
+                return blackMirrorItemDefaultModel.getQuads(state, side, rand);
+            }
+
+            @Override
+            public boolean isAmbientOcclusion() {
+                return blackMirrorItemDefaultModel.isAmbientOcclusion();
+            }
+
+            @Override
+            public boolean isGui3d() {
+                return blackMirrorItemDefaultModel.isGui3d();
+            }
+
+            @Override
+            public boolean func_230044_c_() {
+                return blackMirrorItemDefaultModel.func_230044_c_();
+            }
+
+            @Override
+            public boolean isBuiltInRenderer() {
+                return blackMirrorItemDefaultModel.isBuiltInRenderer();
+            }
+
+            @Override
+            public TextureAtlasSprite getParticleTexture() {
+                return blackMirrorItemDefaultModel.getParticleTexture();
+            }
+
+            @Override
+            public ItemOverrideList getOverrides() {
+                return blackMirrorItemDefaultModel.getOverrides();
+            }
+
+            @Override
+            public IBakedModel handlePerspective(ItemCameraTransforms.TransformType cameraTransformType, MatrixStack mat) {
+                IBakedModel blackMirrorItemModelToUse = blackMirrorItemDefaultModel;
+                if (cameraTransformType == ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND){
+                    blackMirrorItemModelToUse = blackMirrorItemHandModel;
+                }
+                return ForgeHooksClient.handlePerspective(blackMirrorItemModelToUse,cameraTransformType,mat);
+            }
+
+
+        };
+        modelMap.put(blackMirrorItemInventory,blackMirrorItemModelWrapper);
         modelMap.put(reinforcementInventory,reinforcementModelWrapper);
     }
 }

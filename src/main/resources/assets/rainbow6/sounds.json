@@ -54,5 +54,13 @@
       {
         "name": "rainbow6:reinforcement_place"
       }]
+  },
+  "blackmirror_set": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:blackmirror_set"
+      }]
   }
 }

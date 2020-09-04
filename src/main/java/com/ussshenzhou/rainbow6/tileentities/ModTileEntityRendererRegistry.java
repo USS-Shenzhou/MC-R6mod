@@ -7,9 +7,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModTileEntityRendererRegistry {
-    /*@SubscribeEvent
+    @SubscribeEvent
     public static void registryTileEntityRenderer(FMLClientSetupEvent event){
-        ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.BlackMirrorTileEntityLeftType,BlackMirrorTileEntityRenderer_left::new);
-        ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.BlackMirrorTileEntityRightType,BlackMirrorTileEntityRenderer_right::new);
-    }*/
+        ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.BlackMirrorTileEntityType,BlackMirrorTileEntityRenderer::new);
+    }
 }

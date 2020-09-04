@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "broken=false,left=true,facing=south": { "model": "rainbow6:block/blackmirror_left" },
+    "broken=false,left=true,facing=north": { "model": "rainbow6:block/blackmirror_left" ,"y": 180},
+    "broken=false,left=true,facing=east": { "model": "rainbow6:block/blackmirror_left" ,"y":270},
+    "broken=false,left=true,facing=west": { "model": "rainbow6:block/blackmirror_left", "y":90},
+    "broken=false,left=true,facing=up": { "model": "rainbow6:block/blackmirror_left", "x":-90},
+    "broken=false,left=true,facing=down": { "model": "rainbow6:block/blackmirror_left", "x":90,"y":180},
+    "broken=false,left=false,facing=south": { "model": "rainbow6:block/blackmirror_right" },
+    "broken=false,left=false,facing=north": { "model": "rainbow6:block/blackmirror_right" ,"y": 180},
+    "broken=false,left=false,facing=east": { "model": "rainbow6:block/blackmirror_right" ,"y":270},
+    "broken=false,left=false,facing=west": { "model": "rainbow6:block/blackmirror_right", "y":90},
+    "broken=false,left=false,facing=up": { "model": "rainbow6:block/blackmirror_right", "x":-90},
+    "broken=false,left=false,facing=down": { "model": "rainbow6:block/blackmirror_right", "x":90,"y":180},
+    "broken=true,left=true,facing=south": { "model": "rainbow6:block/blackmirror_left_broken" },
+    "broken=true,left=true,facing=north": { "model": "rainbow6:block/blackmirror_left_broken" ,"y": 180},
+    "broken=true,left=true,facing=east": { "model": "rainbow6:block/blackmirror_left_broken" ,"y":270},
+    "broken=true,left=true,facing=west": { "model": "rainbow6:block/blackmirror_left_broken", "y":90},
+    "broken=true,left=true,facing=up": { "model": "rainbow6:block/blackmirror_left_broken", "x":-90},
+    "broken=true,left=true,facing=down": { "model": "rainbow6:block/blackmirror_left_broken", "x":90,"y":180},
+    "broken=true,left=false,facing=south": { "model": "rainbow6:block/blackmirror_right_broken" },
+    "broken=true,left=false,facing=north": { "model": "rainbow6:block/blackmirror_right_broken" ,"y": 180},
+    "broken=true,left=false,facing=east": { "model": "rainbow6:block/blackmirror_right_broken" ,"y":270},
+    "broken=true,left=false,facing=west": { "model": "rainbow6:block/blackmirror_right_broken", "y":90},
+    "broken=true,left=false,facing=up": { "model": "rainbow6:block/blackmirror_right_broken", "x":-90},
+    "broken=true,left=false,facing=down": { "model": "rainbow6:block/blackmirror_right_broken", "x":90,"y":180}
+  }
+}

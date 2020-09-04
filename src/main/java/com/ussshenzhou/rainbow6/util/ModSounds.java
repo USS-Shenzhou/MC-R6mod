@@ -1,5 +1,6 @@
 package com.ussshenzhou.rainbow6.util;
 
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
@@ -11,5 +12,5 @@ public class ModSounds {
     public static SoundEvent NITRO_CELL_THROW = new SoundEvent(new ResourceLocation("rainbow6","nitro_cell_throw")).setRegistryName("nitro_cell_throw");
     public static SoundEvent NITRO_CELL_HIT = new SoundEvent(new ResourceLocation("rainbow6","nitro_cell_hit")).setRegistryName("nitro_cell_hit");
     public static SoundEvent REINFORCEMENT_PLACE = new SoundEvent(new ResourceLocation("rainbow6","reinforcement_place")).setRegistryName("reinforcement_place");
-
+    public static SoundEvent BLACKMIRROR_SET = new SoundEvent(new ResourceLocation("rainbow6","blackmirror_set")).setRegistryName("blackmirror_set");
 }

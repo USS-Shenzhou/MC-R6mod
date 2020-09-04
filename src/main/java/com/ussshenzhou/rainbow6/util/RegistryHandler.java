@@ -25,7 +25,8 @@ public class RegistryHandler {
         event.getRegistry().registerAll(
                 ModBlocks.barricade,
                 ModBlocks.ironBlock,
-                ModBlocks.reinforcement
+                ModBlocks.reinforcement,
+                ModBlocks.blackMirror
         );
     }
     @SubscribeEvent
@@ -37,7 +38,8 @@ public class RegistryHandler {
                 ModItems.reinforcement,
                 ModItems.impactGrenade,
                 ModItems.nitroCell,
-                ModItems.nitroCellExploder
+                ModItems.nitroCellExploder,
+                ModItems.blackMirrorItem
         );
     }
 
@@ -50,7 +52,8 @@ public class RegistryHandler {
                 ModSounds.IMPACT_GRENADE_THROW,
                 ModSounds.NITRO_CELL_THROW,
                 ModSounds.NITRO_CELL_HIT,
-                ModSounds.REINFORCEMENT_PLACE
+                ModSounds.REINFORCEMENT_PLACE,
+                ModSounds.BLACKMIRROR_SET
         );
     }
     @SubscribeEvent
@@ -63,7 +66,8 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onTileEntityReg(RegistryEvent.Register<TileEntityType<?>> event){
         event.getRegistry().registerAll(
-                ModTileEntityTypes.reinforcementTileEntityType
+                ModTileEntityTypes.reinforcementTileEntityType,
+                ModTileEntityTypes.BlackMirrorTileEntityType
         );
     }
     /*@OnlyIn(Dist.CLIENT)
