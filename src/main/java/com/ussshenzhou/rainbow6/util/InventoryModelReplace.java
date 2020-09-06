@@ -22,8 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-@OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD,value = Dist.CLIENT)
 public class InventoryModelReplace {
     @SubscribeEvent
     public static void onModelLoad(FMLClientSetupEvent event){

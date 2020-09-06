@@ -8,8 +8,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD,value = Dist.CLIENT)
 public class ModTextureStitch {
     @SubscribeEvent
     public static void onTextureStitch(TextureStitchEvent.Pre event) {
