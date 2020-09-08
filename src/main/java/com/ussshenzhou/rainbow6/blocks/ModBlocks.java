@@ -5,4 +5,5 @@ public class ModBlocks {
     public static IronBlock ironBlock = new IronBlock();
     public static Reinforcement reinforcement = new Reinforcement();
     public static BlackMirror blackMirror = new BlackMirror();
+    public static CapabilityTestBlock capabilityTestBlock = new CapabilityTestBlock();
 }

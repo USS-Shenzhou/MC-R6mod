@@ -14,6 +14,8 @@ public class ModItems {
     public static NitroCell nitroCell = new NitroCell();
     public static NitroCellExploder nitroCellExploder = new NitroCellExploder();
     public static BlackMirrorItem blackMirrorItem = new BlackMirrorItem();
+    public static CapabilityTestItem capabilityTestItem = new CapabilityTestItem();
     public static Item ironBlock = new BlockItem(ModBlocks.ironBlock,new Item.Properties().group(ModItemGroups.Group1)).setRegistryName(ModBlocks.ironBlock.getRegistryName());
     public static Item reinforcement = new BlockItem(ModBlocks.reinforcement,new Item.Properties().group(ModItemGroups.Group1)).setRegistryName(ModBlocks.reinforcement.getRegistryName());
+    public static Item capabilityTestBlockItem = new BlockItem(ModBlocks.capabilityTestBlock,new Item.Properties().group(ModItemGroups.Group1)).setRegistryName(ModBlocks.capabilityTestBlock.getRegistryName());
 }

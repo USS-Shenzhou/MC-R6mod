@@ -5,18 +5,13 @@ import com.ussshenzhou.rainbow6.entities.ModEntityTypes;
 import com.ussshenzhou.rainbow6.items.ModItems;
 import com.ussshenzhou.rainbow6.tileentities.ModTileEntityTypes;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class RegistryHandler {
@@ -26,7 +21,8 @@ public class RegistryHandler {
                 ModBlocks.barricade,
                 ModBlocks.ironBlock,
                 ModBlocks.reinforcement,
-                ModBlocks.blackMirror
+                ModBlocks.blackMirror,
+                ModBlocks.capabilityTestBlock
         );
     }
     @SubscribeEvent
@@ -39,7 +35,9 @@ public class RegistryHandler {
                 ModItems.impactGrenade,
                 ModItems.nitroCell,
                 ModItems.nitroCellExploder,
-                ModItems.blackMirrorItem
+                ModItems.blackMirrorItem,
+                ModItems.capabilityTestBlockItem,
+                ModItems.capabilityTestItem
         );
     }
 

@@ -26,8 +26,8 @@ public class NitroCellEntity extends ProjectileItemEntity {
     public NitroCellEntity(EntityType<? extends NitroCellEntity> type, LivingEntity playerIn, World worldIn) {
         super(type, playerIn, worldIn);
     }
-    public NitroCellEntity(EntityType<NitroCellEntity> c4entityEntityType, World world) {
-        super(c4entityEntityType, world);
+    public NitroCellEntity(EntityType<NitroCellEntity> nitroCellEntityEntityType, World world) {
+        super(nitroCellEntityEntityType, world);
     }
 
     @Nullable
@@ -107,11 +107,11 @@ public class NitroCellEntity extends ProjectileItemEntity {
         this.dataManager.set(IGNITED, true);
     }
 
-    public int getc4state() {
+    public int getNitroCellState() {
         return this.dataManager.get(STATE);
     }
 
-    public void setc4state(int state) {
+    public void setNitroCellState(int state) {
         this.dataManager.set(STATE, state);
     }
 
@@ -124,8 +124,8 @@ public class NitroCellEntity extends ProjectileItemEntity {
     }
     public void exploder() {
         this.ignite();
-            this.setc4state(1);
-            int i = this.getc4state();
+            this.setNitroCellState(1);
+            int i = this.getNitroCellState();
             this.timeSinceIgnited += i;
             if (this.timeSinceIgnited < 0) {
                 this.timeSinceIgnited = 0;
