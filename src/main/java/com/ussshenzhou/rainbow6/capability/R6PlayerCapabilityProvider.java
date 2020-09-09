@@ -14,7 +14,7 @@ public class R6PlayerCapabilityProvider implements ICapabilityProvider, INBTSeri
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nonnull Direction side) {
-        return cap ==ModCapabilities.R6_PLAYER_CAPABILITY ? LazyOptional.of(()-> this.r6PlayerCapability).cast():LazyOptional.empty();
+        return cap ==ModCapabilities.R6_PLAYER_CAPABILITY ? LazyOptional.of(()-> this.getOrCreateCapability()).cast():LazyOptional.empty();
     }
 
     @Nonnull

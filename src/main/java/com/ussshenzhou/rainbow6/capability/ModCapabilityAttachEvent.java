@@ -20,7 +20,7 @@ public class ModCapabilityAttachEvent {
     }
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event){
-        if (!event.isWasDeath()){
+        //if (!event.isWasDeath()){
             LazyOptional<IR6PlayerCapability> oldR6Cap = event.getOriginal().getCapability(ModCapabilities.R6_PLAYER_CAPABILITY);
             LazyOptional<IR6PlayerCapability> newR6Cap = event.getPlayer().getCapability(ModCapabilities.R6_PLAYER_CAPABILITY);
             if (oldR6Cap.isPresent()&& newR6Cap.isPresent()){
@@ -34,6 +34,6 @@ public class ModCapabilityAttachEvent {
 
                 );
             }
-        }
+        //}
     }
 }
