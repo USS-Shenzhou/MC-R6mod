@@ -23,7 +23,8 @@ public class CapabilityTestItem extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-        if (worldIn.isRemote){
+
+        if (!worldIn.isRemote){
             LazyOptional<IR6PlayerCapability> r6PlayerCap = playerIn.getCapability(ModCapabilities.R6_PLAYER_CAPABILITY);
             r6PlayerCap.ifPresent((cap)->{
                         String operator = cap.getOperator();
