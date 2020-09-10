@@ -22,6 +22,9 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
+/**
+ * @author USS_Shenzhou
+ */
 public class NitroCellEntity extends ProjectileItemEntity {
     public NitroCellEntity(EntityType<? extends NitroCellEntity> type, LivingEntity playerIn, World worldIn) {
         super(type, playerIn, worldIn);
@@ -122,6 +125,9 @@ public class NitroCellEntity extends ProjectileItemEntity {
 
         }
     }
+    /**
+     * From creeper's code.Forgot why and how.
+     */
     public void exploder() {
         this.ignite();
             this.setNitroCellState(1);

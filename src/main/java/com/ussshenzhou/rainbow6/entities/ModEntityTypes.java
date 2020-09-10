@@ -2,7 +2,9 @@ package com.ussshenzhou.rainbow6.entities;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class ModEntityTypes {
     public static EntityType nitroCellEntityType = EntityType.Builder.<NitroCellEntity>create(NitroCellEntity::new,EntityClassification.MISC)
             .size(0.25f,0.12f)

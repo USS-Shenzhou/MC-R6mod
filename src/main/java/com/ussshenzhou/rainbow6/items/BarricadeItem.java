@@ -11,7 +11,9 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class BarricadeItem extends BlockItem {
     public BarricadeItem() {
         super(ModBlocks.barricade,new Properties().group(ModItemGroups.Group1));

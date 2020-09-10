@@ -27,7 +27,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class Reinforcement extends Block{
     protected static final VoxelShape NORTH = Block.makeCuboidShape(0.0D, 0.0D, 14.0D, 16.0D, 16.0D, 16.0D);
     protected static final VoxelShape SOUTH = Block.makeCuboidShape(0.0D, 0.0D, 2.0D, 16.0D, 16.0D, 0.0D);

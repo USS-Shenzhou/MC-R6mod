@@ -6,7 +6,9 @@ import com.ussshenzhou.rainbow6.blocks.ModBlocks;
 import com.ussshenzhou.rainbow6.util.ModItemGroups;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class ModItems {
     public static Logo logo = new Logo();
     public static ImpactGrenade impactGrenade = new ImpactGrenade();

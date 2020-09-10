@@ -3,7 +3,9 @@ package com.ussshenzhou.rainbow6.util;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class ModSounds {
     public static SoundEvent MUTE = new SoundEvent(new ResourceLocation("rainbow6","mute")).setRegistryName("mute");
     public static SoundEvent BARRICADE_BREAK = new SoundEvent(new ResourceLocation("rainbow6","barricade_break")).setRegistryName("barricade_break");

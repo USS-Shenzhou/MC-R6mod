@@ -12,7 +12,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
 import javax.annotation.Nullable;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class ImpactGrenadeEntityRenderer extends EntityRenderer<ImpactGrenadeEntity> {
     public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("rainbow6:textures/entity/impactgrenade.png");
     private static final ImpactGrenadeModel IMPACT_GRENADE_MODEL = new ImpactGrenadeModel();

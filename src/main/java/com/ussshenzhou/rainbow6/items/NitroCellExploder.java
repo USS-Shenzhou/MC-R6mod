@@ -12,7 +12,9 @@ import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.function.Predicate;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class NitroCellExploder extends Item {
     public NitroCellExploder(){
         super(new Properties().group(ModItemGroups.Group1));

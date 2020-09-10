@@ -13,7 +13,9 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
 import org.apache.logging.log4j.LogManager;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class CapabilityTestBlock extends Block {
     public CapabilityTestBlock() {
         super(Properties.create(Material.IRON)

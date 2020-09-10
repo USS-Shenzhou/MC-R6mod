@@ -23,7 +23,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class Barricade extends Block {
 
     public static final BooleanProperty BOTTOM = BlockStateProperties.BOTTOM;

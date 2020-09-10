@@ -2,7 +2,9 @@ package com.ussshenzhou.rainbow6.entities;
 
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.registries.ObjectHolder;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class ModEntities {
     @ObjectHolder("rainbow6:c4")
     public static EntityType<NitroCellEntity> nitroCellEntityEntityType;

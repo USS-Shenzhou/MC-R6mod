@@ -12,7 +12,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 
 import javax.annotation.Nullable;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class NitroCellEntityRenderer extends EntityRenderer<NitroCellEntity> {
     public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("rainbow6:textures/entity/nitrocell.png");
     private static final NitroCellModel NITRO_CELL_MODEL = new NitroCellModel();

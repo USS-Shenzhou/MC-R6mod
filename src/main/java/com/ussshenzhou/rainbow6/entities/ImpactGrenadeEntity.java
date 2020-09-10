@@ -16,7 +16,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.List;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class ImpactGrenadeEntity extends ProjectileItemEntity {
     private float explosion = 1.2f;
 

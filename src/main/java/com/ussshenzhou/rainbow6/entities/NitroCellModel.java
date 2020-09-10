@@ -7,7 +7,9 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
+/**
+ * @author USS_Shenzhou
+ */
 @OnlyIn(Dist.CLIENT)
 public class NitroCellModel extends EntityModel<NitroCellEntity> {
     public ModelRenderer nitroCellModel;

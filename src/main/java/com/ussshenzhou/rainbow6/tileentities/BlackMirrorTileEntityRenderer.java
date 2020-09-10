@@ -13,7 +13,9 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ResourceLocation;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class BlackMirrorTileEntityRenderer extends TileEntityRenderer<BlackMirrorTileEntity> {
     public static final ResourceLocation BLACK_MIRROR_GLASS_TEXTURE_LOCATION = new ResourceLocation("rainbow6:block/blackmirror_glass");
     public Boolean left = true;

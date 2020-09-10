@@ -8,7 +8,9 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class R6PlayerCapabilityProvider implements ICapabilityProvider, INBTSerializable<CompoundNBT> {
     private IR6PlayerCapability r6PlayerCapability;
     @Nonnull

@@ -21,7 +21,9 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
+/**
+ * @author USS_Shenzhou
+ */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD,value = Dist.CLIENT)
 public class InventoryModelReplace {
     @SubscribeEvent

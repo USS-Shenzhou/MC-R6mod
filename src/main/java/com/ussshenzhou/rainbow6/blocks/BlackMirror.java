@@ -26,7 +26,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class BlackMirror extends Block {
     public static BooleanProperty LEFT = BooleanProperty.create("left");
     public static BooleanProperty BROKEN = BooleanProperty.create("broken");

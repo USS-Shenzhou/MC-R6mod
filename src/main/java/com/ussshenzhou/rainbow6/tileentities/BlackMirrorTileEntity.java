@@ -13,7 +13,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class BlackMirrorTileEntity extends TileEntity implements ITickableTileEntity {
     private Boolean isMoved = false;
     private int startTime = 0;

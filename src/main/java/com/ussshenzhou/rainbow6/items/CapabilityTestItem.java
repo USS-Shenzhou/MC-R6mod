@@ -13,7 +13,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
 import org.apache.logging.log4j.LogManager;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class CapabilityTestItem extends Item {
     public CapabilityTestItem() {
         super(new Properties().group(ModItemGroups.Group1));

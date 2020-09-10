@@ -1,7 +1,9 @@
 package com.ussshenzhou.rainbow6.capability;
 
 import net.minecraft.nbt.CompoundNBT;
-
+/**
+ * @author USS_Shenzhou
+ */
 public class R6PlayerCapability implements IR6PlayerCapability {
     /**
      * use the lower case of operator's nickname.
