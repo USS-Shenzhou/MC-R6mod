@@ -1,4 +1,4 @@
-package com.ussshenzhou.rainbow6.capability;
+package com.ussshenzhou.rainbow6.capabilities;
 
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;

@@ -1,10 +1,9 @@
 package com.ussshenzhou.rainbow6.items;
 
-import com.ussshenzhou.rainbow6.capability.IR6PlayerCapability;
-import com.ussshenzhou.rainbow6.capability.ModCapabilities;
+import com.ussshenzhou.rainbow6.capabilities.IR6PlayerCapability;
+import com.ussshenzhou.rainbow6.capabilities.ModCapabilities;
 import com.ussshenzhou.rainbow6.util.ModItemGroups;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;

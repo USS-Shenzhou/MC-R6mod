@@ -1,7 +1,7 @@
 package com.ussshenzhou.rainbow6.blocks;
 
-import com.ussshenzhou.rainbow6.capability.IR6PlayerCapability;
-import com.ussshenzhou.rainbow6.capability.ModCapabilities;
+import com.ussshenzhou.rainbow6.capabilities.IR6PlayerCapability;
+import com.ussshenzhou.rainbow6.capabilities.ModCapabilities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
-import org.apache.logging.log4j.LogManager;
+
 /**
  * @author USS_Shenzhou
  */

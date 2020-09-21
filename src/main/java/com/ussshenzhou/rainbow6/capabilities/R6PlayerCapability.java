@@ -1,4 +1,4 @@
-package com.ussshenzhou.rainbow6.capability;
+package com.ussshenzhou.rainbow6.capabilities;
 
 import net.minecraft.nbt.CompoundNBT;
 /**
@@ -18,9 +18,16 @@ public class R6PlayerCapability implements IR6PlayerCapability {
      */
     private String r6Team;
 
-    public R6PlayerCapability(String operator,String r6Team){
+    /**
+     * use "blue" or "orange" or "white"
+     */
+    private String r6TeamColor;
+
+
+    public R6PlayerCapability(String operator,String r6Team,String r6TeamColor){
         this.operator = operator;
         this.r6Team = r6Team;
+        this.r6TeamColor = r6TeamColor;
     }
 
     @Override
@@ -34,6 +41,11 @@ public class R6PlayerCapability implements IR6PlayerCapability {
     }
 
     @Override
+    public String getR6TeamColor() {
+        return r6TeamColor;
+    }
+
+    @Override
     public void setOperator(String operator) {
         this.operator = operator;
     }
@@ -44,10 +56,16 @@ public class R6PlayerCapability implements IR6PlayerCapability {
     }
 
     @Override
+    public void setR6TeamColor() {
+        this.r6TeamColor = r6TeamColor;
+    }
+
+    @Override
     public CompoundNBT serializeNBT() {
         CompoundNBT compoundNBT = new CompoundNBT();
         compoundNBT.putString("operator",this.operator);
         compoundNBT.putString("r6team",this.r6Team);
+        compoundNBT.putString("r6teamcolor",this.r6TeamColor);
         return compoundNBT;
     }
 
@@ -55,5 +73,6 @@ public class R6PlayerCapability implements IR6PlayerCapability {
     public void deserializeNBT(CompoundNBT nbt) {
         this.operator = nbt.getString("operator");
         this.r6Team = nbt.getString("r6team");
+        this.r6TeamColor = nbt.getString("r6teamcolor");
     }
 }

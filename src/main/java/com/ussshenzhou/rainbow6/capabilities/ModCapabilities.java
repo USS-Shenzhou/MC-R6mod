@@ -1,4 +1,4 @@
-package com.ussshenzhou.rainbow6.capability;
+package com.ussshenzhou.rainbow6.capabilities;
 
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;

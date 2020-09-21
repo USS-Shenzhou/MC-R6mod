@@ -1,4 +1,4 @@
-package com.ussshenzhou.rainbow6.capability;
+package com.ussshenzhou.rainbow6.capabilities;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -8,6 +8,8 @@ import net.minecraftforge.common.util.INBTSerializable;
 public interface IR6PlayerCapability extends INBTSerializable<CompoundNBT> {
     String getOperator();
     String getR6Team();
+    String getR6TeamColor();
     void setOperator(String operator);
     void setR6Team(String r6team);
+    void setR6TeamColor();
 }

@@ -1,4 +1,4 @@
-package com.ussshenzhou.rainbow6.capability;
+package com.ussshenzhou.rainbow6.capabilities;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
@@ -22,7 +22,7 @@ public class R6PlayerCapabilityProvider implements ICapabilityProvider, INBTSeri
     @Nonnull
     IR6PlayerCapability getOrCreateCapability(){
         if (r6PlayerCapability==null){
-            this.r6PlayerCapability = new R6PlayerCapability("operatorless","teamless");
+            this.r6PlayerCapability = new R6PlayerCapability("operatorless","teamless","white");
         }
         return this.r6PlayerCapability;
     }
