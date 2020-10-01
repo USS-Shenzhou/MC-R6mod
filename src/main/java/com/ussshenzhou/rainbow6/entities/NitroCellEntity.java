@@ -4,8 +4,10 @@ package com.ussshenzhou.rainbow6.entities;
 import com.ussshenzhou.rainbow6.items.ModItems;
 import com.ussshenzhou.rainbow6.util.ModSounds;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
@@ -13,10 +15,13 @@ import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.*;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
@@ -68,12 +73,11 @@ public class NitroCellEntity extends ProjectileItemEntity {
     private static final DataParameter<Boolean> IGNITED = EntityDataManager.createKey(NitroCellEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Integer> STATE = EntityDataManager.createKey(NitroCellEntity.class, DataSerializers.VARINT);
     private int fuseTime = 1;
-    private float explosionRadius = 2.0f;
+    private float explosionRadius = 2f;
     private int timeSinceIgnited = 1;
 
     @Override
     protected void registerData() {
-        super.registerData();
         this.dataManager.register(STATE, -1);
         this.dataManager.register(IGNITED, false);
     }
@@ -120,7 +124,7 @@ public class NitroCellEntity extends ProjectileItemEntity {
 
     public void explode() {
         if (!this.world.isRemote) {
-            this.world.createExplosion(this, this.getPosX(), this.getPosY(), this.getPosZ(), (float) this.explosionRadius, Explosion.Mode.DESTROY);
+            this.world.createExplosion(this, this.getPosX(), this.getPosY(), this.getPosZ(), this.explosionRadius, Explosion.Mode.DESTROY);
             this.remove();
 
         }
@@ -142,4 +146,38 @@ public class NitroCellEntity extends ProjectileItemEntity {
             }
     }
 
+    @Override
+    public boolean canExplosionDestroyBlock(Explosion explosionIn, IBlockReader worldIn, BlockPos pos, BlockState blockStateIn, float p_174816_5_) {
+        return true;
+    }
+
+
+
+    @Override
+    public boolean hitByEntity(Entity entityIn) {
+        if (entityIn instanceof PlayerEntity) {
+            PlayerEntity playerentity = (PlayerEntity)entityIn;
+            return this.attackEntityFrom(DamageSource.causePlayerDamage(playerentity), 1.0F);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount) {
+            if (!this.world.isRemote) {
+                this.remove();
+                this.markVelocityChanged();
+                this.world.playSound((PlayerEntity)null,getPosition(),SoundEvents.BLOCK_SAND_FALL,SoundCategory.PLAYERS,1.0f,1.0f);
+            }
+            else {
+                this.world.addParticle(ParticleTypes.CLOUD,this.getPosX(),this.getPosY(),this.getPosZ(),0,0,0);
+            }
+            return true;
+    }
+
+    @Override
+    public boolean canBeCollidedWith() {
+        return true;
+    }
 }
