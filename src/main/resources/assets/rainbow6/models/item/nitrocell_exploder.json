@@ -55,6 +55,10 @@
 			"rotation": [77, 0, 0],
 			"translation": [-25, 4, 2]
 		},
+		"ground": {
+			"rotation": [90, 0, 90],
+			"scale": [0.5, 0.5, 0.5]
+		},
 		"gui": {
 			"rotation": [107, 12, -36],
 			"translation": [5.75, -1.5, 0],

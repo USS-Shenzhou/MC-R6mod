@@ -3,12 +3,14 @@ package com.ussshenzhou.rainbow6.entities;
 import com.ussshenzhou.rainbow6.items.ModItems;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
@@ -39,10 +41,8 @@ public class ImpactGrenadeEntity extends ProjectileItemEntity {
         if (raytraceResultIn.getType() == RayTraceResult.Type.BLOCK) {
             this.setNoGravity(true);
             this.remove();
-            String isPlanks = "planks";
-            BlockPos pos = this.getPosition().add(normalize(this.getMotion().getX()),normalize(this.getMotion().getY()),normalize(this.getMotion().getZ()));
-            LOGGER.info(world.getBlockState(pos).getBlock());
-            if (world.getBlockState(pos).getBlock().toString().contains(isPlanks)){
+            BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceResultIn;
+            if (world.getBlockState(blockraytraceresult.getPos()).getMaterial()== Material.WOOD){
                 explosion=1.32f;
             }
             this.explode();
