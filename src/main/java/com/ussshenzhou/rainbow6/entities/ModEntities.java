@@ -10,6 +10,8 @@ public class ModEntities {
     public static EntityType<NitroCellEntity> nitroCellEntityEntityType;
     @ObjectHolder("rainbow6:impactgrenade")
     public static EntityType<ImpactGrenadeEntity> impactGrenadeEntityType;
+    @ObjectHolder("rainbow6:fraggrenade")
+    public static EntityType<FragGrenadeEntity> fragGrenadeEntityEntityType;
     /*@ObjectHolder("rainbow6:gumine")
     public static EntityType<gumineentity> gumine;*/
 }

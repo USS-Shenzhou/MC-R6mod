@@ -39,7 +39,8 @@ public class RegistryHandler {
                 ModItems.nitroCellExploder,
                 ModItems.blackMirrorItem,
                 ModItems.capabilityTestBlockItem,
-                ModItems.capabilityTestItem
+                ModItems.capabilityTestItem,
+                ModItems.fragGrenade
         );
     }
 
@@ -53,14 +54,17 @@ public class RegistryHandler {
                 ModSounds.NITRO_CELL_THROW,
                 ModSounds.NITRO_CELL_HIT,
                 ModSounds.REINFORCEMENT_PLACE,
-                ModSounds.BLACKMIRROR_SET
+                ModSounds.BLACKMIRROR_SET,
+                ModSounds.FRAGGRENADE_READY,
+                ModSounds.FRAGGRENADE_TOUCH
         );
     }
     @SubscribeEvent
     public static void onEntityTypeReg(RegistryEvent.Register<EntityType<?>> event){
         event.getRegistry().registerAll(
                 ModEntityTypes.impactGrenadeEntityType,
-                ModEntityTypes.nitroCellEntityType
+                ModEntityTypes.nitroCellEntityType,
+                ModEntityTypes.fragGrenadeEntityType
         );
     }
     @SubscribeEvent

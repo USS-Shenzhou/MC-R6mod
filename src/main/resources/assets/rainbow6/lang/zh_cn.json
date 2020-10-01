@@ -1,5 +1,5 @@
 {
-  "itemGroup.Rainbow6:Minesiege": "彩虹六号：我的世界",
+  "itemGroup.Rainbow6:Minesiege": "我的六号",
 
   "block.rainbow6.barricade": "放置方块以封阻门窗",
   "item.rainbow6.logo": "logo",
@@ -8,6 +8,7 @@
   "item.rainbow6.nitrocell": "遥控炸药",
   "block.rainbow6.reinforcement": "放置方块以加固墙面",
   "item.rainbow6.nitrocell_exploder": "遥控炸药引爆器",
+  "item.rainbow6.fraggrenade": "破片手榴弹",
 
   "block.rainbow6.blackmirror": "黑镜"
 }

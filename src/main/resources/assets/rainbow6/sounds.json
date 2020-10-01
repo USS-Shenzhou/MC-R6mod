@@ -62,5 +62,21 @@
       {
         "name": "rainbow6:blackmirror_set"
       }]
+  },
+  "fraggrenade_ready": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:fraggrenade_ready"
+      }]
+  },
+  "fraggrenade_touch": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:fraggrenade_touch"
+      }]
   }
 }

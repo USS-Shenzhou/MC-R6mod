@@ -15,4 +15,6 @@ public class ModSounds {
     public static SoundEvent NITRO_CELL_HIT = new SoundEvent(new ResourceLocation("rainbow6","nitro_cell_hit")).setRegistryName("nitro_cell_hit");
     public static SoundEvent REINFORCEMENT_PLACE = new SoundEvent(new ResourceLocation("rainbow6","reinforcement_place")).setRegistryName("reinforcement_place");
     public static SoundEvent BLACKMIRROR_SET = new SoundEvent(new ResourceLocation("rainbow6","blackmirror_set")).setRegistryName("blackmirror_set");
+    public static SoundEvent FRAGGRENADE_READY = new SoundEvent(new ResourceLocation("rainbow6","fraggrenade_ready")).setRegistryName("fraggrenade_ready");
+    public static SoundEvent FRAGGRENADE_TOUCH = new SoundEvent(new ResourceLocation("rainbow6","fraggrenade_touch")).setRegistryName("fraggrenade_touch");
 }

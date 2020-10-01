@@ -13,6 +13,7 @@ public class ModEntityRenderRegistry {
     public static void registryEntityRenders(final FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.nitroCellEntityType, NitroCellEntityRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.impactGrenadeEntityType, ImpactGrenadeEntityRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.fragGrenadeEntityType,FragGrenadeEntityRenderer::new);
         //RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.gumineentitytype,guminerenderer::new);
         //RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.RemoteGasGrenadeEntityType,RemoteGasGrenadeRenderer::new);
     }
