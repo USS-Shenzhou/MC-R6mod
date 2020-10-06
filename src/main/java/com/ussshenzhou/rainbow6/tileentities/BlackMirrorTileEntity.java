@@ -130,8 +130,8 @@ public class BlackMirrorTileEntity extends TileEntity implements ITickableTileEn
         }
         worldIn.setBlockState(rPos, ModBlocks.blackMirror.getDefaultState().with(BlockStateProperties.FACING,direction).with(BlackMirror.LEFT,false).with(BlackMirror.BROKEN,false));
         worldIn.setTileEntity(rPos,new BlackMirrorTileEntity());
-        worldIn.notifyNeighbors(pos, Blocks.AIR);
-        state.updateNeighbors(worldIn, pos, 3);
+        state.updateNeighbours(worldIn, pos, 3);
+        worldIn.notifyNeighborsOfStateChange(pos, Blocks.AIR);
     }
     public Boolean setIsMoved(Boolean bool){
         this.isMoved =bool;
@@ -151,11 +151,11 @@ public class BlackMirrorTileEntity extends TileEntity implements ITickableTileEn
     }
 
     @Override
-    public void read(CompoundNBT compound) {
+    public void read(BlockState state, CompoundNBT compound) {
         isMoved = compound.getBoolean("IsMoved");
         startTime = compound.getInt("startTime");
         counter = compound.getInt("counter");
-        super.read(compound);
+        super.read(state, compound);
     }
 
     @Override

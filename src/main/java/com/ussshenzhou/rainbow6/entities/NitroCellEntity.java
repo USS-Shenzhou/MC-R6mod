@@ -20,6 +20,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.*;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -51,14 +52,14 @@ public class NitroCellEntity extends ProjectileItemEntity {
             BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceResultIn;
             BlockState blockstate = this.world.getBlockState(blockraytraceresult.getPos());
             this.inBlockState = blockstate;
-            Vec3d vec3d = blockraytraceresult.getHitVec().subtract(this.getPosX(), this.getPosY()-0.01, this.getPosZ());
+            Vector3d vec3d = blockraytraceresult.getHitVec().subtract(this.getPosX(), this.getPosY()-0.01, this.getPosZ());
             this.setMotion(vec3d);
-            Vec3d vec3d1 = vec3d.normalize().scale((double) 0.05F);
+            Vector3d vec3d1 = vec3d.normalize().scale((double) 0.05F);
             this.prevPosX -= vec3d1.x;
             this.prevPosY -= vec3d1.y;
             this.prevPosZ -= vec3d1.z;
             this.playSound(ModSounds.NITRO_CELL_HIT, 0.8f, 1.0f);
-            this.inGround = true;
+            this.onGround = true;
             this.setNoGravity(true);
             blockstate.onProjectileCollision(this.world, blockstate, blockraytraceresult, this);
         }

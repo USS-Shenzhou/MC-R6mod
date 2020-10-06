@@ -1,5 +1,6 @@
 package com.ussshenzhou.rainbow6.items;
 
+import com.google.common.collect.Maps;
 import com.ussshenzhou.rainbow6.entities.FragGrenadeEntity;
 import com.ussshenzhou.rainbow6.entities.ImpactGrenadeEntity;
 import com.ussshenzhou.rainbow6.entities.ModEntityTypes;
@@ -9,10 +10,7 @@ import com.ussshenzhou.rainbow6.util.ModSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.item.UseAction;
+import net.minecraft.item.*;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
 import net.minecraft.world.Explosion;
@@ -25,10 +23,11 @@ import org.apache.logging.log4j.Logger;
  */
 public class FragGrenade extends Item {
     public FragGrenade() {
-        super(new Properties().group(ModItemGroups.Group1));
+        super(new Properties()
+                .group(ModItemGroups.Group1)
+        );
         this.setRegistryName("fraggrenade");
-        //BowItem.java
-        this.addPropertyOverride(new ResourceLocation("pulling"),(p_210309_0_, p_210309_1_, p_210309_2_) -> {
+        ItemModelsProperties.registerProperty(ModItems.fragGrenade,new ResourceLocation("pulling"),(p_210309_0_, p_210309_1_, p_210309_2_) -> {
             return p_210309_2_ != null && p_210309_2_.isHandActive() && p_210309_2_.getActiveItemStack() == p_210309_0_ ? 1.0F : 0.0F;
         });
     }
@@ -47,7 +46,7 @@ public class FragGrenade extends Item {
                 if (!worldIn.isRemote) {
                     FragGrenadeEntity fragGrenadeEntity = new FragGrenadeEntity(ModEntityTypes.fragGrenadeEntityType,player,worldIn);
                     fragGrenadeEntity.setItem(itemstack);
-                    fragGrenadeEntity.shoot(player, player.rotationPitch, player.rotationYaw, 1.0F, 0.6F, 0.1F);
+                    fragGrenadeEntity.shoot(player.getLookVec().x,player.getLookVec().y,player.getLookVec().z, 0.6F, 0.1F);
                     fragGrenadeEntity.setTimeCountDown(timeLeft);
                     worldIn.addEntity(fragGrenadeEntity);
                 }
@@ -68,7 +67,7 @@ public class FragGrenade extends Item {
             ItemStack itemstack = player.getActiveItemStack();
             FragGrenadeEntity fragGrenadeEntity = new FragGrenadeEntity(ModEntityTypes.fragGrenadeEntityType,player,worldIn);
             fragGrenadeEntity.setItem(itemstack);
-            fragGrenadeEntity.shoot(player, player.rotationPitch, player.rotationYaw, 1.0F, 0.6F, 0.1F);
+            fragGrenadeEntity.shoot(player.getLookVec().x,player.getLookVec().y,player.getLookVec().z, 0.6F, 0.1F);
             fragGrenadeEntity.setTimeCountDown(0);
             worldIn.addEntity(fragGrenadeEntity);
         }
@@ -88,4 +87,5 @@ public class FragGrenade extends Item {
         playerIn.setActiveHand(handIn);
         return ActionResult.resultConsume(stack);
     }
+
 }

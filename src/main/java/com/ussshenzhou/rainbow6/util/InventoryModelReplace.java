@@ -11,6 +11,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,7 +28,7 @@ import java.util.Random;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD,value = Dist.CLIENT)
 public class InventoryModelReplace {
     @SubscribeEvent
-    public static void onModelLoad(FMLClientSetupEvent event){
+    public static void onModelLoad(ModelRegistryEvent event){
         ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.reinforcement.getRegistryName()+"_hand","inventory"));
         ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.blackMirrorItem.getRegistryName()+"_hand","inventory"));
     }
@@ -57,8 +58,8 @@ public class InventoryModelReplace {
             }
 
             @Override
-            public boolean func_230044_c_() {
-                return reinforcementDefaultModel.func_230044_c_();
+            public boolean isSideLit() {
+                return reinforcementDefaultModel.isSideLit();
             }
 
             @Override
@@ -110,8 +111,8 @@ public class InventoryModelReplace {
             }
 
             @Override
-            public boolean func_230044_c_() {
-                return blackMirrorItemDefaultModel.func_230044_c_();
+            public boolean isSideLit() {
+                return blackMirrorItemDefaultModel.isSideLit();
             }
 
             @Override

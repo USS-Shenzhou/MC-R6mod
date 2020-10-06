@@ -32,7 +32,7 @@ public class ImpactGrenade extends Item {
         if (!worldIn.isRemote) {
             ImpactGrenadeEntity impactgrenadeentity = new ImpactGrenadeEntity(ModEntityTypes.impactGrenadeEntityType,playerIn,worldIn);
             impactgrenadeentity.setItem(itemstack);
-            impactgrenadeentity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 1.0F, 1.0F, 0.1F);
+            impactgrenadeentity.shoot(playerIn.getLookVec().x,playerIn.getLookVec().y,playerIn.getLookVec().z, 1.0F, 0.1F);
             worldIn.addEntity(impactgrenadeentity);
         }
 

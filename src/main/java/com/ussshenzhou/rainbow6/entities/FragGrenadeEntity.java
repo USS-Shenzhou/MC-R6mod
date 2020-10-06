@@ -14,6 +14,7 @@ import net.minecraft.network.IPacket;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.*;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -40,13 +41,13 @@ public class FragGrenadeEntity extends ProjectileItemEntity {
     @Override
     protected void onImpact(RayTraceResult result) {
         if (result.getType() == RayTraceResult.Type.BLOCK){
-            Vec3d oldMotion = this.getMotion();
+            Vector3d oldMotion = this.getMotion();
             double velocity = Math.sqrt(Math.pow(oldMotion.x,2)+Math.pow(oldMotion.y,2)+Math.pow(oldMotion.z,2));
             if (velocity<=0.1) {
                 this.setVelocity(0,0,0);
             }
             else {
-                Vec3d newMotion = this.impactReflection(result);
+                Vector3d newMotion = this.impactReflection(result);
                 this.setMotion(newMotion);
                 world.playSound((PlayerEntity)null,getPosition(),ModSounds.FRAGGRENADE_TOUCH,SoundCategory.PLAYERS,1.0f,1.0f);
             }
@@ -55,7 +56,7 @@ public class FragGrenadeEntity extends ProjectileItemEntity {
         if (result.getType() == RayTraceResult.Type.ENTITY){
             EntityRayTraceResult entityRayTraceResult = (EntityRayTraceResult)result;
             Entity entity = entityRayTraceResult.getEntity();
-            if (entity!=this.getThrower()){
+            if (entity!=this.func_234616_v_()){
                 this.setVelocity(0,0,0);
                 this.markVelocityChanged();
             }
@@ -110,9 +111,9 @@ public class FragGrenadeEntity extends ProjectileItemEntity {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-    public Vec3d impactReflection(RayTraceResult oldResult){
-        Vec3d oldMotion = this.getMotion();
-        Vec3d newMotion = oldMotion;
+    public Vector3d impactReflection(RayTraceResult oldResult){
+        Vector3d oldMotion = this.getMotion();
+        Vector3d newMotion = oldMotion;
         double reduction =0.6;
         BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) oldResult;
         Direction direction = blockraytraceresult.getFace();

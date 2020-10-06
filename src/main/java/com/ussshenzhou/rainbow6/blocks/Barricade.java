@@ -16,9 +16,9 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -188,7 +188,7 @@ public class Barricade extends Block {
         }
     }
     public static Direction getFacingFromEntity(BlockPos clickedBlock, LivingEntity entity){
-        Vec3d vec =entity.getPositionVec();
+        Vector3d vec =entity.getPositionVec();
         return Direction.getFacingFromVector((float) (vec.x - clickedBlock.getX()),(float) (vec.y - clickedBlock.getY()),(float) (vec.z - clickedBlock.getZ()));
     }
 
@@ -200,8 +200,5 @@ public class Barricade extends Block {
         super.fillStateContainer(builder);
     }
 
-    @Override
-    public boolean canBeConnectedTo(BlockState state, IBlockReader world, BlockPos pos, Direction facing) {
-        return false;
-    }
+
 }

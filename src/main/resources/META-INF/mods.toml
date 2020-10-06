@@ -7,6 +7,9 @@
 modLoader="javafml" #mandatory
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
 loaderVersion="[31,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+# The license for you mod. This is mandatory metadata and allows for easier comprehension of your redistributive properties.
+# Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
+license="GPLv3"
 # A URL to refer people to when problems occur with this mod
 issueTrackerURL="http://my.issue.tracker/" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
@@ -15,7 +18,7 @@ issueTrackerURL="http://my.issue.tracker/" #optional
 modId="rainbow6" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 # Major.Minor.patch-alpha/beta/demo/rc.X+yearXseasonX.Minecraft
-version="0.1.0.dev2" #mandatory
+version="0.1.1.dev1" #mandatory
  # A display name for the mod
 displayName="Rainbow6Minesiege" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
@@ -50,6 +53,6 @@ Thanks ubi.
 [[dependencies.rainbow6]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.15.2]"
+    versionRange="[1.16.3]"
     ordering="NONE"
     side="BOTH"

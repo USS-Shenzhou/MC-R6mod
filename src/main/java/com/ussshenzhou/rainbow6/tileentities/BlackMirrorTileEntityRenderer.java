@@ -6,13 +6,14 @@ import com.ussshenzhou.rainbow6.blocks.BlackMirror;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Vector3f;
+
 /**
  * @author USS_Shenzhou
  */
@@ -35,7 +36,7 @@ public class BlackMirrorTileEntityRenderer extends TileEntityRenderer<BlackMirro
     @Override
     public void render(BlackMirrorTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         TextureAtlasSprite sprite = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(BLACK_MIRROR_GLASS_TEXTURE_LOCATION);
-        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getTranslucent());
+        IVertexBuilder builder = bufferIn.getBuffer(RenderType.getTranslucentMovingBlock());
         left = tileEntityIn.getBlockState().get(BlackMirror.LEFT);
         broken = tileEntityIn.getBlockState().get(BlackMirror.BROKEN);
         float MinU = sprite.getMinU();

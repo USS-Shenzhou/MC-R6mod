@@ -3,6 +3,7 @@ package com.ussshenzhou.rainbow6.tileentities;
 import com.ussshenzhou.rainbow6.blocks.ModBlocks;
 import com.ussshenzhou.rainbow6.blocks.Reinforcement;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -45,10 +46,11 @@ public class ReinforcementTileEntity extends TileEntity implements ITickableTile
             startTime++;
         }
     }
+
     @Override
-    public void read(CompoundNBT compound) {
-        startTime = compound.getInt("startTime");
-        super.read(compound);
+    public void read(BlockState state, CompoundNBT nbt) {
+        startTime = nbt.getInt("startTime");
+        super.read(state, nbt);
     }
 
     @Override

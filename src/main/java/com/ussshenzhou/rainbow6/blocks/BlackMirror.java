@@ -16,10 +16,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
@@ -89,7 +89,7 @@ public class BlackMirror extends Block {
             //wall to deploy MUST NOT harder than Terracotta
             float maxDeployableResistance = 4.2f;
             //this long-long shit just to get the ExplosionResistance of the front block, please tell me if there is a easier method.
-            boolean isDeployableResistance = worldIn.getBlockState(pos.offset(direction.getOpposite())).getExplosionResistance(worldIn,pos.offset(direction.getOpposite()),null,new Explosion(worldIn,null,pos.offset(direction.getOpposite()).getX(),pos.offset(direction.getOpposite()).getY(),pos.offset(direction.getOpposite()).getZ(),0,false, Explosion.Mode.DESTROY))>=maxDeployableResistance;
+            boolean isDeployableResistance = worldIn.getBlockState(pos.offset(direction.getOpposite())).getBlock().getExplosionResistance(state,worldIn,pos,new Explosion(worldIn,null,null,null,pos.getX(),pos.getY(),pos.getZ(),0,false, Explosion.Mode.DESTROY)) >= maxDeployableResistance;
             //also detect the right-part's position is empty or not.
             BlockPos rPos = pos;
             switch(direction){
@@ -196,10 +196,8 @@ public class BlackMirror extends Block {
     }
 
     public static void breakMirror(BlockState state, World worldIn, BlockPos pos){
-        if (worldIn.isRemote){
-            worldIn.getWorld().playSound(pos.getX(),pos.getY(),pos.getZ(), SoundEvents.BLOCK_GLASS_BREAK,SoundCategory.PLAYERS,1.0f,1.0f,false);
-        }
-        else{
+            worldIn.playSound(pos.getX(),pos.getY(),pos.getZ(), SoundEvents.BLOCK_GLASS_BREAK,SoundCategory.PLAYERS,1.0f,1.0f,false);
+        if (!worldIn.isRemote){
             Direction dir = state.get(BlockStateProperties.FACING);
             worldIn.destroyBlock(pos,false);
             worldIn.setBlockState(pos,ModBlocks.blackMirror.getDefaultState().with(BlockStateProperties.FACING,dir).with(LEFT,true).with(BROKEN,true));
@@ -227,7 +225,7 @@ public class BlackMirror extends Block {
     }
 
     public static Direction getFacingFromEntity(BlockPos clickedBlock, LivingEntity entity){
-        Vec3d vec = entity.getPositionVec();
+        Vector3d vec = entity.getPositionVec();
         return Direction.getFacingFromVector((float) (vec.x - clickedBlock.getX()),(float) (vec.y - clickedBlock.getY()),(float) (vec.z - clickedBlock.getZ()));
     }
 

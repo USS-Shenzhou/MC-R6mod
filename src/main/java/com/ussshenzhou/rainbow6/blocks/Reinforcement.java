@@ -19,9 +19,9 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -81,7 +81,7 @@ public class Reinforcement extends Block{
             //wall to reinforce MUST NOT harder than Terracotta
             float maxDeployableResistance = 4.2f;
             //this long-long shit just to get the ExplosionResistance of the front block, please tell me if there is a easier method.
-            if (direction==Direction.DOWN||direction==Direction.UP||worldIn.getBlockState(pos.offset(direction.getOpposite())).getExplosionResistance(worldIn,pos.offset(direction.getOpposite()),null,new Explosion(worldIn,null,pos.offset(direction.getOpposite()).getX(),pos.offset(direction.getOpposite()).getY(),pos.offset(direction.getOpposite()).getZ(),0,false, Explosion.Mode.DESTROY))>=maxDeployableResistance){
+            if (direction==Direction.DOWN||direction==Direction.UP||worldIn.getBlockState(pos.offset(direction.getOpposite())).getBlock().getExplosionResistance(state,worldIn,pos,new Explosion(worldIn,null,null,null,pos.getX(),pos.getY(),pos.getZ(),0,false, Explosion.Mode.DESTROY))>=maxDeployableResistance){
                 if (!worldIn.isRemote){
                     worldIn.removeBlock(pos,false);
                     worldIn.removeTileEntity(pos);
@@ -106,7 +106,7 @@ public class Reinforcement extends Block{
     }
 
     public static Direction getFacingFromEntity(BlockPos clickedBlock, LivingEntity entity){
-        Vec3d vec =entity.getPositionVec();
+        Vector3d vec =entity.getPositionVec();
         return Direction.getFacingFromVector((float) (vec.x - clickedBlock.getX()),(float) (vec.y - clickedBlock.getY()),(float) (vec.z - clickedBlock.getZ()));
     }
 
