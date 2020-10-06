@@ -11,6 +11,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3f;
 
+/**
+ * @author USS_Shenzhou
+ */
 public class FragGrenadeEntityRenderer extends EntityRenderer<FragGrenadeEntity> {
     public FragGrenadeEntityRenderer(EntityRendererManager renderManager) {
         super(renderManager);

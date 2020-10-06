@@ -21,6 +21,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.lwjgl.system.CallbackI;
 
+/**
+ * @author USS_Shenzhou
+ */
 public class FragGrenadeEntity extends ProjectileItemEntity {
 
     public FragGrenadeEntity(EntityType<FragGrenadeEntity> type, World worldIn) {
