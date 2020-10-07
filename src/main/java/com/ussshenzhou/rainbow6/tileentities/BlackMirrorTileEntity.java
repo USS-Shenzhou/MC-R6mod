@@ -26,7 +26,7 @@ public class BlackMirrorTileEntity extends TileEntity implements ITickableTileEn
     private Boolean isMoved = false;
     private int startTime = 0;
     private int counter = 0;
-    private int breakCounter = 0;
+
     public BlackMirrorTileEntity() {
         super(ModTileEntityTypes.BlackMirrorTileEntityType);
     }
@@ -37,13 +37,13 @@ public class BlackMirrorTileEntity extends TileEntity implements ITickableTileEn
             case 1:
                 world.playSound(null,pos,ModSounds.BLACKMIRROR_BREAK,SoundCategory.PLAYERS,0.8f,1.0f);
                 break;
-            case 2:
+            /*case 2:
                 if (world.isRemote){
                     for (int i=0;i<2;i++){
                         world.addParticle(ParticleTypes.CLOUD,pos.getX(),pos.getY(),pos.getZ(),0,0,0);
                     }
                 }
-                break;
+                break;*/
             case 23:
                 this.readyOrDoBreakMirror(dir,rPos,left,broken);
                 break;
@@ -198,6 +198,8 @@ public class BlackMirrorTileEntity extends TileEntity implements ITickableTileEn
     private BlockPos rPos;
     private BooleanProperty left;
     private BooleanProperty broken;
+    private int breakCounter = 0;
+
     public void readyOrDoBreakMirror(Direction direction, BlockPos blockPos, BooleanProperty aLeft, BooleanProperty aBroken, IntegerProperty click){
         this.dir = direction;
         this.rPos = blockPos;

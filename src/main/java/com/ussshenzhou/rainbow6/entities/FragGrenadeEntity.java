@@ -106,7 +106,7 @@ public class FragGrenadeEntity extends ProjectileItemEntity {
 
     @Override
     public boolean canExplosionDestroyBlock(Explosion explosionIn, IBlockReader worldIn, BlockPos pos, BlockState blockStateIn, float p_174816_5_) {
-        return false;
+        return true;
     }
 
     @Override
