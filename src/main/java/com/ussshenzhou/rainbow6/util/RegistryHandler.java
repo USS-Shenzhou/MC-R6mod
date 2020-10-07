@@ -33,13 +33,13 @@ public class RegistryHandler {
                 ModItems.logo,
                 ModItems.barricadeItem,
                 ModItems.ironBlock,
-                ModItems.reinforcement,
+                ModItems.reinforcementItem,
                 ModItems.impactGrenade,
                 ModItems.nitroCell,
                 ModItems.nitroCellExploder,
                 ModItems.blackMirrorItem,
-                ModItems.capabilityTestBlockItem,
-                ModItems.capabilityTestItem,
+                //ModItems.capabilityTestBlockItem,
+                //ModItems.capabilityTestItem,
                 ModItems.fragGrenade
         );
     }

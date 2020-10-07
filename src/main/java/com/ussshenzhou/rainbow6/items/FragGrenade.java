@@ -15,6 +15,8 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,9 +29,6 @@ public class FragGrenade extends Item {
                 .group(ModItemGroups.Group1)
         );
         this.setRegistryName("fraggrenade");
-        ItemModelsProperties.registerProperty(ModItems.fragGrenade,new ResourceLocation("pulling"),(p_210309_0_, p_210309_1_, p_210309_2_) -> {
-            return p_210309_2_ != null && p_210309_2_.isHandActive() && p_210309_2_.getActiveItemStack() == p_210309_0_ ? 1.0F : 0.0F;
-        });
     }
     protected static final Logger LOGGER = LogManager.getLogger();
 

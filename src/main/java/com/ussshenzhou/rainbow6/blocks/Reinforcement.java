@@ -5,7 +5,6 @@ import com.ussshenzhou.rainbow6.tileentities.ReinforcementTileEntity;
 import com.ussshenzhou.rainbow6.util.ModSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,7 +16,6 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -101,7 +99,7 @@ public class Reinforcement extends Block{
         }
     }
     public void cancelPlace(PlayerEntity player){
-        ItemStack returnStack = new ItemStack(ModItems.reinforcement);
+        ItemStack returnStack = new ItemStack(ModItems.reinforcementItem);
         player.addItemStackToInventory(returnStack);
     }
 

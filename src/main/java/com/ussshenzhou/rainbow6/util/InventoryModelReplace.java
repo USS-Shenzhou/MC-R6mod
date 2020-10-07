@@ -8,15 +8,12 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -29,13 +26,13 @@ import java.util.Random;
 public class InventoryModelReplace {
     @SubscribeEvent
     public static void onModelLoad(ModelRegistryEvent event){
-        ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.reinforcement.getRegistryName()+"_hand","inventory"));
+        ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.reinforcementItem.getRegistryName()+"_hand","inventory"));
         ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.blackMirrorItem.getRegistryName()+"_hand","inventory"));
     }
     @SubscribeEvent
     public static void onModelBake(ModelBakeEvent event){
         Map<ResourceLocation, IBakedModel> modelMap = event.getModelRegistry();
-        ResourceLocation reinforcement = ModItems.reinforcement.getRegistryName();
+        ResourceLocation reinforcement = ModItems.reinforcementItem.getRegistryName();
         ResourceLocation reinforcementHand = new ModelResourceLocation(reinforcement+"_hand","inventory");
         ResourceLocation reinforcementInventory = new ModelResourceLocation(reinforcement,"inventory");
         IBakedModel reinforcementHandModel = modelMap.get(reinforcementHand);

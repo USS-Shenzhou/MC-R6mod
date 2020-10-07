@@ -42,7 +42,7 @@ public class ImpactGrenadeEntity extends ProjectileItemEntity {
             this.remove();
             BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceResultIn;
             if (world.getBlockState(blockraytraceresult.getPos()).getMaterial()== Material.WOOD){
-                explosion=1.32f;
+                explosion=1.34f;
             }
             this.explode();
         }
