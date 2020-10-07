@@ -63,6 +63,14 @@
         "name": "rainbow6:blackmirror_set"
       }]
   },
+  "blackmirror_break": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:blackmirror_break"
+      }]
+  },
   "fraggrenade_ready": {
     "category": "player",
     "replace": "true",

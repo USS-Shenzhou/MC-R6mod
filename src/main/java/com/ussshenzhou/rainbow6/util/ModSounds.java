@@ -17,4 +17,5 @@ public class ModSounds {
     public static SoundEvent BLACKMIRROR_SET = new SoundEvent(new ResourceLocation("rainbow6","blackmirror_set")).setRegistryName("blackmirror_set");
     public static SoundEvent FRAGGRENADE_READY = new SoundEvent(new ResourceLocation("rainbow6","fraggrenade_ready")).setRegistryName("fraggrenade_ready");
     public static SoundEvent FRAGGRENADE_TOUCH = new SoundEvent(new ResourceLocation("rainbow6","fraggrenade_touch")).setRegistryName("fraggrenade_touch");
+    public static SoundEvent BLACKMIRROR_BREAK = new SoundEvent(new ResourceLocation("rainbow6","blackmirror_break")).setRegistryName("blackmirror_break");
 }

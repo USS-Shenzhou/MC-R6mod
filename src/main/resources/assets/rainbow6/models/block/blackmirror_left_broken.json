@@ -2,7 +2,7 @@
   "parent":"rainbow6:block/blackmirror_left",
   "texture_size": [80, 80],
   "textures": {
-    "0": "rainbow6:block/blackmirror_left",
+    "0": "rainbow6:block/blackmirror_left3",
     "particle": "rainbow6:block/blackmirror_particle2"
   }
 }

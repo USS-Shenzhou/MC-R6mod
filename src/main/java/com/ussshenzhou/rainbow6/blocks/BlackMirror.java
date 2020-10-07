@@ -6,10 +6,12 @@ import com.ussshenzhou.rainbow6.util.ModSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
@@ -22,7 +24,6 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -32,6 +33,7 @@ import javax.annotation.Nullable;
 public class BlackMirror extends Block {
     public static BooleanProperty LEFT = BooleanProperty.create("left");
     public static BooleanProperty BROKEN = BooleanProperty.create("broken");
+    public static IntegerProperty CLICK = IntegerProperty.create("click",0,3);
 
     protected static final VoxelShape NORTH = Block.makeCuboidShape(0.0D, 0.0D, 6.0D, 16.0D, 16.0D, 10.0D);
     protected static final VoxelShape SOUTH = Block.makeCuboidShape(0.0D, 0.0D, 10.0D, 16.0D, 16.0D, 6.0D);
@@ -79,7 +81,7 @@ public class BlackMirror extends Block {
                 .notSolid()
         );
         this.setRegistryName("blackmirror");
-        this.setDefaultState(this.getStateContainer().getBaseState().with(LEFT,true).with(BROKEN,false).with(BlockStateProperties.FACING,Direction.NORTH));
+        this.setDefaultState(this.getStateContainer().getBaseState().with(LEFT,true).with(BROKEN,false).with(BlockStateProperties.FACING,Direction.NORTH).with(CLICK,0));
     }
 
     @Override
@@ -187,21 +189,26 @@ public class BlackMirror extends Block {
         //if (hit.getPos().getY()){}
         if (state.get(LEFT) && handIn == Hand.MAIN_HAND && hit.getFace()==state.get(BlockStateProperties.FACING)){
             BlackMirrorTileEntity blackMirrorTileEntity = (BlackMirrorTileEntity)worldIn.getTileEntity(pos);
-            blackMirrorTileEntity.increaseCounter();
-            if (blackMirrorTileEntity.getCounter()==3){
-                breakMirror(state,worldIn,pos);
+            int conuter = blackMirrorTileEntity.getCounter();
+            if (conuter < 3){
+                blackMirrorTileEntity.increaseCounter();
+                this.readyAndGoBreakMirror(state,worldIn,pos);
+
+                return ActionResultType.SUCCESS;
+            }
+            else {
+                return ActionResultType.FAIL;
             }
         }
-        return ActionResultType.SUCCESS;
+        else {
+            return ActionResultType.FAIL;
+        }
     }
 
-    public static void breakMirror(BlockState state, World worldIn, BlockPos pos){
-            worldIn.playSound(pos.getX(),pos.getY(),pos.getZ(), SoundEvents.BLOCK_GLASS_BREAK,SoundCategory.PLAYERS,1.0f,1.0f,false);
+    public void readyAndGoBreakMirror(BlockState state, World worldIn, BlockPos pos){
         if (!worldIn.isRemote){
+            BlackMirrorTileEntity blackMirrorTileEntity = (BlackMirrorTileEntity)worldIn.getTileEntity(pos);
             Direction dir = state.get(BlockStateProperties.FACING);
-            worldIn.destroyBlock(pos,false);
-            worldIn.setBlockState(pos,ModBlocks.blackMirror.getDefaultState().with(BlockStateProperties.FACING,dir).with(LEFT,true).with(BROKEN,true));
-            worldIn.removeTileEntity(pos);
             BlockPos rPos = pos;
             switch(dir){
                 case NORTH:
@@ -218,9 +225,27 @@ public class BlackMirror extends Block {
                     break;
                 default:
             }
-            worldIn.destroyBlock(rPos,false);
-            worldIn.setBlockState(rPos,ModBlocks.blackMirror.getDefaultState().with(BlockStateProperties.FACING,dir).with(LEFT,false).with(BROKEN,true));
-            worldIn.removeTileEntity(rPos);
+            int count = blackMirrorTileEntity.getCounter();
+            switch (count){
+                case 0:
+                    break;
+                case 1:
+                    worldIn.setBlockState(pos,ModBlocks.blackMirror.getDefaultState().with(BlockStateProperties.FACING,dir).with(LEFT,true).with(CLICK,1));
+                    break;
+                case 2:
+                    worldIn.setBlockState(pos,ModBlocks.blackMirror.getDefaultState().with(BlockStateProperties.FACING,dir).with(LEFT,true).with(CLICK,2));
+                    break;
+                case 3:
+                    blackMirrorTileEntity.readyOrDoBreakMirror(dir,rPos,LEFT,BROKEN,CLICK);
+                    break;
+                default:
+                    worldIn.destroyBlock(pos,false);
+                    worldIn.removeTileEntity(pos);
+                    worldIn.destroyBlock(rPos,false);
+                    worldIn.removeTileEntity(rPos);
+                    Minecraft.getInstance().player.sendChatMessage("WARNING! A BlackMirror TileEntity with wrong click counter at "+pos.toString()+"! Go check if it has been removed automatically!");
+                    break;
+            }
         }
     }
 
@@ -234,6 +259,7 @@ public class BlackMirror extends Block {
         builder.add(BlockStateProperties.FACING);
         builder.add(LEFT);
         builder.add(BROKEN);
+        builder.add(CLICK);
         super.fillStateContainer(builder);
     }
 

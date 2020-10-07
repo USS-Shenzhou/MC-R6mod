@@ -2,15 +2,21 @@ package com.ussshenzhou.rainbow6.tileentities;
 
 import com.ussshenzhou.rainbow6.blocks.BlackMirror;
 import com.ussshenzhou.rainbow6.blocks.ModBlocks;
+import com.ussshenzhou.rainbow6.util.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 /**
@@ -20,12 +26,34 @@ public class BlackMirrorTileEntity extends TileEntity implements ITickableTileEn
     private Boolean isMoved = false;
     private int startTime = 0;
     private int counter = 0;
+    private int breakCounter = 0;
     public BlackMirrorTileEntity() {
         super(ModTileEntityTypes.BlackMirrorTileEntityType);
     }
 
     @Override
     public void tick() {
+        switch (this.breakCounter){
+            case 1:
+                world.playSound(null,pos,ModSounds.BLACKMIRROR_BREAK,SoundCategory.PLAYERS,0.8f,1.0f);
+                break;
+            case 2:
+                if (world.isRemote){
+                    for (int i=0;i<2;i++){
+                        world.addParticle(ParticleTypes.CLOUD,pos.getX(),pos.getY(),pos.getZ(),0,0,0);
+                    }
+                }
+                break;
+            case 23:
+                this.readyOrDoBreakMirror(dir,rPos,left,broken);
+                break;
+            default:
+                break;
+        }
+        if (this.breakCounter!=0){
+            this.breakCounter++;
+        }
+
         if (!world.getBlockState(pos).get(BlackMirror.BROKEN)){
             //using a debug stick to redirect may cause this problem
             try{
@@ -35,7 +63,7 @@ public class BlackMirrorTileEntity extends TileEntity implements ITickableTileEn
             }
             catch (IllegalStateException e){
                 String posWrong = pos.toString();
-                Minecraft.getInstance().player.sendChatMessage("WARNING! A BlackMirror Block with wrong direction detected at"+posWrong+"! Go check it if it has been removed automatically!");
+                Minecraft.getInstance().player.sendChatMessage("WARNING! A BlackMirror Block with wrong direction detected at"+posWrong+"! Go check if it has been removed automatically!");
                 if (!world.isRemote){
                     world.removeBlock(pos,false);
                     world.removeTileEntity(pos);
@@ -60,7 +88,7 @@ public class BlackMirrorTileEntity extends TileEntity implements ITickableTileEn
                             world.removeBlock(pos,false);
                         }
                         else{
-                            addSteamParticle(world,pos);
+                           this.addSteamParticle(world,pos);
                         }
                         break;
                     default:
@@ -164,5 +192,31 @@ public class BlackMirrorTileEntity extends TileEntity implements ITickableTileEn
         compound.putInt("startTime",startTime);
         compound.putInt("counter",counter);
         return super.write(compound);
+    }
+
+    private Direction dir;
+    private BlockPos rPos;
+    private BooleanProperty left;
+    private BooleanProperty broken;
+    public void readyOrDoBreakMirror(Direction direction, BlockPos blockPos, BooleanProperty aLeft, BooleanProperty aBroken, IntegerProperty click){
+        this.dir = direction;
+        this.rPos = blockPos;
+        this.left = aLeft;
+        this.broken = aBroken;
+            this.breakCounter = 1 ;
+            if (!world.isRemote){
+                world.setBlockState(pos,ModBlocks.blackMirror.getDefaultState().with(BlockStateProperties.FACING,dir).with(left,true).with(click,3));
+            }
+    }
+    public void readyOrDoBreakMirror(Direction direction, BlockPos blockPos, BooleanProperty aLeft, BooleanProperty aBroken){
+        world.playSound(null,pos, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS,1.0f,1.0f);
+        if (!world.isRemote){
+            world.destroyBlock(rPos,false);
+            world.setBlockState(rPos,ModBlocks.blackMirror.getDefaultState().with(BlockStateProperties.FACING,dir).with(left,false).with(broken,true));
+            world.removeTileEntity(rPos);
+            world.destroyBlock(pos,false);
+            world.setBlockState(pos,ModBlocks.blackMirror.getDefaultState().with(BlockStateProperties.FACING,dir).with(left,true).with(broken,true));
+            world.removeTileEntity(pos);
+        }
     }
 }
