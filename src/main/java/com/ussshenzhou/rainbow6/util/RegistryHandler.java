@@ -77,7 +77,7 @@ public class RegistryHandler {
     /*@OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
-        RenderTypeLookup.setRenderLayer(ModBlocks.barricade, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.ironBlock, RenderType.getTranslucent());
     }*/
 
 }
