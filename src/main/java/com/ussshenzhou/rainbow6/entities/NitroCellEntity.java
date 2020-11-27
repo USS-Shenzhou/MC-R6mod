@@ -47,6 +47,14 @@ public class NitroCellEntity extends ProjectileItemEntity {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        if(this.onGround){
+            this.setMotion(0,0,0);
+        }
+    }
+
+    @Override
     protected void onImpact(RayTraceResult raytraceResultIn) {
         if (raytraceResultIn.getType() == RayTraceResult.Type.BLOCK) {
             BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceResultIn;
