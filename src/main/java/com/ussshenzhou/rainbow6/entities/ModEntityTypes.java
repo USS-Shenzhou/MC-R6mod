@@ -22,8 +22,8 @@ public class ModEntityTypes {
             .size(0.2f,0.1f)
             .build("gumine")
             .setRegistryName("gumine");*/
-    /*public static EntityType RemoteGasGrenadeEntityType = EntityType.Builder.<RemoteGasGrenadeEntity>create(RemoteGasGrenadeEntity::new,EntityClassification.MISC)
-            .size(0.1f,0.1f)
+    public static EntityType remoteGasGrenadeEntityType = EntityType.Builder.<RemoteGasGrenadeEntity>create(RemoteGasGrenadeEntity::new,EntityClassification.MISC)
+            .size(0.2f,0.13f)
             .build("RemoteGasGrenade")
-            .setRegistryName("rainbow6","remotegasgrenade");*/
+            .setRegistryName("rainbow6","remotegasgrenade");
 }

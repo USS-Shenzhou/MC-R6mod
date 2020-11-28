@@ -28,8 +28,7 @@ public class CapabilityTestBlock extends Block {
         if (!worldIn.isRemote){
             LazyOptional<IR6PlayerCapability> r6PlayerCap = player.getCapability(ModCapabilities.R6_PLAYER_CAPABILITY);
             r6PlayerCap.ifPresent((cap)->{
-                        cap.setR6Team("attacker");
-                        cap.setOperator("mira");
+
                     }
             );
         }

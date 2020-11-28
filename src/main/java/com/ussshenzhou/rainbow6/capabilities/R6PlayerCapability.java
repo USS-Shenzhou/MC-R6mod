@@ -7,16 +7,16 @@ import net.minecraft.nbt.CompoundNBT;
 public class R6PlayerCapability implements IR6PlayerCapability {
     /**
      * use the lower case of operator's nickname.
-     * for common player in server, use "operatorless".
+     * for common player in server, use "player".
      */
-    private String operator;
+    private String operator = "player";
 
     /**
      * use "attacker" or "defender" or "r6_spectator".
-     * for common player in server, use "teamless"
+     * for common player in server, use "none"
      *
      */
-    private String r6Team;
+    private String r6Team = "none";
 
     /**
      * use "blue" or "orange" or "white"

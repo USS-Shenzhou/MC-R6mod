@@ -28,6 +28,7 @@ public class InventoryModelReplace {
     public static void onModelLoad(ModelRegistryEvent event){
         ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.reinforcementItem.getRegistryName()+"_hand","inventory"));
         ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.blackMirrorItem.getRegistryName()+"_hand","inventory"));
+        ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.remoteGasGrenadeItem.getRegistryName()+"_hand","inventory"));
     }
     @SubscribeEvent
     public static void onModelBake(ModelBakeEvent event){
@@ -130,7 +131,7 @@ public class InventoryModelReplace {
             @Override
             public IBakedModel handlePerspective(ItemCameraTransforms.TransformType cameraTransformType, MatrixStack mat) {
                 IBakedModel blackMirrorItemModelToUse = blackMirrorItemDefaultModel;
-                if (cameraTransformType == ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND){
+                if (cameraTransformType == ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.GROUND){
                     blackMirrorItemModelToUse = blackMirrorItemHandModel;
                 }
                 return ForgeHooksClient.handlePerspective(blackMirrorItemModelToUse,cameraTransformType,mat);
@@ -138,7 +139,60 @@ public class InventoryModelReplace {
 
 
         };
+        ResourceLocation remotegasgrenade = ModItems.remoteGasGrenadeItem.getRegistryName();
+        ResourceLocation remotegasgrenadeHand = new ModelResourceLocation(remotegasgrenade+"_hand","inventory");
+        ResourceLocation remotegasgrenadeInventory = new ModelResourceLocation(remotegasgrenade,"inventory");
+        IBakedModel remotegasgrenadeHandModel = modelMap.get(remotegasgrenadeHand);
+        IBakedModel remotegasgrenadeDefaultModel = modelMap.get(remotegasgrenadeInventory);
+
+        IBakedModel remotegasgrenadeModelWrapper = new IBakedModel() {
+            @Override
+            public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, Random rand) {
+                return remotegasgrenadeDefaultModel.getQuads(state, side, rand);
+            }
+
+            @Override
+            public boolean isAmbientOcclusion() {
+                return remotegasgrenadeDefaultModel.isAmbientOcclusion();
+            }
+
+            @Override
+            public boolean isGui3d() {
+                return remotegasgrenadeDefaultModel.isGui3d();
+            }
+
+            @Override
+            public boolean isSideLit() {
+                return remotegasgrenadeDefaultModel.isSideLit();
+            }
+
+            @Override
+            public boolean isBuiltInRenderer() {
+                return remotegasgrenadeDefaultModel.isBuiltInRenderer();
+            }
+
+            @Override
+            public TextureAtlasSprite getParticleTexture() {
+                return remotegasgrenadeDefaultModel.getParticleTexture();
+            }
+
+            @Override
+            public ItemOverrideList getOverrides() {
+                return remotegasgrenadeDefaultModel.getOverrides();
+            }
+
+            @Override
+            public IBakedModel handlePerspective(ItemCameraTransforms.TransformType cameraTransformType, MatrixStack mat) {
+                IBakedModel remotegasgrenadeModelToUse = remotegasgrenadeDefaultModel;
+                if (cameraTransformType == ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.GROUND){
+                    remotegasgrenadeModelToUse = remotegasgrenadeHandModel;
+                }
+                return ForgeHooksClient.handlePerspective(remotegasgrenadeModelToUse,cameraTransformType,mat);
+            }
+        };
+
         modelMap.put(blackMirrorItemInventory,blackMirrorItemModelWrapper);
         modelMap.put(reinforcementInventory,reinforcementModelWrapper);
+        modelMap.put(remotegasgrenadeInventory,remotegasgrenadeModelWrapper);
     }
 }

@@ -18,4 +18,7 @@ public class ModSounds {
     public static SoundEvent FRAGGRENADE_READY = new SoundEvent(new ResourceLocation("rainbow6","fraggrenade_ready")).setRegistryName("fraggrenade_ready");
     public static SoundEvent FRAGGRENADE_TOUCH = new SoundEvent(new ResourceLocation("rainbow6","fraggrenade_touch")).setRegistryName("fraggrenade_touch");
     public static SoundEvent BLACKMIRROR_BREAK = new SoundEvent(new ResourceLocation("rainbow6","blackmirror_break")).setRegistryName("blackmirror_break");
+    public static SoundEvent REMOTEGASGRENADE_THROW = new SoundEvent(new ResourceLocation("rainbow6","remotegasgrenade_throw")).setRegistryName("remotegasgrenade_throw");
+    public static SoundEvent REMOTEGASGRENADE_EXPLODE = new SoundEvent(new ResourceLocation("rainbow6","remotegasgrenade_explode")).setRegistryName("remotegasgrenade_explode");
+    public static SoundEvent EXPLODER_CLICK = new SoundEvent(new ResourceLocation("rainbow6","exploder_click")).setRegistryName("exploder_click");
 }

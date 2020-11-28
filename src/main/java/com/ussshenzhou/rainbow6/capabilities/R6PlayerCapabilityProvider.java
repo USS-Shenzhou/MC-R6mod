@@ -22,7 +22,7 @@ public class R6PlayerCapabilityProvider implements ICapabilityProvider, INBTSeri
     @Nonnull
     IR6PlayerCapability getOrCreateCapability(){
         if (r6PlayerCapability==null){
-            this.r6PlayerCapability = new R6PlayerCapability("operatorless","teamless","white");
+            this.r6PlayerCapability = new R6PlayerCapability("player","none","white");
         }
         return this.r6PlayerCapability;
     }

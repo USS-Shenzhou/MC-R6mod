@@ -19,6 +19,9 @@ public class ModItems {
     public static CapabilityTestItem capabilityTestItem = new CapabilityTestItem();
     public static FragGrenade fragGrenade = new FragGrenade();
     public static ReinforcementItem reinforcementItem = new ReinforcementItem();
+    public static RemoteGasGrenadeItem remoteGasGrenadeItem = new RemoteGasGrenadeItem();
+    public static Exploder exploder = new Exploder();
     public static Item ironBlock = new BlockItem(ModBlocks.ironBlock,new Item.Properties().group(ModItemGroups.Group1)).setRegistryName(ModBlocks.ironBlock.getRegistryName());
     public static Item capabilityTestBlockItem = new BlockItem(ModBlocks.capabilityTestBlock,new Item.Properties().group(ModItemGroups.Group1)).setRegistryName(ModBlocks.capabilityTestBlock.getRegistryName());
+
 }

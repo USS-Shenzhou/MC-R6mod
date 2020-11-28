@@ -39,8 +39,10 @@ public class RegistryHandler {
                 ModItems.nitroCellExploder,
                 ModItems.blackMirrorItem,
                 //ModItems.capabilityTestBlockItem,
-                //ModItems.capabilityTestItem,
-                ModItems.fragGrenade
+                ModItems.capabilityTestItem,
+                ModItems.fragGrenade,
+                ModItems.remoteGasGrenadeItem,
+                ModItems.exploder
         );
     }
 
@@ -56,7 +58,10 @@ public class RegistryHandler {
                 ModSounds.REINFORCEMENT_PLACE,
                 ModSounds.BLACKMIRROR_SET,
                 ModSounds.FRAGGRENADE_READY,
-                ModSounds.FRAGGRENADE_TOUCH
+                ModSounds.FRAGGRENADE_TOUCH,
+                ModSounds.REMOTEGASGRENADE_THROW,
+                ModSounds.REMOTEGASGRENADE_EXPLODE,
+                ModSounds.EXPLODER_CLICK
         );
     }
     @SubscribeEvent
@@ -64,7 +69,8 @@ public class RegistryHandler {
         event.getRegistry().registerAll(
                 ModEntityTypes.impactGrenadeEntityType,
                 ModEntityTypes.nitroCellEntityType,
-                ModEntityTypes.fragGrenadeEntityType
+                ModEntityTypes.fragGrenadeEntityType,
+                ModEntityTypes.remoteGasGrenadeEntityType
         );
     }
     @SubscribeEvent

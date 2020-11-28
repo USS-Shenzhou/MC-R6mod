@@ -28,9 +28,7 @@ public class CapabilityTestItem extends Item {
         if (!worldIn.isRemote){
             LazyOptional<IR6PlayerCapability> r6PlayerCap = playerIn.getCapability(ModCapabilities.R6_PLAYER_CAPABILITY);
             r6PlayerCap.ifPresent((cap)->{
-                        String operator = cap.getOperator();
-                        String r6Team = cap.getR6Team();
-                        LogManager.getLogger().info(operator+","+r6Team);
+                        cap.setOperator("smoke");
                     }
             );
         }

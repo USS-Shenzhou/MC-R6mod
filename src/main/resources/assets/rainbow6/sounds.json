@@ -86,5 +86,29 @@
       {
         "name": "rainbow6:fraggrenade_touch"
       }]
+  },
+  "remotegasgrenade_throw": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:remotegasgrenade_throw"
+      }]
+  },
+  "remotegasgrenade_explode": {
+  "category": "player",
+  "replace": "true",
+  "sounds": [
+    {
+      "name": "rainbow6:remotegasgrenade_explode"
+    }]
+  },
+  "exploder_click": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:exploder_click"
+      }]
   }
 }
