@@ -31,6 +31,7 @@ public class FragGrenade extends Item {
         this.setRegistryName("fraggrenade");
     }
     protected static final Logger LOGGER = LogManager.getLogger();
+    private Boolean normal = true;
 
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
@@ -45,9 +46,12 @@ public class FragGrenade extends Item {
                 if (!worldIn.isRemote) {
                     FragGrenadeEntity fragGrenadeEntity = new FragGrenadeEntity(ModEntityTypes.fragGrenadeEntityType,player,worldIn);
                     fragGrenadeEntity.setItem(itemstack);
-                    fragGrenadeEntity.shoot(player.getLookVec().x,player.getLookVec().y,player.getLookVec().z, 0.6F, 0.1F);
-                    fragGrenadeEntity.setTimeCountDown(timeLeft);
-                    worldIn.addEntity(fragGrenadeEntity);
+                    if (normal){
+                        fragGrenadeEntity.shoot(player.getLookVec().x,player.getLookVec().y,player.getLookVec().z, 0.6F, 0.1F);
+                        fragGrenadeEntity.setTimeCountDown(timeLeft);
+                        worldIn.addEntity(fragGrenadeEntity);
+                        this.normal = true;
+                    }
                 }
                 player.addStat(Stats.ITEM_USED.get(this));
             }
@@ -62,11 +66,12 @@ public class FragGrenade extends Item {
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         if (!worldIn.isRemote){
+            this.normal = false;
             PlayerEntity player = (PlayerEntity)entityLiving;
             ItemStack itemstack = player.getActiveItemStack();
             FragGrenadeEntity fragGrenadeEntity = new FragGrenadeEntity(ModEntityTypes.fragGrenadeEntityType,player,worldIn);
             fragGrenadeEntity.setItem(itemstack);
-            fragGrenadeEntity.shoot(player.getLookVec().x,player.getLookVec().y,player.getLookVec().z, 0.6F, 0.1F);
+            fragGrenadeEntity.shoot(0,0,0, 0.6F, 0.1F);
             fragGrenadeEntity.setTimeCountDown(0);
             worldIn.addEntity(fragGrenadeEntity);
         }
