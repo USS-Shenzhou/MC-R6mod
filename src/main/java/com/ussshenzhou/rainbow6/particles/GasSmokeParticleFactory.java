@@ -18,6 +18,7 @@ public class GasSmokeParticleFactory implements IParticleFactory<GasSmokeParticl
     @Override
     public Particle makeParticle(GasSmokeParticleData typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
         GasSmokeParticle particle = new GasSmokeParticle(worldIn ,x,y,z,xSpeed,ySpeed,zSpeed);
+        particle.selectSpriteRandomly(sprite);
         return particle;
     }
 }

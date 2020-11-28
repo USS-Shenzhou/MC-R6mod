@@ -9,11 +9,11 @@ import net.minecraft.client.world.ClientWorld;
  */
 public class GasSmokeParticle extends SpriteTexturedParticle {
     protected GasSmokeParticle(ClientWorld world, double x, double y, double z, double motionX, double motionY, double motionZ) {
-        super(world, x, y, z, motionX, motionY, motionZ);
+        super(world, x, y, z, motionX*0.1, motionY*0.1, motionZ*0.1);
         maxAge=120;
         particleScale = 1.0f;
-        this.canCollide=false;
-        this.setAlphaF(0.8f);
+        this.canCollide=true;
+        this.setAlphaF(0.9f);
     }
 
     @Override

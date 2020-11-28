@@ -9,6 +9,8 @@
   "block.rainbow6.reinforcement": "放置方块以加固墙面",
   "item.rainbow6.nitrocell_exploder": "遥控炸药引爆器",
   "item.rainbow6.fraggrenade": "破片手榴弹",
+  "item.rainbow6.remotegargrenade": "遥控毒气手榴弹",
+  "item.rainbow6.exploder": "通用起爆器",
 
   "block.rainbow6.blackmirror": "黑镜"
 }

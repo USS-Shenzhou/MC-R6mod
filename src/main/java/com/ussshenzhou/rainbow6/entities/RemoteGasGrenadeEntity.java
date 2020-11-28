@@ -48,7 +48,7 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
     }
 
     private Boolean exploded = false;
-    private int i =1;
+    private int i =0;
     @Override
     public void tick() {
         super.tick();
@@ -57,27 +57,27 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
         }
         if (this.exploded){
             if (!world.isRemote){
-                Predicate<PlayerEntity> ifexist = new Predicate<PlayerEntity>() {
-                    @Override
-                    public boolean test(PlayerEntity entity) {
-                        return entity != null ;
-                    }
-                };
-                List<PlayerEntity> list = world.getEntitiesWithinAABB(PlayerEntity.class, this.getBoundingBox().grow(2.0d),ifexist);
-                if (!list.isEmpty()){
-                    for(PlayerEntity playerEntity:list){
-                        Boolean flag = false;
-                        EffectInstance effect = new EffectInstance(Effects.WITHER,21,4,false,false);
-                        LazyOptional<IR6PlayerCapability> r6PlayerCap = playerEntity.getCapability(ModCapabilities.R6_PLAYER_CAPABILITY);
-                        IR6PlayerCapability ir6PlayerCapability = r6PlayerCap.orElse(null);
-                        if (!"smoke".equals(ir6PlayerCapability.getOperator())){
-                            playerEntity.addPotionEffect(effect);
+                if (i%20==0){
+                    Predicate<PlayerEntity> ifexist = new Predicate<PlayerEntity>() {
+                        @Override
+                        public boolean test(PlayerEntity entity) {
+                            return entity != null ;
+                        }
+                    };
+                    List<PlayerEntity> list = world.getEntitiesWithinAABB(PlayerEntity.class, this.getBoundingBox().grow(2.5d),ifexist);
+                    if (!list.isEmpty()){
+                        for(PlayerEntity playerEntity:list){
+                            LazyOptional<IR6PlayerCapability> r6PlayerCap = playerEntity.getCapability(ModCapabilities.R6_PLAYER_CAPABILITY);
+                            IR6PlayerCapability ir6PlayerCapability = r6PlayerCap.orElse(null);
+                            if (!"smoke".equals(ir6PlayerCapability.getOperator())){
+                                playerEntity.attackEntityFrom(new DamageSource("Remote Gas Grenade"),5);
+                            }
                         }
                     }
                 }
             }
-            else {
-                world.addParticle(new GasSmokeParticleData(new Vector3d(0,0,0),new Color(0),0),false,this.getPosX()+rand(),this.getPosY()+rand(),this.getPosZ()+rand(),Math.random()*0.1,Math.random()*0.1,Math.random()*0.1);
+            else if (i<150){
+                world.addParticle(new GasSmokeParticleData(new Vector3d(0,0,0),new Color(0),0),false,this.getPosX()+rand(),this.getPosY()+rand(),this.getPosZ()+rand(),0,0,0);
             }
             i++;
         }
@@ -88,10 +88,10 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
 
     private double rand(){
         if (Math.random()*10<5){
-            return Math.random()*-2;
+            return Math.random();
         }
         else {
-            return Math.random()*2;
+            return Math.random();
         }
     }
 

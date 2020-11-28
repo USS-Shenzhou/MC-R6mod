@@ -1,9 +1,12 @@
 package com.ussshenzhou.rainbow6;
 
+import com.ussshenzhou.rainbow6.particles.ModParticleRegistry;
+import com.ussshenzhou.rainbow6.particles.ModParticleTypeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -39,6 +42,8 @@ public class rainbow6
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ModParticleTypeRegistry.PARTICLE_TYPE.register(eventBus);
     }
 
     private void setup(final FMLCommonSetupEvent event)
