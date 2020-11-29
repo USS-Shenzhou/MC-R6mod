@@ -11,6 +11,7 @@
   "item.rainbow6.fraggrenade": "Frag Grenade",
   "item.rainbow6.remotegasgrenade": "Remote Gas Grenade",
   "item.rainbow6.exploder": "Universal Exploder",
+  "item.rainbow6.capabilitytestitem": "switch between smoke and none -  for temp",
 
   "block.rainbow6.blackmirror": "Black Mirror"
 }
