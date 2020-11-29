@@ -50,7 +50,9 @@ public class FragGrenade extends Item {
                         fragGrenadeEntity.shoot(player.getLookVec().x,player.getLookVec().y,player.getLookVec().z, 0.6F, 0.1F);
                         fragGrenadeEntity.setTimeCountDown(timeLeft);
                         worldIn.addEntity(fragGrenadeEntity);
-                        this.normal = true;
+                    }
+                    else {
+                        normal = true;
                     }
                 }
                 player.addStat(Stats.ITEM_USED.get(this));
@@ -71,7 +73,7 @@ public class FragGrenade extends Item {
             ItemStack itemstack = player.getActiveItemStack();
             FragGrenadeEntity fragGrenadeEntity = new FragGrenadeEntity(ModEntityTypes.fragGrenadeEntityType,player,worldIn);
             fragGrenadeEntity.setItem(itemstack);
-            fragGrenadeEntity.shoot(0,0,0, 0.6F, 0.1F);
+            fragGrenadeEntity.shoot(0,0,0, 0.8F, 0.1F);
             fragGrenadeEntity.setTimeCountDown(0);
             worldIn.addEntity(fragGrenadeEntity);
         }

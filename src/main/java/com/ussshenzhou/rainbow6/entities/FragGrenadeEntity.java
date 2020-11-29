@@ -47,7 +47,7 @@ public class FragGrenadeEntity extends ProjectileItemEntity {
             Vector3d oldMotion = this.getMotion();
             double velocity = Math.sqrt(Math.pow(oldMotion.x,2)+Math.pow(oldMotion.y,2)+Math.pow(oldMotion.z,2));
             if (velocity<=0.1) {
-                this.setVelocity(0,0,0);
+                this.setMotion(0,0,0);
             }
             else {
                 Vector3d newMotion = this.impactReflection(result);

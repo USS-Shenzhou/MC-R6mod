@@ -68,9 +68,9 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
                     if (!list.isEmpty()){
                         for(PlayerEntity playerEntity:list){
                             LazyOptional<IR6PlayerCapability> r6PlayerCap = playerEntity.getCapability(ModCapabilities.R6_PLAYER_CAPABILITY);
-                            IR6PlayerCapability ir6PlayerCapability = r6PlayerCap.orElse(null);
+                            IR6PlayerCapability ir6PlayerCapability = r6PlayerCap.orElse(ModCapabilities.R6_PLAYER_CAPABILITY.getDefaultInstance());
                             if (!"smoke".equals(ir6PlayerCapability.getOperator())){
-                                playerEntity.attackEntityFrom(new DamageSource("Remote Gas Grenade"),5);
+                                playerEntity.attackEntityFrom(new DamageSource("Remote Gas Grenade"),4);
                             }
                         }
                     }
