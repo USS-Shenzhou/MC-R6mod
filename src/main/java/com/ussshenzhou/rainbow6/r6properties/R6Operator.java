@@ -1,4 +1,4 @@
-package com.ussshenzhou.rainbow6.r6data;
+package com.ussshenzhou.rainbow6.r6properties;
 
 /**
  * @author USS_Shenzhou
