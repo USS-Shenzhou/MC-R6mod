@@ -73,7 +73,7 @@ public class FragGrenade extends Item {
             ItemStack itemstack = player.getActiveItemStack();
             FragGrenadeEntity fragGrenadeEntity = new FragGrenadeEntity(ModEntityTypes.fragGrenadeEntityType,player,worldIn);
             fragGrenadeEntity.setItem(itemstack);
-            fragGrenadeEntity.shoot(0,0,0, 0.8F, 0.1F);
+            fragGrenadeEntity.shoot(0,0,0, 1.1F, 0.1F);
             fragGrenadeEntity.setTimeCountDown(0);
             worldIn.addEntity(fragGrenadeEntity);
         }
