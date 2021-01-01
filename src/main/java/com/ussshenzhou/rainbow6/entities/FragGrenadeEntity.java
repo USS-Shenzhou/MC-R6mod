@@ -117,7 +117,7 @@ public class FragGrenadeEntity extends ProjectileItemEntity {
     public Vector3d impactReflection(RayTraceResult oldResult){
         Vector3d oldMotion = this.getMotion();
         Vector3d newMotion = oldMotion;
-        double reduction =0.6;
+        double reduction =0.5;
         BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) oldResult;
         Direction direction = blockraytraceresult.getFace();
         switch (direction){
