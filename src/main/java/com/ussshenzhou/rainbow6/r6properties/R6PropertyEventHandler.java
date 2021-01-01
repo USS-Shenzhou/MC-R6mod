@@ -12,8 +12,8 @@ import java.util.UUID;
  */
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD,value = Dist.CLIENT)
 public class R6PropertyEventHandler {
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void onPlayerIn(PlayerEvent.PlayerLoggedInEvent event){
         UUID uuid = event.getPlayer().getUniqueID();
-    }
+    }*/
 }
