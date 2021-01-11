@@ -1,7 +1,5 @@
 package com.ussshenzhou.rainbow6.items;
 
-import com.ussshenzhou.rainbow6.blocks.Barricade;
-import com.ussshenzhou.rainbow6.blocks.BlackMirror;
 import com.ussshenzhou.rainbow6.blocks.ModBlocks;
 import com.ussshenzhou.rainbow6.util.ModItemGroups;
 import net.minecraft.item.BlockItem;
@@ -21,7 +19,7 @@ public class ModItems {
     public static ReinforcementItem reinforcementItem = new ReinforcementItem();
     public static RemoteGasGrenadeItem remoteGasGrenadeItem = new RemoteGasGrenadeItem();
     public static Exploder exploder = new Exploder();
-    public static Item ironBlock = new BlockItem(ModBlocks.ironBlock,new Item.Properties().group(ModItemGroups.Group1)).setRegistryName(ModBlocks.ironBlock.getRegistryName());
-    public static Item capabilityTestBlockItem = new BlockItem(ModBlocks.capabilityTestBlock,new Item.Properties().group(ModItemGroups.Group1)).setRegistryName(ModBlocks.capabilityTestBlock.getRegistryName());
+    public static Item ironBlock = new BlockItem(ModBlocks.ironBlock,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.ironBlock.getRegistryName());
+    public static Item capabilityTestBlockItem = new BlockItem(ModBlocks.capabilityTestBlock,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.capabilityTestBlock.getRegistryName());
 
 }

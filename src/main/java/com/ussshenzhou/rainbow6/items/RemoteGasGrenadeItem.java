@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 public class RemoteGasGrenadeItem extends Item {
     public RemoteGasGrenadeItem() {
         super(new Properties()
-                .group(ModItemGroups.Group1)
+                .group(ModItemGroups.Main)
         );
         this.setRegistryName("remotegasgrenade");
     }

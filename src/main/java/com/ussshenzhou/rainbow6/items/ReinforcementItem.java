@@ -6,15 +6,13 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.common.Mod;
 
 /**
  * @author USS_Shenzhou
  */
 public class ReinforcementItem extends BlockItem {
     public ReinforcementItem() {
-        super(ModBlocks.reinforcement,new Properties().group(ModItemGroups.Group1));
+        super(ModBlocks.reinforcement,new Properties().group(ModItemGroups.Main));
         this.setRegistryName(ModBlocks.reinforcement.getRegistryName());
     }
 

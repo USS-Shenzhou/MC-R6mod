@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
  */
 public class Logo extends Item {
     public Logo() {
-        super(new Properties().group(ModItemGroups.Group1));
+        super(new Properties().group(ModItemGroups.Main));
         this.setRegistryName("logo");
     }
 }

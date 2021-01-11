@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 public class NitroCell extends Item {
 
     public NitroCell() {
-        super(new Properties().group(ModItemGroups.Group1));
+        super(new Properties().group(ModItemGroups.Main));
         this.setRegistryName("nitrocell");
     }
     @Override

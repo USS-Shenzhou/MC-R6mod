@@ -1,6 +1,5 @@
 package com.ussshenzhou.rainbow6.items;
 
-import com.ussshenzhou.rainbow6.entities.NitroCellEntity;
 import com.ussshenzhou.rainbow6.entities.RemoteGasGrenadeEntity;
 import com.ussshenzhou.rainbow6.util.ModItemGroups;
 import com.ussshenzhou.rainbow6.util.ModSounds;
@@ -21,7 +20,7 @@ import java.util.function.Predicate;
  */
 public class Exploder extends Item {
     public Exploder() {
-        super(new Properties().group(ModItemGroups.Group1));
+        super(new Properties().group(ModItemGroups.Main));
         this.setRegistryName("exploder");
     }
     private static final Predicate<RemoteGasGrenadeEntity> ifexist = new Predicate<RemoteGasGrenadeEntity>() {

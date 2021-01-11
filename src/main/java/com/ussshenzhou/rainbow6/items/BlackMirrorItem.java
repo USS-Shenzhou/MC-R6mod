@@ -8,7 +8,7 @@ import net.minecraft.item.BlockItem;
  */
 public class BlackMirrorItem extends BlockItem {
     public BlackMirrorItem() {
-        super(ModBlocks.blackMirror,new Properties().group(ModItemGroups.Group1));
+        super(ModBlocks.blackMirror,new Properties().group(ModItemGroups.Main));
         this.setRegistryName(ModBlocks.blackMirror.getRegistryName());
     }
 }

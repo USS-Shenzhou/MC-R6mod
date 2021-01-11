@@ -1,5 +1,6 @@
 {
-  "itemGroup.Rainbow6:Minesiege": "我的六号",
+  "itemGroup.Rainbow6:main": "我的六号",
+  "itemGroup.Rainbow6:weapon": "我的六号：武器",
 
   "block.rainbow6.barricade": "放置方块以封阻门窗",
   "item.rainbow6.logo": "logo",
@@ -13,5 +14,5 @@
   "item.rainbow6.exploder": "通用起爆器",
   "item.rainbow6.capabilitytestitem": "smoke身份切换 - 临时用",
 
-  "block.rainbow6.blackmirror": "黑镜"
+  "block.rainbow6.blackmirror": "黑镜",
 }

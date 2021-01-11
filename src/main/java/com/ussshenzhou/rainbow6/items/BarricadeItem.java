@@ -2,21 +2,17 @@ package com.ussshenzhou.rainbow6.items;
 
 import com.ussshenzhou.rainbow6.blocks.ModBlocks;
 import com.ussshenzhou.rainbow6.util.ModItemGroups;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+
 /**
  * @author USS_Shenzhou
  */
 public class BarricadeItem extends BlockItem {
     public BarricadeItem() {
-        super(ModBlocks.barricade,new Properties().group(ModItemGroups.Group1));
+        super(ModBlocks.barricade,new Properties().group(ModItemGroups.Main));
         this.setRegistryName(ModBlocks.barricade.getRegistryName());
     }
 

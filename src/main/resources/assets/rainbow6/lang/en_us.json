@@ -1,5 +1,6 @@
 {
-  "itemGroup.Rainbow6:Minesiege": "Rainbow6:Minesiege",
+  "itemGroup.Rainbow6:main": "Rainbow6:Minesiege",
+  "itemGroup.Rainbow6:weapon": "Rainbow6:Weapon",
 
   "block.rainbow6.barricade": "Place block to barricade",
   "item.rainbow6.logo": "logo",
