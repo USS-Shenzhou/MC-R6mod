@@ -28,9 +28,9 @@ import javax.annotation.Nullable;
  */
 public class Barricade extends Block {
 
-    public static final BooleanProperty BOTTOM = BlockStateProperties.BOTTOM;
-    public static final BooleanProperty WINDOW = BooleanProperty.create("window");
-    public static final DirectionProperty DIRECTION = BlockStateProperties.FACING;
+    public static BooleanProperty BOTTOM = BlockStateProperties.BOTTOM;
+    public static BooleanProperty WINDOW = BooleanProperty.create("window");
+    public static DirectionProperty DIRECTION = BlockStateProperties.FACING;
 
     protected static final VoxelShape BOTTOM_NORTH = Block.makeCuboidShape(0.0D,2.0D,-1.0D,16.0D,16.0D,0.0D);
     protected static final VoxelShape BOTTOM_SOUTH = Block.makeCuboidShape(0.0D,2.0D,16.0D,16.0D,16.0D,17.0D);

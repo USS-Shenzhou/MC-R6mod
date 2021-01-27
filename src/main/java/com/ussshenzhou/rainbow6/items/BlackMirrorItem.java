@@ -11,4 +11,5 @@ public class BlackMirrorItem extends BlockItem {
         super(ModBlocks.blackMirror,new Properties().group(ModItemGroups.Main));
         this.setRegistryName(ModBlocks.blackMirror.getRegistryName());
     }
+
 }

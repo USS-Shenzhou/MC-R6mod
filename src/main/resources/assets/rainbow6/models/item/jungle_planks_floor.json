@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "up": "rainbow6:item/jungle_planks_floor1",
+    "down": "minecraft:block/jungle_planks",
+    "east": "rainbow6:item/jungle_planks_floor2",
+    "west": "rainbow6:item/jungle_planks_floor2",
+    "north": "minecraft:block/jungle_planks",
+    "south":"minecraft:block/jungle_planks"
+  }
+}

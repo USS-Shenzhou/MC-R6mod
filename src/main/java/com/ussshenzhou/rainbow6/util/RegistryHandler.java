@@ -1,5 +1,6 @@
 package com.ussshenzhou.rainbow6.util;
 
+import com.ussshenzhou.rainbow6.armors.ModArmors;
 import com.ussshenzhou.rainbow6.blocks.ModBlocks;
 import com.ussshenzhou.rainbow6.entities.ModEntityTypes;
 import com.ussshenzhou.rainbow6.items.ModItems;
@@ -24,7 +25,14 @@ public class RegistryHandler {
                 ModBlocks.ironBlock,
                 ModBlocks.reinforcement,
                 ModBlocks.blackMirror,
-                ModBlocks.capabilityTestBlock
+                ModBlocks.capabilityTestBlock,
+                ModBlocks.oakPlanksFloor,
+                ModBlocks.sprucePlanksFloor,
+                ModBlocks.birchPlanksFloor,
+                ModBlocks.junglePlanksFloor,
+                ModBlocks.acaciaPlanksFloor,
+                ModBlocks.darkOakPlanksFloor,
+                ModBlocks.ironBarFloor
         );
     }
     @SubscribeEvent
@@ -42,7 +50,23 @@ public class RegistryHandler {
                 ModItems.capabilityTestItem,
                 ModItems.fragGrenade,
                 ModItems.remoteGasGrenadeItem,
-                ModItems.exploder
+                ModItems.exploder,
+                ModItems.oakPlanksFloor,
+                ModItems.sprucePlanksFloor,
+                ModItems.birchPlanksFloor,
+                ModItems.junglePlanksFloor,
+                ModItems.acaciaPlanksFloor,
+                ModItems.darkOakPlanksFloor
+        );
+    }
+    /**
+     * same as ItemReg
+    */
+     @SubscribeEvent
+    public static void onArmorReg(RegistryEvent.Register<Item> event){
+        event.getRegistry().registerAll(
+                ModArmors.ashHead,
+                ModArmors.ashChest
         );
     }
 

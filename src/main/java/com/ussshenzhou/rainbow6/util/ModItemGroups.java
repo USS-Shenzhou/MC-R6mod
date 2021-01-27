@@ -1,5 +1,6 @@
 package com.ussshenzhou.rainbow6.util;
 
+import com.ussshenzhou.rainbow6.armors.ModArmors;
 import com.ussshenzhou.rainbow6.bullets.ModBulletItems;
 import com.ussshenzhou.rainbow6.items.ModItems;
 import net.minecraft.item.ItemGroup;
@@ -18,6 +19,12 @@ public class ModItemGroups {
         @Override
         public ItemStack createIcon() {
             return new ItemStack(ModBulletItems.testBulletItem);
+        }
+    };
+    public static ItemGroup Armor = new ItemGroup("Rainbow6:armor") {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(ModArmors.ashChest);
         }
     };
 }

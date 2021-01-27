@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": { "model": "rainbow6:block/iron_bar_floor", "y": 180},
+    "facing=south": { "model": "rainbow6:block/iron_bar_floor" ,"y": 180},
+    "facing=west": { "model": "rainbow6:block/iron_bar_floor" ,"y":270},
+    "facing=east": { "model": "rainbow6:block/iron_bar_floor", "y":270},
+    "facing=up": { "model": "rainbow6:block/iron_bar_floor", "x":-90},
+    "facing=down": { "model": "rainbow6:block/iron_bar_floor", "x":90,"y":180}
+  }
+}

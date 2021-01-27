@@ -15,4 +15,10 @@
   "item.rainbow6.capabilitytestitem": "smoke身份切换 - 临时用",
 
   "block.rainbow6.blackmirror": "黑镜",
+  "block.rainbow6.oak_planks_floor":"带钢梁的橡木木板" ,
+  "block.rainbow6.spruce_planks_floor": "带钢梁的云杉木板",
+  "block.rainbow6.birch_planks_floor": "带钢梁的白桦木板",
+  "block.rainbow6.acacia_planks_floor": "带钢梁的金合欢木板",
+  "block.rainbow6.dark_oak_planks_floor": "带钢梁的深色橡木木板",
+  "block.rainbow6.jungle_planks_floor": "带钢梁的丛林木板"
 }

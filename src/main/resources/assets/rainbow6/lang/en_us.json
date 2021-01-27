@@ -14,5 +14,11 @@
   "item.rainbow6.exploder": "Universal Exploder",
   "item.rainbow6.capabilitytestitem": "switch between smoke and none -  for temp",
 
-  "block.rainbow6.blackmirror": "Black Mirror"
+  "block.rainbow6.blackmirror": "Black Mirror",
+  "block.rainbow6.oak_planks_floor":"Oak Planks Floor" ,
+  "block.rainbow6.spruce_planks_floor": "Spruce Planks Floor",
+  "block.rainbow6.birch_planks_floor": "Birch Flanks Floor",
+  "block.rainbow6.acacia_planks_floor": "Acacia Planks Floor",
+  "block.rainbow6.dark_oak_planks_floor": "Dark Oak Planks Floor",
+  "block.rainbow6.jungle_planks_floor": "Jungle Planks Floor"
 }

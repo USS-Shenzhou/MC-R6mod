@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "up": "rainbow6:item/dark_oak_planks_floor1",
+    "down": "minecraft:block/dark_oak_planks",
+    "east": "rainbow6:item/dark_oak_planks_floor2",
+    "west": "rainbow6:item/dark_oak_planks_floor2",
+    "north": "minecraft:block/dark_oak_planks",
+    "south":"minecraft:block/dark_oak_planks"
+  }
+}
