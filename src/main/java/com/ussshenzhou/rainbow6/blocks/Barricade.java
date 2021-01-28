@@ -160,7 +160,7 @@ public class Barricade extends Block {
                     if (worldIn.getBlockState(pos).getBlock() instanceof AirBlock && worldIn.getBlockState(pos.add(0,-1,0)).getBlock() instanceof AirBlock){
                         worldIn.setBlockState(pos,state.with(BOTTOM,false).with(WINDOW,true).with(DIRECTION,direction));
                         worldIn.setBlockState(pos.add(0,-1,0),state.with(BOTTOM,true).with(WINDOW,true).with(DIRECTION,direction));
-                        worldIn.playSound(pos.getX(),pos.getY()-0.5,pos.getZ(),ModSounds.BARRICADE_PLACE, SoundCategory.PLAYERS,1.0f,1.0f,true);
+                        worldIn.playSound((PlayerEntity) placer,pos,ModSounds.BARRICADE_PLACE,SoundCategory.PLAYERS,1.0f,1.0f);
                     }
                     else {
                         cancelPlace((PlayerEntity)placer);
@@ -178,7 +178,7 @@ public class Barricade extends Block {
                     if (worldIn.getBlockState(pos).getBlock() instanceof AirBlock && worldIn.getBlockState(pos.add(0,-1,0)).getBlock() instanceof AirBlock){
                         worldIn.setBlockState(pos,state.with(BOTTOM,false).with(WINDOW,false).with(DIRECTION,direction));
                         worldIn.setBlockState(pos.add(0,-1,0),state.with(BOTTOM,true).with(WINDOW,false).with(DIRECTION,direction));
-                        worldIn.playSound(pos.getX(),pos.getY()-0.5,pos.getZ(),ModSounds.BARRICADE_PLACE, SoundCategory.PLAYERS,1.0f,1.0f,true);
+                        worldIn.playSound((PlayerEntity) placer,pos,ModSounds.BARRICADE_PLACE,SoundCategory.PLAYERS,1.0f,1.0f);
                     }
                     else {
                         cancelPlace((PlayerEntity)placer);
