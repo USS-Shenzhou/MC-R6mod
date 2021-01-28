@@ -37,7 +37,7 @@ public class Exploder extends Item {
             for(RemoteGasGrenadeEntity entity:list){
                 entity.explode();
             }
-            worldIn.playSound((PlayerEntity)null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModSounds.EXPLODER_CLICK, SoundCategory.PLAYERS, 1.0f, 1.0f);
+            worldIn.playSound(playerIn,playerIn.getPosition(),ModSounds.EXPLODER_CLICK,SoundCategory.PLAYERS,1.0f,1.0f);
         }
         return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
     }
