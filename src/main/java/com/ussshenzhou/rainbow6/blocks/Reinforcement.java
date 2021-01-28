@@ -93,7 +93,7 @@ public class Reinforcement extends Block{
                 }
                 else
                 {
-                    worldIn.playSound(pos.getX(),pos.getY(),pos.getZ(),ModSounds.REINFORCEMENT_PLACE, SoundCategory.PLAYERS,1.0f,1.0f,true);
+                    worldIn.playSound((PlayerEntity) placer,pos,ModSounds.REINFORCEMENT_PLACE,SoundCategory.PLAYERS,1.0f,1.0f);
                 }
             }
         }
