@@ -77,7 +77,7 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
                 }
             }
             else if (i<150){
-                world.addParticle(new GasSmokeParticleData(new Vector3d(0,0,0),new Color(0),0),false,this.getPosX()+rand(),this.getPosY()+rand(),this.getPosZ()+rand(),0,0,0);
+                world.addParticle(new GasSmokeParticleData(new Vector3d(0,0,0),new Color(0),0),this.getPosX()+rand(),this.getPosY()+rand(),this.getPosZ()+rand(),0,0,0);
             }
             i++;
         }
@@ -118,7 +118,6 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
             this.exploded=true;
             world.addParticle(ParticleTypes.CLOUD,this.getPosX(),this.getPosY(),this.getPosZ(),0,0,0);
             world.playSound((PlayerEntity)null, this.getPosX(), this.getPosY(), this.getPosZ(), ModSounds.REMOTEGASGRENADE_EXPLODE, SoundCategory.PLAYERS, 1.0f, 1.0f);
-
         }
     }
 
