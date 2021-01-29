@@ -91,10 +91,7 @@ public class Reinforcement extends Block{
                     worldIn.setBlockState(pos, state.with(BlockStateProperties.FACING,getFacingFromEntity(pos,placer)).with(upper,false),2);
                     worldIn.setTileEntity(pos,new ReinforcementTileEntity());
                 }
-                else
-                {
-                    worldIn.playSound((PlayerEntity) placer,pos,ModSounds.REINFORCEMENT_PLACE,SoundCategory.PLAYERS,1.0f,1.0f);
-                }
+                worldIn.playSound((PlayerEntity) placer,pos,ModSounds.REINFORCEMENT_PLACE,SoundCategory.PLAYERS,1.0f,1.0f);
             }
         }
     }

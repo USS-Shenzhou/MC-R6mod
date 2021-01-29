@@ -124,9 +124,7 @@ public class BlackMirror extends Block {
             }
             else{
                 worldIn.setBlockState(pos,state.with(BlockStateProperties.FACING,direction).with(LEFT,true).with(BROKEN,false),2);
-                if (worldIn.isRemote){
-                    worldIn.playSound((PlayerEntity) placer,pos,ModSounds.BLACKMIRROR_SET,SoundCategory.PLAYERS,1.0f,1.0f);
-                }
+                worldIn.playSound((PlayerEntity) placer,pos,ModSounds.BLACKMIRROR_SET,SoundCategory.PLAYERS,1.0f,1.0f);
             }
         }
     }
