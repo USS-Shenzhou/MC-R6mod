@@ -32,7 +32,7 @@ public class Exploder extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-        worldIn.playSound(playerIn,playerIn.getPosition(),ModSounds.EXPLODER_CLICK,SoundCategory.PLAYERS,1.0f,1.0f);
+        worldIn.playSound(playerIn,playerIn.getPosition(),ModSounds.EXPLODER_CLICK,SoundCategory.PLAYERS,0.7f,1.0f);
         List<RemoteGasGrenadeEntity> list = worldIn.getEntitiesWithinAABB(RemoteGasGrenadeEntity.class, playerIn.getBoundingBox().grow(50.0d),ifexist);
         if (!list.isEmpty()){
             for(RemoteGasGrenadeEntity entity:list){

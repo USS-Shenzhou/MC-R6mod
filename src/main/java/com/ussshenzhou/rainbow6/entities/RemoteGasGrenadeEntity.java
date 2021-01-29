@@ -17,6 +17,9 @@ import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -47,7 +50,7 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
         super(remoteGasGrenadeEntityEntityType, world);
     }
 
-    private Boolean exploded = false;
+    private static DataParameter<Boolean> exploded = EntityDataManager.createKey(RemoteGasGrenadeEntity.class, DataSerializers.BOOLEAN);
     private int i =0;
     @Override
     public void tick() {
@@ -55,7 +58,7 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
         if(this.onGround){
             this.setMotion(0,0,0);
         }
-        if (this.exploded){
+        if (this.dataManager.get(exploded)){
             if (!world.isRemote){
                 if (i%20==0){
                     Predicate<PlayerEntity> ifexist = new Predicate<PlayerEntity>() {
@@ -77,6 +80,7 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
                 }
             }
             else if (i<150){
+                world.addParticle(ParticleTypes.CLOUD,this.getPosX(),this.getPosY(),this.getPosZ(),0,0,0);
                 world.addParticle(new GasSmokeParticleData(new Vector3d(0,0,0),new Color(0),0),this.getPosX()+rand(),this.getPosY()+rand(),this.getPosZ()+rand(),0,0,0);
             }
             i++;
@@ -88,12 +92,18 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
 
     private double rand(){
         if (Math.random()*10<5){
-            return Math.random();
+            return Math.random()*0.5;
         }
         else {
-            return Math.random();
+            return Math.random()*0.5;
         }
     }
+
+    @Override
+    protected void registerData() {
+        this.dataManager.register(exploded, false);
+    }
+
 
     @Override
     protected void onImpact(RayTraceResult raytraceResultIn) {
@@ -114,10 +124,9 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
     }
 
     public void explode(){
-        if (!this.exploded){
-            this.exploded=true;
-            world.addParticle(ParticleTypes.CLOUD,this.getPosX(),this.getPosY(),this.getPosZ(),0,0,0);
-            world.playSound((PlayerEntity)null, this.getPosX(), this.getPosY(), this.getPosZ(), ModSounds.REMOTEGASGRENADE_EXPLODE, SoundCategory.PLAYERS, 1.0f, 1.0f);
+        if (!this.dataManager.get(exploded)){
+            this.dataManager.set(exploded,true);
+            world.playSound((PlayerEntity)null, this.getPosX(), this.getPosY(), this.getPosZ(), ModSounds.REMOTEGASGRENADE_EXPLODE, SoundCategory.PLAYERS, 0.7f, 1.0f);
         }
     }
 
@@ -160,15 +169,4 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
         return true;
     }
 
-    @Override
-    public void readAdditional(CompoundNBT compound) {
-        super.readAdditional(compound);
-        this.exploded = compound.getBoolean("exploded");
-    }
-
-    @Override
-    public void writeAdditional(CompoundNBT compound) {
-        super.writeAdditional(compound);
-        compound.putBoolean("exploded", this.exploded);
-    }
 }
