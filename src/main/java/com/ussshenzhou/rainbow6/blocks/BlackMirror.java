@@ -189,8 +189,8 @@ public class BlackMirror extends Block {
         //if (hit.getPos().getY()){}
         if (state.get(LEFT) && handIn == Hand.MAIN_HAND && hit.getFace()==state.get(BlockStateProperties.FACING)){
             BlackMirrorTileEntity blackMirrorTileEntity = (BlackMirrorTileEntity)worldIn.getTileEntity(pos);
-            int conuter = blackMirrorTileEntity.getCounter();
-            if (conuter < 3){
+            int counter = blackMirrorTileEntity.getCounter();
+            if (counter < 3){
                 blackMirrorTileEntity.increaseCounter();
                 this.readyAndGoBreakMirror(state,worldIn,pos);
 
