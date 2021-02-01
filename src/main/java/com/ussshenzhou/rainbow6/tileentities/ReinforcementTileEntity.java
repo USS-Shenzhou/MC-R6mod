@@ -10,6 +10,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 /**
@@ -57,5 +58,21 @@ public class ReinforcementTileEntity extends TileEntity implements ITickableTile
     public CompoundNBT write(CompoundNBT compound) {
         compound.putInt("startTime",startTime);
         return super.write(compound);
+    }
+
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        switch (this.world.getBlockState(pos).get(BlockStateProperties.FACING)){
+            case NORTH:
+                return new AxisAlignedBB(getPos(),getPos().add(1,1,2d));
+            case SOUTH:
+                return new AxisAlignedBB(getPos(),getPos().add(1,1,-2d));
+            case EAST:
+                return new AxisAlignedBB(getPos(),getPos().add(-2d,1,1));
+            case WEST:
+                return new AxisAlignedBB(getPos(),getPos().add(2d,1,1));
+            default:
+                return new AxisAlignedBB(getPos(),getPos().add(1,1,1d));
+        }
     }
 }

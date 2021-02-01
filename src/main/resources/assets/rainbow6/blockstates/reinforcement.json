@@ -1,15 +1,15 @@
 {
   "variants": {
-    "facing=north,upper=true": { "model": "rainbow6:block/reinforcement_up" },
-    "facing=south,upper=true": { "model": "rainbow6:block/reinforcement_up" ,"y": 180},
-    "facing=west,upper=true": { "model": "rainbow6:block/reinforcement_up" ,"y":270},
-    "facing=east,upper=true": { "model": "rainbow6:block/reinforcement_up", "y":90},
+    "facing=south,upper=true": { "model": "rainbow6:block/reinforcement_up" },
+    "facing=north,upper=true": { "model": "rainbow6:block/reinforcement_up" ,"y": 180},
+    "facing=east,upper=true": { "model": "rainbow6:block/reinforcement_up" ,"y":270},
+    "facing=west,upper=true": { "model": "rainbow6:block/reinforcement_up", "y":90},
     "facing=up,upper=true": { "model": "rainbow6:block/reinforcement_up", "x":-90},
     "facing=down,upper=true": { "model": "rainbow6:block/reinforcement_up", "x":90,"y":180},
-    "facing=north,upper=false": { "model": "rainbow6:block/reinforcement_low" },
-    "facing=south,upper=false": { "model": "rainbow6:block/reinforcement_low" ,"y": 180},
-    "facing=west,upper=false": { "model": "rainbow6:block/reinforcement_low" ,"y":270},
-    "facing=east,upper=false": { "model": "rainbow6:block/reinforcement_low", "y":90},
+    "facing=south,upper=false": { "model": "rainbow6:block/reinforcement_low" },
+    "facing=north,upper=false": { "model": "rainbow6:block/reinforcement_low" ,"y": 180},
+    "facing=east,upper=false": { "model": "rainbow6:block/reinforcement_low" ,"y":270},
+    "facing=west,upper=false": { "model": "rainbow6:block/reinforcement_low", "y":90},
     "facing=up,upper=false": { "model": "rainbow6:block/reinforcement_low", "x":-90},
     "facing=down,upper=false": { "model": "rainbow6:block/reinforcement_low", "x":90,"y":-180}
   }

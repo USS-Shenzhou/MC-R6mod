@@ -12,5 +12,6 @@ public class ModTileEntityRendererRegistry {
     @SubscribeEvent
     public static void registryTileEntityRenderer(FMLClientSetupEvent event){
         ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.BlackMirrorTileEntityType,BlackMirrorTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntityTypes.reinforcementTileEntityType,ReinforcementTileEntityRenderer::new);
     }
 }
