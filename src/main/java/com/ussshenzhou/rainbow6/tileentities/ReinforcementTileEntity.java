@@ -62,17 +62,6 @@ public class ReinforcementTileEntity extends TileEntity implements ITickableTile
 
     @Override
     public AxisAlignedBB getRenderBoundingBox() {
-        switch (this.world.getBlockState(pos).get(BlockStateProperties.FACING)){
-            case NORTH:
-                return new AxisAlignedBB(getPos(),getPos().add(1,1,2d));
-            case SOUTH:
-                return new AxisAlignedBB(getPos(),getPos().add(1,1,-2d));
-            case EAST:
-                return new AxisAlignedBB(getPos(),getPos().add(-2d,1,1));
-            case WEST:
-                return new AxisAlignedBB(getPos(),getPos().add(2d,1,1));
-            default:
-                return new AxisAlignedBB(getPos(),getPos().add(1,1,1d));
-        }
+        return new AxisAlignedBB(getPos().add(-2,1,-2),getPos().add(2,1,2));
     }
 }
