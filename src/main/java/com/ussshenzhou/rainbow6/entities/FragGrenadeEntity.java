@@ -11,6 +11,9 @@ import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.*;
@@ -35,7 +38,7 @@ public class FragGrenadeEntity extends ProjectileItemEntity {
     }
 
 
-    private int timeCountDown = 90;
+    private static DataParameter<Integer> timeCountDown = EntityDataManager.createKey(FragGrenadeEntity.class, DataSerializers.VARINT);
     @Override
     protected Item getDefaultItem() {
         return ModItems.fragGrenade;
@@ -68,12 +71,12 @@ public class FragGrenadeEntity extends ProjectileItemEntity {
 
     @Override
     public void tick() {
-        if (timeCountDown<=0){
+        if (this.dataManager.get(timeCountDown)<=0){
             this.explode();
             this.remove();
         }
         else {
-            timeCountDown--;
+            this.dataManager.set(timeCountDown,this.dataManager.get(timeCountDown)-1);
         }
         super.tick();
     }
@@ -87,21 +90,26 @@ public class FragGrenadeEntity extends ProjectileItemEntity {
     }
 
     @Override
+    protected void registerData() {
+        this.dataManager.register(timeCountDown,90);
+    }
+
+    @Override
     public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
-        compound.putInt("timeCountDown",timeCountDown);
+        compound.putInt("timwcountdown",this.dataManager.get(timeCountDown));
     }
 
     @Override
     public void readAdditional(CompoundNBT compound) {
         super.readAdditional(compound);
-        if (compound.contains("timeCountDown")){
-            this.timeCountDown = compound.getInt("timeCountDown");
+        if (compound.contains("timecountdown")){
+            this.dataManager.set(timeCountDown,compound.getInt("timecountdown"));
         }
     }
 
-    public void setTimeCountDown(int timeCountDown){
-        this.timeCountDown = timeCountDown;
+    public void setTimeCountDown(int aTimeCountDown){
+        this.dataManager.set(timeCountDown,aTimeCountDown);
     }
 
     @Override
