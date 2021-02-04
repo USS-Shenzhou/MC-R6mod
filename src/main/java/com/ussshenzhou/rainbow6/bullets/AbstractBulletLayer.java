@@ -1,4 +1,7 @@
 package com.ussshenzhou.rainbow6.bullets;
 
-public abstract class AbstractBulletLayer {
+/**
+ * @author USS_Shenzhou
+ */
+public class AbstractBulletLayer {
 }

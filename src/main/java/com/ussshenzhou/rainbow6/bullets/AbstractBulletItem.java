@@ -8,8 +8,11 @@ import net.minecraft.item.ItemStack;
 /**
  * @author USS_Shenzhou
  */
-public abstract class AbstractBulletItem extends Item {
+public class AbstractBulletItem extends Item {
     public AbstractBulletItem() {
-        super(new Properties().group(ModItemGroups.Weapon));
+        super(new Properties()
+                .group(ModItemGroups.Weapon)
+                .maxStackSize(60)
+        );
     }
 }
