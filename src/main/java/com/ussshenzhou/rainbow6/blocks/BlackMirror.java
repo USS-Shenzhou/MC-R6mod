@@ -3,6 +3,7 @@ package com.ussshenzhou.rainbow6.blocks;
 import com.ussshenzhou.rainbow6.items.ModItems;
 import com.ussshenzhou.rainbow6.tileentities.BlackMirrorTileEntity;
 import com.ussshenzhou.rainbow6.util.ModSounds;
+import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -89,9 +90,7 @@ public class BlackMirror extends Block {
         if (placer!= null){
             Direction direction = getFacingFromEntity(pos,placer);
             //wall to deploy MUST NOT harder than Terracotta
-            float maxDeployableResistance = 4.2f;
-            //this long-long shit just to get the ExplosionResistance of the front block, please tell me if there is a easier method.
-            boolean isDeployableResistance = worldIn.getBlockState(pos.offset(direction.getOpposite())).getBlock().getExplosionResistance() >= maxDeployableResistance;
+            boolean isDeployableResistance = canPlace(pos,worldIn,direction);
             //also detect the right-part's position is empty or not.
             BlockPos rPos = pos;
             switch(direction){
@@ -109,7 +108,8 @@ public class BlackMirror extends Block {
                     break;
                 default:
             }
-            boolean rightIsNotEmpty = !worldIn.getBlockState(rPos).isAir(worldIn,rPos);
+            //And get ExplosionResistance of the right-part's front-block .
+            boolean rightIsNotEmpty = (!worldIn.getBlockState(rPos).isAir(worldIn,rPos))||canPlace(rPos,worldIn,direction);
             //an exception
             if (worldIn.getBlockState(rPos).getBlock() instanceof Reinforcement){
                 rightIsNotEmpty=false;
@@ -129,6 +129,15 @@ public class BlackMirror extends Block {
                 }
             }
         }
+    }
+
+    /**
+     * this long-long shit just to get ExplosionResistance of the front-block, please tell me if there is a easier method.
+     * And whether it is an air block.
+     */
+    private Boolean canPlace(BlockPos pos,World worldIn,Direction direction){
+        //4.2:terracotta's explosion resistance
+        return (worldIn.getBlockState(pos.offset(direction.getOpposite())).getBlock().getExplosionResistance() >= 4.2) || worldIn.getBlockState(pos.offset(direction.getOpposite())).isAir();
     }
 
     public void cancelPlace(PlayerEntity player){
