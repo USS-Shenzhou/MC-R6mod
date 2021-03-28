@@ -10,7 +10,6 @@ public class ModBlocks {
     public static IronBlock ironBlock = new IronBlock();
     public static Reinforcement reinforcement = new Reinforcement();
     public static BlackMirror blackMirror = new BlackMirror();
-    public static CapabilityTestBlock capabilityTestBlock = new CapabilityTestBlock();
     public static IronBarFloor ironBarFloor = new IronBarFloor();
 
     public static Block oakPlanksFloor = new PlanksFloor().setRegistryName("oak_planks_floor");

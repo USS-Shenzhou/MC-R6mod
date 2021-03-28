@@ -1,6 +1,9 @@
 package com.ussshenzhou.rainbow6.capabilities;
 
 import net.minecraft.nbt.CompoundNBT;
+
+import java.util.Locale;
+
 /**
  * @author USS_Shenzhou
  */
@@ -75,4 +78,68 @@ public class R6PlayerCapability implements IR6PlayerCapability {
         this.r6Team = nbt.getString("r6team");
         this.r6TeamColor = nbt.getString("r6teamcolor");
     }
+
+    public static final String[] ATTACKERS = new String[]{
+            "sledge",
+            "thacher",
+            "ash",
+            "thermite",
+            "twitch",
+            "montage",
+            "glaz",
+            "fuze",
+            "blitz",
+            "iq",
+            "buck",
+            "blackbeard",
+            "capitao",
+            "hibana",
+            "jackal",
+            "ying",
+            "zofia",
+            "dokkaebi",
+            "lion",
+            "finka",
+            "maverick",
+            "nomad",
+            "gridlock",
+            "nokk",
+            "amaru",
+            "kali",
+            "iana",
+            "ace",
+            "zero",
+            "flores"
+    };
+    public static final String[] DEFENDERS = new String[]{
+            "smoke",
+            "mute",
+            "castle",
+            "pulse",
+            "doc",
+            "rook",
+            "kapkan",
+            "tachanka",
+            "jager",
+            "bandit",
+            "frost",
+            "valkyrie",
+            "caveira",
+            "echo",
+            "mira",
+            "lesion",
+            "ela",
+            "vigil",
+            "alibi",
+            "maestro",
+            "clash",
+            "kaid",
+            "mozzie",
+            "warden",
+            "goyo",
+            "wamai",
+            "oryx",
+            "melusi",
+            "aruni"
+    };
 }

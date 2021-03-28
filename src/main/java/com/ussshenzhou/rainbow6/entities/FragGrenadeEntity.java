@@ -62,7 +62,7 @@ public class FragGrenadeEntity extends ProjectileItemEntity {
         if (result.getType() == RayTraceResult.Type.ENTITY){
             EntityRayTraceResult entityRayTraceResult = (EntityRayTraceResult)result;
             Entity entity = entityRayTraceResult.getEntity();
-            if (entity!=this.func_234616_v_()){
+            if (entity!=this.getShooter()){
                 this.setVelocity(0,0,0);
                 this.markVelocityChanged();
             }

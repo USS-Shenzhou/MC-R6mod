@@ -15,13 +15,11 @@ public class ModItems {
     public static NitroCell nitroCell = new NitroCell();
     public static NitroCellExploder nitroCellExploder = new NitroCellExploder();
     public static BlackMirrorItem blackMirrorItem = new BlackMirrorItem();
-    public static CapabilityTestItem capabilityTestItem = new CapabilityTestItem();
     public static FragGrenade fragGrenade = new FragGrenade();
     public static ReinforcementItem reinforcementItem = new ReinforcementItem();
     public static RemoteGasGrenadeItem remoteGasGrenadeItem = new RemoteGasGrenadeItem();
     public static Exploder exploder = new Exploder();
     public static Item ironBlock = new BlockItem(ModBlocks.ironBlock,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.ironBlock.getRegistryName());
-    public static Item capabilityTestBlockItem = new BlockItem(ModBlocks.capabilityTestBlock,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.capabilityTestBlock.getRegistryName());
     public static Item oakPlanksFloor = new BlockItem(ModBlocks.oakPlanksFloor,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.oakPlanksFloor.getRegistryName());
     public static Item sprucePlanksFloor = new BlockItem(ModBlocks.sprucePlanksFloor,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.sprucePlanksFloor.getRegistryName());
     public static Item birchPlanksFloor = new BlockItem(ModBlocks.birchPlanksFloor,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.birchPlanksFloor.getRegistryName());

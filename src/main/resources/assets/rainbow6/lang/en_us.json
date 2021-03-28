@@ -20,5 +20,8 @@
   "block.rainbow6.birch_planks_floor": "Birch Flanks Floor",
   "block.rainbow6.acacia_planks_floor": "Acacia Planks Floor",
   "block.rainbow6.dark_oak_planks_floor": "Dark Oak Planks Floor",
-  "block.rainbow6.jungle_planks_floor": "Jungle Planks Floor"
+  "block.rainbow6.jungle_planks_floor": "Jungle Planks Floor",
+
+  "commands.rainbow6.showid": "%s is %s in %s.",
+  "commands.rainbow6.setid": "Successfully set %s as %s in %s."
 }

@@ -20,5 +20,8 @@
   "block.rainbow6.birch_planks_floor": "带钢梁的白桦木板",
   "block.rainbow6.acacia_planks_floor": "带钢梁的金合欢木板",
   "block.rainbow6.dark_oak_planks_floor": "带钢梁的深色橡木木板",
-  "block.rainbow6.jungle_planks_floor": "带钢梁的丛林木板"
+  "block.rainbow6.jungle_planks_floor": "带钢梁的丛林木板",
+
+  "commands.rainbow6.showid": "%s是%3$s的%2$s干员",
+  "commands.rainbow6.setid": "成功将%s设为%3$s的%2$s干员",
 }

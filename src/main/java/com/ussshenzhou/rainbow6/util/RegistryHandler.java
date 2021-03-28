@@ -1,11 +1,13 @@
 package com.ussshenzhou.rainbow6.util;
 
+import com.mojang.brigadier.arguments.ArgumentType;
 import com.ussshenzhou.rainbow6.armors.ModArmors;
 import com.ussshenzhou.rainbow6.blocks.ModBlocks;
 import com.ussshenzhou.rainbow6.entities.ModEntityTypes;
 import com.ussshenzhou.rainbow6.items.ModItems;
 import com.ussshenzhou.rainbow6.tileentities.ModTileEntityTypes;
 import net.minecraft.block.Block;
+import net.minecraft.command.arguments.ArgumentTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
@@ -25,7 +27,6 @@ public class RegistryHandler {
                 ModBlocks.ironBlock,
                 ModBlocks.reinforcement,
                 ModBlocks.blackMirror,
-                ModBlocks.capabilityTestBlock,
                 ModBlocks.oakPlanksFloor,
                 ModBlocks.sprucePlanksFloor,
                 ModBlocks.birchPlanksFloor,
@@ -47,7 +48,6 @@ public class RegistryHandler {
                 ModItems.nitroCellExploder,
                 ModItems.blackMirrorItem,
                 //ModItems.capabilityTestBlockItem,
-                ModItems.capabilityTestItem,
                 ModItems.fragGrenade,
                 ModItems.remoteGasGrenadeItem,
                 ModItems.exploder,
