@@ -30,7 +30,7 @@ public class IsPenetrableBlocks {
      *
      * Slabs and Stairs is penetrable but un destroyable--only can be destroyed by explosion.
      */
-    public void createMap(){
+    public static void createMap(){
 
         specialBlocks.put(Blocks.LODESTONE,2);
         specialBlocks.put(Blocks.BLAST_FURNACE,2);
