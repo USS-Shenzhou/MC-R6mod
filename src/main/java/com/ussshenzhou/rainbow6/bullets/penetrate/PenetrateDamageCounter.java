@@ -11,7 +11,7 @@ public class PenetrateDamageCounter {
 
     private static HashMap<BlockPos,Integer> counter = new HashMap<BlockPos, Integer>();
 
-    public static int call(BlockPos pos){
+    public static int call(String type,BlockPos pos){
         if (counter.containsKey(pos)){
             counter.put(pos,counter.get(pos)+1);
         }
