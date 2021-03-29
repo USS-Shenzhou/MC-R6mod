@@ -110,5 +110,13 @@
       {
         "name": "rainbow6:exploder_click"
       }]
+  },
+  "proximity_alarm": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:proximity_alarm"
+      }]
   }
 }

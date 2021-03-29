@@ -16,5 +16,6 @@ public class ModEntityRenderRegistry {
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.fragGrenadeEntityType,FragGrenadeEntityRenderer::new);
         //RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.gumineentitytype,guminerenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.remoteGasGrenadeEntityType,RemoteGasGrenadeRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.proximityAlarmEntityType,ProximityAlarmEntityRenderer::new);
     }
 }

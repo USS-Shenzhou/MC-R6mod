@@ -3,6 +3,7 @@ package com.ussshenzhou.rainbow6.util;
 import com.mojang.brigadier.arguments.ArgumentType;
 import com.ussshenzhou.rainbow6.armors.ModArmors;
 import com.ussshenzhou.rainbow6.blocks.ModBlocks;
+import com.ussshenzhou.rainbow6.bullets.ModBulletEntityTypes;
 import com.ussshenzhou.rainbow6.entities.ModEntityTypes;
 import com.ussshenzhou.rainbow6.items.ModItems;
 import com.ussshenzhou.rainbow6.tileentities.ModTileEntityTypes;
@@ -51,6 +52,8 @@ public class RegistryHandler {
                 ModItems.fragGrenade,
                 ModItems.remoteGasGrenadeItem,
                 ModItems.exploder,
+                ModItems.proximityAlarmItem,
+
                 ModItems.oakPlanksFloor,
                 ModItems.sprucePlanksFloor,
                 ModItems.birchPlanksFloor,
@@ -85,7 +88,8 @@ public class RegistryHandler {
                 ModSounds.FRAGGRENADE_TOUCH,
                 ModSounds.REMOTEGASGRENADE_THROW,
                 ModSounds.REMOTEGASGRENADE_EXPLODE,
-                ModSounds.EXPLODER_CLICK
+                ModSounds.EXPLODER_CLICK,
+                ModSounds.PROXIMITY_ALARM
         );
     }
     @SubscribeEvent
@@ -94,7 +98,10 @@ public class RegistryHandler {
                 ModEntityTypes.impactGrenadeEntityType,
                 ModEntityTypes.nitroCellEntityType,
                 ModEntityTypes.fragGrenadeEntityType,
-                ModEntityTypes.remoteGasGrenadeEntityType
+                ModEntityTypes.remoteGasGrenadeEntityType,
+                ModEntityTypes.proximityAlarmEntityType,
+
+                ModBulletEntityTypes.testbulletEntityType
         );
     }
     @SubscribeEvent

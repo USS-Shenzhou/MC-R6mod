@@ -39,8 +39,6 @@ public class NitroCellEntity extends ProjectileItemEntity {
         super(nitroCellEntityEntityType, world);
     }
 
-    @Nullable
-    private BlockState inBlockState;
     @Override
     protected Item getDefaultItem() {
         return ModItems.nitroCell;
@@ -59,7 +57,6 @@ public class NitroCellEntity extends ProjectileItemEntity {
         if (raytraceResultIn.getType() == RayTraceResult.Type.BLOCK) {
             BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceResultIn;
             BlockState blockstate = this.world.getBlockState(blockraytraceresult.getPos());
-            this.inBlockState = blockstate;
             Vector3d vec3d = blockraytraceresult.getHitVec().subtract(this.getPosX(), this.getPosY()-0.01, this.getPosZ());
             this.setMotion(vec3d);
             Vector3d vec3d1 = vec3d.normalize().scale((double) 0.05F);

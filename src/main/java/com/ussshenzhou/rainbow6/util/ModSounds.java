@@ -21,4 +21,5 @@ public class ModSounds {
     public static SoundEvent REMOTEGASGRENADE_THROW = new SoundEvent(new ResourceLocation("rainbow6","remotegasgrenade_throw")).setRegistryName("remotegasgrenade_throw");
     public static SoundEvent REMOTEGASGRENADE_EXPLODE = new SoundEvent(new ResourceLocation("rainbow6","remotegasgrenade_explode")).setRegistryName("remotegasgrenade_explode");
     public static SoundEvent EXPLODER_CLICK = new SoundEvent(new ResourceLocation("rainbow6","exploder_click")).setRegistryName("exploder_click");
+    public static SoundEvent PROXIMITY_ALARM = new SoundEvent(new ResourceLocation("rainbow6","proximity_alarm")).setRegistryName("proximity_alarm");
 }

@@ -26,4 +26,8 @@ public class ModEntityTypes {
             .size(0.2f,0.13f)
             .build("RemoteGasGrenade")
             .setRegistryName("rainbow6","remotegasgrenade");
+    public static EntityType proximityAlarmEntityType = EntityType.Builder.<ProximityAlarmEntity>create(ProximityAlarmEntity::new,EntityClassification.MISC)
+            .size(0.35f,0.15f)
+            .build("ProximityAlarm")
+            .setRegistryName("rainbow6","proximityalarm");
 }

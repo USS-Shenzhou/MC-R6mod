@@ -2,9 +2,9 @@ package com.ussshenzhou.rainbow6.items;
 
 import com.ussshenzhou.rainbow6.blocks.ModBlocks;
 import com.ussshenzhou.rainbow6.util.ModItemGroups;
-import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+
 /**
  * @author USS_Shenzhou
  */
@@ -19,6 +19,7 @@ public class ModItems {
     public static ReinforcementItem reinforcementItem = new ReinforcementItem();
     public static RemoteGasGrenadeItem remoteGasGrenadeItem = new RemoteGasGrenadeItem();
     public static Exploder exploder = new Exploder();
+    public static ProximityAlarmItem proximityAlarmItem = new ProximityAlarmItem();
     public static Item ironBlock = new BlockItem(ModBlocks.ironBlock,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.ironBlock.getRegistryName());
     public static Item oakPlanksFloor = new BlockItem(ModBlocks.oakPlanksFloor,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.oakPlanksFloor.getRegistryName());
     public static Item sprucePlanksFloor = new BlockItem(ModBlocks.sprucePlanksFloor,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.sprucePlanksFloor.getRegistryName());
