@@ -34,7 +34,7 @@ public class ProximityAlarmItem extends Item {
         if (!worldIn.isRemote) {
             ProximityAlarmEntity proximityAlarmEntity = new ProximityAlarmEntity(ModEntityTypes.proximityAlarmEntityType,playerIn,worldIn);
             proximityAlarmEntity.setItem(itemstack);
-            proximityAlarmEntity.shoot(playerIn.getLookVec().x,playerIn.getLookVec().y,playerIn.getLookVec().z,0.78f,0.1F);
+            proximityAlarmEntity.shoot(playerIn.getLookVec().x,playerIn.getLookVec().y,playerIn.getLookVec().z,0.82f,0.1F);
             worldIn.addEntity(proximityAlarmEntity);
         }
 

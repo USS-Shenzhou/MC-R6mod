@@ -5,10 +5,12 @@ import com.ussshenzhou.rainbow6.capabilities.ModCapabilities;
 import com.ussshenzhou.rainbow6.items.ModItems;
 import com.ussshenzhou.rainbow6.util.ModSounds;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
@@ -76,10 +78,10 @@ public class ProximityAlarmEntity extends ProjectileItemEntity {
                 }
             }
         }
-        i++;
         if(this.onGround){
             this.setMotion(0,0,0);
         }
+        i++;
     }
 
     private static DataParameter<Direction> direction = EntityDataManager.createKey(ProximityAlarmEntity.class, DataSerializers.DIRECTION);
@@ -147,6 +149,13 @@ public class ProximityAlarmEntity extends ProjectileItemEntity {
             this.dataManager.set(dX,X);
             this.dataManager.set(dY,Y);
             this.dataManager.set(dZ,Z);
+            if (this.getShooter() instanceof PlayerEntity){
+                if ((!((PlayerEntity) this.getShooter()).canEntityBeSeen(this)) && this.getDistance(this.getShooter())<=5){
+                    ItemStack returnStack = new ItemStack(ModItems.proximityAlarmItem);
+                    ((PlayerEntity) this.getShooter()).addItemStackToInventory(returnStack);
+                    this.remove();
+                }
+            }
         }
     }
 
