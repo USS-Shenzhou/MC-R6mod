@@ -116,26 +116,27 @@ public class ProximityAlarmEntity extends ProjectileItemEntity {
                     X=0;
                     Y=(float) (Math.random()*360);
                     Z=0;
+                    this.setPosition(this.getPosX(),this.getPosY()-0.01,this.getPosZ());
                     break;
                 case NORTH:
                     X=90;
                     Y=0;
-                    Z=0;
+                    Z=(float) (Math.random()*360);
                     break;
                 case SOUTH:
                     X=-90;
                     Y=0;
-                    Z=0;
+                    Z=(float) (Math.random()*360);
                     break;
                 case EAST:
-                    X=0;
-                    Y=0;
-                    Z=90;
+                    X=90;
+                    Y=-90;
+                    Z=(float) (Math.random()*360);
                     break;
                 case WEST:
-                    X=0;
-                    Y=0;
-                    Z=-90;
+                    X=90;
+                    Y=90;
+                    Z=(float) (Math.random()*360);
                     break;
                 default:
                     X=180;
