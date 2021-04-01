@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "up": "rainbow6:item/warped_planks_floor1",
+    "down": "minecraft:block/warped_planks",
+    "east": "rainbow6:item/warped_planks_floor2",
+    "west": "rainbow6:item/warped_planks_floor2",
+    "north": "minecraft:block/warped_planks",
+    "south":"minecraft:block/warped_planks"
+  }
+}

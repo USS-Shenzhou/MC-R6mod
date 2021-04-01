@@ -18,4 +18,6 @@ public class ModBlocks {
     public static Block junglePlanksFloor = new PlanksFloor().setRegistryName("jungle_planks_floor");
     public static Block acaciaPlanksFloor =  new PlanksFloor().setRegistryName("acacia_planks_floor");
     public static Block darkOakPlanksFloor = new PlanksFloor().setRegistryName("dark_oak_planks_floor");
+    public static Block crimsonPlanksFloor = new PlanksFloor().setRegistryName("crimson_planks_floor");
+    public static Block warpedPlanksFloor = new PlanksFloor().setRegistryName("warped_planks_floor");
 }

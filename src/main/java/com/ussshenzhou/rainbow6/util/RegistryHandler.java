@@ -34,6 +34,8 @@ public class RegistryHandler {
                 ModBlocks.junglePlanksFloor,
                 ModBlocks.acaciaPlanksFloor,
                 ModBlocks.darkOakPlanksFloor,
+                ModBlocks.crimsonPlanksFloor,
+                ModBlocks.warpedPlanksFloor,
                 ModBlocks.ironBarFloor
         );
     }
@@ -59,7 +61,9 @@ public class RegistryHandler {
                 ModItems.birchPlanksFloor,
                 ModItems.junglePlanksFloor,
                 ModItems.acaciaPlanksFloor,
-                ModItems.darkOakPlanksFloor
+                ModItems.darkOakPlanksFloor,
+                ModItems.crimsonPlanksFloor,
+                ModItems.warpedPlanksFloor
         );
     }
     /**

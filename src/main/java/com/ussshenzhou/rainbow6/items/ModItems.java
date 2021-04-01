@@ -27,4 +27,6 @@ public class ModItems {
     public static Item junglePlanksFloor = new BlockItem(ModBlocks.junglePlanksFloor,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.junglePlanksFloor.getRegistryName());
     public static Item acaciaPlanksFloor = new BlockItem(ModBlocks.acaciaPlanksFloor,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.acaciaPlanksFloor.getRegistryName());
     public static Item darkOakPlanksFloor = new BlockItem(ModBlocks.darkOakPlanksFloor,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.darkOakPlanksFloor.getRegistryName());
+    public static Item crimsonPlanksFloor = new BlockItem(ModBlocks.crimsonPlanksFloor,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.crimsonPlanksFloor.getRegistryName());
+    public static Item warpedPlanksFloor = new BlockItem(ModBlocks.warpedPlanksFloor,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.warpedPlanksFloor.getRegistryName());
 }

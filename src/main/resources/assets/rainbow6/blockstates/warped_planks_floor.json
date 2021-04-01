@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": { "model": "minecraft:block/warped_planks","y": 90},
+    "facing=south": { "model": "minecraft:block/warped_planks" ,"y": 270},
+    "facing=west": { "model": "minecraft:block/warped_planks" ,"y":0},
+    "facing=east": { "model": "minecraft:block/warped_planks", "y":180},
+    "facing=up": { "model": "minecraft:block/warped_planks", "x":-90},
+    "facing=down": { "model": "minecraft:block/warped_planks", "x":90,"y":180}
+  }
+}
