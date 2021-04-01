@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -66,13 +67,10 @@ public class FragGrenade extends Item {
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         if (!worldIn.isRemote){
             this.normal = false;
-            PlayerEntity player = (PlayerEntity)entityLiving;
-            ItemStack itemstack = player.getActiveItemStack();
-            FragGrenadeEntity fragGrenadeEntity = new FragGrenadeEntity(ModEntityTypes.fragGrenadeEntityType,player,worldIn);
-            fragGrenadeEntity.setItem(itemstack);
-            fragGrenadeEntity.shoot(0,0,0, 1.1F, 0.1F);
-            fragGrenadeEntity.setTimeCountDown(0);
-            worldIn.addEntity(fragGrenadeEntity);
+            if (entityLiving instanceof PlayerEntity && ! ((PlayerEntity) entityLiving).abilities.isCreativeMode){
+                stack.shrink(1);
+            }
+            worldIn.createExplosion(entityLiving,entityLiving.getPosX(),entityLiving.getPosY(),entityLiving.getPosZ(),2f, Explosion.Mode.DESTROY);
         }
         else {
             this.normal = false;
