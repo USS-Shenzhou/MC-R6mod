@@ -4,6 +4,7 @@ import com.ussshenzhou.rainbow6.entities.FragGrenadeEntity;
 import com.ussshenzhou.rainbow6.entities.ModEntityTypes;
 import com.ussshenzhou.rainbow6.util.ModItemGroups;
 import com.ussshenzhou.rainbow6.util.ModSounds;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -23,8 +24,9 @@ public class FragGrenade extends Item {
         );
         this.setRegistryName("fraggrenade");
     }
-    protected static final Logger LOGGER = LogManager.getLogger();
     private Boolean normal = true;
+    private int timeCount = -1;
+    private final int MAX_TIME = 100;
 
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
@@ -47,6 +49,8 @@ public class FragGrenade extends Item {
                     else {
                         normal = true;
                     }
+                }else {
+                    this.timeCount = -1;
                 }
                 player.addStat(Stats.ITEM_USED.get(this));
             }
@@ -70,12 +74,16 @@ public class FragGrenade extends Item {
             fragGrenadeEntity.setTimeCountDown(0);
             worldIn.addEntity(fragGrenadeEntity);
         }
+        else {
+            this.normal = false;
+            this.timeCount = -1;
+        }
         return stack;
     }
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        return 90;
+        return this.MAX_TIME;
     }
 
     @Override
@@ -84,7 +92,26 @@ public class FragGrenade extends Item {
         worldIn.playSound(playerIn,playerIn.getPosX(),playerIn.getPosY(),playerIn.getPosZ(),ModSounds.FRAGGRENADE_READY,SoundCategory.PLAYERS,1.0f,1.0f);
         ItemStack stack = playerIn.getHeldItem(handIn);
         playerIn.setActiveHand(handIn);
+        if (worldIn.isRemote){
+            this.timeCount = 0;
+        }
         return ActionResult.resultConsume(stack);
     }
 
+    @Override
+    public boolean showDurabilityBar(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public double getDurabilityForDisplay(ItemStack stack) {
+        return (double) this.timeCount/this.MAX_TIME;
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+        if (worldIn.isRemote && timeCount>=0){
+            timeCount++;
+        }
+    }
 }
