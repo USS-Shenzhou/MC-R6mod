@@ -33,7 +33,7 @@ public class IronBarFloor extends Block {
 
     public IronBarFloor() {
         super(Properties.create(Material.IRON)
-        .hardnessAndResistance(100.0f,6.0f)
+        .hardnessAndResistance(100.0f,9.0f)
         .sound(SoundType.METAL)
         .notSolid()
         );
