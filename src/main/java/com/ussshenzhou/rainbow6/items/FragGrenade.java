@@ -11,7 +11,9 @@ import net.minecraft.item.*;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.ExplosionContext;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,14 +37,14 @@ public class FragGrenade extends Item {
             PlayerEntity player = (PlayerEntity)entityLiving;
             ItemStack itemstack = player.getHeldItem(player.getActiveHand());
             if (timeLeft>1){
-                if (!player.abilities.isCreativeMode) {
-                    itemstack.shrink(1);
-                }
                 worldIn.playSound((PlayerEntity)null, player.getPosX(), player.getPosY(), player.getPosZ(), ModSounds.IMPACT_GRENADE_THROW, SoundCategory.PLAYERS, 1.0f, 1.0f);
                 if (!worldIn.isRemote) {
                     FragGrenadeEntity fragGrenadeEntity = new FragGrenadeEntity(ModEntityTypes.fragGrenadeEntityType,player,worldIn);
                     fragGrenadeEntity.setItem(itemstack);
                     if (normal){
+                        if (!player.abilities.isCreativeMode) {
+                            itemstack.shrink(1);
+                        }
                         fragGrenadeEntity.shoot(player.getLookVec().x,player.getLookVec().y,player.getLookVec().z, 0.6F, 0.1F);
                         fragGrenadeEntity.setTimeCountDown(timeLeft);
                         worldIn.addEntity(fragGrenadeEntity);
@@ -69,8 +71,9 @@ public class FragGrenade extends Item {
             this.normal = false;
             if (entityLiving instanceof PlayerEntity && ! ((PlayerEntity) entityLiving).abilities.isCreativeMode){
                 stack.shrink(1);
+                entityLiving.attackEntityFrom(DamageSource.causeExplosionDamage(entityLiving),entityLiving.getMaxHealth());
             }
-            worldIn.createExplosion(entityLiving,entityLiving.getPosX(),entityLiving.getPosY(),entityLiving.getPosZ(),2f, Explosion.Mode.DESTROY);
+            worldIn.createExplosion(entityLiving,DamageSource.causeExplosionDamage(entityLiving),null,entityLiving.getPosX(),entityLiving.getPosY(),entityLiving.getPosZ(),2f,false, Explosion.Mode.DESTROY);
         }
         else {
             this.normal = false;

@@ -50,7 +50,6 @@ public class RegistryHandler {
                 ModItems.nitroCell,
                 ModItems.nitroCellExploder,
                 ModItems.blackMirrorItem,
-                //ModItems.capabilityTestBlockItem,
                 ModItems.fragGrenade,
                 ModItems.remoteGasGrenadeItem,
                 ModItems.exploder,
