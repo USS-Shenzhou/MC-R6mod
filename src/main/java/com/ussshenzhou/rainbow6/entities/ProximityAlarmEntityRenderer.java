@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
 
@@ -30,7 +31,7 @@ public class ProximityAlarmEntityRenderer extends EntityRenderer<ProximityAlarmE
         matrixStackIn.rotate(Vector3f.XP.rotationDegrees(entityIn.X));
         IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutout(RESOURCE_LOCATION));
         //I do not know why 0xf0 is brightest.
-        PROXIMITY_ALARM_ENTITY_MODEL.render(matrixStackIn,ivertexbuilder,0xf0, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        PROXIMITY_ALARM_ENTITY_MODEL.render(matrixStackIn,ivertexbuilder,entityIn.light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         matrixStackIn.pop();
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
     }

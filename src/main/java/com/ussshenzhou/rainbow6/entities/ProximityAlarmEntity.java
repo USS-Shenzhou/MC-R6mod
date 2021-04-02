@@ -6,6 +6,7 @@ import com.ussshenzhou.rainbow6.items.ModItems;
 import com.ussshenzhou.rainbow6.util.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
@@ -55,6 +56,7 @@ public class ProximityAlarmEntity extends ProjectileItemEntity {
     }
 
     private int i=0;
+    public int light = 15;
     @Override
     public void tick() {
         super.tick();
@@ -80,7 +82,9 @@ public class ProximityAlarmEntity extends ProjectileItemEntity {
         }
         if(this.onGround){
             this.setMotion(0,0,0);
+            this.light = 16 * world.getLightSubtracted(this.getPosition().offset(this.dataManager.get(direction)),0);
         }
+        //LOGGER.warn(this.light);
         i++;
     }
 
