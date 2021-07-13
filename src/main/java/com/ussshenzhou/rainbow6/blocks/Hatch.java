@@ -54,7 +54,7 @@ public class Hatch extends Block {
 
     public Hatch() {
         super(Properties.create(Material.WOOD)
-                .hardnessAndResistance(80,0.8f)
+                .hardnessAndResistance(80,1.5f)
                 .sound(SoundType.WOOD)
                 .notSolid()
         );
