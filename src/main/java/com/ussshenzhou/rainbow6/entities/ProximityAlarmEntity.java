@@ -251,4 +251,6 @@ public class ProximityAlarmEntity extends ProjectileItemEntity {
     protected float getEyeHeight(Pose poseIn, EntitySize sizeIn) {
         return sizeIn.height*0.5f;
     }
+
+
 }

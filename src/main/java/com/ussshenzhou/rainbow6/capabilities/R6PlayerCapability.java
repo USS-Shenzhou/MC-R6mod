@@ -140,6 +140,7 @@ public class R6PlayerCapability implements IR6PlayerCapability {
             "wamai",
             "oryx",
             "melusi",
-            "aruni"
+            "aruni",
+            "flores"
     };
 }

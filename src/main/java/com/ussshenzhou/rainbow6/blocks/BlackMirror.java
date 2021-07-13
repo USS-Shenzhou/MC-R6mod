@@ -124,9 +124,9 @@ public class BlackMirror extends Block {
             }
             else{
                 worldIn.setBlockState(pos,state.with(BlockStateProperties.FACING,direction).with(LEFT,true).with(BROKEN,false),2);
-                if (worldIn.isRemote){
+                //if (worldIn.isRemote){
                     worldIn.playSound((PlayerEntity) placer,pos,ModSounds.BLACKMIRROR_SET,SoundCategory.PLAYERS,1.0f,1.0f);
-                }
+                //}
             }
         }
     }
@@ -137,7 +137,7 @@ public class BlackMirror extends Block {
      */
     private Boolean canPlace(BlockPos pos,World worldIn,Direction direction){
         //4.2:terracotta's explosion resistance
-        return (worldIn.getBlockState(pos.offset(direction.getOpposite())).getBlock().getExplosionResistance() >= 4.2) || worldIn.getBlockState(pos.offset(direction.getOpposite())).isAir();
+        return (worldIn.getBlockState(pos.offset(direction.getOpposite())).getBlock().getExplosionResistance() >= 4.2) || worldIn.getBlockState(pos.offset(direction.getOpposite())).isAir() || worldIn.getBlockState(pos.offset(direction.getOpposite())).getBlock().getRegistryName().toString().contains("_planks_floor");
     }
 
     public void cancelPlace(PlayerEntity player){

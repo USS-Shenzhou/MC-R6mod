@@ -34,7 +34,7 @@ public class PlanksFloor extends Block {
 
     public PlanksFloor() {
         super(AbstractBlock.Properties.create(Material.WOOD)
-                .hardnessAndResistance(80f, 3.0f)
+                .hardnessAndResistance(80f, 1.5f)
                 .sound(SoundType.WOOD)
         );
     }

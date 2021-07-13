@@ -21,7 +21,7 @@ import java.util.List;
  * @author USS_Shenzhou
  */
 public class ImpactGrenadeEntity extends ProjectileItemEntity {
-    private float explosion = 1.2f;
+    private float explosion = 1.3f;
 
     public ImpactGrenadeEntity(EntityType<? extends ImpactGrenadeEntity> type, LivingEntity playerIn, World worldIn) {
         super(type, playerIn, worldIn);
