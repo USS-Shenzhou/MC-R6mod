@@ -15,6 +15,14 @@
   "item.rainbow6.proximityalarm": "感应警报器",
 
   "block.rainbow6.blackmirror": "黑镜",
+  "block.rainbow6.oak_hatch":"橡木顶板" ,
+  "block.rainbow6.spruce_hatch": "云杉木顶板",
+  "block.rainbow6.birch_hatch": "白桦木顶板",
+  "block.rainbow6.acacia_hatch": "金合欢木顶板",
+  "block.rainbow6.dark_oak_hatch": "深色橡木顶板",
+  "block.rainbow6.jungle_hatch": "丛林木顶板",
+  "block.rainbow6.crimson_hatch": "绯红木顶板",
+  "block.rainbow6.warped_hatch": "诡异木顶板",
   "block.rainbow6.oak_planks_floor":"带钢梁的橡木木板" ,
   "block.rainbow6.spruce_planks_floor": "带钢梁的云杉木板",
   "block.rainbow6.birch_planks_floor": "带钢梁的白桦木板",
@@ -23,6 +31,7 @@
   "block.rainbow6.jungle_planks_floor": "带钢梁的丛林木板",
   "block.rainbow6.crimson_planks_floor": "带钢梁的绯红木板",
   "block.rainbow6.warped_planks_floor": "带钢梁的诡异木板",
+
 
   "commands.rainbow6.showid": "%s是%3$s的%2$s干员",
   "commands.rainbow6.setid": "成功将%s设为%3$s的%2$s干员"

@@ -30,7 +30,6 @@ public class ProximityAlarmEntityRenderer extends EntityRenderer<ProximityAlarmE
         matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(entityIn.Z));
         matrixStackIn.rotate(Vector3f.XP.rotationDegrees(entityIn.X));
         IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutout(RESOURCE_LOCATION));
-        //I do not know why 0xf0 is brightest.
         PROXIMITY_ALARM_ENTITY_MODEL.render(matrixStackIn,ivertexbuilder,entityIn.light, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         matrixStackIn.pop();
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);

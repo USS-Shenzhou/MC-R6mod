@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": { "model": "rainbow6:block/jungle_hatch","y": 90},
+    "facing=south": { "model": "rainbow6:block/jungle_hatch" ,"y": 270},
+    "facing=west": { "model": "rainbow6:block/jungle_hatch" ,"y":0},
+    "facing=east": { "model": "rainbow6:block/jungle_hatch", "y":180},
+    "facing=up": { "model": "rainbow6:block/jungle_hatch", "x":-90},
+    "facing=down": { "model": "rainbow6:block/jungle_hatch", "x":90,"y":180}
+  }
+}

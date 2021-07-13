@@ -28,6 +28,7 @@ public class RegistryHandler {
                 ModBlocks.ironBlock,
                 ModBlocks.reinforcement,
                 ModBlocks.blackMirror,
+
                 ModBlocks.oakPlanksFloor,
                 ModBlocks.sprucePlanksFloor,
                 ModBlocks.birchPlanksFloor,
@@ -36,6 +37,17 @@ public class RegistryHandler {
                 ModBlocks.darkOakPlanksFloor,
                 ModBlocks.crimsonPlanksFloor,
                 ModBlocks.warpedPlanksFloor,
+
+                ModBlocks.oakHatch,
+                ModBlocks.spruceHatch,
+                ModBlocks.birchHatch,
+                ModBlocks.jungleHatch,
+                ModBlocks.acaciaHatch,
+                ModBlocks.darkoakHatch,
+                ModBlocks.crimsonHatch,
+                ModBlocks.warpedHatch,
+                ModBlocks.brokenHatch,
+
                 ModBlocks.ironBarFloor
         );
     }
@@ -62,7 +74,16 @@ public class RegistryHandler {
                 ModItems.acaciaPlanksFloor,
                 ModItems.darkOakPlanksFloor,
                 ModItems.crimsonPlanksFloor,
-                ModItems.warpedPlanksFloor
+                ModItems.warpedPlanksFloor,
+
+                ModItems.oakHatch,
+                ModItems.spruceHatch,
+                ModItems.birchHatch,
+                ModItems.jungleHatch,
+                ModItems.acaciaHatch,
+                ModItems.darkoakHatch,
+                ModItems.crimsonHatch,
+                ModItems.warpedHatch
         );
     }
     /**

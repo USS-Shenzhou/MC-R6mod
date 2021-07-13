@@ -81,6 +81,7 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
             }
             else if (i<150){
                 world.addParticle(ParticleTypes.CLOUD,this.getPosX(),this.getPosY(),this.getPosZ(),0,0,0);
+
                 world.addParticle(new GasSmokeParticleData(new Vector3d(0,0,0),new Color(0),0),this.getPosX()+rand(),this.getPosY()+rand(),this.getPosZ()+rand(),0,0,0);
             }
             i++;
@@ -95,7 +96,7 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
             return Math.random()*0.5;
         }
         else {
-            return Math.random()*0.5;
+            return Math.random()*-0.5;
         }
     }
 

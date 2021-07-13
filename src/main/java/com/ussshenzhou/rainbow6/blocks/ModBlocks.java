@@ -20,4 +20,14 @@ public class ModBlocks {
     public static Block darkOakPlanksFloor = new PlanksFloor().setRegistryName("dark_oak_planks_floor");
     public static Block crimsonPlanksFloor = new PlanksFloor().setRegistryName("crimson_planks_floor");
     public static Block warpedPlanksFloor = new PlanksFloor().setRegistryName("warped_planks_floor");
+
+    public static Block oakHatch = new Hatch().setRegistryName("oak_hatch");
+    public static Block spruceHatch = new Hatch().setRegistryName("spruce_hatch");
+    public static Block birchHatch = new Hatch().setRegistryName("birch_hatch");
+    public static Block jungleHatch = new Hatch().setRegistryName("jungle_hatch");
+    public static Block acaciaHatch =  new Hatch().setRegistryName("acacia_hatch");
+    public static Block darkoakHatch = new Hatch().setRegistryName("dark_oak_hatch");
+    public static Block crimsonHatch = new Hatch().setRegistryName("crimson_hatch");
+    public static Block warpedHatch = new Hatch().setRegistryName("warped_hatch");
+    public static Block brokenHatch = new BrokenHatch().setRegistryName("broken_hatch");
 }

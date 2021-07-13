@@ -32,7 +32,7 @@ public class NitroCell extends Item {
         if (!worldIn.isRemote) {
             NitroCellEntity nitroCellEntity = new NitroCellEntity(ModEntityTypes.nitroCellEntityType,playerIn,worldIn);
             nitroCellEntity.setItem(itemstack);
-            nitroCellEntity.shoot(playerIn.getLookVec().x,playerIn.getLookVec().y,playerIn.getLookVec().z, 0.39F, 0.1F);
+            nitroCellEntity.shoot(playerIn.getLookVec().x,playerIn.getLookVec().y,playerIn.getLookVec().z, 0.45F, 0.1F);
             worldIn.addEntity(nitroCellEntity);
         }
 
