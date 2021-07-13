@@ -141,6 +141,6 @@ public class R6PlayerCapability implements IR6PlayerCapability {
             "oryx",
             "melusi",
             "aruni",
-            "flores"
+            "thunderbird"
     };
 }

@@ -27,9 +27,6 @@ public class ProximityAlarmItem extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-        if (!playerIn.abilities.isCreativeMode) {
-            itemstack.shrink(1);
-        }
         worldIn.playSound((PlayerEntity)null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModSounds.NITRO_CELL_THROW, SoundCategory.PLAYERS, 1.0f, 1.0f);
         if (!worldIn.isRemote) {
             ProximityAlarmEntity proximityAlarmEntity = new ProximityAlarmEntity(ModEntityTypes.proximityAlarmEntityType,playerIn,worldIn);
@@ -37,8 +34,10 @@ public class ProximityAlarmItem extends Item {
             proximityAlarmEntity.shoot(playerIn.getLookVec().x,playerIn.getLookVec().y,playerIn.getLookVec().z,0.82f,0.1F);
             worldIn.addEntity(proximityAlarmEntity);
         }
-
         playerIn.addStat(Stats.ITEM_USED.get(this));
+        if (!playerIn.abilities.isCreativeMode) {
+            itemstack.shrink(1);
+        }
         return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
     }
 }

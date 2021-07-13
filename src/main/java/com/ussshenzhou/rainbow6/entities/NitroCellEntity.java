@@ -177,7 +177,7 @@ public class NitroCellEntity extends ProjectileItemEntity {
                 this.world.playSound((PlayerEntity)null,getPosition(),SoundEvents.BLOCK_SAND_FALL,SoundCategory.PLAYERS,1.0f,1.0f);
             }
             else {
-                this.world.addParticle(ParticleTypes.CLOUD,this.getPosX(),this.getPosY(),this.getPosZ(),0,0,0);
+                world.addParticle(ParticleTypes.CLOUD,this.getPosX(),this.getPosY(),this.getPosZ(),0,0,0);
             }
             return true;
     }
