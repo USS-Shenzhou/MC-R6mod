@@ -114,5 +114,8 @@ public class FragGrenade extends Item {
         if (worldIn.isRemote && timeCount>=0){
             timeCount++;
         }
+        /*if (stack.getItem()!=ModItems.fragGrenade){
+            this.timeCount = -1;
+        }*/
     }
 }
