@@ -1,9 +1,9 @@
 {
   "variants": {
     "facing=north": { "model": "minecraft:block/oak_planks","y": 90},
-    "facing=south": { "model": "minecraft:block/oak_planks" ,"y": 270},
+    "facing=south": { "model": "minecraft:block/oak_planks" ,"y": 90},
     "facing=west": { "model": "minecraft:block/oak_planks" ,"y":0},
-    "facing=east": { "model": "minecraft:block/oak_planks", "y":180},
+    "facing=east": { "model": "minecraft:block/oak_planks", "y":0},
     "facing=up": { "model": "minecraft:block/oak_planks", "x":-90},
     "facing=down": { "model": "minecraft:block/oak_planks", "x":90,"y":180}
   }

@@ -1,9 +1,9 @@
 {
   "variants": {
     "facing=north": { "model": "minecraft:block/spruce_planks","y": 90},
-    "facing=south": { "model": "minecraft:block/spruce_planks" ,"y": 270},
+    "facing=south": { "model": "minecraft:block/spruce_planks" ,"y": 90},
     "facing=west": { "model": "minecraft:block/spruce_planks" ,"y":0},
-    "facing=east": { "model": "minecraft:block/spruce_planks", "y":180},
+    "facing=east": { "model": "minecraft:block/spruce_planks", "y":0},
     "facing=up": { "model": "minecraft:block/spruce_planks", "x":-90},
     "facing=down": { "model": "minecraft:block/spruce_planks", "x":90,"y":180}
   }

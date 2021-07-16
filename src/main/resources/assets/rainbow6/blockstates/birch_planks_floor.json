@@ -1,9 +1,9 @@
 {
   "variants": {
     "facing=north": { "model": "minecraft:block/birch_planks","y": 90},
-    "facing=south": { "model": "minecraft:block/birch_planks" ,"y": 270},
+    "facing=south": { "model": "minecraft:block/birch_planks" ,"y": 90},
     "facing=west": { "model": "minecraft:block/birch_planks" ,"y":0},
-    "facing=east": { "model": "minecraft:block/birch_planks", "y":180},
+    "facing=east": { "model": "minecraft:block/birch_planks", "y":0},
     "facing=up": { "model": "minecraft:block/birch_planks", "x":-90},
     "facing=down": { "model": "minecraft:block/birch_planks", "x":90,"y":180}
   }
