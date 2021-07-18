@@ -63,6 +63,7 @@ public class Hatch extends Block {
     private static final VoxelShape SHAPE = Block.makeCuboidShape(0,2,0,16,16,16);
 
     private void onDestroyed(BlockState state, World worldIn, BlockPos pos){
+        worldIn.destroyBlock(pos,false);
         worldIn.setBlockState(pos,ModBlocks.brokenHatch.getDefaultState().with(BlockStateProperties.FACING,state.get(BlockStateProperties.FACING)));
     }
 

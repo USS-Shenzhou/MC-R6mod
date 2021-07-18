@@ -161,11 +161,11 @@ public class BlackMirrorTileEntity extends TileEntity implements ITickableTileEn
         state.updateNeighbours(worldIn, pos, 3);
         worldIn.notifyNeighborsOfStateChange(pos, Blocks.AIR);
     }
-    public Boolean setIsMoved(Boolean bool){
+    public void setIsMoved(Boolean bool){
         this.isMoved =bool;
         markDirty();
-        return this.isMoved;
     }
+
     public Boolean getIsMoved(){
         return this.isMoved;
     }

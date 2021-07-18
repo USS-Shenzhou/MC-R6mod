@@ -41,6 +41,7 @@ public class PlanksFloor extends Block {
 
 
     public void onDestroyed(BlockState state, World worldIn, BlockPos pos) {
+        worldIn.destroyBlock(pos,false);
         worldIn.setBlockState(pos,ModBlocks.ironBarFloor.getDefaultState().with(BlockStateProperties.FACING,state.get(BlockStateProperties.FACING)));
     }
 

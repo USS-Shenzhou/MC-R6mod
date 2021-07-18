@@ -4,7 +4,7 @@
   "textures": {
     "0": "rainbow6:block/broken_hatch",
     "1": "minecraft:block/oak_planks",
-    "particle": "rainbow6:block/broken_hatch"
+    "particle": "minecraft:block/oak_planks"
   },
   "elements": [
     {
