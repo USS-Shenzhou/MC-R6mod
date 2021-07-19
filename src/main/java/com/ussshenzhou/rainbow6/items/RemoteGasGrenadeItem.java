@@ -28,9 +28,6 @@ public class RemoteGasGrenadeItem extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-        if (!playerIn.abilities.isCreativeMode) {
-            itemstack.shrink(1);
-        }
         worldIn.playSound((PlayerEntity)null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModSounds.REMOTEGASGRENADE_THROW, SoundCategory.PLAYERS, 1.0f, 1.0f);
         if (!worldIn.isRemote) {
             RemoteGasGrenadeEntity remoteGsaGrenadeEntity = new RemoteGasGrenadeEntity(ModEntityTypes.remoteGasGrenadeEntityType,playerIn,worldIn);
@@ -38,7 +35,9 @@ public class RemoteGasGrenadeItem extends Item {
             remoteGsaGrenadeEntity.shoot(playerIn.getLookVec().x,playerIn.getLookVec().y,playerIn.getLookVec().z, 1.0F, 0.1F);
             worldIn.addEntity(remoteGsaGrenadeEntity);
         }
-
+        if (!playerIn.abilities.isCreativeMode) {
+            itemstack.shrink(1);
+        }
         playerIn.addStat(Stats.ITEM_USED.get(this));
         return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
     }

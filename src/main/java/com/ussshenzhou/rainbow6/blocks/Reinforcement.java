@@ -41,7 +41,7 @@ public class Reinforcement extends Block{
     public Reinforcement() {
         super(Properties.create(Material.IRON)
                 .harvestLevel(0)
-                .hardnessAndResistance(40.0f,7.0f)
+                .hardnessAndResistance(40.0f,9.0f)
                 .notSolid()
         );
         this.setRegistryName("reinforcement");

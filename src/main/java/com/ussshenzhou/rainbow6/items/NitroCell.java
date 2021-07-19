@@ -25,9 +25,6 @@ public class NitroCell extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-        if (!playerIn.abilities.isCreativeMode) {
-            itemstack.shrink(1);
-        }
         worldIn.playSound((PlayerEntity)null,playerIn.getPosX(),playerIn.getPosY(),playerIn.getPosZ(),ModSounds.NITRO_CELL_THROW,SoundCategory.PLAYERS,1.0f,1.0f);
         if (!worldIn.isRemote) {
             NitroCellEntity nitroCellEntity = new NitroCellEntity(ModEntityTypes.nitroCellEntityType,playerIn,worldIn);
@@ -35,7 +32,9 @@ public class NitroCell extends Item {
             nitroCellEntity.shoot(playerIn.getLookVec().x,playerIn.getLookVec().y,playerIn.getLookVec().z, 0.45F, 0.1F);
             worldIn.addEntity(nitroCellEntity);
         }
-
+        if (!playerIn.abilities.isCreativeMode) {
+            itemstack.shrink(1);
+        }
         playerIn.addStat(Stats.ITEM_USED.get(this));
         return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
     }
