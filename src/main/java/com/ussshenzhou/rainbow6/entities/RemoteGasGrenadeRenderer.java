@@ -19,8 +19,6 @@ import javax.annotation.Nullable;
 public class RemoteGasGrenadeRenderer extends EntityRenderer<RemoteGasGrenadeEntity> {
     public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("rainbow6:textures/entity/remotegasgrenade.png");
     private static final RemoteGasGrenadeModel REMOTE_GAS_GRENADE_MODEL = new RemoteGasGrenadeModel();
-    private float Y = (float) Math.random()*360;
-    private float Z = (float) Math.random()*360;
 
     public RemoteGasGrenadeRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);
@@ -30,8 +28,8 @@ public class RemoteGasGrenadeRenderer extends EntityRenderer<RemoteGasGrenadeEnt
     public void render(RemoteGasGrenadeEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
         matrixStackIn.push();
         matrixStackIn.scale(0.5f,0.5f,0.5f);
-        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationYaw, entityIn.rotationYaw) +Y));
-        matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationPitch, entityIn.rotationPitch) + Z));
+        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationYaw, entityIn.rotationYaw)));
+        matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationPitch, entityIn.rotationPitch)));
         IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntitySolid(TEXTURE_LOCATION));
         REMOTE_GAS_GRENADE_MODEL.render(matrixStackIn,ivertexbuilder,packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         matrixStackIn.pop();

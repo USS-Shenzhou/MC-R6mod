@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "#",
+    "X"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:white_dye"
+    },
+    "X": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "item": "rainbow6:logo",
+    "count": 1
+  }
+}

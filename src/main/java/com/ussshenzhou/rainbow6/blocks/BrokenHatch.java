@@ -31,7 +31,7 @@ public class BrokenHatch extends Block {
     private static final VoxelShape EAST = VoxelShapes.or(EAST1,EAST2);
 
     private static final VoxelShape WEST1 = Block.makeCuboidShape(0,0,0,16,16,1);
-    private static final VoxelShape WEST2 = Block.makeCuboidShape(15,0,0,16,16,15);
+    private static final VoxelShape WEST2 = Block.makeCuboidShape(15,0,0,16,16,16);
     private static final VoxelShape WEST = VoxelShapes.or(WEST1,WEST2);
 
     public BrokenHatch() {

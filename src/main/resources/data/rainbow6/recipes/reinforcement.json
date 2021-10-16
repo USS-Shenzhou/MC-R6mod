@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "#",
+    "Y"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_block"
+    },
+    "X": {
+      "item": "minecraft:red_dye"
+    },
+    "Y": {
+      "item": "minecraft:blue_dye"
+    }
+  },
+  "result": {
+    "item": "rainbow6:reinforcement",
+    "count": 1
+  }
+}

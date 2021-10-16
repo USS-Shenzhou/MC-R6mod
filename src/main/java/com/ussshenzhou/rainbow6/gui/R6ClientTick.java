@@ -1,0 +1,39 @@
+package com.ussshenzhou.rainbow6.gui;
+
+import com.ussshenzhou.rainbow6.input.R6MouseHelper;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.LogManager;
+
+/**
+ * @author USS_Shenzhou
+ */
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE,value = Dist.CLIENT)
+public class R6ClientTick {
+    @SubscribeEvent
+    public static void onClientTick(TickEvent.ClientTickEvent event){
+        ClientMatch.tick();
+        /*if ( InGameClientProperties.getIsWaitingMatchMaking()){
+            InGameClientTimeCount.increaseMatchMakingTime();
+        }*/
+        if (InGameClientProperties.isUsingDrone){
+            try {
+                InGameClientProperties.getR6DroneGui().tick();
+            } catch (Exception ignored) {
+            }
+        }
+    }
+    static double yaw=0;
+    @SubscribeEvent
+    public static void onRenderTick(TickEvent.RenderTickEvent event){
+        R6MouseHelper.tick();
+        /*try {
+            if (yaw != InGameClientProperties.getR6DroneGui().getCurrentDrone().rotationYaw){
+                yaw = InGameClientProperties.getR6DroneGui().getCurrentDrone().rotationYaw;
+                LogManager.getLogger().warn(yaw);
+            }
+        } catch (Exception ignored){}*/
+    }
+}

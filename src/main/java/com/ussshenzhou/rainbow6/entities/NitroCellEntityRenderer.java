@@ -18,8 +18,6 @@ import javax.annotation.Nullable;
 public class NitroCellEntityRenderer extends EntityRenderer<NitroCellEntity> {
     public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("rainbow6:textures/entity/nitrocell.png");
     private static final NitroCellModel NITRO_CELL_MODEL = new NitroCellModel();
-    private float Y = (float) Math.random()*360;
-    private float Z = (float) Math.random()*360;
 
     public NitroCellEntityRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);
@@ -28,8 +26,8 @@ public class NitroCellEntityRenderer extends EntityRenderer<NitroCellEntity> {
     public void render(NitroCellEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
         matrixStackIn.push();
         matrixStackIn.scale(0.5f,0.5f,0.5f);
-        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationYaw, entityIn.rotationYaw) +Y));
-        matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationPitch, entityIn.rotationPitch) + Z));
+        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationYaw, entityIn.rotationYaw)));
+        matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationPitch, entityIn.rotationPitch)));
         IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntitySolid(TEXTURE_LOCATION));
         NITRO_CELL_MODEL.render(matrixStackIn,ivertexbuilder,packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         matrixStackIn.pop();

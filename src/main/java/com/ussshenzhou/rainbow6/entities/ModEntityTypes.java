@@ -30,4 +30,12 @@ public class ModEntityTypes {
             .size(0.35f,0f)
             .build("ProximityAlarm")
             .setRegistryName("rainbow6","proximityalarm");
+    public static EntityType smokeGrenadeEntityType = EntityType.Builder.<SmokeGrenadeEntity>create(SmokeGrenadeEntity::new,EntityClassification.MISC)
+            .size(0.1f,0.1f)
+            .build("smokeGrenade")
+            .setRegistryName("rainbow6","smokegrenade");
+    public static EntityType droneEntityType = EntityType.Builder.<DroneEntity>create(DroneEntity::new,EntityClassification.MISC)
+            .size(0.3f,0.16f)
+            .build("drone")
+            .setRegistryName("rainbow6","drone");
 }

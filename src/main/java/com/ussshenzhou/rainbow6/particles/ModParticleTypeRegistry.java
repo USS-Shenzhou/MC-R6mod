@@ -15,6 +15,8 @@ public class ModParticleTypeRegistry {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPE = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES,"rainbow6");
 
     public static final RegistryObject<ParticleType<GasSmokeParticleData>> GAS_SMOKE_PARTICLE = PARTICLE_TYPE.register("gas_smoke_particle", GasSmokeParticleType::new);
+    public static final RegistryObject<ParticleType<SmokeGrenadeParticleData>> SMOKE_GRENADE_PARTICLE = PARTICLE_TYPE.register("smoke_grenade_particle",SmokeGrenadeParticleType::new);
+
     public static final RegistryObject<ParticleType<BulletHoleParticleData>> BULLET_HOLE_PARTICLE = PARTICLE_TYPE.register("bullet_hole_particle",() -> new ParticleType<BulletHoleParticleData>(false, BulletHoleParticleData.DESERIALIZER)
     {
         @Override

@@ -15,5 +15,6 @@ public class ModParticleRegistry {
     public static void onParticleFactoryReg(ParticleFactoryRegisterEvent event){
         Minecraft.getInstance().particles.registerFactory(ModParticleTypeRegistry.BULLET_HOLE_PARTICLE.get(),BulletHoleParticleFactory::new);
         Minecraft.getInstance().particles.registerFactory(ModParticleTypeRegistry.GAS_SMOKE_PARTICLE.get(),GasSmokeParticleFactory::new);
+        Minecraft.getInstance().particles.registerFactory(ModParticleTypeRegistry.SMOKE_GRENADE_PARTICLE.get(),SmokeGrenadeParticleFactory::new);
     }
 }

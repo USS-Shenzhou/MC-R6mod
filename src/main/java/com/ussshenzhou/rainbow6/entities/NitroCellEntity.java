@@ -1,6 +1,7 @@
 package com.ussshenzhou.rainbow6.entities;
 
 
+import com.ussshenzhou.rainbow6.gui.R6ThrowableEntityUtils;
 import com.ussshenzhou.rainbow6.items.ModItems;
 import com.ussshenzhou.rainbow6.util.ModSounds;
 import net.minecraft.block.BlockState;
@@ -35,6 +36,7 @@ public class NitroCellEntity extends ProjectileItemEntity {
     public NitroCellEntity(EntityType<? extends NitroCellEntity> type, LivingEntity playerIn, World worldIn) {
         super(type, playerIn, worldIn);
     }
+
     public NitroCellEntity(EntityType<NitroCellEntity> nitroCellEntityEntityType, World world) {
         super(nitroCellEntityEntityType, world);
     }
@@ -47,8 +49,8 @@ public class NitroCellEntity extends ProjectileItemEntity {
     @Override
     public void tick() {
         super.tick();
-        if(this.onGround){
-            this.setMotion(0,0,0);
+        if (this.onGround) {
+            this.setMotion(0, 0, 0);
         }
     }
 
@@ -57,7 +59,7 @@ public class NitroCellEntity extends ProjectileItemEntity {
         if (raytraceResultIn.getType() == RayTraceResult.Type.BLOCK) {
             BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceResultIn;
             BlockState blockstate = this.world.getBlockState(blockraytraceresult.getPos());
-            Vector3d vec3d = blockraytraceresult.getHitVec().subtract(this.getPosX(), this.getPosY()-0.01, this.getPosZ());
+            Vector3d vec3d = blockraytraceresult.getHitVec().subtract(this.getPosX(), this.getPosY() - 0.01, this.getPosZ());
             this.setMotion(vec3d);
             Vector3d vec3d1 = vec3d.normalize().scale((double) 0.05F);
             this.prevPosX -= vec3d1.x;
@@ -67,6 +69,14 @@ public class NitroCellEntity extends ProjectileItemEntity {
             this.onGround = true;
             this.setNoGravity(true);
             blockstate.onProjectileCollision(this.world, blockstate, blockraytraceresult, this);
+        }
+        if (raytraceResultIn.getType() == RayTraceResult.Type.ENTITY) {
+            EntityRayTraceResult entityRayTraceResult = (EntityRayTraceResult) raytraceResultIn;
+            Entity entity = entityRayTraceResult.getEntity();
+            if (entity != this.getShooter()) {
+                R6ThrowableEntityUtils.EntityReboundOnEntity.rebound(entityRayTraceResult, this, entity);
+                this.markVelocityChanged();
+            }
         }
     }
 
@@ -135,21 +145,22 @@ public class NitroCellEntity extends ProjectileItemEntity {
 
         }
     }
+
     /**
      * From creeper's code.Forgot why and how.
      */
     public void exploder() {
         this.ignite();
-            this.setNitroCellState(1);
-            int i = this.getNitroCellState();
-            this.timeSinceIgnited += i;
-            if (this.timeSinceIgnited < 0) {
-                this.timeSinceIgnited = 0;
-            }
-            if (this.timeSinceIgnited >= this.fuseTime) {
-                this.timeSinceIgnited = this.fuseTime;
-                this.explode();
-            }
+        this.setNitroCellState(1);
+        int i = this.getNitroCellState();
+        this.timeSinceIgnited += i;
+        if (this.timeSinceIgnited < 0) {
+            this.timeSinceIgnited = 0;
+        }
+        if (this.timeSinceIgnited >= this.fuseTime) {
+            this.timeSinceIgnited = this.fuseTime;
+            this.explode();
+        }
     }
 
     @Override
@@ -157,33 +168,30 @@ public class NitroCellEntity extends ProjectileItemEntity {
         return true;
     }
 
-
-
-    @Override
-    public boolean hitByEntity(Entity entityIn) {
-        if (entityIn instanceof PlayerEntity) {
-            PlayerEntity playerentity = (PlayerEntity)entityIn;
-            return this.attackEntityFrom(DamageSource.causePlayerDamage(playerentity), 1.0F);
-        } else {
-            return false;
-        }
-    }
-
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
-            if (!this.world.isRemote) {
-                this.remove();
-                this.markVelocityChanged();
-                this.world.playSound((PlayerEntity)null,getPosition(),SoundEvents.BLOCK_SAND_FALL,SoundCategory.PLAYERS,1.0f,1.0f);
-            }
-            else {
-                world.addParticle(ParticleTypes.CLOUD,this.getPosX(),this.getPosY(),this.getPosZ(),0,0,0);
-            }
-            return true;
+        if (!this.world.isRemote) {
+            this.remove();
+            this.markVelocityChanged();
+            this.world.playSound((PlayerEntity) null, getPosition(), SoundEvents.BLOCK_SAND_FALL, SoundCategory.PLAYERS, 1.0f, 1.0f);
+        } else {
+            world.addParticle(ParticleTypes.CLOUD, this.getPosX(), this.getPosY(), this.getPosZ(), 0, 0, 0);
+        }
+        return true;
     }
 
     @Override
     public boolean canBeCollidedWith() {
         return true;
+    }
+
+    @Override
+    protected void updatePitchAndYaw() {
+
+    }
+
+    public void setRandomRotation() {
+        this.rotationYaw = (float) (Math.random()*360);
+        this.rotationPitch = (float) (Math.random()*360);
     }
 }

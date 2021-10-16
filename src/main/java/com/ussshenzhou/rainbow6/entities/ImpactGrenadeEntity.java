@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.List;
+
 /**
  * @author USS_Shenzhou
  */
@@ -26,6 +27,7 @@ public class ImpactGrenadeEntity extends ProjectileItemEntity {
     public ImpactGrenadeEntity(EntityType<? extends ImpactGrenadeEntity> type, LivingEntity playerIn, World worldIn) {
         super(type, playerIn, worldIn);
     }
+
     public ImpactGrenadeEntity(EntityType<ImpactGrenadeEntity> EntityType, World world) {
         super(EntityType, world);
     }
@@ -41,18 +43,18 @@ public class ImpactGrenadeEntity extends ProjectileItemEntity {
             this.setNoGravity(true);
             this.remove();
             BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceResultIn;
-            if (world.getBlockState(blockraytraceresult.getPos()).getMaterial()== Material.WOOD){
-                explosion=1.34f;
+            if (world.getBlockState(blockraytraceresult.getPos()).getMaterial() == Material.WOOD) {
+                explosion = 1.34f;
             }
             this.explode();
-        }
-        else if (raytraceResultIn.getType() == RayTraceResult.Type.ENTITY){
+        } else if (raytraceResultIn.getType() == RayTraceResult.Type.ENTITY) {
             this.setNoGravity(true);
             this.explode();
             this.remove();
-            explosion=1.3f;
+            explosion = 1.3f;
         }
     }
+
     @Override
     public IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
@@ -65,7 +67,17 @@ public class ImpactGrenadeEntity extends ProjectileItemEntity {
 
         }
     }
-    private double normalize(double x){
-        return (Math.abs(x)+1)*0.5*x/Math.abs(x);
+
+    private double normalize(double x) {
+        return (Math.abs(x) + 1) * 0.5 * x / Math.abs(x);
+    }
+
+    @Override
+    protected void updatePitchAndYaw() {
+
+    }
+    public void setRandomRotation() {
+        this.rotationYaw = (float) (Math.random()*360);
+        this.rotationPitch = (float) (Math.random()*360);
     }
 }

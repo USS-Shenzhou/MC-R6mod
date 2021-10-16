@@ -33,6 +33,7 @@ public class RemoteGasGrenadeItem extends Item {
             RemoteGasGrenadeEntity remoteGsaGrenadeEntity = new RemoteGasGrenadeEntity(ModEntityTypes.remoteGasGrenadeEntityType,playerIn,worldIn);
             remoteGsaGrenadeEntity.setItem(itemstack);
             remoteGsaGrenadeEntity.shoot(playerIn.getLookVec().x,playerIn.getLookVec().y,playerIn.getLookVec().z, 1.0F, 0.1F);
+            remoteGsaGrenadeEntity.setRandomRotation();
             worldIn.addEntity(remoteGsaGrenadeEntity);
         }
         if (!playerIn.abilities.isCreativeMode) {

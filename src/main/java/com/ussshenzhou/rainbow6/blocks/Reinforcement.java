@@ -77,7 +77,7 @@ public class Reinforcement extends Block{
         if (placer != null){
             Direction direction = getFacingFromEntity(pos,placer);
             //wall to reinforce MUST NOT harder than Terracotta
-            float maxDeployableResistance = 4.2f;
+            float maxDeployableResistance = 4.3f;
             //this long-long shit just to get the ExplosionResistance of the front block, please tell me if there is a easier method.
             if (direction==Direction.DOWN||direction==Direction.UP||worldIn.getBlockState(pos.offset(direction.getOpposite())).getBlock().getExplosionResistance(state,worldIn,pos,new Explosion(worldIn,null,null,null,pos.getX(),pos.getY(),pos.getZ(),0,false, Explosion.Mode.DESTROY))>=maxDeployableResistance){
                 if (!worldIn.isRemote){

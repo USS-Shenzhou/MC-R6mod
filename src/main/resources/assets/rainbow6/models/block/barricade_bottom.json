@@ -7,7 +7,7 @@
     "front": "rainbow6:block/barricade_front_bottom"
   },
   "elements": [
-    {   "from": [ 0, 2, -1 ],
+    {   "from": [ 0, 4, -1 ],
         "to": [ 16, 16, 0 ],
         "faces": {
           "down":  {"uv": [ 0, 0, 16, 16 ], "texture": "#wide"},

@@ -777,7 +777,7 @@ Build: 1.15.1-30.0.24 - Sat Jan 04 16:19:24 GMT 2020
 		A few more binary-breaking changes, before it's too late:
 		- Move CompositeModel out of its package.
 		- Move a few inner classes from the OBJ loader.
-		- Rename the bucket model and fluid model classes to match the naming convention.
+		- Rename the bucket model and fluid model classes to serverMatch the naming convention.
 		- Remove BiomeEvent.* and WorldTypeEvent.InitBiomeGens as they are not currently implemented and they haven't been in the previous version either.
 
 =========

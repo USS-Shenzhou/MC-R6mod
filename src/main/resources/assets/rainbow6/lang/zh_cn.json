@@ -13,6 +13,7 @@
   "item.rainbow6.remotegasgrenade": "遥控毒气手榴弹",
   "item.rainbow6.exploder": "通用起爆器",
   "item.rainbow6.proximityalarm": "感应警报器",
+  "item.rainbow6.smokegrenade": "烟雾弹",
 
   "block.rainbow6.blackmirror": "黑镜",
   "block.rainbow6.oak_hatch":"橡木顶板" ,
@@ -32,7 +33,36 @@
   "block.rainbow6.crimson_planks_floor": "带钢梁的绯红木板",
   "block.rainbow6.warped_planks_floor": "带钢梁的诡异木板",
 
-
   "commands.rainbow6.showid": "%s是%3$s的%2$s干员",
-  "commands.rainbow6.setid": "成功将%s设为%3$s的%2$s干员"
+  "commands.rainbow6.setid": "成功将%s设为%3$s的%2$s干员",
+  "commands.rainbow6.invalidmapname": "不可用的地图！请先创建地图！",
+  "commands.rainbow6.createmap": "创建地图%s",
+  "commands.rainbow6.nextbomb": "设置炸弹%s",
+  "commands.rainbow6.save": "已保存",
+  "commands.rainbow6.load": "加载地图%s",
+  "commands.rainbow6.invalidbombnum": "无效的炸弹点编号！",
+  "commands.rainbow6.setbomb": "已将%s设为炸弹点%s",
+  "commands.rainbow6.setspawn": "已将%s设为出生点%s",
+  "commands.rainbow6.removebomb": "炸弹点%s已移除",
+  "commands.rainbow6.removespawn": "出生点%s已移除",
+  "commands.rainbow6.zone": "对战区域边界点%s已设为%s",
+  "commands.rainbow6.scene": "地图封面已设置",
+  "commands.rainbow6.done": "地图%s标记为已完成",
+  "commands.rainbow6.undone": "地图%s标记为未完成",
+
+  "key.category.rainbow6": "我的六号",
+  "key.r6mainmenu": "打开主界面",
+
+  "gui.rainbow6.matchmade": "对战已开始",
+  "gui.rainbow6.playbutton": "进入对战",
+  "gui.rainbow6.exitbutton": "正在匹配中...",
+  "gui.rainbow6.matchmakingbar": "多人游戏",
+  "gui.rainbow6.blue": "蓝队",
+  "gui.rainbow6.orange": "桔队",
+  "gui.rainbow6.round": "第%s回合",
+  "gui.rainbow6.attacker": "进攻方",
+  "gui.rainbow6.defender": "防守方",
+  "gui.rainbow6.locations": "地点",
+  "gui.rainbow6.operators": "特勤干员",
+  "gui.rainbow6.loadout": "装备配置"
 }

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "#",
+    "Y"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:green_stained_glass_pane"
+    },
+    "X": {
+      "item": "minecraft:redstone"
+    },
+    "Y": {
+      "item": "minecraft:stone_button"
+    }
+  },
+  "result": {
+    "item": "rainbow6:exploder",
+    "count": 1
+  }
+}

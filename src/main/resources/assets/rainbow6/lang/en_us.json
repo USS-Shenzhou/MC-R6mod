@@ -13,6 +13,7 @@
   "item.rainbow6.remotegasgrenade": "Remote Gas Grenade",
   "item.rainbow6.exploder": "Universal Exploder",
   "item.rainbow6.proximityalarm": "Proximity Alarm",
+  "item.rainbow6.smokegrenade": "Smoke Grenade",
 
   "block.rainbow6.blackmirror": "Black Mirror",
   "block.rainbow6.oak_hatch":"Oak Hatch" ,
@@ -33,5 +34,35 @@
   "block.rainbow6.warped_planks_floor": "Warped Planks Floor",
 
   "commands.rainbow6.showid": "%s is %s in %s.",
-  "commands.rainbow6.setid": "Successfully set %s as %s in %s."
+  "commands.rainbow6.setid": "Set %s as %s in %s.",
+  "commands.rainbow6.invalidmapname": "Invalid Map! Create the map first!",
+  "commands.rainbow6.createmap": "Created map %s",
+  "commands.rainbow6.nextbomb": "Set bomb %s",
+  "commands.rainbow6.save": "Saved",
+  "commands.rainbow6.load": "Map %s Loaded",
+  "commands.rainbow6.invalidbombnum": "Invalid Bomb Number!",
+  "commands.rainbow6.setbomb": "Bomb %2$s set at %1$s",
+  "commands.rainbow6.setspawn": "Spawn point %2$s set at %1$s",
+  "commands.rainbow6.removespawn": "Spawn point %s removed",
+  "commands.rainbow6.removebomb": "Bomb %s removed",
+  "commands.rainbow6.zone": "Zone point #%s set at %s",
+  "commands.rainbow6.scene": "Map scene set",
+  "commands.rainbow6.done": "Set map %s done",
+  "commands.rainbow6.undone": "Set map %s undone",
+
+  "key.category.rainbow6": "Rainbow6:Minesiege",
+  "key.r6mainmenu": "Open Main Menu",
+
+  "gui.rainbow6.matchmade": "MATCH STARTED",
+  "gui.rainbow6.playbutton": "PLAY MULTIPLAYER",
+  "gui.rainbow6.exitbutton": "MATCHMAKING...",
+  "gui.rainbow6.matchmakingbar": "MULTIPLAYER",
+  "gui.rainbow6.blue": "BLUE",
+  "gui.rainbow6.orange": "ORANGE",
+  "gui.rainbow6.round": "ROUND %s",
+  "gui.rainbow6.attacker": "attacker",
+  "gui.rainbow6.defender": "defender",
+  "gui.rainbow6.locations": "LOCATIONS",
+  "gui.rainbow6.operators": "OPERATORS",
+  "gui.rainbow6.loadout": "LOADOUT"
 }

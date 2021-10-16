@@ -32,10 +32,10 @@ public class Barricade extends Block {
     public static BooleanProperty WINDOW = BooleanProperty.create("window");
     public static DirectionProperty DIRECTION = BlockStateProperties.FACING;
 
-    protected static final VoxelShape BOTTOM_NORTH = Block.makeCuboidShape(0.0D,2.0D,-1.0D,16.0D,16.0D,0.0D);
-    protected static final VoxelShape BOTTOM_SOUTH = Block.makeCuboidShape(0.0D,2.0D,16.0D,16.0D,16.0D,17.0D);
-    protected static final VoxelShape BOTTOM_WEST = Block.makeCuboidShape(-1.0D,2.0D,0.0D,0.0D,16.0D,16.0D);
-    protected static final VoxelShape BOTTOM_EAST = Block.makeCuboidShape(16.0D,2.0D,0.0D,17.0D,16.0D,16.0D);
+    protected static final VoxelShape BOTTOM_NORTH = Block.makeCuboidShape(0.0D,5.0D,-1.0D,16.0D,16.0D,0.0D);
+    protected static final VoxelShape BOTTOM_SOUTH = Block.makeCuboidShape(0.0D,5.0D,16.0D,16.0D,16.0D,17.0D);
+    protected static final VoxelShape BOTTOM_WEST = Block.makeCuboidShape(-1.0D,5.0D,0.0D,0.0D,16.0D,16.0D);
+    protected static final VoxelShape BOTTOM_EAST = Block.makeCuboidShape(16.0D,5.0D,0.0D,17.0D,16.0D,16.0D);
 
     protected static final VoxelShape TOP_NORTH = Block.makeCuboidShape(0.0D,0.0D,-1.0D,16.0D,17.0D,0.0D);
     protected static final VoxelShape TOP_SOUTH = Block.makeCuboidShape(0.0D,0.0D,16.0D,16.0D,17.0D,17.0D);

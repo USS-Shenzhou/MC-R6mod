@@ -66,6 +66,9 @@ public class RegistryHandler {
                 ModItems.remoteGasGrenadeItem,
                 ModItems.exploder,
                 ModItems.proximityAlarmItem,
+                ModItems.smokeGrenade,
+                ModItems.droneItem,
+                ModItems.r6CellPhone,
 
                 ModItems.oakPlanksFloor,
                 ModItems.sprucePlanksFloor,
@@ -113,7 +116,11 @@ public class RegistryHandler {
                 ModSounds.REMOTEGASGRENADE_THROW,
                 ModSounds.REMOTEGASGRENADE_EXPLODE,
                 ModSounds.EXPLODER_CLICK,
-                ModSounds.PROXIMITY_ALARM
+                ModSounds.PROXIMITY_ALARM,
+                ModSounds.R6BUTTON_DOWN,
+                ModSounds.MATCHMADE,
+                ModSounds.DRONE_HIT,
+                ModSounds.DRONE_MOVE
         );
     }
     @SubscribeEvent
@@ -124,7 +131,8 @@ public class RegistryHandler {
                 ModEntityTypes.fragGrenadeEntityType,
                 ModEntityTypes.remoteGasGrenadeEntityType,
                 ModEntityTypes.proximityAlarmEntityType,
-
+                ModEntityTypes.smokeGrenadeEntityType,
+                ModEntityTypes.droneEntityType,
                 ModBulletEntityTypes.testbulletEntityType
         );
     }

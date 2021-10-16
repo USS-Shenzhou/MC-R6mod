@@ -147,6 +147,22 @@ public class IsPenetrableBlocks {
         specialBlocks.put(Blocks.GREEN_CONCRETE_POWDER,2);
         specialBlocks.put(Blocks.RED_CONCRETE_POWDER,2);
         specialBlocks.put(Blocks.BLACK_CONCRETE_POWDER,2);
+        specialBlocks.put(Blocks.WHITE_CONCRETE,2);
+        specialBlocks.put(Blocks.ORANGE_CONCRETE,2);
+        specialBlocks.put(Blocks.MAGENTA_CONCRETE,2);
+        specialBlocks.put(Blocks.LIGHT_BLUE_CONCRETE,2);
+        specialBlocks.put(Blocks.YELLOW_CONCRETE,2);
+        specialBlocks.put(Blocks.LIME_CONCRETE,2);
+        specialBlocks.put(Blocks.PINK_CONCRETE,2);
+        specialBlocks.put(Blocks.GRAY_CONCRETE,2);
+        specialBlocks.put(Blocks.LIGHT_GRAY_CONCRETE,2);
+        specialBlocks.put(Blocks.CYAN_CONCRETE,2);
+        specialBlocks.put(Blocks.PURPLE_CONCRETE,2);
+        specialBlocks.put(Blocks.BLUE_CONCRETE,2);
+        specialBlocks.put(Blocks.BROWN_CONCRETE,2);
+        specialBlocks.put(Blocks.GREEN_CONCRETE,2);
+        specialBlocks.put(Blocks.RED_CONCRETE,2);
+        specialBlocks.put(Blocks.BLACK_CONCRETE,2);
         specialBlocks.put(Blocks.DIRT,2);
         specialBlocks.put(Blocks.FROSTED_ICE,0);
         specialBlocks.put(Blocks.ICE,-1);
@@ -230,6 +246,15 @@ public class IsPenetrableBlocks {
         specialBlocks.put(Blocks.SLIME_BLOCK,2);
         specialBlocks.put(Blocks.TNT,0);
         specialBlocks.put(Blocks.TRIPWIRE_HOOK,0);
+        //SANDSTONE
+        specialBlocks.put(Blocks.SANDSTONE,2);
+        specialBlocks.put(Blocks.CUT_SANDSTONE,2);
+        specialBlocks.put(Blocks.SMOOTH_SANDSTONE,2);
+        specialBlocks.put(Blocks.CHISELED_SANDSTONE,2);
+        specialBlocks.put(Blocks.RED_SANDSTONE,2);
+        specialBlocks.put(Blocks.CUT_RED_SANDSTONE,2);
+        specialBlocks.put(Blocks.SMOOTH_RED_SANDSTONE,2);
+        specialBlocks.put(Blocks.CHISELED_RED_SANDSTONE,2);
         //specialBlocks.put(Blocks.);
     }
 

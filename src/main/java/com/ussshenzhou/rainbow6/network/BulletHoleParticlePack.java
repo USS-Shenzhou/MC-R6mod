@@ -1,34 +1,55 @@
 package com.ussshenzhou.rainbow6.network;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import com.ussshenzhou.rainbow6.particles.BulletHoleParticleData;
+import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.network.NetworkEvent;
+
+import java.util.function.Supplier;
+
 
 /**
  * @author USS_Shenzhou
  */
 public class BulletHoleParticlePack {
-    public static SimpleChannel INSTANCE;
-    public static final String VERSION = "1.0";
-    private static int ID = 0;
 
-    public static int nextID() {
-        return ID++;
+    private final int dir;
+    private final BlockPos pos;
+    private final double x;
+    private final double y;
+    private final double z;
+
+    public BulletHoleParticlePack(PacketBuffer buffer) {
+        dir = buffer.readInt();
+        pos = buffer.readBlockPos();
+        x = buffer.readDouble();
+        y = buffer.readDouble();
+        z = buffer.readDouble();
     }
 
-    public static void registerMessage() {
-        INSTANCE = NetworkRegistry.newSimpleChannel(
-                new ResourceLocation("rainbow6", "first_networking"),
-                () -> VERSION,
-                (version) -> version.equals(VERSION),
-                (version) -> version.equals(VERSION)
-        );
-        INSTANCE.registerMessage(
-                nextID(),
-                BulletHoleParticlePackSend.class,
-                BulletHoleParticlePackSend::toBytes,
-                BulletHoleParticlePackSend::new,
-                BulletHoleParticlePackSend::handler
-        );
+    public BulletHoleParticlePack(int dir, BlockPos pos, double x, double y, double z) {
+        this.dir = dir;
+        this.pos = pos;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    public void toBytes(PacketBuffer buf) {
+        buf.writeInt(dir);
+        buf.writeBlockPos(pos);
+        buf.writeDouble(x);
+        buf.writeDouble(y);
+        buf.writeDouble(z);
+    }
+
+    public void handler(Supplier<NetworkEvent.Context> ctx) {
+        ctx.get().enqueueWork(() -> {
+            Minecraft.getInstance().world.addParticle(new BulletHoleParticleData(Direction.byIndex(this.dir),this.pos),false,this.x,this.y,this.z,0,0,0);
+        });
+        ctx.get().setPacketHandled(true);
     }
 }

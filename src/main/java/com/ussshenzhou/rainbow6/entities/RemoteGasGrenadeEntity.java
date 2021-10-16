@@ -3,6 +3,7 @@ package com.ussshenzhou.rainbow6.entities;
 import com.ussshenzhou.rainbow6.capabilities.IR6PlayerCapability;
 import com.ussshenzhou.rainbow6.capabilities.ModCapabilities;
 import com.ussshenzhou.rainbow6.capabilities.R6PlayerCapability;
+import com.ussshenzhou.rainbow6.gui.R6ThrowableEntityUtils;
 import com.ussshenzhou.rainbow6.items.ModItems;
 import com.ussshenzhou.rainbow6.particles.GasSmokeParticleData;
 import com.ussshenzhou.rainbow6.particles.ModParticleTypeRegistry;
@@ -27,6 +28,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
@@ -122,6 +124,14 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
             this.setNoGravity(true);
             blockstate.onProjectileCollision(this.world, blockstate, blockraytraceresult, this);
         }
+        if (raytraceResultIn.getType() == RayTraceResult.Type.ENTITY) {
+            EntityRayTraceResult entityRayTraceResult = (EntityRayTraceResult) raytraceResultIn;
+            Entity entity = entityRayTraceResult.getEntity();
+            if (entity != this.getShooter()) {
+                R6ThrowableEntityUtils.EntityReboundOnEntity.rebound(entityRayTraceResult, this, entity);
+                this.markVelocityChanged();
+            }
+        }
     }
 
     public void explode(){
@@ -141,17 +151,6 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-
-    @Override
-    public boolean hitByEntity(Entity entityIn) {
-        if (entityIn instanceof PlayerEntity) {
-            PlayerEntity playerentity = (PlayerEntity)entityIn;
-            return this.attackEntityFrom(DamageSource.causePlayerDamage(playerentity), 1.0F);
-        } else {
-            return false;
-        }
-    }
-
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
         if (!this.world.isRemote) {
@@ -169,5 +168,13 @@ public class RemoteGasGrenadeEntity extends ProjectileItemEntity {
     public boolean canBeCollidedWith() {
         return true;
     }
+    @Override
+    protected void updatePitchAndYaw() {
 
+    }
+
+    public void setRandomRotation() {
+        this.rotationYaw = (float) (Math.random()*360);
+        this.rotationPitch = (float) (Math.random()*360);
+    }
 }

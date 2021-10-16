@@ -14,6 +14,10 @@ public class ModEntities {
     public static EntityType<RemoteGasGrenadeEntity> remoteGasGrenadeEntityEntityType;
     @ObjectHolder("rainbow6:proximityalarm")
     public static EntityType<ProximityAlarmEntity> proximityAlarmEntityEntityType;
+    @ObjectHolder("rainbow6:smokegrenade")
+    public static EntityType<SmokeGrenadeEntity> smokeGrenadeEntityEntityType;
+    @ObjectHolder("rainbow6:drone")
+    public static EntityType<DroneEntity> droneEntityEntityType;
     /*@ObjectHolder("rainbow6:gumine")
     public static EntityType<gumineentity> gumine;*/
 }

@@ -20,6 +20,10 @@ public class ModItems {
     public static RemoteGasGrenadeItem remoteGasGrenadeItem = new RemoteGasGrenadeItem();
     public static Exploder exploder = new Exploder();
     public static ProximityAlarmItem proximityAlarmItem = new ProximityAlarmItem();
+    public static SmokeGrenade smokeGrenade = new SmokeGrenade();
+    public static DroneItem droneItem = new DroneItem();
+    public static R6CellPhone r6CellPhone = new R6CellPhone();
+
     public static Item ironBlock = new BlockItem(ModBlocks.ironBlock,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.ironBlock.getRegistryName());
 
     public static Item oakPlanksFloor = new BlockItem(ModBlocks.oakPlanksFloor,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.oakPlanksFloor.getRegistryName());

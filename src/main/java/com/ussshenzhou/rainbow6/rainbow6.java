@@ -1,6 +1,7 @@
 package com.ussshenzhou.rainbow6;
 
-import com.ussshenzhou.rainbow6.particles.ModParticleRegistry;
+import com.ussshenzhou.rainbow6.config.R6ServerMapConfigManager;
+import com.ussshenzhou.rainbow6.matchmaking.InGameServerProperties;
 import com.ussshenzhou.rainbow6.particles.ModParticleTypeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -76,6 +77,8 @@ public class rainbow6
     public void onServerStarting(FMLServerStartingEvent event) {
         // do something when the server starts
         LOGGER.info("HELLO from server starting");
+        InGameServerProperties.refreshValidMaps();
+        //InGameServerProperties.refreshMaps();
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD

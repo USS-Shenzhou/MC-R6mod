@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "##Y",
+    "XXX"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:glass_pane"
+    },
+    "X": {
+      "item": "minecraft:iron_ingot"
+    },
+    "Y": {
+      "item": "minecraft:black_stained_glass_pane"
+    }
+  },
+  "result": {
+    "item": "rainbow6:blackmirror",
+    "count": 1
+  }
+}

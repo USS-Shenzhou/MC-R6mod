@@ -24,3 +24,6 @@ logs
 
 # Files from Forge MDK
 forge*changelog.txt
+
+#R6-Cape List
+/src/main/java/com/ussshenzhou/rainbow6/capes/

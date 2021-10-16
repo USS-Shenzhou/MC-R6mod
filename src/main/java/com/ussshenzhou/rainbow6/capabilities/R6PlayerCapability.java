@@ -80,12 +80,14 @@ public class R6PlayerCapability implements IR6PlayerCapability {
     }
 
     public static final String[] ATTACKERS = new String[]{
+            "unknown",
+            "recruit",
             "sledge",
-            "thacher",
+            "thatcher",
             "ash",
             "thermite",
             "twitch",
-            "montage",
+            "montagne",
             "glaz",
             "fuze",
             "blitz",
@@ -107,11 +109,13 @@ public class R6PlayerCapability implements IR6PlayerCapability {
             "amaru",
             "kali",
             "iana",
-            "ace",
+            "ace"/*,
             "zero",
-            "flores"
+            "flores"*/
     };
     public static final String[] DEFENDERS = new String[]{
+            "unknown",
+            "recruit",
             "smoke",
             "mute",
             "castle",
@@ -139,8 +143,8 @@ public class R6PlayerCapability implements IR6PlayerCapability {
             "goyo",
             "wamai",
             "oryx",
-            "melusi",
+            "melusi"/*,
             "aruni",
-            "thunderbird"
+            "thunderbird"*/
     };
 }

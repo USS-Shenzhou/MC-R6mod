@@ -45,8 +45,9 @@ public class FragGrenade extends Item {
                         if (!player.abilities.isCreativeMode) {
                             itemstack.shrink(1);
                         }
-                        fragGrenadeEntity.shoot(player.getLookVec().x,player.getLookVec().y,player.getLookVec().z, 0.75F, 0.1F);
+                        fragGrenadeEntity.shoot(player.getLookVec().x,player.getLookVec().y,player.getLookVec().z, 0.8F, 0.1F);
                         fragGrenadeEntity.setTimeCountDown(timeLeft);
+                        fragGrenadeEntity.setRandomRotation();
                         worldIn.addEntity(fragGrenadeEntity);
                     }
                     else {
@@ -118,4 +119,5 @@ public class FragGrenade extends Item {
             this.timeCount = -1;
         }*/
     }
+
 }

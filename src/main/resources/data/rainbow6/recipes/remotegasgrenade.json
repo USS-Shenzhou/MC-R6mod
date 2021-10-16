@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "YAY",
+    "Y#Y"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:gunpowder"
+    },
+    "X": {
+      "item": "minecraft:redstone"
+    },
+    "Y": {
+      "item": "minecraft:paper"
+    },
+    "A": {
+      "item": "minecraft:spider_eye"
+    }
+  },
+  "result": {
+    "item": "rainbow6:remotegasgrenade",
+    "count": 1
+  }
+}

@@ -118,5 +118,37 @@
       {
         "name": "rainbow6:proximity_alarm"
       }]
+  },
+  "r6button_down": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:r6button_down"
+      }]
+  },
+  "matchmade": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:matchmade"
+      }]
+  },
+  "drone_hit": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:drone_hit"
+      }]
+  },
+  "drone_move": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:drone_move"
+      }]
   }
 }
