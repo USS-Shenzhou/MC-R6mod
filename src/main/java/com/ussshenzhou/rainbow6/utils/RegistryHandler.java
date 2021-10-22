@@ -1,16 +1,16 @@
-package com.ussshenzhou.rainbow6.util;
+package com.ussshenzhou.rainbow6.utils;
 
-import com.mojang.brigadier.arguments.ArgumentType;
 import com.ussshenzhou.rainbow6.armors.ModArmors;
 import com.ussshenzhou.rainbow6.blocks.ModBlocks;
 import com.ussshenzhou.rainbow6.bullets.ModBulletEntityTypes;
+import com.ussshenzhou.rainbow6.effects.ModEffects;
 import com.ussshenzhou.rainbow6.entities.ModEntityTypes;
 import com.ussshenzhou.rainbow6.items.ModItems;
 import com.ussshenzhou.rainbow6.tileentities.ModTileEntityTypes;
 import net.minecraft.block.Block;
-import net.minecraft.command.arguments.ArgumentTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Effect;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -142,6 +142,12 @@ public class RegistryHandler {
                 ModTileEntityTypes.reinforcementTileEntityType,
                 ModTileEntityTypes.BlackMirrorTileEntityType
         );
+    }
+    @SubscribeEvent
+    public static void onEffectReg(RegistryEvent.Register<Effect> event){
+         event.getRegistry().registerAll(
+                 ModEffects.EXPOSED
+         );
     }
     /*@OnlyIn(Dist.CLIENT)
     @SubscribeEvent

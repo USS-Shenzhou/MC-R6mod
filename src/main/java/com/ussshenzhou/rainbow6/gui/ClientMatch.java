@@ -1,6 +1,6 @@
 package com.ussshenzhou.rainbow6.gui;
 
-import com.ussshenzhou.rainbow6.util.ModSounds;
+import com.ussshenzhou.rainbow6.utils.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.util.SoundCategory;

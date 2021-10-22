@@ -1,7 +1,5 @@
 package com.ussshenzhou.rainbow6.bullets;
 
-import com.ussshenzhou.rainbow6.util.ModItemGroups;
-
 /**
  * @author USS_Shenzhou
  */

@@ -2,28 +2,22 @@ package com.ussshenzhou.rainbow6.entities;
 
 import com.ussshenzhou.rainbow6.capabilities.IR6PlayerCapability;
 import com.ussshenzhou.rainbow6.capabilities.ModCapabilities;
-import com.ussshenzhou.rainbow6.capabilities.R6PlayerCapability;
 import com.ussshenzhou.rainbow6.gui.R6ThrowableEntityUtils;
 import com.ussshenzhou.rainbow6.items.ModItems;
 import com.ussshenzhou.rainbow6.particles.GasSmokeParticleData;
-import com.ussshenzhou.rainbow6.particles.ModParticleTypeRegistry;
-import com.ussshenzhou.rainbow6.util.ModSounds;
+import com.ussshenzhou.rainbow6.utils.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -34,11 +28,9 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.NetworkHooks;
-import org.apache.logging.log4j.LogManager;
 
 import java.awt.*;
 import java.util.List;
-import java.util.Random;
 import java.util.function.Predicate;
 
 /**

@@ -2,11 +2,10 @@ package com.ussshenzhou.rainbow6.tileentities;
 
 import com.ussshenzhou.rainbow6.blocks.BlackMirror;
 import com.ussshenzhou.rainbow6.blocks.ModBlocks;
-import com.ussshenzhou.rainbow6.util.ModSounds;
+import com.ussshenzhou.rainbow6.utils.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;

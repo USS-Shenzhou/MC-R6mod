@@ -1,7 +1,7 @@
 package com.ussshenzhou.rainbow6.items;
 
 import com.ussshenzhou.rainbow6.entities.NitroCellEntity;
-import com.ussshenzhou.rainbow6.util.ModItemGroups;
+import com.ussshenzhou.rainbow6.utils.ModItemGroups;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -1,7 +1,7 @@
 package com.ussshenzhou.rainbow6.items;
 
 import com.ussshenzhou.rainbow6.blocks.ModBlocks;
-import com.ussshenzhou.rainbow6.util.ModItemGroups;
+import com.ussshenzhou.rainbow6.utils.ModItemGroups;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemUseContext;

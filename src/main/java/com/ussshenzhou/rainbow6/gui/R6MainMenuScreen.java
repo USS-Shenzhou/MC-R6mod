@@ -4,18 +4,11 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.ussshenzhou.rainbow6.network.MatchMakingPack;
 import com.ussshenzhou.rainbow6.network.MatchMakingPackSend;
-import com.ussshenzhou.rainbow6.util.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.client.util.InputMappings;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import org.apache.logging.log4j.LogManager;
 
 
 /**

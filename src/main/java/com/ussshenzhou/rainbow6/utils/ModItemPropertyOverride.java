@@ -1,7 +1,6 @@
-package com.ussshenzhou.rainbow6.util;
+package com.ussshenzhou.rainbow6.utils;
 
 import com.ussshenzhou.rainbow6.items.ModItems;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;

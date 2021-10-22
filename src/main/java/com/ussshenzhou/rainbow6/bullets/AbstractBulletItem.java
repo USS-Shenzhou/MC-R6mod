@@ -1,9 +1,7 @@
 package com.ussshenzhou.rainbow6.bullets;
 
-import com.ussshenzhou.rainbow6.util.ModItemGroups;
-import net.minecraft.item.ArrowItem;
+import com.ussshenzhou.rainbow6.utils.ModItemGroups;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 /**
  * @author USS_Shenzhou

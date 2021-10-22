@@ -2,7 +2,7 @@ package com.ussshenzhou.rainbow6.blocks;
 
 import com.ussshenzhou.rainbow6.items.ModItems;
 import com.ussshenzhou.rainbow6.tileentities.ReinforcementTileEntity;
-import com.ussshenzhou.rainbow6.util.ModSounds;
+import com.ussshenzhou.rainbow6.utils.ModSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;

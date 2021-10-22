@@ -1,16 +1,15 @@
 package com.ussshenzhou.rainbow6.entities;
 
-import com.ussshenzhou.rainbow6.util.ModSounds;
+import com.ussshenzhou.rainbow6.utils.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.util.SoundCategory;
-import org.apache.logging.log4j.LogManager;
 
 /**
  * @author USS_Shenzhou
  */
 public class DroneEntityClientProxy {
-    private static final double maxSilentSpeed = 0.04;
+    private static final double MAX_SILENT_SPEED = 0.04;
     private static int startPlay = -1;
     private static float pitch;
     private static double soundX;
@@ -20,7 +19,7 @@ public class DroneEntityClientProxy {
     private static SimpleSound sound;
 
     public static void clientProxy(DroneEntity entity, double velocity, int ticksExisted) {
-        if (velocity >= maxSilentSpeed) {
+        if (velocity >= MAX_SILENT_SPEED) {
             if (startPlay == -1) {
                 startPlay = ticksExisted % 20;
             }

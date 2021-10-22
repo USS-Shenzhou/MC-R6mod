@@ -3,7 +3,7 @@ package com.ussshenzhou.rainbow6.entities;
 
 import com.ussshenzhou.rainbow6.gui.R6ThrowableEntityUtils;
 import com.ussshenzhou.rainbow6.items.ModItems;
-import com.ussshenzhou.rainbow6.util.ModSounds;
+import com.ussshenzhou.rainbow6.utils.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -26,8 +26,6 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
-
-import javax.annotation.Nullable;
 
 /**
  * @author USS_Shenzhou

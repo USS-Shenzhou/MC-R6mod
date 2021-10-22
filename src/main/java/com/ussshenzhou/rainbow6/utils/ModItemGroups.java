@@ -1,4 +1,4 @@
-package com.ussshenzhou.rainbow6.util;
+package com.ussshenzhou.rainbow6.utils;
 
 import com.ussshenzhou.rainbow6.armors.ModArmors;
 import com.ussshenzhou.rainbow6.bullets.ModBulletItems;

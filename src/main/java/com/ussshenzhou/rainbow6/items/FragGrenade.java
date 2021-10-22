@@ -2,8 +2,8 @@ package com.ussshenzhou.rainbow6.items;
 
 import com.ussshenzhou.rainbow6.entities.FragGrenadeEntity;
 import com.ussshenzhou.rainbow6.entities.ModEntityTypes;
-import com.ussshenzhou.rainbow6.util.ModItemGroups;
-import com.ussshenzhou.rainbow6.util.ModSounds;
+import com.ussshenzhou.rainbow6.utils.ModItemGroups;
+import com.ussshenzhou.rainbow6.utils.ModSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,11 +11,7 @@ import net.minecraft.item.*;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
 import net.minecraft.world.Explosion;
-import net.minecraft.world.ExplosionContext;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * @author USS_Shenzhou

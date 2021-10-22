@@ -1,10 +1,9 @@
 package com.ussshenzhou.rainbow6.items;
 
 import com.ussshenzhou.rainbow6.entities.ModEntityTypes;
-import com.ussshenzhou.rainbow6.entities.RemoteGasGrenadeEntity;
 import com.ussshenzhou.rainbow6.entities.SmokeGrenadeEntity;
-import com.ussshenzhou.rainbow6.util.ModItemGroups;
-import com.ussshenzhou.rainbow6.util.ModSounds;
+import com.ussshenzhou.rainbow6.utils.ModItemGroups;
+import com.ussshenzhou.rainbow6.utils.ModSounds;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -6,7 +6,7 @@ import com.ussshenzhou.rainbow6.network.R6DroneControllerPack;
 import com.ussshenzhou.rainbow6.network.R6DroneControllerPackSend;
 import com.ussshenzhou.rainbow6.network.R6DroneMotionPack;
 import com.ussshenzhou.rainbow6.network.R6DroneMotionPackSend;
-import com.ussshenzhou.rainbow6.util.ModSounds;
+import com.ussshenzhou.rainbow6.utils.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

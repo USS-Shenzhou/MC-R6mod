@@ -1,6 +1,5 @@
-package com.ussshenzhou.rainbow6.util;
+package com.ussshenzhou.rainbow6.utils;
 
-import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 

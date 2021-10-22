@@ -1,10 +1,9 @@
-package com.ussshenzhou.rainbow6.util;
+package com.ussshenzhou.rainbow6.utils;
 
 import com.ussshenzhou.rainbow6.tileentities.BlackMirrorTileEntityRenderer;
 import com.ussshenzhou.rainbow6.tileentities.ReinforcementTileEntityRenderer;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

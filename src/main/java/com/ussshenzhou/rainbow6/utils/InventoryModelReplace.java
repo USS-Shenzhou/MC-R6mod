@@ -1,4 +1,4 @@
-package com.ussshenzhou.rainbow6.util;
+package com.ussshenzhou.rainbow6.utils;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.ussshenzhou.rainbow6.items.ModItems;

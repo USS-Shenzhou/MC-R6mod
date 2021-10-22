@@ -2,8 +2,7 @@ package com.ussshenzhou.rainbow6.blocks;
 
 import com.ussshenzhou.rainbow6.items.ModItems;
 import com.ussshenzhou.rainbow6.tileentities.BlackMirrorTileEntity;
-import com.ussshenzhou.rainbow6.util.ModSounds;
-import net.minecraft.block.AirBlock;
+import com.ussshenzhou.rainbow6.utils.ModSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -23,7 +22,6 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 

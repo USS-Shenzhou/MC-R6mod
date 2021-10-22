@@ -1,15 +1,10 @@
 package com.ussshenzhou.rainbow6.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.ussshenzhou.rainbow6.util.ModSounds;
-import net.minecraft.client.Minecraft;
+import com.ussshenzhou.rainbow6.utils.ModSounds;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.audio.SoundHandler;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 
 /**
