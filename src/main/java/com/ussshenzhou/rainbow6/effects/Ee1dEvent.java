@@ -1,5 +1,6 @@
 package com.ussshenzhou.rainbow6.effects;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OutlineLayerBuffer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -15,7 +16,7 @@ import org.apache.logging.log4j.LogManager;
 public class Ee1dEvent {
     @SubscribeEvent
     public static void beforeLivingRenderer(RenderLivingEvent.Pre event) {
-        LogManager.getLogger().info(event.getEntity().isGlowing());
+        //LogManager.getLogger().info(Minecraft.getInstance().gameSettings.entityDistanceScaling * 160);
         if (true) {
             if (event.getBuffers() instanceof OutlineLayerBuffer) {
                 ((OutlineLayerBuffer)event.getBuffers()).setColor(0xb5,0x36,0x33,100);

@@ -26,4 +26,4 @@ logs
 forge*changelog.txt
 
 #R6-Cape List
-/src/main/java/com/ussshenzhou/rainbow6/capes/
+#/src/main/java/com/ussshenzhou/rainbow6/capes/

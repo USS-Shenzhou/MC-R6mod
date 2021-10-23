@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "package": "com.ussshenzhou.rainbow6.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "rainbow6.refmap.json",
+  "mixins": [
+    "MixinTileEntity"
+  ],
+  "minVersion": "0.8"
+}
