@@ -1,0 +1,56 @@
+package cn.ussshenzhou.rainbow6.gui;
+
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.util.text.TranslationTextComponent;
+
+/**
+ * @author USS_Shenzhou
+ */
+public class R6MatchMakingBarGui extends AbstractGui {
+    private final int width;
+    private final int height;
+    private final Minecraft minecraft;
+    private MatrixStack matrixStack;
+    float scaleFactorX = (float)(Minecraft.getInstance().getMainWindow().getScaledWidth() / 1920.0);
+    float scaleFactorY = (float)(Minecraft.getInstance().getMainWindow().getScaledHeight() / 1080.0);
+
+    public R6MatchMakingBarGui(MatrixStack matrixStack) {
+        this.width = Minecraft.getInstance().getMainWindow().getScaledWidth();
+        this.height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+        this.minecraft = Minecraft.getInstance();
+        this.matrixStack = matrixStack;
+    }
+
+    public void setMatrixStack(MatrixStack stack) {
+        this.matrixStack = stack;
+    }
+
+    public void render() {
+        RenderSystem.enableBlend();
+        matrixStack.push();
+        //render background
+        matrixStack.scale(scaleFactorX,scaleFactorY,1);
+        fill(matrixStack,0,160,1920,210,0x80808080);
+        //render text
+        float scaleFactor = 0.9f / scaleFactorY;
+        matrixStack.scale(scaleFactor, scaleFactor, scaleFactor);
+        drawString(matrixStack, minecraft.fontRenderer,
+                new TranslationTextComponent("gui.rainbow6.matchmakingbar"),
+                (int) (400 / scaleFactor),
+                (int) (172 / scaleFactor),
+                0xffffff);
+        //render time
+        TranslationTextComponent time = new TranslationTextComponent(InGameClientTimeCount.getMatchMakingMinAsString()+":"+InGameClientTimeCount.getMatchMakingSecAsString());
+        drawString(matrixStack, minecraft.fontRenderer,
+                time,
+                (int) (300 / scaleFactor),
+                (int) (172 / scaleFactor),
+                0x42b7f1);
+        matrixStack.pop();
+        RenderSystem.disableBlend();
+
+    }
+}
