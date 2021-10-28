@@ -8,7 +8,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
  * @author USS_Shenzhou
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class NetworkRegister {
+public class ModNetworkRegister {
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event){
         event.enqueueWork(BulletHoleParticlePackSend::registerMessage);
@@ -19,5 +19,6 @@ public class NetworkRegister {
         event.enqueueWork(SpawnPointPackSend::registerMessage);
         event.enqueueWork(R6DroneMotionPackSend::registerMessage);
         event.enqueueWork(R6DroneControllerPackSend::registerMessage);
+        event.enqueueWork(EE1DPackSend::registerMessage);
     }
 }

@@ -26,4 +26,6 @@ public class ModSounds {
     public static SoundEvent MATCHMADE = new SoundEvent(new ResourceLocation("rainbow6", "matchmade")).setRegistryName("matchmade");
     public static SoundEvent DRONE_HIT = new SoundEvent(new ResourceLocation("rainbow6", "drone_hit")).setRegistryName("drone_hit");
     public static SoundEvent DRONE_MOVE = new SoundEvent(new ResourceLocation("rainbow6", "drone_move")).setRegistryName("drone_move");
+    public static SoundEvent EE1D_START = new SoundEvent(new ResourceLocation("rainbow6","ee1d_start")).setRegistryName("ee1d_start");
+    public static SoundEvent EE1D_MAIN = new SoundEvent(new ResourceLocation("rainbow6","ee1d_main")).setRegistryName("ee1d_main");
 }

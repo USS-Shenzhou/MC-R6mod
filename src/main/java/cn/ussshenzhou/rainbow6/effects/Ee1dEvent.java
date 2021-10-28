@@ -1,10 +1,10 @@
 package cn.ussshenzhou.rainbow6.effects;
 
-import net.minecraft.client.Minecraft;
+import cn.ussshenzhou.rainbow6.mixin.MixinEntityAccessor;
 import net.minecraft.client.renderer.OutlineLayerBuffer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
@@ -16,15 +16,21 @@ import org.apache.logging.log4j.LogManager;
 public class Ee1dEvent {
     @SubscribeEvent
     public static void beforeLivingRenderer(RenderLivingEvent.Pre event) {
-        //LogManager.getLogger().info(Minecraft.getInstance().gameSettings.entityDistanceScaling * 160);
-        if (true) {
-            if (event.getBuffers() instanceof OutlineLayerBuffer) {
-                ((OutlineLayerBuffer)event.getBuffers()).setColor(0xb5,0x36,0x33,100);
-            } else {
-
+        MixinEntityAccessor livingEntity = (MixinEntityAccessor) event.getEntity();
+        if (event.getBuffers() instanceof OutlineLayerBuffer) {
+            if (livingEntity.r6GetFlag(8 + 0)) {
+                ((OutlineLayerBuffer) event.getBuffers()).setColor(0xde, 0x33, 0x2f, 0xbb);
             }
-        } else {
+        }
+    }
 
+    @SubscribeEvent
+    public static void effectEndEvent(PotionEvent.PotionExpiryEvent event) {
+        if (event.getPotionEffect().getPotion() == ModEffects.EXPOSED) {
+            MixinEntityAccessor mixinEntityAccessor = (MixinEntityAccessor) event.getEntityLiving();
+            mixinEntityAccessor.r6SetFlag(6, false);
+            event.getEntityLiving().setGlowing(false);
+            mixinEntityAccessor.r6SetFlag(8 + 0, false);
         }
     }
 }

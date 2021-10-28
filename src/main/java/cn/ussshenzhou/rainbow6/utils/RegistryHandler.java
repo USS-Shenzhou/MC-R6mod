@@ -69,6 +69,7 @@ public class RegistryHandler {
                 ModItems.smokeGrenade,
                 ModItems.droneItem,
                 ModItems.r6CellPhone,
+                ModItems.ee1DController,
 
                 ModItems.oakPlanksFloor,
                 ModItems.sprucePlanksFloor,
@@ -120,7 +121,9 @@ public class RegistryHandler {
                 ModSounds.R6BUTTON_DOWN,
                 ModSounds.MATCHMADE,
                 ModSounds.DRONE_HIT,
-                ModSounds.DRONE_MOVE
+                ModSounds.DRONE_MOVE,
+                ModSounds.EE1D_START,
+                ModSounds.EE1D_MAIN
         );
     }
     @SubscribeEvent

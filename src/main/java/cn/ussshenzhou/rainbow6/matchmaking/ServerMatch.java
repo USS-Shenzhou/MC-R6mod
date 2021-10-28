@@ -4,7 +4,7 @@ import cn.ussshenzhou.rainbow6.entities.DroneEntity;
 import cn.ussshenzhou.rainbow6.network.*;
 import cn.ussshenzhou.rainbow6.config.R6ServerMapConfig;
 import cn.ussshenzhou.rainbow6.config.R6ServerMapConfigManager;
-import com.ussshenzhou.rainbow6.network.*;
+import cn.ussshenzhou.rainbow6.network.*;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.server.MinecraftServer;

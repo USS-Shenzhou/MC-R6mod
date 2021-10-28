@@ -150,5 +150,21 @@
       {
         "name": "rainbow6:drone_move"
       }]
+  },
+  "ee1d_start": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:ee1d_start"
+      }]
+  },
+  "ee1d_main": {
+    "category": "player",
+    "replace": "true",
+    "sounds": [
+      {
+        "name": "rainbow6:ee1d_main"
+      }]
   }
 }

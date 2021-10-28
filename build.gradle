@@ -114,7 +114,11 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
 }
+mixin {
+    add sourceSets.main, "mixins.rainbow6.refmap.json"
 
+    config 'rainbow6.mixins.json'
+}
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
@@ -148,11 +152,6 @@ publishing {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
-}
-mixin {
-    add sourceSets.main, "rainbow6.refmap.json"
-
-    config 'rainbow6.mixins.json'
 }
 /*client {
 

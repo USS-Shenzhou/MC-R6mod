@@ -23,6 +23,7 @@ public class ModItems {
     public static SmokeGrenade smokeGrenade = new SmokeGrenade();
     public static DroneItem droneItem = new DroneItem();
     public static R6CellPhone r6CellPhone = new R6CellPhone();
+    public static EE1DController ee1DController = new EE1DController();
 
     public static Item ironBlock = new BlockItem(ModBlocks.ironBlock,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.ironBlock.getRegistryName());
 
