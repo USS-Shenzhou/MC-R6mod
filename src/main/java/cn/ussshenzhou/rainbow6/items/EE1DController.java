@@ -40,6 +40,7 @@ public class EE1DController extends Item {
     public EE1DController() {
         super(new Properties()
                 .group(ModItemGroups.Main)
+                .maxStackSize(1)
         );
         this.setRegistryName("ee1d_controller");
     }
@@ -60,12 +61,17 @@ public class EE1DController extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-        if (!worldIn.isRemote && this.counter == -1) {
-            this.counter = 0;
+        if (this.counter == -1){
+            if (!worldIn.isRemote) {
+                this.counter = 0;
+            } else {
+                worldIn.playSound(playerIn, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModSounds.EE1D_START, SoundCategory.PLAYERS, 1.0f, 1.0f);
+            }
+            return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
         } else {
-            worldIn.playSound(playerIn, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModSounds.EE1D_START, SoundCategory.PLAYERS, 1.0f, 1.0f);
+            return new ActionResult<>(ActionResultType.FAIL, itemstack);
         }
-        return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
+
     }
 
     @Override
@@ -75,9 +81,6 @@ public class EE1DController extends Item {
             PlayerEntity player = (PlayerEntity) entityIn;
             if (this.counter >= 0) {
                 if (this.counter == ACTIVATING_TIME) {
-                    ((PlayerEntity) entityIn).addPotionEffect(
-                            new EffectInstance(ModEffects.EXPOSED, SCAN_TIME + ACTIVATING_TIME - counter, 0, false, false));
-
                     LazyOptional<IR6PlayerCapability> r6PlayerCap = player.getCapability(ModCapabilities.R6_PLAYER_CAPABILITY);
                     IR6PlayerCapability ir6PlayerCapability = r6PlayerCap.orElse(ModCapabilities.R6_PLAYER_CAPABILITY.getDefaultInstance());
                     if ("player".equals(ir6PlayerCapability.getOperator())) {
@@ -110,12 +113,12 @@ public class EE1DController extends Item {
                     for (LivingEntity target : list) {
                         if (target instanceof PlayerEntity) {
 
-                            Vector3d motion = target.getMotion();
+                            /*Vector3d motion = target.getMotion();
                             double speed = Math.sqrt(motion.x * motion.x + motion.y * motion.y + motion.z * motion.z);
                             LogManager.getLogger().info(target.getName()
                                     + "   "
                                     +speed
-                            );
+                            );*/
 
                             LazyOptional<IR6PlayerCapability> r6PlayerCap = target.getCapability(ModCapabilities.R6_PLAYER_CAPABILITY);
                             IR6PlayerCapability ir6PlayerCapability = r6PlayerCap.orElse(ModCapabilities.R6_PLAYER_CAPABILITY.getDefaultInstance());

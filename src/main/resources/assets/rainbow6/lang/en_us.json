@@ -14,6 +14,9 @@
   "item.rainbow6.exploder": "Universal Exploder",
   "item.rainbow6.proximityalarm": "Proximity Alarm",
   "item.rainbow6.smokegrenade": "Smoke Grenade",
+  "item.rainbow6.drone": "Drone",
+  "item.rainbow6.r6cellphone": "Cellphone",
+  "item.rainbow6.ee1d_controller": "EE-ONE-D Controller",
 
   "block.rainbow6.blackmirror": "Black Mirror",
   "block.rainbow6.oak_hatch":"Oak Hatch" ,
@@ -64,5 +67,7 @@
   "gui.rainbow6.defender": "defender",
   "gui.rainbow6.locations": "LOCATIONS",
   "gui.rainbow6.operators": "OPERATORS",
-  "gui.rainbow6.loadout": "LOADOUT"
+  "gui.rainbow6.loadout": "LOADOUT",
+
+  "effect.rainbow6.exposed": "Exposed"
 }

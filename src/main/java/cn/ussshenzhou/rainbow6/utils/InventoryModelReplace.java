@@ -5,6 +5,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.item.Item;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,180 +20,86 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 /**
  * @author USS_Shenzhou
  */
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD,value = Dist.CLIENT)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class InventoryModelReplace {
     @SubscribeEvent
-    public static void onModelLoad(ModelRegistryEvent event){
-        ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.reinforcementItem.getRegistryName()+"_hand","inventory"));
-        ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.blackMirrorItem.getRegistryName()+"_hand","inventory"));
-        ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.remoteGasGrenadeItem.getRegistryName()+"_hand","inventory"));
+    public static void onModelLoad(ModelRegistryEvent event) {
+        ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.reinforcementItem.getRegistryName() + "_hand", "inventory"));
+        ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.blackMirrorItem.getRegistryName() + "_hand", "inventory"));
+        ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.remoteGasGrenadeItem.getRegistryName() + "_hand", "inventory"));
+        ModelLoader.addSpecialModel(new ModelResourceLocation(ModItems.ee1DController.getRegistryName() + "_hand", "inventory"));
     }
+
     @SubscribeEvent
-    public static void onModelBake(ModelBakeEvent event){
+    public static void onModelBake(ModelBakeEvent event) {
         Map<ResourceLocation, IBakedModel> modelMap = event.getModelRegistry();
-        ResourceLocation reinforcement = ModItems.reinforcementItem.getRegistryName();
-        ResourceLocation reinforcementHand = new ModelResourceLocation(reinforcement+"_hand","inventory");
-        ResourceLocation reinforcementInventory = new ModelResourceLocation(reinforcement,"inventory");
-        IBakedModel reinforcementHandModel = modelMap.get(reinforcementHand);
-        IBakedModel reinforcementDefaultModel = modelMap.get(reinforcementInventory);
 
-        IBakedModel reinforcementModelWrapper = new IBakedModel() {
+        changeInventoryModel(modelMap,ModItems.blackMirrorItem);
+        changeInventoryModel(modelMap,ModItems.reinforcementItem);
+        changeInventoryModel(modelMap,ModItems.remoteGasGrenadeItem);
+        changeInventoryModel(modelMap,ModItems.ee1DController);
+
+    }
+
+    private static void changeInventoryModel(Map<ResourceLocation, IBakedModel> modelMap, Item item) {
+        ResourceLocation resourceLocation = item.getRegistryName();
+
+        ResourceLocation resourceLocationHand = new ModelResourceLocation(resourceLocation + "_hand", "inventory");
+        IBakedModel handModel = modelMap.get(resourceLocationHand);
+
+        ResourceLocation resourceLocationInventory = new ModelResourceLocation(resourceLocation, "inventory");
+        IBakedModel defaultModel = modelMap.get(resourceLocationInventory);
+
+        IBakedModel modelWrapper = new IBakedModel() {
             @Override
             public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, Random rand) {
-                return reinforcementDefaultModel.getQuads(state, side, rand);
+                return defaultModel.getQuads(state,side,rand);
             }
 
             @Override
             public boolean isAmbientOcclusion() {
-                return reinforcementDefaultModel.isAmbientOcclusion();
+                return defaultModel.isAmbientOcclusion();
             }
 
             @Override
             public boolean isGui3d() {
-                return reinforcementDefaultModel.isGui3d();
+                return defaultModel.isGui3d();
             }
 
             @Override
             public boolean isSideLit() {
-                return reinforcementDefaultModel.isSideLit();
+                return defaultModel.isSideLit();
             }
 
             @Override
             public boolean isBuiltInRenderer() {
-                return reinforcementDefaultModel.isBuiltInRenderer();
+                return defaultModel.isBuiltInRenderer();
             }
 
             @Override
             public TextureAtlasSprite getParticleTexture() {
-                return reinforcementDefaultModel.getParticleTexture();
+                return defaultModel.getParticleTexture();
             }
 
             @Override
             public ItemOverrideList getOverrides() {
-                return reinforcementDefaultModel.getOverrides();
+                return defaultModel.getOverrides();
             }
 
             @Override
             public IBakedModel handlePerspective(ItemCameraTransforms.TransformType cameraTransformType, MatrixStack mat) {
-                IBakedModel reinforcementModelToUse = reinforcementDefaultModel;
-                if (cameraTransformType == ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND){
-                    reinforcementModelToUse = reinforcementHandModel;
+                IBakedModel modelToUse = defaultModel;
+                if (cameraTransformType == ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND || cameraTransformType == ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND || cameraTransformType == ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND || cameraTransformType == ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND || cameraTransformType == ItemCameraTransforms.TransformType.GROUND){
+                    modelToUse = handModel;
                 }
-                return ForgeHooksClient.handlePerspective(reinforcementModelToUse,cameraTransformType,mat);
-            }
-
-
-        };
-        ResourceLocation blackMirrorItem = ModItems.blackMirrorItem.getRegistryName();
-        ResourceLocation blackMirrorItemHand = new ModelResourceLocation(blackMirrorItem+"_hand","inventory");
-        ResourceLocation blackMirrorItemInventory = new ModelResourceLocation(blackMirrorItem,"inventory");
-        IBakedModel blackMirrorItemHandModel = modelMap.get(blackMirrorItemHand);
-        IBakedModel blackMirrorItemDefaultModel = modelMap.get(blackMirrorItemInventory);
-
-        IBakedModel blackMirrorItemModelWrapper = new IBakedModel() {
-            @Override
-            public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, Random rand) {
-                return blackMirrorItemDefaultModel.getQuads(state, side, rand);
-            }
-
-            @Override
-            public boolean isAmbientOcclusion() {
-                return blackMirrorItemDefaultModel.isAmbientOcclusion();
-            }
-
-            @Override
-            public boolean isGui3d() {
-                return blackMirrorItemDefaultModel.isGui3d();
-            }
-
-            @Override
-            public boolean isSideLit() {
-                return blackMirrorItemDefaultModel.isSideLit();
-            }
-
-            @Override
-            public boolean isBuiltInRenderer() {
-                return blackMirrorItemDefaultModel.isBuiltInRenderer();
-            }
-
-            @Override
-            public TextureAtlasSprite getParticleTexture() {
-                return blackMirrorItemDefaultModel.getParticleTexture();
-            }
-
-            @Override
-            public ItemOverrideList getOverrides() {
-                return blackMirrorItemDefaultModel.getOverrides();
-            }
-
-            @Override
-            public IBakedModel handlePerspective(ItemCameraTransforms.TransformType cameraTransformType, MatrixStack mat) {
-                IBakedModel blackMirrorItemModelToUse = blackMirrorItemDefaultModel;
-                if (cameraTransformType == ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.GROUND){
-                    blackMirrorItemModelToUse = blackMirrorItemHandModel;
-                }
-                return ForgeHooksClient.handlePerspective(blackMirrorItemModelToUse,cameraTransformType,mat);
-            }
-
-
-        };
-        ResourceLocation remotegasgrenade = ModItems.remoteGasGrenadeItem.getRegistryName();
-        ResourceLocation remotegasgrenadeHand = new ModelResourceLocation(remotegasgrenade+"_hand","inventory");
-        ResourceLocation remotegasgrenadeInventory = new ModelResourceLocation(remotegasgrenade,"inventory");
-        IBakedModel remotegasgrenadeHandModel = modelMap.get(remotegasgrenadeHand);
-        IBakedModel remotegasgrenadeDefaultModel = modelMap.get(remotegasgrenadeInventory);
-
-        IBakedModel remotegasgrenadeModelWrapper = new IBakedModel() {
-            @Override
-            public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, Random rand) {
-                return remotegasgrenadeDefaultModel.getQuads(state, side, rand);
-            }
-
-            @Override
-            public boolean isAmbientOcclusion() {
-                return remotegasgrenadeDefaultModel.isAmbientOcclusion();
-            }
-
-            @Override
-            public boolean isGui3d() {
-                return remotegasgrenadeDefaultModel.isGui3d();
-            }
-
-            @Override
-            public boolean isSideLit() {
-                return remotegasgrenadeDefaultModel.isSideLit();
-            }
-
-            @Override
-            public boolean isBuiltInRenderer() {
-                return remotegasgrenadeDefaultModel.isBuiltInRenderer();
-            }
-
-            @Override
-            public TextureAtlasSprite getParticleTexture() {
-                return remotegasgrenadeDefaultModel.getParticleTexture();
-            }
-
-            @Override
-            public ItemOverrideList getOverrides() {
-                return remotegasgrenadeDefaultModel.getOverrides();
-            }
-
-            @Override
-            public IBakedModel handlePerspective(ItemCameraTransforms.TransformType cameraTransformType, MatrixStack mat) {
-                IBakedModel remotegasgrenadeModelToUse = remotegasgrenadeDefaultModel;
-                if (cameraTransformType == ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND||cameraTransformType== ItemCameraTransforms.TransformType.GROUND){
-                    remotegasgrenadeModelToUse = remotegasgrenadeHandModel;
-                }
-                return ForgeHooksClient.handlePerspective(remotegasgrenadeModelToUse,cameraTransformType,mat);
+                return ForgeHooksClient.handlePerspective(modelToUse, cameraTransformType, mat);
             }
         };
 
-        modelMap.put(blackMirrorItemInventory,blackMirrorItemModelWrapper);
-        modelMap.put(reinforcementInventory,reinforcementModelWrapper);
-        modelMap.put(remotegasgrenadeInventory,remotegasgrenadeModelWrapper);
+        modelMap.put(resourceLocationInventory,modelWrapper);
     }
 }

@@ -17,6 +17,7 @@ public class R6CellPhone extends Item {
     public R6CellPhone() {
         super(new Properties()
                 .group(ModItemGroups.Main)
+                .maxStackSize(0)
         );
         this.setRegistryName("r6cellphone");
     }

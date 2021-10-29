@@ -14,6 +14,9 @@
   "item.rainbow6.exploder": "通用起爆器",
   "item.rainbow6.proximityalarm": "感应警报器",
   "item.rainbow6.smokegrenade": "烟雾弹",
+  "item.rainbow6.drone": "无人机",
+  "item.rainbow6.r6cellphone": "手机",
+  "item.rainbow6.ee1d_controller": "EE-1-D 控制器",
 
   "block.rainbow6.blackmirror": "黑镜",
   "block.rainbow6.oak_hatch":"橡木顶板" ,
@@ -64,5 +67,7 @@
   "gui.rainbow6.defender": "防守方",
   "gui.rainbow6.locations": "地点",
   "gui.rainbow6.operators": "特勤干员",
-  "gui.rainbow6.loadout": "装备配置"
+  "gui.rainbow6.loadout": "装备配置",
+
+  "effect.rainbow6.exposed": "被发现"
 }
