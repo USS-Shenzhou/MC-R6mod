@@ -113,4 +113,14 @@ public class HUDClientEvent {
             InGameClientProperties.interceptInGameMenu = false;
         }
     }
+    @SubscribeEvent
+    public static void ee1dWarn(RenderGameOverlayEvent event){
+        if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
+            return;
+        }
+        if (EE1DWarnGui.isRender){
+            EE1DWarnGui ee1DWarnGui = new EE1DWarnGui(event.getMatrixStack());
+            ee1DWarnGui.render();
+        }
+    }
 }

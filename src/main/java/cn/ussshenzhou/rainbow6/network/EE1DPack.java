@@ -1,6 +1,7 @@
 package cn.ussshenzhou.rainbow6.network;
 
 import cn.ussshenzhou.rainbow6.gui.ClientMatch;
+import cn.ussshenzhou.rainbow6.gui.EE1DWarnGui;
 import cn.ussshenzhou.rainbow6.utils.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -43,6 +44,7 @@ public class EE1DPack {
                 if (minecraft.player!=null){
                     ClientPlayerEntity playerEntity = minecraft.player;
                     minecraft.world.playSound(playerEntity,playerEntity.getPosX(),playerEntity.getPosY(),playerEntity.getPosZ(),ModSounds.EE1D_MAIN,SoundCategory.PLAYERS,1.0f,1.0f);
+                    EE1DWarnGui.isRender = true;
                 }
             }
         });

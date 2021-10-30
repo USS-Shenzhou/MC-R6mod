@@ -199,6 +199,11 @@ public class ClientMatch {
         return team;
     }
 
+    public static boolean getIsAttacker() {
+        //return (isBlueAttacker && "blue".equals(team)) || (!isBlueAttacker && "orange".equals(team));
+        return false;
+    }
+
     public static Boolean getIsMatchMade() {
         return isMatchMade;
     }

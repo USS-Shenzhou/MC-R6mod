@@ -7,10 +7,12 @@ import cn.ussshenzhou.rainbow6.network.EE1DPack;
 import cn.ussshenzhou.rainbow6.network.EE1DPackSend;
 import cn.ussshenzhou.rainbow6.utils.ModItemGroups;
 import cn.ussshenzhou.rainbow6.utils.ModSounds;
+import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
@@ -30,7 +32,7 @@ import java.util.function.Predicate;
 /**
  * @author USS_Shenzhou
  */
-public class EE1DController extends Item {
+public class EE1DController extends Item implements IVanishable {
     public static final int ACTIVATING_TIME = 20;
     public static final int PREPARE_TIME = 30;
     public static final int SCAN_TIME = 40;
@@ -41,6 +43,7 @@ public class EE1DController extends Item {
         super(new Properties()
                 .group(ModItemGroups.Main)
                 .maxStackSize(1)
+                .maxDamage(3)
         );
         this.setRegistryName("ee1d_controller");
     }
@@ -66,6 +69,10 @@ public class EE1DController extends Item {
                 this.counter = 0;
             } else {
                 worldIn.playSound(playerIn, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), ModSounds.EE1D_START, SoundCategory.PLAYERS, 1.0f, 1.0f);
+            }
+            if (!playerIn.isCreative()){
+                //balance
+                playerIn.getCooldownTracker().setCooldown(this, 300);
             }
             return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
         } else {
@@ -108,6 +115,9 @@ public class EE1DController extends Item {
                             }
                         }
                     }
+                    stack.damageItem(1, (LivingEntity) entityIn, (entity) -> {
+                        entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+                    });
                 } else if (this.counter > ACTIVATING_TIME + PREPARE_TIME) {
                     //list.remove(entityIn);
                     for (LivingEntity target : list) {
@@ -142,4 +152,5 @@ public class EE1DController extends Item {
             }
         }
     }
+
 }

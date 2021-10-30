@@ -23,6 +23,11 @@ public class R6ClientTick {
             } catch (Exception ignored) {
             }
         }
+        if (event.phase== TickEvent.Phase.END){
+            if (EE1DWarnGui.isRender){
+                EE1DWarnGui.tick();
+            }
+        }
     }
     static double yaw=0;
     @SubscribeEvent
