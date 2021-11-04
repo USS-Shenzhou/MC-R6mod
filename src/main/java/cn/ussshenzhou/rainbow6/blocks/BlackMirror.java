@@ -115,6 +115,7 @@ public class BlackMirror extends Block {
 
             if (direction == Direction.UP||direction == Direction.DOWN||isDeployableResistance||rightIsNotEmpty){
                 if (!worldIn.isRemote){
+                    LOGGER.info(worldIn.getBlockState(pos));
                     worldIn.removeBlock(pos,false);
                     worldIn.removeTileEntity(pos);
                 }

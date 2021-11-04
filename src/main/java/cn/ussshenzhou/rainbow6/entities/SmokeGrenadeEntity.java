@@ -50,8 +50,9 @@ public class SmokeGrenadeEntity extends ProjectileItemEntity {
 
     @Override
     public void writeAdditional(CompoundNBT compound) {
-        super.writeAdditional(compound);
         compound.putInt("timwcountdown", this.dataManager.get(timeCountDown));
+        super.writeAdditional(compound);
+
     }
 
     @Override
@@ -94,7 +95,7 @@ public class SmokeGrenadeEntity extends ProjectileItemEntity {
     }
 
     private double rand() {
-        if (Math.random() * 10 < 5) {
+        if (Math.random() < 0.5) {
             return Math.random() * 0.5;
         } else {
             return Math.random() * -0.5;

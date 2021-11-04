@@ -25,10 +25,11 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+
 /**
  * @author USS_Shenzhou
  */
-public class Reinforcement extends Block{
+public class Reinforcement extends Block {
     protected static final VoxelShape NORTH = Block.makeCuboidShape(0.0D, 0.0D, 14.0D, 16.0D, 16.0D, 16.0D);
     protected static final VoxelShape SOUTH = Block.makeCuboidShape(0.0D, 0.0D, 2.0D, 16.0D, 16.0D, 0.0D);
     protected static final VoxelShape WEST = Block.makeCuboidShape(14.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
@@ -41,7 +42,7 @@ public class Reinforcement extends Block{
     public Reinforcement() {
         super(Properties.create(Material.IRON)
                 .harvestLevel(0)
-                .hardnessAndResistance(40.0f,9.0f)
+                .hardnessAndResistance(40.0f, 9.0f)
                 .notSolid()
         );
         this.setRegistryName("reinforcement");
@@ -49,12 +50,10 @@ public class Reinforcement extends Block{
     }
 
 
-
-
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         Direction direction = state.get(BlockStateProperties.FACING);
-        switch(direction){
+        switch (direction) {
             case NORTH:
                 return NORTH;
             case SOUTH:
@@ -74,38 +73,36 @@ public class Reinforcement extends Block{
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        if (placer != null){
-            Direction direction = getFacingFromEntity(pos,placer);
+        if (placer != null) {
+            Direction direction = getFacingFromEntity(pos, placer);
             //wall to reinforce MUST NOT harder than Terracotta
             float maxDeployableResistance = 4.3f;
             //this long-long shit just to get the ExplosionResistance of the front block, please tell me if there is a easier method.
-            if (direction==Direction.DOWN||direction==Direction.UP||worldIn.getBlockState(pos.offset(direction.getOpposite())).getBlock().getExplosionResistance(state,worldIn,pos,new Explosion(worldIn,null,null,null,pos.getX(),pos.getY(),pos.getZ(),0,false, Explosion.Mode.DESTROY))>=maxDeployableResistance){
-                if (!worldIn.isRemote){
-                    worldIn.removeBlock(pos,false);
+            if (direction == Direction.DOWN || direction == Direction.UP || worldIn.getBlockState(pos.offset(direction.getOpposite())).getBlock().getExplosionResistance(state, worldIn, pos, new Explosion(worldIn, null, null, null, pos.getX(), pos.getY(), pos.getZ(), 0, false, Explosion.Mode.DESTROY)) >= maxDeployableResistance) {
+                if (!worldIn.isRemote) {
+                    worldIn.removeBlock(pos, false);
                     worldIn.removeTileEntity(pos);
                 }
-                cancelPlace((PlayerEntity)placer);
-            }
-            else{
-                if (!worldIn.isRemote){
-                    worldIn.setBlockState(pos, state.with(BlockStateProperties.FACING,getFacingFromEntity(pos,placer)).with(upper,false),2);
-                    worldIn.setTileEntity(pos,new ReinforcementTileEntity());
-                }
-                else
-                {
-                    worldIn.playSound((PlayerEntity) placer,pos,ModSounds.REINFORCEMENT_PLACE,SoundCategory.PLAYERS,1.0f,1.0f);
+                cancelPlace((PlayerEntity) placer);
+            } else {
+                if (!worldIn.isRemote) {
+                    worldIn.setBlockState(pos, state.with(BlockStateProperties.FACING, getFacingFromEntity(pos, placer)).with(upper, false), 2);
+                    worldIn.setTileEntity(pos, new ReinforcementTileEntity());
+                } else {
+                    worldIn.playSound((PlayerEntity) placer, pos, ModSounds.REINFORCEMENT_PLACE, SoundCategory.PLAYERS, 1.0f, 1.0f);
                 }
             }
         }
     }
-    public void cancelPlace(PlayerEntity player){
+
+    public void cancelPlace(PlayerEntity player) {
         ItemStack returnStack = new ItemStack(ModItems.reinforcementItem);
         player.addItemStackToInventory(returnStack);
     }
 
-    public static Direction getFacingFromEntity(BlockPos clickedBlock, LivingEntity entity){
-        Vector3d vec =entity.getPositionVec();
-        return Direction.getFacingFromVector((float) (vec.x - clickedBlock.getX()),(float) (vec.y - clickedBlock.getY()),(float) (vec.z - clickedBlock.getZ()));
+    public static Direction getFacingFromEntity(BlockPos clickedBlock, LivingEntity entity) {
+        Vector3d vec = entity.getPositionVec();
+        return Direction.getFacingFromVector((float) (vec.x - clickedBlock.getX()), (float) (vec.y - clickedBlock.getY()), (float) (vec.z - clickedBlock.getZ()));
     }
 
     @Override
@@ -114,6 +111,7 @@ public class Reinforcement extends Block{
         builder.add(upper);
         super.fillStateContainer(builder);
     }
+
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;
@@ -127,6 +125,11 @@ public class Reinforcement extends Block{
 
     @Override
     public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
-        return useContext.getItem().getItem() == ModItems.blackMirrorItem ? true : super.isReplaceable(state, useContext);
+        //return useContext.getItem().getItem() == ModItems.blackMirrorItem ? true : super.isReplaceable(state, useContext);
+        if (useContext.getItem().getItem() == ModItems.blackMirrorItem && useContext.getNearestLookingDirection() == state.get(BlockStateProperties.FACING).getOpposite()) {
+            return true;
+        } else {
+            return super.isReplaceable(state, useContext);
+        }
     }
 }
