@@ -269,10 +269,11 @@ public class R6MapCommand implements Command<CommandSource> {
     public static Boolean checkBombNumber(CommandSource source, String number) {
         if (number.charAt(number.length() - 1) == 'a' || number.charAt(number.length() - 1) == 'b') {
             number = number.replace("a", "");
-            number = number.replace("a", "");
+            number = number.replace("b", "");
             try {
                 Integer.parseInt(number);
             } catch (NumberFormatException e) {
+                e.printStackTrace();
                 source.sendFeedback(new TranslationTextComponent("commands.rainbow6.invalidbombnum"), true);
                 return false;
             }
