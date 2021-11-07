@@ -8,7 +8,6 @@ import java.util.HashSet;
  */
 public class R6CapeList {
     private static final HashSet<String> r6ThankCapePlayers = new HashSet<String>(){{
-        add("Dev");
     }};
     private static final HashSet<String> r6AlphaCapePlayers = new HashSet<String>(){{
     }};

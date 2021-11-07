@@ -14,7 +14,7 @@ public class SmokeGrenadeParticle extends SpriteTexturedParticle {
         maxAge=80;
         particleScale = (float) (Math.random() * 0.6 + 0.55);
         this.canCollide=true;
-        this.setAlphaF((float) (Math.random() * 0.2 + 0.8));
+        this.setAlphaF((float) (Math.random() * 0.1 + 0.9));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package cn.ussshenzhou.rainbow6.armors;
 
 import java.util.function.Supplier;
+
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.Items;
@@ -17,11 +18,18 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public enum ModArmorMaterials implements IArmorMaterial {
     //rook:???
-    LEVEL1("rainbow6:level1",10,new int[]{1,3,3,1},10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> { return Ingredient.fromItems(Items.LEATHER);}),
-    LEVEL2("rainbow6:level2",10,new int[]{2,4,3,1},10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> { return Ingredient.fromItems(Items.LEATHER);}),
-    LEVEL3("rainbow6:level3",10,new int[]{2,5,4,2},10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> { return Ingredient.fromItems(Items.LEATHER);});
+    LEVEL1("rainbow6:level1", 8, new int[]{1, 3, 3, 1}, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> {
+        return Ingredient.fromItems(Items.LEATHER);
+    }),
+    LEVEL2("rainbow6:level2", 12, new int[]{2, 4, 3, 1}, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> {
+        return Ingredient.fromItems(Items.LEATHER);
+    }),
+    LEVEL3("rainbow6:level3", 16, new int[]{2, 5, 4, 2}, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> {
+        return Ingredient.fromItems(Items.LEATHER);
+    });
 
     private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};
+
     private final String name;
     private final int maxDamageFactor;
     private final int[] damageReductionAmountArray;
@@ -44,12 +52,12 @@ public enum ModArmorMaterials implements IArmorMaterial {
 
     @Override
     public int getDurability(EquipmentSlotType slotIn) {
-        return 800;
+        return MAX_DAMAGE_ARRAY[slotIn.getIndex()] * this.maxDamageFactor;
     }
 
     @Override
     public int getDamageReductionAmount(EquipmentSlotType slotIn) {
-        return MAX_DAMAGE_ARRAY[slotIn.getIndex()];
+        return this.damageReductionAmountArray[slotIn.getIndex()];
     }
 
     @Override

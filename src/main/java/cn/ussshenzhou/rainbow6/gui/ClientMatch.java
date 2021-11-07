@@ -42,7 +42,7 @@ public class ClientMatch {
     private static BlockPos zonePosMax = new BlockPos(-220, 36, 201);
     private static Vector3d scenePos;
     private static Vector2f sceneDir;
-    private static String mapName = "tmp";
+    private static String mapName = "test";
     private static int round = 0;
     private static Boolean readyRound = false;
     private static Boolean isShowScene = false;

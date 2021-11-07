@@ -87,17 +87,13 @@ public class RegistryHandler {
                 ModItems.acaciaHatch,
                 ModItems.darkoakHatch,
                 ModItems.crimsonHatch,
-                ModItems.warpedHatch
-        );
-    }
-    /**
-     * same as ItemReg
-    */
-     @SubscribeEvent
-    public static void onArmorReg(RegistryEvent.Register<Item> event){
-        event.getRegistry().registerAll(
-                ModArmors.ashHead,
-                ModArmors.ashChest
+                ModItems.warpedHatch,
+
+                ModArmors.ashHelmet,
+                ModArmors.testHelmet,
+                ModArmors.testChestplate,
+                ModArmors.testLeggings,
+                ModArmors.testBoots
         );
     }
 

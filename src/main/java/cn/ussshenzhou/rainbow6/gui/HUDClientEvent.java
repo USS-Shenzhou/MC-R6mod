@@ -18,7 +18,7 @@ public class HUDClientEvent {
         if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
             return;
         }
-        //if (ClientMatch.getIsShowIconList()) {
+        if (ClientMatch.getIsShowIconList()) {
         R6PlayerIconListBackGroundGui r6PlayerIconListBackGroundGui = new R6PlayerIconListBackGroundGui(event.getMatrixStack());
         switch (ClientMatch.getTeam()) {
             case "blue":
@@ -30,7 +30,7 @@ public class HUDClientEvent {
             default:
                 break;
         }
-        //}
+        }
     }
 
     @SubscribeEvent
@@ -96,9 +96,9 @@ public class HUDClientEvent {
         if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
             return;
         }
-        if (InGameClientProperties.isUsingDrone){
+        /*if (InGameClientProperties.isUsingDrone){
             InGameClientProperties.getR6DroneGui(event).render();
-        }
+        }*/
     }
     @SubscribeEvent
     public static void hideHand(RenderHandEvent event){

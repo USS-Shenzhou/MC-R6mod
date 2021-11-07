@@ -18,13 +18,13 @@ public class ModItemGroups {
     public static ItemGroup Weapon = new ItemGroup("Rainbow6:weapon") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ModBulletItems.testBulletItem);
+            return new ItemStack(ModItems.logo);
         }
     };
     public static ItemGroup Armor = new ItemGroup("Rainbow6:armor") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ModArmors.ashChest);
+            return new ItemStack(ModItems.logo);
         }
     };
 }
