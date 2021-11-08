@@ -4,8 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.rainbow6.refmap.json",
   "mixins": [
-    "MixinEntityAccessor",
     "MixinEntity",
+    "MixinEntityAccessor",
     "MixinTileEntity"
   ],
   "minVersion": "0.8"

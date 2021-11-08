@@ -1,16 +1,13 @@
 package cn.ussshenzhou.rainbow6.armors.ash;
 
-import cn.ussshenzhou.rainbow6.armors.ModelArmor;
-import cn.ussshenzhou.rainbow6.armors.R6ModelArmor;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import cn.ussshenzhou.rainbow6.armors.R6ArmorModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.inventory.EquipmentSlotType;
 
 /**
  * @author USS_Shenzhou
  */
-public class AshArmorModel extends R6ModelArmor {
+public class AshArmorModel extends R6ArmorModel {
     private final ModelRenderer helmAnchor;
 
     private final ModelRenderer bodyAnchor;

@@ -89,11 +89,21 @@ public class RegistryHandler {
                 ModItems.crimsonHatch,
                 ModItems.warpedHatch,
 
-                ModArmors.ashHelmet,
+                //ModArmors.ashHelmet,
                 ModArmors.testHelmet,
                 ModArmors.testChestplate,
                 ModArmors.testLeggings,
-                ModArmors.testBoots
+                ModArmors.testBoots,
+
+                /*ModArmors.miraHelmet,
+                ModArmors.miraChestplate,
+                ModArmors.miraLeggings,
+                ModArmors.miraBoots,*/
+
+                ModArmors.alexHelmet,
+                ModArmors.alexChestplate,
+                ModArmors.alexLeggings,
+                ModArmors.alexBoots
         );
     }
 

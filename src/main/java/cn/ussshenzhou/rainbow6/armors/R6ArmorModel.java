@@ -1,12 +1,11 @@
 package cn.ussshenzhou.rainbow6.armors;
 
-import cn.ussshenzhou.rainbow6.armors.ModelArmor;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.inventory.EquipmentSlotType;
 
-public abstract class R6ModelArmor extends ModelArmor {
+public abstract class R6ArmorModel extends ModelArmor {
     protected ModelRenderer helmetAnchor;
 
     protected ModelRenderer bodyAnchor;
@@ -17,20 +16,20 @@ public abstract class R6ModelArmor extends ModelArmor {
 
     protected ModelRenderer pantsAnchor;
 
-    protected ModelRenderer legL;
+    protected ModelRenderer legLAnchor;
 
-    protected ModelRenderer legR;
+    protected ModelRenderer legRAnchor;
 
-    protected ModelRenderer bootL;
+    protected ModelRenderer bootLAnchor;
 
-    protected ModelRenderer bootR;
+    protected ModelRenderer bootRAnchor;
 
     /**
      * 1.0f = 1 pixel
      */
-    protected float expandFactor = 0.05F;
+    public static final float STD_ARMOR_FACTOR = 0.1F;
 
-    public R6ModelArmor(EquipmentSlotType slot) {
+    public R6ArmorModel(EquipmentSlotType slot) {
         super(slot);
 
         textureHeight = 16;
@@ -45,13 +44,13 @@ public abstract class R6ModelArmor extends ModelArmor {
         this.bodyAnchor.setRotationPoint(0.0F, 0.0F, 0.0F);
 
         //armL
+        //addBox(x-1,...)
         this.armLAnchor = new ModelRenderer(this, 0, 0);
-        //this.armLAnchor.mirror = true;
         this.armLAnchor.setRotationPoint(4.0F, 2.0F, 0.0F);
 
         //armR
+        //.addBox(x+1,...)
         this.armRAnchor = new ModelRenderer(this, 0, 0);
-        //this.armRAnchor.mirror = true;
         this.armRAnchor.setRotationPoint(-4.0F, 2.0F, 0.0F);
 
         //pants
@@ -59,24 +58,20 @@ public abstract class R6ModelArmor extends ModelArmor {
         this.pantsAnchor.setRotationPoint(0.0F, 0.0F, 0.0F);
 
         //legL
-        //legL.addBox(x-1,...)
-        this.legL = new ModelRenderer(this, 0, 0);
-        //this.legL.mirror = true;
-        this.legL.setRotationPoint(1.9F, 12.0F, 0.0F);
+        this.legLAnchor = new ModelRenderer(this, 0, 0);
+        this.legLAnchor.setRotationPoint(1.9F, 12.0F, 0.0F);
 
         //legR
-        //legR.addBox(x+1,...)
-        this.legR = new ModelRenderer(this, 0, 0);
-        this.legR.setRotationPoint(-1.9F, 12.0F, 0.0F);
+        this.legRAnchor = new ModelRenderer(this, 0, 0);
+        this.legRAnchor.setRotationPoint(-1.9F, 12.0F, 0.0F);
 
-        //boot left
-        this.bootL = new ModelRenderer(this, 0, 0);
-        //this.bootL.mirror = true;
-        this.bootL.setRotationPoint(1.9F, 12.0F, 0.0F);
+        //bootL
+        this.bootLAnchor = new ModelRenderer(this, 0, 0);
+        this.bootLAnchor.setRotationPoint(1.9F, 12.0F, 0.0F);
 
-        //boot right
-        this.bootR = new ModelRenderer(this, 0, 0);
-        this.bootR.setRotationPoint(-1.9F, 12.0F, 0.0F);
+        //bootR
+        this.bootRAnchor = new ModelRenderer(this, 0, 0);
+        this.bootRAnchor.setRotationPoint(-1.9F, 12.0F, 0.0F);
     }
 
 
@@ -89,11 +84,11 @@ public abstract class R6ModelArmor extends ModelArmor {
         armLAnchor.showModel = slot == EquipmentSlotType.CHEST;
         armRAnchor.showModel = slot == EquipmentSlotType.CHEST;
 
-        legR.showModel = slot == EquipmentSlotType.LEGS;
-        legL.showModel = slot == EquipmentSlotType.LEGS;
+        legRAnchor.showModel = slot == EquipmentSlotType.LEGS;
+        legLAnchor.showModel = slot == EquipmentSlotType.LEGS;
 
-        bootL.showModel = slot == EquipmentSlotType.FEET;
-        bootR.showModel = slot == EquipmentSlotType.FEET;
+        bootLAnchor.showModel = slot == EquipmentSlotType.FEET;
+        bootRAnchor.showModel = slot == EquipmentSlotType.FEET;
 
         bipedHeadwear.showModel = false;
 
@@ -103,11 +98,11 @@ public abstract class R6ModelArmor extends ModelArmor {
         bipedLeftArm = armLAnchor;
         if (slot == EquipmentSlotType.LEGS) {
             bipedBody = pantsAnchor;
-            bipedRightLeg = legR;
-            bipedLeftLeg = legL;
+            bipedRightLeg = legRAnchor;
+            bipedLeftLeg = legLAnchor;
         } else {
-            bipedRightLeg = bootR;
-            bipedLeftLeg = bootL;
+            bipedRightLeg = bootRAnchor;
+            bipedLeftLeg = bootLAnchor;
         }
 
         super.render(ms, buffer, light, overlay, r, g, b, a);

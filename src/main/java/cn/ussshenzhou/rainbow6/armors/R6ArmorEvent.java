@@ -14,6 +14,8 @@ import net.minecraftforge.fml.common.Mod;
 public class R6ArmorEvent {
     @SubscribeEvent
     public static void removePlayerWear(RenderPlayerEvent.Pre event) {
+
+
         boolean flag = false;
         for (ItemStack itemStack : event.getPlayer().getArmorInventoryList()) {
             if (itemStack.getItem() instanceof R6ArmorItem) {

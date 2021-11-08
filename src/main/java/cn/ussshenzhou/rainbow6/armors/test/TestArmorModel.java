@@ -1,13 +1,13 @@
 package cn.ussshenzhou.rainbow6.armors.test;
 
-import cn.ussshenzhou.rainbow6.armors.R6ModelArmor;
+import cn.ussshenzhou.rainbow6.armors.R6ArmorModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.inventory.EquipmentSlotType;
 
 /**
  * @author USS_Shenzhou
  */
-public class TestArmorModel extends R6ModelArmor {
+public class TestArmorModel extends R6ArmorModel {
     public TestArmorModel(EquipmentSlotType slot) {
         super(slot);
 
@@ -37,33 +37,33 @@ public class TestArmorModel extends R6ModelArmor {
         this.pantsAnchor.setRotationPoint(0.0F, 0.0F, 0.0F);
 
         //legL
-        this.legL = new ModelRenderer(this, 0, 32);
+        this.legLAnchor = new ModelRenderer(this, 0, 32);
         //this.legL.mirror = true;
-        this.legL.setRotationPoint(1.9F, 12.0F, 0.0F);
+        this.legLAnchor.setRotationPoint(1.9F, 12.0F, 0.0F);
 
         //legR
-        this.legR = new ModelRenderer(this, 24, 16);
-        this.legR.setRotationPoint(-1.9F, 12.0F, 0.0F);
+        this.legRAnchor = new ModelRenderer(this, 24, 16);
+        this.legRAnchor.setRotationPoint(-1.9F, 12.0F, 0.0F);
 
         //boot left
-        this.bootL = new ModelRenderer(this, 0, 0);
+        this.bootLAnchor = new ModelRenderer(this, 0, 0);
         //this.bootL.mirror = true;
-        this.bootL.setRotationPoint(1.9F, 12.0F, 0.0F);
+        this.bootLAnchor.setRotationPoint(1.9F, 12.0F, 0.0F);
 
         //boot right
-        this.bootR = new ModelRenderer(this, 0, 0);
-        this.bootR.setRotationPoint(-1.9F, 12.0F, 0.0F);
+        this.bootRAnchor = new ModelRenderer(this, 0, 0);
+        this.bootRAnchor.setRotationPoint(-1.9F, 12.0F, 0.0F);
 
-        helmetAnchor.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, expandFactor);
+        helmetAnchor.addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, STD_ARMOR_FACTOR);
 
-        bodyAnchor.addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, expandFactor);
+        bodyAnchor.addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, STD_ARMOR_FACTOR);
 
-        armLAnchor.addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, expandFactor);
+        armLAnchor.addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, STD_ARMOR_FACTOR);
 
-        armRAnchor.addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, expandFactor);
+        armRAnchor.addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, STD_ARMOR_FACTOR);
 
-        legL.addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, expandFactor);
+        legLAnchor.addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, STD_ARMOR_FACTOR);
 
-        legR.addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, expandFactor);
+        legRAnchor.addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, STD_ARMOR_FACTOR);
     }
 }
