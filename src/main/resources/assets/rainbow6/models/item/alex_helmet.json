@@ -1,0 +1,8 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "rainbow6:item/alex_bg",
+		"layer1": "rainbow6:item/alex_helmet"
+	}
+}
