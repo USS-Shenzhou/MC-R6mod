@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ussshenzhou.rainbow6.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "rainbow6.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
