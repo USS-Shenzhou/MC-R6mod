@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.Mod;
  */
 @Mod("r6ms")
 public class Rainbow6 {
+    public static final String MOD_ID = "r6ms";
 
     public Rainbow6() {
 

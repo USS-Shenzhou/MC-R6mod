@@ -9,7 +9,7 @@ import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
-import ussshenzhou.rainbow6.client.gui.MainMenuScreen;
+import ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
 import ussshenzhou.rainbow6.client.gui.ScreenManager;
 
 /**
@@ -18,8 +18,8 @@ import ussshenzhou.rainbow6.client.gui.ScreenManager;
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class KeyInputListener {
     public static final KeyMapping MAIN_MENU = new KeyMapping(
-            "key.r6ms.main_menu", KeyConflictContext.IN_GAME, KeyModifier.CONTROL,
-            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_R, "key.r6ms.category"
+            "key.r6ms.main_menu", KeyConflictContext.IN_GAME, KeyModifier.ALT,
+            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_6, "key.r6ms.category"
     );
 
     @SubscribeEvent
