@@ -1,10 +1,7 @@
 package ussshenzhou.rainbow6.client.gui.widgets;
 
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
-import cn.ussshenzhou.t88.gui.widegt.TButton;
-import cn.ussshenzhou.t88.gui.widegt.TImage;
-import cn.ussshenzhou.t88.gui.widegt.TLabel;
-import cn.ussshenzhou.t88.gui.widegt.TPanel;
+import cn.ussshenzhou.t88.gui.widegt.*;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
@@ -20,12 +17,16 @@ public class FocusSensitiveImageButton extends TPanel {
     private TButton button;
     private TLabel text;
 
-    //TODO paddingX/Y
+    //TODO text enlarge
     private int padding = 0;
+    private boolean inTransition = false;
+    private boolean transited = false;
+    private int transitionTimeMinus1 = 2;
+    private float transitionTick = 0;
 
-    public FocusSensitiveImageButton(Component text, Button.OnPress onPress, ResourceLocation backgroundImageLocation, ResourceLocation backgroundImageLocationFocused) {
+    public FocusSensitiveImageButton(Component text1, Button.OnPress onPress, ResourceLocation backgroundImageLocation, ResourceLocation backgroundImageLocationFocused) {
         super();
-        this.text = new TLabel(text);
+        this.text = new TLabel(text1);
         this.button = new TButton(new TextComponent(""), onPress) {
             @Override
             public void renderButton(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
@@ -33,7 +34,7 @@ public class FocusSensitiveImageButton extends TPanel {
             }
         };
         this.backgroundImage = new TImage(backgroundImageLocation);
-        this.backgroundImageFocused = new TransitionImage(backgroundImageLocationFocused);
+        this.backgroundImageFocused = new TImage(backgroundImageLocationFocused);
         this.backgroundImageFocused.setVisibleT(false);
 
         this.add(this.backgroundImage);
@@ -61,12 +62,101 @@ public class FocusSensitiveImageButton extends TPanel {
             backgroundImage.setVisibleT(true);
             backgroundImageFocused.setVisibleT(false);
         }
+
+        if (backgroundImageFocused.isVisibleT() && !transited) {
+            if (!inTransition) {
+                //begin transit
+                inTransition = true;
+            }
+            if (transitionTick >= transitionTimeMinus1) {
+                //complete transit
+                inTransition = false;
+                transited = true;
+                transitionTick = 0;
+            }
+        }
+        if (!backgroundImageFocused.isVisibleT()) {
+            inTransition = false;
+            transited = false;
+            transitionTick = 0;
+        }
+
         super.tickT();
     }
 
     @Override
     protected void renderChildren(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        super.renderChildren(pPoseStack, pMouseX, pMouseY, pPartialTick);
+        for (TWidget tWidget : children) {
+            if (tWidget.isVisibleT()) {
+                if (tWidget == text && backgroundImageFocused.isVisibleT()) {
+                    renderText(pPoseStack, pMouseX, pMouseY, pPartialTick);
+                    continue;
+                }
+                if (tWidget == backgroundImageFocused) {
+                    renderBgImageFocused(pPoseStack, pMouseX, pMouseY, pPartialTick);
+                    continue;
+                }
+                tWidget.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+            }
+        }
+    }
+
+    /**
+     * backgroundImage will be stretched to the size of backgroundImage, then magnified to original.
+     */
+    private void renderBgImageFocused(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+        if (padding != 0 && inTransition && transitionTick < transitionTimeMinus1) {
+            float minScaleX = (float) backgroundImage.getWidth() / backgroundImageFocused.getWidth();
+            float minScaleY = (float) backgroundImage.getHeight() / backgroundImageFocused.getHeight();
+            float scaleX = minScaleX + transitionTick / transitionTimeMinus1 * (1 - minScaleX);
+            float scaleY = minScaleY + transitionTick / transitionTimeMinus1 * (1 - minScaleY);
+            float compensationRelativeX = (1 - scaleX) / (1 - minScaleX) * padding;
+            float compensationRelativeY = (1 - scaleY) / (1 - minScaleY) * padding;
+            pPoseStack.pushPose();
+            //scale compensation = absolute + relative
+            pPoseStack.translate(
+                    (1 - scaleX) * backgroundImageFocused.getX() + compensationRelativeX,
+                    (1 - scaleY) * backgroundImageFocused.getY() + compensationRelativeY,
+                    0);
+            pPoseStack.scale(scaleX, scaleY, 1);
+            backgroundImageFocused.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+            pPoseStack.popPose();
+            transitionTick += pPartialTick;
+        } else {
+            backgroundImageFocused.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+        }
+    }
+
+    /**
+     * Text will be magnified when focused. To keep text's original shape, scaling will not calculate separately.
+     */
+    private void renderText(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+        float maxScaleX = (float) backgroundImageFocused.getWidth() / backgroundImage.getWidth();
+        float maxScaleY = (float) backgroundImageFocused.getHeight() / backgroundImage.getHeight();
+        float maxScale = Math.min(maxScaleX, maxScaleY);
+        if (padding != 0 && inTransition && transitionTick < transitionTimeMinus1) {
+            //float scaleX = 1 + transitionTick / transitionTimeMinus1 * (maxScaleX - 1);
+            //float scaleY = 1 + transitionTick / transitionTimeMinus1 * (maxScaleY - 1);
+            float scale = 1 + transitionTick / transitionTimeMinus1 * (maxScale - 1);
+            renderTextInternal(pPoseStack, pMouseX, pMouseY, pPartialTick, scale, maxScale);
+        } else {
+            renderTextInternal(pPoseStack, pMouseX, pMouseY, pPartialTick, maxScale, maxScale);
+        }
+    }
+
+    private void renderTextInternal(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick, float scale, float maxScale) {
+        //float compensationRelativeX = (1 - scaleX) / (maxScaleX - 1) * padding;
+        //float compensationRelativeY = (1 - scaleY) / (maxScaleY - 1) * padding;
+        float compensationRelative = (1 - scale) / (maxScale - 1) * padding;
+        pPoseStack.pushPose();
+        //TODO
+        pPoseStack.translate(
+                (1 - scale) * text.getX() + compensationRelative,
+                (1 - scale) * text.getY() + compensationRelative,
+                0);
+        pPoseStack.scale(scale, scale, 1);
+        text.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+        pPoseStack.popPose();
     }
 
     public TImage getBackgroundImage() {
@@ -93,70 +183,11 @@ public class FocusSensitiveImageButton extends TPanel {
         this.padding = padding;
     }
 
-    public class TransitionImage extends cn.ussshenzhou.t88.gui.widegt.TImage {
+    public int getTransitionTimeMinus1() {
+        return transitionTimeMinus1;
+    }
 
-        public TransitionImage(ResourceLocation imageLocation) {
-            super(imageLocation);
-        }
-
-        private boolean inTransition = false;
-        private boolean transited = false;
-        private int transitionTimeMinus1 = 2;
-        private float transitionTick = 0;
-
-        @Override
-        public void tickT() {
-            if (isVisibleT() && !transited) {
-                if (!inTransition) {
-                    //begin transit
-                    inTransition = true;
-                }
-                if (transitionTick >= transitionTimeMinus1) {
-                    //complete transit
-                    inTransition = false;
-                    transited = true;
-                    transitionTick = 0;
-                }
-            }
-            if (!isVisibleT()) {
-                inTransition = false;
-                transited = false;
-                transitionTick = 0;
-            }
-            super.tickT();
-        }
-
-        @Override
-        public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-            if (inTransition && transitionTick < transitionTimeMinus1) {
-                //backgroundImageFocused will be stretched to backgroundImage, then enlarged.
-                pPoseStack.pushPose();
-                float minScaleX = (float) backgroundImage.getWidth() / backgroundImageFocused.getWidth();
-                float minScaleY = (float) backgroundImage.getHeight() / backgroundImageFocused.getHeight();
-                float scaleX = minScaleX + transitionTick / transitionTimeMinus1 * (1 - minScaleX);
-                float scaleY = minScaleY + transitionTick / transitionTimeMinus1 * (1 - minScaleY);
-                float compensationRelativeX = (1 - scaleX) / (1 - minScaleX) * padding;
-                float compensationRelativeY = (1 - scaleY) / (1 - minScaleY) * padding;
-                //scale compensation = absolute + relative
-                pPoseStack.translate(
-                        (1 - scaleX) * this.getX() + compensationRelativeX,
-                        (1 - scaleY) * this.getY() + compensationRelativeY,
-                        0);
-                pPoseStack.scale(scaleX, scaleY, 1);
-                super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-                pPoseStack.popPose();
-                transitionTick += pPartialTick;
-            } else {
-                super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-            }
-        }
-
-        public int getTransitionTimeMinus1() {
-            return transitionTimeMinus1;
-        }
-
-        public void setTransitionTimeMinus1(int transitionTimeMinus1) {
-            this.transitionTimeMinus1 = transitionTimeMinus1;
-        }
+    public void setTransitionTimeMinus1(int transitionTimeMinus1) {
+        this.transitionTimeMinus1 = transitionTimeMinus1;
     }
 }
