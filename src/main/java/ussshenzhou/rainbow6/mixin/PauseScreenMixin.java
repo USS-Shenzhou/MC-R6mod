@@ -26,30 +26,30 @@ public class PauseScreenMixin extends Screen {
         super(pTitle);
     }
 
-    HoverSensitiveImageButton1 initiateButton = new HoverSensitiveImageButton1(
+    HoverSensitiveImageButton1 initiateR6msButton = new HoverSensitiveImageButton1(
             new TranslatableComponent("gui.r6ms.pausescreen.button"),
             pButton -> {
                 ScreenManager.showNewLayer(new MainMenuScreen());
             },
-            new ResourceLocation(Rainbow6.MOD_ID,"textures/gui/button20unhovered18.png"),
-            new ResourceLocation(Rainbow6.MOD_ID,"textures/gui/button20hovered.png")
+            new ResourceLocation(Rainbow6.MOD_ID,"textures/gui/button20_unhovered18.png"),
+            new ResourceLocation(Rainbow6.MOD_ID,"textures/gui/button20_hovered.png")
     );
 
     @Inject(method = "createPauseMenu",at=@At("RETURN"))
-    private void addR6MSButton(CallbackInfo ci){
-        //TODO Do not add if already opened.
-        initiateButton.setPadding(1);
-        initiateButton.getText().setHorizontalAlignment(HorizontalAlignment.CENTER);
-        initiateButton.getBackgroundImage().setImageFit(ImageFit.STRETCH);
-        initiateButton.getBackgroundImageHovered().setImageFit(ImageFit.STRETCH);
+    private void addR6msButton(CallbackInfo ci){
+        //TODO Do not add if already opened. PauseScreen during match needs remake.
+        initiateR6msButton.setPadding(1);
+        initiateR6msButton.getText().setHorizontalAlignment(HorizontalAlignment.CENTER);
+        initiateR6msButton.getBackgroundImage().setImageFit(ImageFit.STRETCH);
+        initiateR6msButton.getBackgroundImageHovered().setImageFit(ImageFit.STRETCH);
 
-        initiateButton.setAbsBounds(this.width / 2 - 102, this.height / 4 + 144 + -16, 204, 20);
-        initiateButton.layout();
-        this.addRenderableWidget(initiateButton);
+        initiateR6msButton.setAbsBounds(this.width / 2 - 102, this.height / 4 + 144 + -16, 204, 20);
+        initiateR6msButton.layout();
+        this.addRenderableWidget(initiateR6msButton);
     }
 
     @Inject(method = "tick",at = @At("RETURN"))
-    private void buttonTick(CallbackInfo ci){
-        initiateButton.tickT();
+    private void tickR6msButton(CallbackInfo ci){
+        initiateR6msButton.tickT();
     }
 }

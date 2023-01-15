@@ -16,8 +16,8 @@ public class MainMenuHomePanel extends TPanel {
             new TranslatableComponent("gui.r6ms.mainmenu.play"),
             pButton -> {
             },
-            new ResourceLocation(Rainbow6.MOD_ID, "textures/gui/test2.png"),
-            new ResourceLocation(Rainbow6.MOD_ID, "textures/gui/test1.png")
+            new ResourceLocation(Rainbow6.MOD_ID, "textures/gui/button38_unhovered30.png"),
+            new ResourceLocation(Rainbow6.MOD_ID, "textures/gui/button38_hovered.png")
     );
 
     public MainMenuHomePanel() {
