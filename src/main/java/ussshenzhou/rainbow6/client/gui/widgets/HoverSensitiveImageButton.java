@@ -11,20 +11,19 @@ import net.minecraft.resources.ResourceLocation;
 /**
  * @author USS_Shenzhou
  */
-public class FocusSensitiveImageButton extends TPanel {
+public class HoverSensitiveImageButton extends TPanel {
     private TImage backgroundImage;
-    private TImage backgroundImageFocused;
+    private TImage backgroundImageHovered;
     private TButton button;
     private TLabel text;
 
-    //TODO text enlarge
     private int padding = 0;
     private boolean inTransition = false;
     private boolean transited = false;
     private int transitionTimeMinus1 = 2;
     private float transitionTick = 0;
 
-    public FocusSensitiveImageButton(Component text1, Button.OnPress onPress, ResourceLocation backgroundImageLocation, ResourceLocation backgroundImageLocationFocused) {
+    public HoverSensitiveImageButton(Component text1, Button.OnPress onPress, ResourceLocation backgroundImageLocation, ResourceLocation backgroundImageLocationFocused) {
         super();
         this.text = new TLabel(text1);
         this.button = new TButton(new TextComponent(""), onPress) {
@@ -34,11 +33,11 @@ public class FocusSensitiveImageButton extends TPanel {
             }
         };
         this.backgroundImage = new TImage(backgroundImageLocation);
-        this.backgroundImageFocused = new TImage(backgroundImageLocationFocused);
-        this.backgroundImageFocused.setVisibleT(false);
+        this.backgroundImageHovered = new TImage(backgroundImageLocationFocused);
+        this.backgroundImageHovered.setVisibleT(false);
 
         this.add(this.backgroundImage);
-        this.add(this.backgroundImageFocused);
+        this.add(this.backgroundImageHovered);
         this.add(this.button);
         this.add(this.text);
     }
@@ -46,7 +45,7 @@ public class FocusSensitiveImageButton extends TPanel {
     @Override
     public void layout() {
         backgroundImage.setBounds(padding, padding, this.width - padding * 2, this.height - padding * 2);
-        backgroundImageFocused.setBounds(0, 0, this.getSize());
+        backgroundImageHovered.setBounds(0, 0, this.getSize());
         LayoutHelper.BSameAsA(text, backgroundImage);
         button.setBounds(padding / 2, padding / 2, this.width - padding, this.height - padding);
 
@@ -57,13 +56,13 @@ public class FocusSensitiveImageButton extends TPanel {
     public void tickT() {
         if (button.isHoveredOrFocused()) {
             backgroundImage.setVisibleT(false);
-            backgroundImageFocused.setVisibleT(true);
+            backgroundImageHovered.setVisibleT(true);
         } else {
             backgroundImage.setVisibleT(true);
-            backgroundImageFocused.setVisibleT(false);
+            backgroundImageHovered.setVisibleT(false);
         }
 
-        if (backgroundImageFocused.isVisibleT() && !transited) {
+        if (backgroundImageHovered.isVisibleT() && !transited) {
             if (!inTransition) {
                 //begin transit
                 inTransition = true;
@@ -75,7 +74,7 @@ public class FocusSensitiveImageButton extends TPanel {
                 transitionTick = 0;
             }
         }
-        if (!backgroundImageFocused.isVisibleT()) {
+        if (!backgroundImageHovered.isVisibleT()) {
             inTransition = false;
             transited = false;
             transitionTick = 0;
@@ -88,12 +87,12 @@ public class FocusSensitiveImageButton extends TPanel {
     protected void renderChildren(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         for (TWidget tWidget : children) {
             if (tWidget.isVisibleT()) {
-                if (tWidget == text && backgroundImageFocused.isVisibleT()) {
+                if (tWidget == text && backgroundImageHovered.isVisibleT()) {
                     renderText(pPoseStack, pMouseX, pMouseY, pPartialTick);
                     continue;
                 }
-                if (tWidget == backgroundImageFocused) {
-                    renderBgImageFocused(pPoseStack, pMouseX, pMouseY, pPartialTick);
+                if (tWidget == backgroundImageHovered) {
+                    renderBgImageHovered(pPoseStack, pMouseX, pMouseY, pPartialTick);
                     continue;
                 }
                 tWidget.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
@@ -104,10 +103,10 @@ public class FocusSensitiveImageButton extends TPanel {
     /**
      * backgroundImage will be stretched to the size of backgroundImage, then magnified to original.
      */
-    private void renderBgImageFocused(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    private void renderBgImageHovered(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         if (padding != 0 && inTransition && transitionTick < transitionTimeMinus1) {
-            float minScaleX = (float) backgroundImage.getWidth() / backgroundImageFocused.getWidth();
-            float minScaleY = (float) backgroundImage.getHeight() / backgroundImageFocused.getHeight();
+            float minScaleX = (float) backgroundImage.getWidth() / backgroundImageHovered.getWidth();
+            float minScaleY = (float) backgroundImage.getHeight() / backgroundImageHovered.getHeight();
             float scaleX = minScaleX + transitionTick / transitionTimeMinus1 * (1 - minScaleX);
             float scaleY = minScaleY + transitionTick / transitionTimeMinus1 * (1 - minScaleY);
             float compensationRelativeX = (1 - scaleX) / (1 - minScaleX) * padding;
@@ -115,15 +114,15 @@ public class FocusSensitiveImageButton extends TPanel {
             pPoseStack.pushPose();
             //scale compensation = absolute + relative
             pPoseStack.translate(
-                    (1 - scaleX) * backgroundImageFocused.getX() + compensationRelativeX,
-                    (1 - scaleY) * backgroundImageFocused.getY() + compensationRelativeY,
+                    (1 - scaleX) * backgroundImageHovered.getX() + compensationRelativeX,
+                    (1 - scaleY) * backgroundImageHovered.getY() + compensationRelativeY,
                     0);
             pPoseStack.scale(scaleX, scaleY, 1);
-            backgroundImageFocused.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+            backgroundImageHovered.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
             pPoseStack.popPose();
             transitionTick += pPartialTick;
         } else {
-            backgroundImageFocused.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+            backgroundImageHovered.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
         }
     }
 
@@ -131,8 +130,8 @@ public class FocusSensitiveImageButton extends TPanel {
      * Text will be magnified when focused. To keep text's original shape, scaling will not calculate separately.
      */
     private void renderText(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        float maxScaleX = (float) backgroundImageFocused.getWidth() / backgroundImage.getWidth();
-        float maxScaleY = (float) backgroundImageFocused.getHeight() / backgroundImage.getHeight();
+        float maxScaleX = (float) backgroundImageHovered.getWidth() / backgroundImage.getWidth();
+        float maxScaleY = (float) backgroundImageHovered.getHeight() / backgroundImage.getHeight();
         float maxScale = Math.min(maxScaleX, maxScaleY);
         if (padding != 0 && inTransition && transitionTick < transitionTimeMinus1) {
             //float scaleX = 1 + transitionTick / transitionTimeMinus1 * (maxScaleX - 1);
@@ -149,7 +148,6 @@ public class FocusSensitiveImageButton extends TPanel {
         //float compensationRelativeY = (1 - scaleY) / (maxScaleY - 1) * padding;
         float compensationRelative = (1 - scale) / (maxScale - 1) * padding;
         pPoseStack.pushPose();
-        //TODO
         pPoseStack.translate(
                 (1 - scale) * text.getX() + compensationRelative,
                 (1 - scale) * text.getY() + compensationRelative,
@@ -163,8 +161,8 @@ public class FocusSensitiveImageButton extends TPanel {
         return backgroundImage;
     }
 
-    public TImage getBackgroundImageFocused() {
-        return backgroundImageFocused;
+    public TImage getBackgroundImageHovered() {
+        return backgroundImageHovered;
     }
 
     public TButton getButton() {

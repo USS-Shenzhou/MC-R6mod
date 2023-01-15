@@ -2,9 +2,10 @@
   "required": true,
   "minVersion": "0.8",
   "package": "ussshenzhou.rainbow6.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "refmap": "rainbow6.refmap.json",
   "mixins": [
+    "PauseScreenMixin"
   ],
   "client": [
   ],
