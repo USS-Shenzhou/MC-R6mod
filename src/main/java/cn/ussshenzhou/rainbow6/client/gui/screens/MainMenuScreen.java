@@ -1,12 +1,12 @@
-package ussshenzhou.rainbow6.client.gui.screens;
+package cn.ussshenzhou.rainbow6.client.gui.screens;
 
+import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
+import cn.ussshenzhou.rainbow6.client.gui.panels.MainMenuHeaderPanel;
 import cn.ussshenzhou.t88.gui.screen.TScreen;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.TextComponent;
-import ussshenzhou.rainbow6.client.gui.ScreenManager;
-import ussshenzhou.rainbow6.client.gui.panels.MainMenuHeaderPanel;
-import ussshenzhou.rainbow6.client.gui.panels.MainMenuHomePanel;
+import cn.ussshenzhou.rainbow6.client.gui.panels.MainMenuHomePanel;
 
 /**
  * @author USS_Shenzhou

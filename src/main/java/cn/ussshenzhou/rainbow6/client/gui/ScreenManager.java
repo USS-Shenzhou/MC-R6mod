@@ -1,4 +1,4 @@
-package ussshenzhou.rainbow6.client.gui;
+package cn.ussshenzhou.rainbow6.client.gui;
 
 import cn.ussshenzhou.t88.gui.screen.TScreen;
 import net.minecraft.client.Minecraft;

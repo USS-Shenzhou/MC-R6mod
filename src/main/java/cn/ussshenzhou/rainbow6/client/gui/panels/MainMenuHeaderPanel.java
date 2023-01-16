@@ -1,4 +1,4 @@
-package ussshenzhou.rainbow6.client.gui.panels;
+package cn.ussshenzhou.rainbow6.client.gui.panels;
 
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 
