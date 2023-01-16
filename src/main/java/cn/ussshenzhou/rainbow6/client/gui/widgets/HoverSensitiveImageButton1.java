@@ -1,4 +1,4 @@
-package ussshenzhou.rainbow6.client.gui.widgets;
+package cn.ussshenzhou.rainbow6.client.gui.widgets;
 
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.narration.NarratableEntry;

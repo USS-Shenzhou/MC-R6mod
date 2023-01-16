@@ -1,4 +1,4 @@
-package ussshenzhou.rainbow6.client.gui.widgets;
+package cn.ussshenzhou.rainbow6.client.gui.widgets;
 
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.*;

@@ -1,5 +1,8 @@
-package ussshenzhou.rainbow6.mixin;
+package cn.ussshenzhou.rainbow6.mixin;
 
+import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
+import cn.ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
+import cn.ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton1;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
 import net.minecraft.client.gui.screens.PauseScreen;
@@ -11,10 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import ussshenzhou.rainbow6.Rainbow6;
-import ussshenzhou.rainbow6.client.gui.ScreenManager;
-import ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
-import ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton1;
+import cn.ussshenzhou.rainbow6.Rainbow6;
 
 /**
  * @author USS_Shenzhou

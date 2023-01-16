@@ -1,4 +1,4 @@
-package ussshenzhou.rainbow6;
+package cn.ussshenzhou.rainbow6;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;

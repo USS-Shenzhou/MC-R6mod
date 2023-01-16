@@ -1,4 +1,4 @@
-package ussshenzhou.rainbow6.client.input;
+package cn.ussshenzhou.rainbow6.client.input;
 
 /**
  * @author USS_Shenzhou

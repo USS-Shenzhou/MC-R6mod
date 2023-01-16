@@ -1,4 +1,4 @@
-package ussshenzhou.rainbow6.client.input;
+package cn.ussshenzhou.rainbow6.client.input;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
@@ -9,8 +9,8 @@ import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
-import ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
-import ussshenzhou.rainbow6.client.gui.ScreenManager;
+import cn.ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
+import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
 
 /**
  * @author USS_Shenzhou
