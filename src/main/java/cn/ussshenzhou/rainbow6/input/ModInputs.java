@@ -29,7 +29,7 @@ public class ModInputs {
     public static void mainMenuKey(InputEvent.KeyInputEvent event) {
         if (MAIN_MENU_KEY.isPressed()) {
             //Minecraft.getInstance().displayGuiScreen(new R6RoundPrepareScreen(new TranslationTextComponent("rainbow6.gui.prepare")));
-            Minecraft.getInstance().displayGuiScreen(new R6MainMenuScreen(new TranslationTextComponent("rainbow6.gui.mainmenu")));
+            //Minecraft.getInstance().displayGuiScreen(new R6MainMenuScreen(new TranslationTextComponent("rainbow6.gui.mainmenu")));
         }
     }
 

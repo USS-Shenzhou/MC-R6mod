@@ -1,0 +1,21 @@
+{
+  "parent":"block/block",
+  "textures": {
+    "particle": "rainbow6:block/barricade",
+    "a": "rainbow6:block/barricade_block",
+    "b": "rainbow6:block/barricade_block_slit"
+  },
+  "elements": [
+    {   "from": [ 0, 2, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  {"uv": [ 0, 0, 16, 16 ], "texture": "#a"},
+        "up":    {"uv": [ 0, 0, 16, 16 ], "texture": "#a"},
+        "north": {"uv": [ 0, 0, 16, 16 ], "texture": "#b"},
+        "south": {"uv": [ 0, 0, 16, 16 ], "texture": "#b"},
+        "west":  {"uv": [ 0, 0, 16, 16 ], "texture": "#b"},
+        "east":  {"uv": [ 0, 0, 16, 16 ], "texture": "#b"}
+      }
+    }
+  ]
+}

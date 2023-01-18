@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 /**
  * @author USS_Shenzhou
  */
-@Mixin(Entity.class)
+@Mixin(value = Entity.class,remap = false)
 public interface MixinEntityAccessor {
 
     @Invoker("getFlag")

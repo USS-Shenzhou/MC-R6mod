@@ -69,5 +69,8 @@
   "gui.rainbow6.operators": "OPERATORS",
   "gui.rainbow6.loadout": "LOADOUT",
 
-  "effect.rainbow6.exposed": "Exposed"
+  "effect.rainbow6.exposed": "Exposed",
+
+  "block.rainbow6.barricade_block": "Barricade Block",
+  "block.rainbow6.barricade_block_slit": "Barricade Block (slit)"
 }

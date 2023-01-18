@@ -45,4 +45,6 @@ public class ModItems {
     public static Item crimsonHatch = new BlockItem(ModBlocks.crimsonHatch,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.crimsonHatch.getRegistryName());
     public static Item warpedHatch = new BlockItem(ModBlocks.warpedHatch,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.warpedHatch.getRegistryName());
 
+    public static Item barricadeBlock = new BlockItem(ModBlocks.barricadeBlock,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.barricadeBlock.getRegistryName());
+    public static Item barricadeBlockSlit = new BlockItem(ModBlocks.barricadeBlockSlit,new Item.Properties().group(ModItemGroups.Main)).setRegistryName(ModBlocks.barricadeBlockSlit.getRegistryName());
 }

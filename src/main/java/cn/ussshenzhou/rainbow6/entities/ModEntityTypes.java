@@ -35,7 +35,7 @@ public class ModEntityTypes {
             .build("smokeGrenade")
             .setRegistryName("rainbow6","smokegrenade");
     public static EntityType droneEntityType = EntityType.Builder.<DroneEntity>create(DroneEntity::new,EntityClassification.MISC)
-            .size(0.3f,0.16f)
+            .size(0.4f,0.12f)
             .build("drone")
             .setRegistryName("rainbow6","drone");
 }

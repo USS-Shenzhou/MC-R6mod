@@ -69,5 +69,8 @@
   "gui.rainbow6.operators": "特勤干员",
   "gui.rainbow6.loadout": "装备配置",
 
-  "effect.rainbow6.exposed": "被发现"
+  "effect.rainbow6.exposed": "被发现",
+
+  "block.rainbow6.barricade_block": "封阻块",
+  "block.rainbow6.barricade_block_slit": "封阻块（留缝）"
 }

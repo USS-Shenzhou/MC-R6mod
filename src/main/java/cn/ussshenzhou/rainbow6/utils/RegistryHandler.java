@@ -48,7 +48,9 @@ public class RegistryHandler {
                 ModBlocks.warpedHatch,
                 ModBlocks.brokenHatch,
 
-                ModBlocks.ironBarFloor
+                ModBlocks.ironBarFloor,
+                ModBlocks.barricadeBlock,
+                ModBlocks.barricadeBlockSlit
         );
     }
     @SubscribeEvent
@@ -103,7 +105,10 @@ public class RegistryHandler {
                 ModArmors.alexHelmet,
                 ModArmors.alexChestplate,
                 ModArmors.alexLeggings,
-                ModArmors.alexBoots
+                ModArmors.alexBoots,
+
+                ModItems.barricadeBlock,
+                ModItems.barricadeBlockSlit
         );
     }
 
