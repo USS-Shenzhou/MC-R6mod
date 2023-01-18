@@ -19,6 +19,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -146,7 +147,7 @@ public class DroneEntity extends ProjectileItemEntity implements Comparable<Dron
         }
         float i = this.rotationPitch < 0 ? j : MathHelper.cos(this.rotationPitch * ((float) Math.PI / 180F)) * j * 0.8f;
         x += (double) (MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180F)) * i);
-        y += this.rotationPitch < 0 ? 0 : MathHelper.sin(this.rotationPitch * ((float) Math.PI / 180F)) * j * 1.2f;
+        y += this.rotationPitch < 0 ? 0 : MathHelper.sin(this.rotationPitch * ((float) Math.PI / 180F)) * j * 1.8f;
         z += (double) (MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180F)) * i);
 
         this.setMotion(this.getMotion().add(x, y, z));
@@ -164,7 +165,7 @@ public class DroneEntity extends ProjectileItemEntity implements Comparable<Dron
     @Override
     protected void onImpact(RayTraceResult result) {
         if (result.getType() == RayTraceResult.Type.BLOCK) {
-            R6ThrowableEntityUtils.EntityReboundOnBlock.reboundOrStop(result, this, 0.1d, null, 0.25d, world);
+            R6ThrowableEntityUtils.EntityReboundOnBlock.reboundOrStop(result, this, 0.1d, null, 0, world);
             this.markVelocityChanged();
         }
         if (result.getType() == RayTraceResult.Type.ENTITY) {
