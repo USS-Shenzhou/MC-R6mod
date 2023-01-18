@@ -96,9 +96,9 @@ public class HUDClientEvent {
         if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
             return;
         }
-        /*if (InGameClientProperties.isUsingDrone){
+        if (InGameClientProperties.isUsingDrone){
             InGameClientProperties.getR6DroneGui(event).render();
-        }*/
+        }
     }
     @SubscribeEvent
     public static void hideHand(RenderHandEvent event){

@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 /**
  * @author USS_Shenzhou
  */
-@Mixin(Entity.class)
+@Mixin(value = Entity.class,remap = false)
 public abstract class MixinEntity {
 
     /**

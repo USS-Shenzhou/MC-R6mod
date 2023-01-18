@@ -58,9 +58,9 @@ public class R6DroneGui extends AbstractGui {
     public void render() {
         RenderSystem.disableBlend();
         //RenderSystem.enableBlend();
-        matrixStack.push();
+        /*matrixStack.push();
         fill(matrixStack, (int) (this.width / 20), (int) (this.height / 1.35), (int) (this.width / 20 + 20 * 5), (int) (this.height / 1.35 + 16), 0xff2195ec);
-        matrixStack.pop();
+        matrixStack.pop();*/
 
     }
 
