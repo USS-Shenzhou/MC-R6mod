@@ -1,24 +1,21 @@
 package cn.ussshenzhou.rainbow6.client.gui.screens;
 
-import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
 import cn.ussshenzhou.rainbow6.client.gui.panels.MainMenuHeaderPanel;
-import cn.ussshenzhou.t88.gui.screen.TScreen;
+import cn.ussshenzhou.rainbow6.client.gui.panels.MainMenuHomePanel;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.network.chat.TextComponent;
-import cn.ussshenzhou.rainbow6.client.gui.panels.MainMenuHomePanel;
 
 /**
  * @author USS_Shenzhou
  */
-public class MainMenuScreen extends TScreen {
+public class MainMenuScreen extends AbstractR6Screen {
     private final MainMenuHeaderPanel headerPanel = new MainMenuHeaderPanel();
     private final MainMenuHomePanel homePanel = new MainMenuHomePanel();
 
     public static final int PADDING = 4;
 
     public MainMenuScreen() {
-        super(new TextComponent("Main Menu"));
+        super("Main Menu Screen");
 
         this.add(headerPanel);
         this.add(homePanel);
@@ -32,18 +29,7 @@ public class MainMenuScreen extends TScreen {
     }
 
     @Override
-    public boolean isPauseScreen() {
-        return false;
-    }
-
-    @Override
     protected void renderBackGround(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         fill(pPoseStack, 0, 0, width, height, 0x80000000);
-    }
-
-    @Override
-    public void onClose(boolean isFinal) {
-        super.onClose(isFinal);
-        ScreenManager.exitCurrentLayer();
     }
 }

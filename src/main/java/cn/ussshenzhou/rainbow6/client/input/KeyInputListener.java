@@ -25,7 +25,7 @@ public class KeyInputListener {
     @SubscribeEvent
     public static void onKeyInput(InputEvent.KeyInputEvent event) {
         if (MAIN_MENU.consumeClick()) {
-            ScreenManager.showNewLayer(new MainMenuScreen());
+            ScreenManager.showNewLayerOverBg(new MainMenuScreen());
         }
     }
 }

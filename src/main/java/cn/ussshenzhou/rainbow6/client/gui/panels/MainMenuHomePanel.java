@@ -1,5 +1,7 @@
 package cn.ussshenzhou.rainbow6.client.gui.panels;
 
+import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
+import cn.ussshenzhou.rainbow6.client.gui.screens.AttentionScreen;
 import cn.ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -14,9 +16,9 @@ public class MainMenuHomePanel extends TPanel {
     private final HoverSensitiveImageButton playButton = new HoverSensitiveImageButton(
             new TranslatableComponent("gui.r6ms.mainmenu.play"),
             pButton -> {
-
+                ScreenManager.showNewLayerOverBg(new AttentionScreen(true));
             },
-            new ResourceLocation(Rainbow6.MOD_ID, "textures/gui/button38_unhovered30.png"),
+            new ResourceLocation(Rainbow6.MOD_ID, "textures/gui/button_std_unhovered.png"),
             new ResourceLocation(Rainbow6.MOD_ID, "textures/gui/button38_hovered.png")
     );
 

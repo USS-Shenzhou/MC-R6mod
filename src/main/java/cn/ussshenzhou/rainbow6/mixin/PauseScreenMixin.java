@@ -29,10 +29,10 @@ public class PauseScreenMixin extends Screen {
     HoverSensitiveImageButton1 initiateR6msButton = new HoverSensitiveImageButton1(
             new TranslatableComponent("gui.r6ms.pausescreen.button"),
             pButton -> {
-                ScreenManager.showNewLayer(new MainMenuScreen());
+                ScreenManager.showNewLayerOverBg(new MainMenuScreen());
             },
-            new ResourceLocation(Rainbow6.MOD_ID,"textures/gui/button20_unhovered18.png"),
-            new ResourceLocation(Rainbow6.MOD_ID,"textures/gui/button20_hovered.png")
+            new ResourceLocation(Rainbow6.MOD_ID,"textures/gui/button20_shadow_unhovered18.png"),
+            new ResourceLocation(Rainbow6.MOD_ID,"textures/gui/button20_shadow_hovered.png")
     );
 
     @Inject(method = "createPauseMenu",at=@At("RETURN"))
