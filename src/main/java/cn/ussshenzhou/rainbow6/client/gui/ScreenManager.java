@@ -3,8 +3,10 @@ package cn.ussshenzhou.rainbow6.client.gui;
 import cn.ussshenzhou.rainbow6.mixin.ForgeHooksClientAccessor;
 import cn.ussshenzhou.t88.gui.screen.TScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraftforge.client.ForgeHooksClient;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 /**
@@ -12,6 +14,9 @@ import java.util.Stack;
  */
 public class ScreenManager {
     private static final Stack<TScreen> SCREEN_STACK = new Stack<>();
+    private static Stack<Screen> screenBuffer = new Stack<>();
+
+    //TODO full test
 
     public static void showNewLayerOverBg(TScreen screen) {
         SCREEN_STACK.push(screen);
@@ -24,7 +29,14 @@ public class ScreenManager {
     }
 
     public static void exitCurrentLayer() {
-        TScreen currentLayer = SCREEN_STACK.pop();
+        TScreen currentLayer = null;
+        TScreen nextLayer = null;
+        try {
+            currentLayer = SCREEN_STACK.pop();
+            nextLayer = SCREEN_STACK.peek();
+        } catch (EmptyStackException ignored) {
+
+        }
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.screen == null) {
             return;
@@ -32,22 +44,21 @@ public class ScreenManager {
         if (currentLayer != minecraft.screen) {
             //TODO error
         }
-        if (currentLayer == ForgeHooksClientAccessor.getGuiLayers().peek()) {
-            ForgeHooksClient.popGuiLayer(minecraft);
-            if (minecraft.screen != SCREEN_STACK.peek()) {
-                //TODO
-            }
+        Screen forgeLayer = null;
+        try {
+            forgeLayer = ForgeHooksClientAccessor.getGuiLayers().peek();
+        } catch (EmptyStackException ignored) {
+
         }
-
-        /*
-
-        if (minecraft.screen != null && minecraft.screen == currentLayer) {
-            try {
-                minecraft.setScreen(SCREEN_STACK.peek());
-            } catch (EmptyStackException ignored) {
-                minecraft.setScreen(null);
+        if (currentLayer == forgeLayer) {
+            ForgeHooksClient.popGuiLayer(minecraft);
+            if (minecraft.screen != nextLayer) {
+                screenBuffer = ForgeHooksClientAccessor.getGuiLayers();
+                minecraft.setScreen(nextLayer);
             }
-        }*/
-        ForgeHooksClient.popGuiLayer(Minecraft.getInstance());
+        } else {
+            minecraft.setScreen(nextLayer);
+            ForgeHooksClientAccessor.setGuiLayers(screenBuffer);
+        }
     }
 }

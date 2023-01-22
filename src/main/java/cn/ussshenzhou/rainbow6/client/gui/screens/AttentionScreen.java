@@ -7,6 +7,7 @@ import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
@@ -14,31 +15,57 @@ import net.minecraft.resources.ResourceLocation;
  * @author USS_Shenzhou
  */
 public class AttentionScreen extends AbstractR6Screen {
-    private final Panel backGroundPanel = new Panel();
+    private final Panel panel = new Panel();
     private final boolean canCancel;
 
-    public AttentionScreen() {
-        this(false);
+    public AttentionScreen(Component abstractMessage, Component detailMessage) {
+        this(abstractMessage, detailMessage, false);
     }
 
-    public AttentionScreen(boolean canCancel) {
+    public AttentionScreen(Component abstractMessage, Component detailMessage, boolean canCancel) {
         super("Attention Screen");
         this.canCancel = canCancel;
-        this.add(backGroundPanel);
+        this.add(panel);
         if (!canCancel) {
-            backGroundPanel.cancelButton.setVisibleT(false);
+            panel.cancelButton.setVisibleT(false);
         }
+        panel.abstractMessage.setText(abstractMessage);
+        panel.detailMessage.setText(detailMessage);
+    }
+
+    public static AttentionScreen errorScreen(Component abstractMessage, Component detailMessage){
+        AttentionScreen a = new AttentionScreen(abstractMessage,detailMessage);
+        a.panel.confirmButton.getButton().setOnPress(pButton -> {
+            a.onClose(true);
+        });
+        return a;
     }
 
     @Override
     public void layout() {
-        backGroundPanel.setBounds((width - 157) / 2, 0, 157, height);
+        panel.setBounds((width - 157) / 2, 0, 157, height);
         super.layout();
     }
 
     @Override
     protected void renderBackGround(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         fill(pPoseStack, 0, 0, width, height, 0x80000000);
+    }
+
+    public TLabel getAbstract() {
+        return panel.abstractMessage;
+    }
+
+    public TLabel getDetail(){
+        return panel.detailMessage;
+    }
+
+    public HoverSensitiveImageButton getConfirm(){
+        return panel.confirmButton;
+    }
+
+    public HoverSensitiveImageButton getCancel(){
+        return panel.cancelButton;
     }
 
     private class Panel extends TPanel {
@@ -62,6 +89,8 @@ public class AttentionScreen extends AbstractR6Screen {
 
         public Panel() {
             this.setBackground(0xff313037);
+            abstractMessage.setFontSize(10);
+            detailMessage.setFontSize(4);
             this.add(abstractMessage);
             this.add(detailMessage);
             confirmButton.setPadding(padding);
@@ -74,7 +103,7 @@ public class AttentionScreen extends AbstractR6Screen {
         public void layout() {
             int gap = 9;
             abstractMessage.setBounds(gap, 40, width - 2 * gap, abstractMessage.getPreferredSize().y);
-            LayoutHelper.BBottomOfA(detailMessage, 10, abstractMessage, abstractMessage.getWidth(), height / 2);
+            LayoutHelper.BBottomOfA(detailMessage, 8, abstractMessage, abstractMessage.getWidth(), detailMessage.getPreferredSize().y);
             int gap1 = 5;
             cancelButton.setBounds(gap1, height - 20 - 17, 145, 17);
             LayoutHelper.BTopOfA(confirmButton, padding, cancelButton);
