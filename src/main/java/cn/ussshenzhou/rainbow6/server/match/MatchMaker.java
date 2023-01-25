@@ -21,6 +21,7 @@ public class MatchMaker {
     @SubscribeEvent
     public static void removeFromWaiting(PlayerEvent.PlayerLoggedOutEvent event) {
         WAITING_PLAYERS.remove(event.getPlayer());
+        //TODO player during match
     }
 
     public static void kickFromWaiting(ServerPlayer player){
@@ -29,7 +30,10 @@ public class MatchMaker {
     }
 
     public static void tick(){
-
+        //TODO MMR
+        if (WAITING_PLAYERS.size() >= 10){
+            ServerMatchManager.newMatch(WAITING_PLAYERS.stream().toList().subList(0,10));
+        }
     }
 
 }
