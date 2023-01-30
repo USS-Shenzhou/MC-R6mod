@@ -1,8 +1,8 @@
 package cn.ussshenzhou.rainbow6.client.gui.screens;
 
-import cn.ussshenzhou.rainbow6.Rainbow6;
 import cn.ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton;
 import cn.ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton1;
+import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
@@ -75,17 +75,16 @@ public class AttentionScreen extends AbstractR6Screen {
                 new TranslatableComponent("gui.r6ms.confirm"),
                 pButton -> {
                 },
-                new ResourceLocation(Rainbow6.MOD_ID, "textures/gui/button_std_unhovered.png"),
-                new ResourceLocation(Rainbow6.MOD_ID, "textures/gui/button_17_hovered.png")
+                new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+                new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_17_hovered.png")
         );
         private final HoverSensitiveImageButton cancelButton = new HoverSensitiveImageButton1(
                 new TranslatableComponent("gui.r6ms.cancel"),
                 pButton -> {
                 },
-                new ResourceLocation(Rainbow6.MOD_ID, "textures/gui/button_std_unhovered.png"),
-                new ResourceLocation(Rainbow6.MOD_ID, "textures/gui/button_17_hovered.png")
+                new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+                new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_17_hovered.png")
         );
-        private final int padding = 2;
 
         public Panel() {
             this.setBackground(0xff313037);
@@ -93,8 +92,8 @@ public class AttentionScreen extends AbstractR6Screen {
             detailMessage.setFontSize(4);
             this.add(abstractMessage);
             this.add(detailMessage);
-            confirmButton.setPadding(padding);
-            cancelButton.setPadding(padding);
+            confirmButton.setPadding(R6Constants.PADDING_SMALL);
+            cancelButton.setPadding(R6Constants.PADDING_SMALL);
             this.add(confirmButton);
             this.add(cancelButton);
         }
@@ -106,7 +105,7 @@ public class AttentionScreen extends AbstractR6Screen {
             LayoutHelper.BBottomOfA(detailMessage, 8, abstractMessage, abstractMessage.getWidth(), detailMessage.getPreferredSize().y);
             int gap1 = 5;
             cancelButton.setBounds(gap1, height - 20 - 17, 145, 17);
-            LayoutHelper.BTopOfA(confirmButton, padding, cancelButton);
+            LayoutHelper.BTopOfA(confirmButton, R6Constants.PADDING_SMALL, cancelButton);
             super.layout();
         }
     }

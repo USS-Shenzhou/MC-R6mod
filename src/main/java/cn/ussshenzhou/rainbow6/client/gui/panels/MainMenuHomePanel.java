@@ -1,35 +1,97 @@
 package cn.ussshenzhou.rainbow6.client.gui.panels;
 
-import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
-import cn.ussshenzhou.rainbow6.client.gui.screens.AttentionScreen;
 import cn.ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
+import cn.ussshenzhou.rainbow6.client.gui.widgets.FocusSensitiveImageSelectButton;
+import cn.ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton;
+import cn.ussshenzhou.rainbow6.util.R6Constants;
+import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
+import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import cn.ussshenzhou.rainbow6.Rainbow6;
-import cn.ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton;
 
 /**
  * @author USS_Shenzhou
  */
 public class MainMenuHomePanel extends TPanel {
     private final HoverSensitiveImageButton playButton = new HoverSensitiveImageButton(
-            new TranslatableComponent("gui.r6ms.mainmenu.play"),
+            new TranslatableComponent("gui.r6ms.main-menu.home.play"),
+            pButton -> {
+                //TODO open modeSelectPanel
+            },
+            new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+            new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")
+    );
+    /**
+     * TODO This should be PlayLastPlayedModeButton. To simplify, we make it just start quick match.
+     */
+    private final HoverSensitiveImageButton playQuickMatchButton = new HoverSensitiveImageButton(
+            new TranslatableComponent("gui.r6ms.main-menu.home.play_quick_match"),
+            pButton -> {
+                startQueuing();
+            },
+            new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+            new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png"));
+    private final FocusSensitiveImageSelectButton queuing = new FocusSensitiveImageSelectButton(
+            new TranslatableComponent("gui.r6ms.main-menu.home.queuing"),
             pButton -> {
             },
-            new ResourceLocation(Rainbow6.MOD_ID, "textures/gui/button_std_unhovered.png"),
-            new ResourceLocation(Rainbow6.MOD_ID, "textures/gui/button38_hovered.png")
+            new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+            new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")
     );
+    private final HoverSensitiveImageButton cancelButton = new HoverSensitiveImageButton(
+            new TranslatableComponent("gui.r6ms.main-menu.home.cancel_match"),
+            pButton -> {
+                stopQueuing();
+            },
+            new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+            new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")) {
+        @Override
+        public void tickT() {
+            super.tickT();
+            queuing.setSelected(!this.button.isHoveredOrFocused());
+        }
+    };
 
     public MainMenuHomePanel() {
-        playButton.setPadding(MainMenuScreen.PADDING);
+        playButton.setPadding(R6Constants.PADDING_STD);
         this.add(playButton);
+        playQuickMatchButton.setPadding(R6Constants.PADDING_STD);
+        playQuickMatchButton.getText().setFontSize(R6Constants.FONT_SMALL);
+        this.add(playQuickMatchButton);
+        queuing.setPadding(R6Constants.PADDING_STD);
+        queuing.setSelected(true);
+        queuing.setVisibleT(false);
+        queuing.getText().setHorizontalAlignment(HorizontalAlignment.CENTER);
+        this.add(queuing);
+        cancelButton.setPadding(R6Constants.PADDING_STD);
+        cancelButton.setVisibleT(false);
+        this.add(cancelButton);
+    }
+
+    private void startQueuing() {
+        ((MainMenuScreen) this.getParentScreen()).startQueuing();
+        playButton.setVisibleT(false);
+        playQuickMatchButton.setVisibleT(false);
+        queuing.setVisibleT(true);
+        cancelButton.setVisibleT(true);
+    }
+
+    private void stopQueuing() {
+        ((MainMenuScreen) this.getParentScreen()).stopQueuing();
+        playButton.setVisibleT(true);
+        playQuickMatchButton.setVisibleT(true);
+        queuing.setVisibleT(false);
+        cancelButton.setVisibleT(false);
     }
 
     @Override
     public void layout() {
-        playButton.setBounds(10, 17, 73 + 2 * MainMenuScreen.PADDING, 30 + 2 * MainMenuScreen.PADDING);
+        playButton.setBounds(10, 17, 73 + 2 * R6Constants.PADDING_STD, 30 + 2 * R6Constants.PADDING_STD);
+        LayoutHelper.BRightOfA(playQuickMatchButton, -R6Constants.PADDING_STD, playButton);
+        LayoutHelper.BSameAsA(queuing, playButton);
+        LayoutHelper.BSameAsA(cancelButton, playQuickMatchButton);
         super.layout();
     }
+
 }

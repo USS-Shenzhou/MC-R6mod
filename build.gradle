@@ -43,7 +43,7 @@ minecraft {
     //mappings channel: 'official', version: '1.18.2'
     mappings channel: 'parchment', version: '2022.11.06-1.18.2'
 
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
@@ -160,8 +160,8 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.1.86'
 
     //implementation fg.deobf('curse.maven:t88-663112:4332327-sources-4332329')
-    implementation fg.deobf('curse.maven:t88-663112:4357135')
-    annotationProcessor 'curse.maven:t88-663112:4357135'
+    implementation fg.deobf('curse.maven:t88-663112:4372363')
+    annotationProcessor 'curse.maven:t88-663112:4372363'
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency

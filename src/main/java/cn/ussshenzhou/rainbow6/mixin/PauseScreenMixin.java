@@ -3,6 +3,7 @@ package cn.ussshenzhou.rainbow6.mixin;
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
 import cn.ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
 import cn.ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton1;
+import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
 import net.minecraft.client.gui.screens.PauseScreen;
@@ -14,7 +15,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import cn.ussshenzhou.rainbow6.Rainbow6;
 
 /**
  * @author USS_Shenzhou
@@ -27,12 +27,12 @@ public class PauseScreenMixin extends Screen {
     }
 
     HoverSensitiveImageButton1 initiateR6msButton = new HoverSensitiveImageButton1(
-            new TranslatableComponent("gui.r6ms.pausescreen.button"),
+            new TranslatableComponent("gui.r6ms.pause-screen.button"),
             pButton -> {
                 ScreenManager.showNewLayerClearBg(new MainMenuScreen());
             },
-            new ResourceLocation(Rainbow6.MOD_ID,"textures/gui/button20_shadow_unhovered18.png"),
-            new ResourceLocation(Rainbow6.MOD_ID,"textures/gui/button20_shadow_hovered.png")
+            new ResourceLocation(R6Constants.MOD_ID,"textures/gui/button20_shadow_unhovered18.png"),
+            new ResourceLocation(R6Constants.MOD_ID,"textures/gui/button20_shadow_hovered.png")
     );
 
     @Inject(method = "createPauseMenu",at=@At("RETURN"))

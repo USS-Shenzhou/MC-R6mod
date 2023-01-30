@@ -2,7 +2,6 @@ package cn.ussshenzhou.rainbow6.server.match;
 
 import net.minecraft.server.level.ServerPlayer;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.UUID;
@@ -14,15 +13,21 @@ public class ServerMatch {
     private final UUID id = UUID.randomUUID();
     private final LinkedHashSet<ServerPlayer> teamOrange = new LinkedHashSet<>();
     private final LinkedHashSet<ServerPlayer> teamBlue = new LinkedHashSet<>();
+    private final ServerMatchHandler handler = new ServerMatchHandler();
 
     public ServerMatch(Collection<ServerPlayer> players) {
         //TODO maybe random?
         teamOrange.addAll(players.stream().toList().subList(0,5));
         teamBlue.addAll(players.stream().toList().subList(5,10));
+
     }
 
     public UUID getId() {
         return id;
+    }
+
+    public void tick(){
+
     }
 
     @Override

@@ -14,4 +14,8 @@ public class ServerMatchManager {
     public static void newMatch(Collection<ServerPlayer> players){
         MATCHES.add(new ServerMatch(players));
     }
+
+    public static void tick(){
+        MATCHES.forEach(ServerMatch::tick);
+    }
 }

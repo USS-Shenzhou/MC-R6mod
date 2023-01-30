@@ -12,10 +12,10 @@ import net.minecraft.resources.ResourceLocation;
  * @author USS_Shenzhou
  */
 public class HoverSensitiveImageButton extends TPanel {
-    private TImage backgroundImage;
-    private TImage backgroundImageHovered;
-    private TButton button;
-    private TLabel text;
+    protected TImage backgroundImage;
+    protected TImage backgroundImageHovered;
+    protected TButton button;
+    protected TLabel text;
 
     private int padding = 0;
     private boolean inTransition = false;
@@ -23,7 +23,7 @@ public class HoverSensitiveImageButton extends TPanel {
     private int transitionTimeMinus1 = 2;
     private float transitionTick = 0;
 
-    public HoverSensitiveImageButton(Component text1, Button.OnPress onPress, ResourceLocation backgroundImageLocation, ResourceLocation backgroundImageLocationFocused) {
+    public HoverSensitiveImageButton(Component text1, Button.OnPress onPress, ResourceLocation backgroundImageLocation, ResourceLocation backgroundImageLocationHovered) {
         super();
         this.text = new TLabel(text1);
         this.button = new TButton(new TextComponent(""), onPress) {
@@ -33,7 +33,7 @@ public class HoverSensitiveImageButton extends TPanel {
             }
         };
         this.backgroundImage = new TImage(backgroundImageLocation);
-        this.backgroundImageHovered = new TImage(backgroundImageLocationFocused);
+        this.backgroundImageHovered = new TImage(backgroundImageLocationHovered);
         this.backgroundImageHovered.setVisibleT(false);
 
         this.add(this.backgroundImage);

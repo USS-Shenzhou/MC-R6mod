@@ -1,8 +1,9 @@
 package cn.ussshenzhou.rainbow6.server;
 
 import cn.ussshenzhou.rainbow6.server.match.MatchMaker;
-import com.mojang.logging.LogUtils;
+import cn.ussshenzhou.rainbow6.server.match.ServerMatchManager;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -16,6 +17,13 @@ public class GeneralListener {
     public static void tick(TickEvent.ServerTickEvent event){
         if (event.phase== TickEvent.Phase.END){
             MatchMaker.tick();
+            ServerMatchManager.tick();
         }
+    }
+
+    @SubscribeEvent
+    public static void playerDisconnect(PlayerEvent.PlayerLoggedOutEvent event) {
+        MatchMaker.getWaitingPlayers().remove(event.getPlayer());
+        //TODO player during match
     }
 }

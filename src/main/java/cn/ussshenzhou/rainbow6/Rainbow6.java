@@ -8,11 +8,10 @@ import net.minecraftforge.fml.common.Mod;
  */
 @Mod("r6ms")
 public class Rainbow6 {
-    public static final String MOD_ID = "r6ms";
 
     public Rainbow6() {
-
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        System.setProperty("t88.test_screen_override","cn.ussshenzhou.rainbow6.client.gui.screens.MatchMapSceneScreen");
     }
 }
