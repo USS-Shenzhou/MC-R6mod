@@ -51,6 +51,7 @@ minecraft {
         client {
             workingDirectory project.file('run')
 
+            jvmArg "-XX:+AllowEnhancedClassRedefinition"
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
             // "SCAN": For mods scan.
@@ -76,6 +77,8 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
+
+            jvmArg "-XX:+AllowEnhancedClassRedefinition"
 
             property 'forge.logging.markers', 'REGISTRIES'
 
@@ -160,8 +163,8 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.1.86'
 
     //implementation fg.deobf('curse.maven:t88-663112:4332327-sources-4332329')
-    implementation fg.deobf('curse.maven:t88-663112:4372363')
-    annotationProcessor 'curse.maven:t88-663112:4372363'
+    implementation fg.deobf('curse.maven:t88-663112:4375160')
+    annotationProcessor 'curse.maven:t88-663112:4375160'
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency

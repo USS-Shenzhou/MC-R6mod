@@ -11,11 +11,11 @@ import net.minecraftforge.fml.common.Mod;
  * @author USS_Shenzhou
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class GeneralListener {
+public class GeneralServerListener {
 
     @SubscribeEvent
-    public static void tick(TickEvent.ServerTickEvent event){
-        if (event.phase== TickEvent.Phase.END){
+    public static void tick(TickEvent.ServerTickEvent event) {
+        if (event.phase == TickEvent.Phase.END && event.haveTime()) {
             MatchMaker.tick();
             ServerMatchManager.tick();
         }

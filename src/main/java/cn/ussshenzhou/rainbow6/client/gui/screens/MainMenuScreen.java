@@ -1,9 +1,11 @@
 package cn.ussshenzhou.rainbow6.client.gui.screens;
 
+import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
 import cn.ussshenzhou.rainbow6.client.gui.panels.MainMenuHeaderPanel;
 import cn.ussshenzhou.rainbow6.client.gui.panels.MainMenuHomePanel;
 import cn.ussshenzhou.rainbow6.client.gui.panels.MainMenuOperatorsPanel;
 import cn.ussshenzhou.rainbow6.client.gui.widgets.QueuingForMatchBar;
+import cn.ussshenzhou.t88.gui.HudManager;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -13,10 +15,14 @@ import com.mojang.blaze3d.vertex.PoseStack;
  */
 public class MainMenuScreen extends AbstractR6Screen {
     private final MainMenuHeaderPanel headerPanel = new MainMenuHeaderPanel();
-    private final QueuingForMatchBar queuingForMatchBar = new QueuingForMatchBar();
+    public final QueuingForMatchBar queuingForMatchBar = new QueuingForMatchBar();
 
     public final MainMenuHomePanel homePanel = new MainMenuHomePanel();
     public final MainMenuOperatorsPanel operatorsPanel = new MainMenuOperatorsPanel();
+    /**
+     * Only use for UI change (headerPanel move).
+     */
+    private boolean queuing = false;
 
     public MainMenuScreen() {
         super("Main Menu Screen");
@@ -39,7 +45,7 @@ public class MainMenuScreen extends AbstractR6Screen {
     @Override
     public void layout() {
         queuingForMatchBar.setBounds(0, 0, this.width, 12);
-        headerPanel.setBounds(0, 0, this.width, 18);
+        headerPanel.setBounds(0, queuing ? 12 : 0, this.width, 18);
         //Don't use LayoutHelper, cause headerPanel may move.
         homePanel.setBounds(0, headerPanel.getHeight(), this.width, this.height - headerPanel.getHeight());
         LayoutHelper.BSameAsA(operatorsPanel, homePanel);
@@ -53,17 +59,32 @@ public class MainMenuScreen extends AbstractR6Screen {
         LayoutHelper.BBottomOfA(headerPanel, 0, queuingForMatchBar, headerPanel.getSize());
         headerPanel.layout();
         queuingForMatchBar.start();
-
+        queuing = true;
     }
 
     public void stopQueuing() {
         headerPanel.setBounds(0, 0, this.width, 18);
         headerPanel.layout();
         queuingForMatchBar.stop();
+        queuing = false;
+    }
+
+    public boolean isQueuing() {
+        return queuing;
     }
 
     @Override
     protected void renderBackGround(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         fill(pPoseStack, 0, 0, width, height, 0x80000000);
     }
+
+    @Override
+    public void onClose(boolean isFinal) {
+        super.onClose(isFinal);
+        if (queuing) {
+            ScreenManager.mainMenuScreenBuffer = this;
+            HudManager.add(queuingForMatchBar);
+        }
+    }
+
 }

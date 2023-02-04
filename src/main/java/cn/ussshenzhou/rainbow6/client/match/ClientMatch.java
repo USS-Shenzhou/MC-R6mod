@@ -1,5 +1,6 @@
 package cn.ussshenzhou.rainbow6.client.match;
 
+import cn.ussshenzhou.rainbow6.util.Sides;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 
 /**
@@ -15,5 +16,20 @@ public class ClientMatch {
     public static String mapName(){
         //TODO
         return "Test";
+    }
+
+    public static int getRoundNumber(){
+        return 1;
+        //TODO
+    }
+
+    public static Sides getSide(){
+        return Sides.ATTACKER;
+        //TODO
+    }
+
+    public static int getRoundsLeftToExchange(){
+        return 2;
+        //TODO
     }
 }

@@ -4,6 +4,8 @@
 
   "gui.r6ms.confirm": " Confirm",
   "gui.r6ms.cancel": " Cancel",
+  "gui.r6ms.attacker": "Attacker",
+  "gui.r6ms.defender": "Defender",
 
   "gui.r6ms.main-menu.header.quick_match": "§b→§r QUICK MATCH  ",
 
@@ -11,7 +13,7 @@
   "gui.r6ms.main-menu.home.play": " play\n ",
   "gui.r6ms.main-menu.home.play_quick_match": " MULTIPLAYER \n PLAY QUICK MATCH",
   "gui.r6ms.main-menu.home.queuing": "MATCHMAKING\n. . .",
-  "gui.r6ms.main-menu.home.cancel_match": " Cancel",
+  "gui.r6ms.main-menu.home.cancel_match": " §c∁→§r Cancel",
 
   "gui.r6ms.main-menu.operators": "OPERATORS",
 
@@ -20,5 +22,7 @@
   "gui.r6ms.match-map-scene.bomb": "BOMB",
   "gui.r6ms.match-map-scene.quick-match": "QUICK MATCH",
   "gui.r6ms.match-map-scene.your-team": "YOUR TEAM",
-  "gui.r6ms.match-map-scene.enemy": "ENEMY"
+  "gui.r6ms.match-map-scene.enemy": "ENEMY",
+  "gui.r6ms.match-map-scene.round": "Round %s"
+
 }

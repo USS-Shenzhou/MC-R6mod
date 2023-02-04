@@ -1,7 +1,6 @@
 package cn.ussshenzhou.rainbow6.client.input;
 
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
-import cn.ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraftforge.api.distmarker.Dist;
@@ -25,7 +24,7 @@ public class KeyInputListener {
     @SubscribeEvent
     public static void onKeyInput(InputEvent.KeyInputEvent event) {
         if (MAIN_MENU.consumeClick()) {
-            ScreenManager.showNewLayerClearBg(new MainMenuScreen());
+            ScreenManager.openMainMenuScreen();
         }
     }
 }

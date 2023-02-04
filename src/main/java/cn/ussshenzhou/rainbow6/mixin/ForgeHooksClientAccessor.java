@@ -11,16 +11,18 @@ import java.util.Stack;
 /**
  * @author USS_Shenzhou
  */
-@Mixin(value = ForgeHooksClient.class,remap = false)
+@Mixin(value = ForgeHooksClient.class, remap = false)
 public interface ForgeHooksClientAccessor {
-    @Accessor
-    static Stack<Screen> getGuiLayers() {
-        throw new UnsupportedOperationException();
-    }
+
 
     @Mutable
     @Accessor
     static void setGuiLayers(Stack<Screen> guiLayers) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Accessor
+    static Stack<Screen> getGuiLayers() {
         throw new UnsupportedOperationException();
     }
 }

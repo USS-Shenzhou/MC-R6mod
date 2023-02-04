@@ -2,8 +2,8 @@ package cn.ussshenzhou.rainbow6.client.gui.screens;
 
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
+import cn.ussshenzhou.rainbow6.util.Sides;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
-import cn.ussshenzhou.t88.gui.screen.TScreen;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
@@ -16,21 +16,27 @@ import net.minecraft.resources.ResourceLocation;
 /**
  * @author USS_Shenzhou
  */
-public class MatchMapSceneScreen extends TScreen {
+public class MatchBeginMapSceneScreen extends AbstractR6Screen {
     private final TLabel bomb = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.bomb"));
     private final TLabel quickMatch = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.quick-match"));
-    private final TImage background = new TImage(ClientMatch.getTeamColor() == TeamColor.BLUE ?
-            new ResourceLocation(R6Constants.MOD_ID, "textures/gui/match_map_scene_blue.png")
-            : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/match_map_scene_orange.png")
+    private final TImage background = new TImage(ClientMatch.getTeamColor() == TeamColor.BLUE
+            ? new ResourceLocation(R6Constants.MOD_ID, "textures/gui/match_begin_map_scene_blue.png")
+            : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/match_begin_map_scene_orange.png")
     );
     private final TLabel yourTeam = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.your-team"));
     private final TLabel enemy = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.enemy"));
-    //private final TImage attackerIcon
-    //private final TImage defenderIcon
+    private final TImage yourTeamIcon = new TImage(ClientMatch.getSide() == Sides.ATTACKER
+            ? new ResourceLocation(R6Constants.MOD_ID, "textures/gui/attacker19_white.png")
+            : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/defender19_white.png")
+    );
+    private final TImage enemyIcon = new TImage(ClientMatch.getSide() != Sides.ATTACKER
+            ? new ResourceLocation(R6Constants.MOD_ID, "textures/gui/attacker13_white.png")
+            : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/defender13_white.png")
+    );
     private final TLabel mapName = new TLabel(new TextComponent(ClientMatch.mapName()));
 
-    public MatchMapSceneScreen() {
-        super(new TextComponent("MatchMapSceneScreen"));
+    public MatchBeginMapSceneScreen() {
+        super("MatchMapSceneScreen");
         bomb.setHorizontalAlignment(HorizontalAlignment.CENTER);
         bomb.setFontSize(21);
         this.add(bomb);
@@ -46,6 +52,8 @@ public class MatchMapSceneScreen extends TScreen {
         mapName.setBackground(0x60000000);
         mapName.setHorizontalAlignment(HorizontalAlignment.CENTER);
         this.add(mapName);
+        this.add(yourTeamIcon);
+        this.add(enemyIcon);
     }
 
     @Override
@@ -64,6 +72,8 @@ public class MatchMapSceneScreen extends TScreen {
                 enemy.getPreferredSize()
         );
         mapName.setBounds(width - mapName.getPreferredSize().x - 20, 33, mapName.getPreferredSize().x + 20, 21);
+        yourTeamIcon.setBounds(background.getX() + 87, background.getY() + 3, 19, 19);
+        enemyIcon.setBounds(background.getX() + 115, background.getY() + 6, 13, 13);
         super.layout();
     }
 

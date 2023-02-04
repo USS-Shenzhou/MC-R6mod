@@ -35,6 +35,12 @@ public class QueuingForMatchBar extends TPanel {
         super.layout();
     }
 
+    @Override
+    public void resizeAsHud(int screenWidth, int screenHeight) {
+        this.setBounds(0, 0, screenWidth, 12);
+        super.resizeAsHud(screenWidth, screenHeight);
+    }
+
     public void start() {
         this.setVisibleT(true);
         timer.start();
