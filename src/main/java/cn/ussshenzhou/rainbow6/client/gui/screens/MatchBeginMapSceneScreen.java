@@ -1,8 +1,8 @@
 package cn.ussshenzhou.rainbow6.client.gui.screens;
 
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
+import cn.ussshenzhou.rainbow6.util.IconHelper;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
-import cn.ussshenzhou.rainbow6.util.Sides;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
@@ -23,16 +23,10 @@ public class MatchBeginMapSceneScreen extends AbstractR6Screen {
             ? new ResourceLocation(R6Constants.MOD_ID, "textures/gui/match_begin_map_scene_blue.png")
             : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/match_begin_map_scene_orange.png")
     );
-    private final TLabel yourTeam = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.your-team"));
+    private final TLabel ally = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.your-team"));
     private final TLabel enemy = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.enemy"));
-    private final TImage yourTeamIcon = new TImage(ClientMatch.getSide() == Sides.ATTACKER
-            ? new ResourceLocation(R6Constants.MOD_ID, "textures/gui/attacker19_white.png")
-            : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/defender19_white.png")
-    );
-    private final TImage enemyIcon = new TImage(ClientMatch.getSide() != Sides.ATTACKER
-            ? new ResourceLocation(R6Constants.MOD_ID, "textures/gui/attacker13_white.png")
-            : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/defender13_white.png")
-    );
+    private final TImage allyIcon = new TImage(IconHelper.getAllyIconWhite(19));
+    private final TImage enemyIcon = new TImage(IconHelper.getEnemyIconWhite(13));
     private final TLabel mapName = new TLabel(new TextComponent(ClientMatch.mapName()));
 
     public MatchBeginMapSceneScreen() {
@@ -43,16 +37,16 @@ public class MatchBeginMapSceneScreen extends AbstractR6Screen {
         quickMatch.setHorizontalAlignment(HorizontalAlignment.CENTER);
         this.add(quickMatch);
         this.add(background);
-        yourTeam.setFontSize(10);
-        yourTeam.setHorizontalAlignment(HorizontalAlignment.CENTER);
-        this.add(yourTeam);
+        ally.setFontSize(10);
+        ally.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        this.add(ally);
         enemy.setFontSize(9);
         enemy.setHorizontalAlignment(HorizontalAlignment.CENTER);
         this.add(enemy);
         mapName.setBackground(0x60000000);
         mapName.setHorizontalAlignment(HorizontalAlignment.CENTER);
         this.add(mapName);
-        this.add(yourTeamIcon);
+        this.add(allyIcon);
         this.add(enemyIcon);
     }
 
@@ -61,10 +55,10 @@ public class MatchBeginMapSceneScreen extends AbstractR6Screen {
         bomb.setBounds(0, height / 2, width, bomb.getPreferredSize().y);
         LayoutHelper.BBottomOfA(quickMatch, 0, bomb);
         background.setBounds((width - 222) / 2, height / 2 - 25 - 7, 222, 25);
-        yourTeam.setBounds(
-                background.getX() + (82 - yourTeam.getPreferredSize().x) / 2,
-                background.getY() + (25 - yourTeam.getPreferredSize().y) / 2,
-                yourTeam.getPreferredSize()
+        ally.setBounds(
+                background.getX() + (82 - ally.getPreferredSize().x) / 2,
+                background.getY() + (25 - ally.getPreferredSize().y) / 2,
+                ally.getPreferredSize()
         );
         enemy.setBounds(
                 width / 2 + 22 + (60 - enemy.getPreferredSize().x) / 2,
@@ -72,7 +66,7 @@ public class MatchBeginMapSceneScreen extends AbstractR6Screen {
                 enemy.getPreferredSize()
         );
         mapName.setBounds(width - mapName.getPreferredSize().x - 20, 33, mapName.getPreferredSize().x + 20, 21);
-        yourTeamIcon.setBounds(background.getX() + 87, background.getY() + 3, 19, 19);
+        allyIcon.setBounds(background.getX() + 87, background.getY() + 3, 19, 19);
         enemyIcon.setBounds(background.getX() + 115, background.getY() + 6, 13, 13);
         super.layout();
     }

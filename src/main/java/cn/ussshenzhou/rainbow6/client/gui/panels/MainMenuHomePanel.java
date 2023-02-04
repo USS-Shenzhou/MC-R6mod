@@ -3,7 +3,7 @@ package cn.ussshenzhou.rainbow6.client.gui.panels;
 import cn.ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
 import cn.ussshenzhou.rainbow6.client.gui.widgets.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton;
-import cn.ussshenzhou.rainbow6.client.gui.widgets.MatchPlayerInfoBarHud;
+import cn.ussshenzhou.rainbow6.client.gui.widgets.RoundPlayerInfoBarHud;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.HudManager;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
@@ -20,7 +20,7 @@ public class MainMenuHomePanel extends TPanel {
             new TranslatableComponent("gui.r6ms.main-menu.home.play"),
             pButton -> {
                 //TODO open modeSelectPanel
-                HudManager.add(new MatchPlayerInfoBarHud());
+                HudManager.add(new RoundPlayerInfoBarHud());
             },
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")

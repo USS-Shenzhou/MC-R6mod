@@ -1,8 +1,8 @@
 package cn.ussshenzhou.rainbow6.client.gui.screens;
 
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
+import cn.ussshenzhou.rainbow6.util.IconHelper;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
-import cn.ussshenzhou.rainbow6.util.Sides;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
@@ -25,16 +25,10 @@ public class RoundBeginMapSceneScreen extends AbstractR6Screen {
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_begin_map_scene_blue.png")
             : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_begin_map_scene_orange.png")
     );
-    private final TLabel yourTeam = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.your-team"));
+    private final TLabel ally = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.your-team"));
     private final TLabel enemy = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.enemy"));
-    private final TImage yourTeamIcon = new TImage(ClientMatch.getSide() == Sides.ATTACKER
-            ? new ResourceLocation(R6Constants.MOD_ID, "textures/gui/attacker15_white.png")
-            : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/defender15_white.png")
-    );
-    private final TImage enemyIcon = new TImage(ClientMatch.getSide() != Sides.ATTACKER
-            ? new ResourceLocation(R6Constants.MOD_ID, "textures/gui/attacker15_white.png")
-            : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/defender15_white.png")
-    );
+    private final TImage allyIcon = new TImage(IconHelper.getAllyIconWhite(15));
+    private final TImage enemyIcon = new TImage(IconHelper.getAllyIconWhite(15));
     private final TLabel roundsLeftToExchange = new TLabel(new TextComponent(String.valueOf(ClientMatch.getRoundsLeftToExchange())));
     private final TImage exchange = new TImage(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_begin_map_scene_exchange.png"));
 
@@ -49,9 +43,9 @@ public class RoundBeginMapSceneScreen extends AbstractR6Screen {
         mapName.setHorizontalAlignment(HorizontalAlignment.CENTER);
         this.add(mapName);
         this.add(background);
-        yourTeam.setFontSize(9);
-        yourTeam.setHorizontalAlignment(HorizontalAlignment.CENTER);
-        this.add(yourTeam);
+        ally.setFontSize(9);
+        ally.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        this.add(ally);
         enemy.setFontSize(9);
         enemy.setHorizontalAlignment(HorizontalAlignment.CENTER);
         this.add(enemy);
@@ -59,7 +53,7 @@ public class RoundBeginMapSceneScreen extends AbstractR6Screen {
         this.add(roundsLeftToExchange);
         exchange.setImageFit(ImageFit.FIT);
         this.add(exchange);
-        this.add(yourTeamIcon);
+        this.add(allyIcon);
         this.add(enemyIcon);
     }
 
@@ -69,19 +63,19 @@ public class RoundBeginMapSceneScreen extends AbstractR6Screen {
         LayoutHelper.BBottomOfA(side, 0, round);
         mapName.setBounds(width - mapName.getPreferredSize().x - 20, 33, mapName.getPreferredSize().x + 20, 21);
         background.setBounds((width - 222) / 2, height / 2 - 21 - 7, 222, 21);
-        yourTeam.setBounds(
-                background.getX() + (73 - yourTeam.getPreferredSize().x) / 2,
-                background.getY() + (21 - yourTeam.getPreferredSize().y) / 2,
-                yourTeam.getPreferredSize()
+        ally.setBounds(
+                background.getX() + (73 - ally.getPreferredSize().x) / 2,
+                background.getY() + (21 - ally.getPreferredSize().y) / 2,
+                ally.getPreferredSize()
         );
         enemy.setBounds(
                 width / 2 + 12 + 24 + (73 - enemy.getPreferredSize().x) / 2,
-                yourTeam.getY(),
+                ally.getY(),
                 enemy.getPreferredSize()
         );
         roundsLeftToExchange.setBounds(0, background.getY() + (21 - roundsLeftToExchange.getPreferredSize().y) / 2, width, roundsLeftToExchange.getPreferredSize().y);
         exchange.setBounds(0, roundsLeftToExchange.getY() - 3, width, 16);
-        yourTeamIcon.setBounds(background.getX() + 79, background.getY() + 3, 15, 15);
+        allyIcon.setBounds(background.getX() + 79, background.getY() + 3, 15, 15);
         enemyIcon.setBounds(background.getX() + 127, background.getY() + 3, 15, 15);
         super.layout();
     }

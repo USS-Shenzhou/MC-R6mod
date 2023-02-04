@@ -1,7 +1,7 @@
 package cn.ussshenzhou.rainbow6.client.gui.widgets;
 
-import cn.ussshenzhou.rainbow6.util.Operators;
-import cn.ussshenzhou.rainbow6.util.R6Constants;
+import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
+import cn.ussshenzhou.rainbow6.util.*;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
@@ -14,20 +14,29 @@ import java.util.ArrayList;
 /**
  * @author USS_Shenzhou
  */
-public class MatchPlayerInfoBarHud extends TImage {
+public class RoundPlayerInfoBarHud extends TImage {
     private final TeamPlayers allies = new TeamPlayers();
     private final TeamPlayers enemies = new TeamPlayers();
+    private final TImage allyIcon = new TImage(IconHelper.getAllyIconColored(20));
+    private final TImage enemyIcon = new TImage(IconHelper.getEnemyIconColored(20));
 
-    public MatchPlayerInfoBarHud() {
-        super(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_player_info_blue.png"));
+    public RoundPlayerInfoBarHud() {
+        super(new ResourceLocation(R6Constants.MOD_ID, ClientMatch.getTeamColor() == TeamColor.BLUE
+                ? "textures/gui/round_player_info_blue.png"
+                : "textures/gui/round_player_info_orange.png"
+        ));
         this.add(allies);
         this.add(enemies);
+        this.add(allyIcon);
+        this.add(enemyIcon);
     }
 
     @Override
     public void layout() {
         allies.setBounds(10, 2, 57, 12);
         enemies.setBounds(width - 10 - 57, 2, 57, 12);
+        allyIcon.setBounds(71, 4, 10, 10);
+        enemyIcon.setBounds(width - 71 - 10, 4, 10, 10);
         super.layout();
     }
 
@@ -80,12 +89,13 @@ public class MatchPlayerInfoBarHud extends TImage {
             super.layout();
         }
 
-        public void setPlayerPrepared(int index){
+        public void setPlayerPrepared(int index) {
             list.get(index).setImageLocation(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/player_info_bar_prepared.png"));
         }
 
-        public void setPlayerOperator(int index, Operators operator){
+        public void setPlayerOperator(int index, Operators operator) {
             //list.get(index).setImageLocation(operator);
+            //TODO
         }
     }
 }
