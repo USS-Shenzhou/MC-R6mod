@@ -17,17 +17,17 @@ import net.minecraft.resources.ResourceLocation;
  * @author USS_Shenzhou
  */
 public class MatchBeginMapSceneScreen extends AbstractR6Screen {
-    private final TLabel bomb = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.bomb"));
-    private final TLabel quickMatch = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.quick-match"));
+    private final TLabel bomb = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.bomb"));
+    private final TLabel quickMatch = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.quick_match"));
     private final TImage background = new TImage(ClientMatch.getTeamColor() == TeamColor.BLUE
             ? new ResourceLocation(R6Constants.MOD_ID, "textures/gui/match_begin_map_scene_blue.png")
             : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/match_begin_map_scene_orange.png")
     );
-    private final TLabel ally = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.your-team"));
-    private final TLabel enemy = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.enemy"));
+    private final TLabel ally = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.your_team"));
+    private final TLabel enemy = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.enemy"));
     private final TImage allyIcon = new TImage(IconHelper.getAllyIconWhite(19));
     private final TImage enemyIcon = new TImage(IconHelper.getEnemyIconWhite(13));
-    private final TLabel mapName = new TLabel(new TextComponent(ClientMatch.mapName()));
+    private final TLabel mapName = new TLabel(new TextComponent(ClientMatch.getMap().getName()));
 
     public MatchBeginMapSceneScreen() {
         super("MatchMapSceneScreen");

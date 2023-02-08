@@ -18,15 +18,15 @@ import net.minecraft.resources.ResourceLocation;
  * @author USS_Shenzhou
  */
 public class RoundBeginMapSceneScreen extends AbstractR6Screen {
-    private final TLabel round = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.round", ClientMatch.getRoundNumber()));
+    private final TLabel round = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.round", ClientMatch.getCurrentRoundNumber()));
     private final TLabel side = new TLabel(new TranslatableComponent(ClientMatch.getSide().getTranslateKey()));
-    private final TLabel mapName = new TLabel(new TextComponent(ClientMatch.mapName()));
+    private final TLabel mapName = new TLabel(new TextComponent(ClientMatch.getMap().getName()));
     private final TImage background = new TImage(ClientMatch.getTeamColor() == TeamColor.BLUE ?
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_begin_map_scene_blue.png")
             : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_begin_map_scene_orange.png")
     );
-    private final TLabel ally = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.your-team"));
-    private final TLabel enemy = new TLabel(new TranslatableComponent("gui.r6ms.match-map-scene.enemy"));
+    private final TLabel ally = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.your_team"));
+    private final TLabel enemy = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.enemy"));
     private final TImage allyIcon = new TImage(IconHelper.getAllyIconWhite(15));
     private final TImage enemyIcon = new TImage(IconHelper.getAllyIconWhite(15));
     private final TLabel roundsLeftToExchange = new TLabel(new TextComponent(String.valueOf(ClientMatch.getRoundsLeftToExchange())));

@@ -9,7 +9,7 @@ import net.minecraft.network.chat.TextComponent;
  * @author USS_Shenzhou
  */
 public abstract class AbstractR6Screen extends TScreen {
-    protected AbstractR6Screen(String screenName) {
+    public AbstractR6Screen(String screenName) {
         super(new TextComponent(screenName));
     }
 

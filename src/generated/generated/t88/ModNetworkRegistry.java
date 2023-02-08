@@ -10,6 +10,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import cn.ussshenzhou.t88.network.PacketProxy;
 
 import cn.ussshenzhou.rainbow6.network.MatchMakerChange;
+import cn.ussshenzhou.rainbow6.network.RoundPrepareTopView;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModNetworkRegistry {
@@ -30,6 +31,20 @@ public class ModNetworkRegistry {
                     .consumer(MatchMakerChange::handler)
                     .add();
             PacketProxy.addChannel("matchmakerchange", channelMatchMakerChange);
+
+            SimpleChannel channelRoundPrepareTopView = NetworkRegistry.newSimpleChannel(
+                    new ResourceLocation("RoundPrepareTopView"),
+                    () -> "1.0",
+                    (version) -> version.equals("1.0"),
+                    (version) -> version.equals("1.0")
+            );
+
+            channelRoundPrepareTopView.messageBuilder(RoundPrepareTopView.class, getId())
+                    .encoder(RoundPrepareTopView::write)
+                    .decoder(RoundPrepareTopView::new)
+                    .consumer(RoundPrepareTopView::handler)
+                    .add();
+            PacketProxy.addChannel("roundpreparetopview", channelRoundPrepareTopView);
 
         });
     }

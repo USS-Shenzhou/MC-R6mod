@@ -26,7 +26,7 @@ public class PauseScreenMixin extends Screen {
     }
 
     HoverSensitiveImageButton1 initiateR6msButton = new HoverSensitiveImageButton1(
-            new TranslatableComponent("gui.r6ms.pause-screen.button"),
+            new TranslatableComponent("gui.r6ms.pause_screen.button"),
             pButton -> {
                 ScreenManager.openMainMenuScreen();
             },

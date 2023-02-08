@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
  */
 public class MainMenuHeaderPanel extends TPanel {
     private final FocusSensitiveImageSelectButton homeButton = new FocusSensitiveImageSelectButton(
-            new TranslatableComponent("gui.r6ms.main-menu.home"),
+            new TranslatableComponent("gui.r6ms.main_menu.home"),
             pButton -> {
                 MainMenuScreen mainMenu = ((MainMenuScreen) getParentScreen());
                 mainMenu.setVisiblePanel(mainMenu.homePanel);
@@ -24,7 +24,7 @@ public class MainMenuHeaderPanel extends TPanel {
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button18_cutout_selected.png")
     );
     private final FocusSensitiveImageSelectButton operatorsButton = new FocusSensitiveImageSelectButton(
-            new TranslatableComponent("gui.r6ms.main-menu.operators"),
+            new TranslatableComponent("gui.r6ms.main_menu.operators"),
             pButton -> {
                 MainMenuScreen mainMenu = ((MainMenuScreen) getParentScreen());
                 mainMenu.setVisiblePanel(mainMenu.operatorsPanel);

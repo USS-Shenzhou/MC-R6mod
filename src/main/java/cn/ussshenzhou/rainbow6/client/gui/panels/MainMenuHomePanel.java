@@ -3,12 +3,13 @@ package cn.ussshenzhou.rainbow6.client.gui.panels;
 import cn.ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
 import cn.ussshenzhou.rainbow6.client.gui.widgets.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton;
-import cn.ussshenzhou.rainbow6.client.gui.widgets.RoundPlayerInfoBarHud;
+import cn.ussshenzhou.rainbow6.network.RoundPrepareTopView;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
-import cn.ussshenzhou.t88.gui.HudManager;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
+import cn.ussshenzhou.t88.network.PacketProxy;
+import com.mojang.math.Vector3d;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
@@ -17,10 +18,12 @@ import net.minecraft.resources.ResourceLocation;
  */
 public class MainMenuHomePanel extends TPanel {
     private final HoverSensitiveImageButton playButton = new HoverSensitiveImageButton(
-            new TranslatableComponent("gui.r6ms.main-menu.home.play"),
+            new TranslatableComponent("gui.r6ms.main_menu.home.play"),
             pButton -> {
                 //TODO open modeSelectPanel
-                HudManager.add(new RoundPlayerInfoBarHud());
+                //ScreenManager.showNewLayerClearBg(new RoundPrepareScreen());
+                //((LevelRendererProxy) Minecraft.getInstance().levelRenderer).enableOrthographic(40).setClipRoof(true);
+                PacketProxy.getChannel(RoundPrepareTopView.class).sendToServer(new RoundPrepareTopView(new Vector3d(0,0,0)));
             },
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")
@@ -29,21 +32,21 @@ public class MainMenuHomePanel extends TPanel {
      * TODO This should be PlayLastPlayedModeButton. To simplify, we make it just start quick match.
      */
     private final HoverSensitiveImageButton playQuickMatchButton = new HoverSensitiveImageButton(
-            new TranslatableComponent("gui.r6ms.main-menu.home.play_quick_match"),
+            new TranslatableComponent("gui.r6ms.main_menu.home.play_quick_match"),
             pButton -> {
                 startQueuing();
             },
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png"));
     private final FocusSensitiveImageSelectButton queuing = new FocusSensitiveImageSelectButton(
-            new TranslatableComponent("gui.r6ms.main-menu.home.queuing"),
+            new TranslatableComponent("gui.r6ms.main_menu.home.queuing"),
             pButton -> {
             },
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")
     );
     private final HoverSensitiveImageButton cancelButton = new HoverSensitiveImageButton(
-            new TranslatableComponent("gui.r6ms.main-menu.home.cancel_match"),
+            new TranslatableComponent("gui.r6ms.main_menu.home.cancel_match"),
             pButton -> {
                 stopQueuing();
             },

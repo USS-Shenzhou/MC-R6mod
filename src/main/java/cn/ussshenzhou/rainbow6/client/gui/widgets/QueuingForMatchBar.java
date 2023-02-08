@@ -11,7 +11,7 @@ import net.minecraft.network.chat.TranslatableComponent;
  * @author USS_Shenzhou
  */
 public class QueuingForMatchBar extends TPanel {
-    private TLabel gameMode = new TLabel(new TranslatableComponent("gui.r6ms.main-menu.header.quick_match"));
+    private TLabel gameMode = new TLabel(new TranslatableComponent("gui.r6ms.main_menu.header.quick_match"));
     private TTimer timer = new TTimer();
 
     public QueuingForMatchBar() {

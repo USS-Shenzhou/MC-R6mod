@@ -11,6 +11,6 @@ public class Rainbow6 {
 
     public Rainbow6() {
         MinecraftForge.EVENT_BUS.register(this);
-        System.setProperty("t88.test_screen_override","cn.ussshenzhou.rainbow6.client.gui.screens.RoundBeginMapSceneScreen");
+        System.setProperty("t88.test_screen_override","cn.ussshenzhou.rainbow6.client.gui.screens.RoundPrepareScreen");
     }
 }
