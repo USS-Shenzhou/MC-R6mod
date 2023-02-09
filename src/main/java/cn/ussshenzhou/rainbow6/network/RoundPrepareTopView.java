@@ -5,7 +5,12 @@ import cn.ussshenzhou.t88.network.annotation.Decoder;
 import cn.ussshenzhou.t88.network.annotation.Encoder;
 import cn.ussshenzhou.t88.network.annotation.NetPacket;
 import com.mojang.math.Vector3d;
+import net.minecraft.client.Minecraft;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkDirection;
@@ -18,22 +23,30 @@ import java.util.function.Supplier;
  */
 @NetPacket
 public class RoundPrepareTopView {
-    final Vector3d pos;
+    final double x, y, z;
+    final boolean turn;
 
-    public RoundPrepareTopView(Vector3d pos) {
-        this.pos = pos;
+    public RoundPrepareTopView(double x, double y, double z, boolean turn) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.turn = turn;
     }
 
     @Decoder
     public RoundPrepareTopView(FriendlyByteBuf buf) {
-        this.pos = new Vector3d(buf.readDouble(), buf.readDouble(), buf.readDouble());
+        x = buf.readDouble();
+        y = buf.readDouble();
+        z = buf.readDouble();
+        turn = buf.readBoolean();
     }
 
     @Encoder
     public void write(FriendlyByteBuf buf) {
-        buf.writeDouble(pos.x);
-        buf.writeDouble(pos.y);
-        buf.writeDouble(pos.z);
+        buf.writeDouble(x);
+        buf.writeDouble(y);
+        buf.writeDouble(z);
+        buf.writeBoolean(turn);
     }
 
     @Consumer
@@ -58,10 +71,11 @@ public class RoundPrepareTopView {
 
     public void serverHandler(Supplier<NetworkEvent.Context> context) {
         try {
-            context.get().getSender().teleportTo(pos.x, pos.y, pos.z);
-            context.get().getSender().setXRot(-180);
-            context.get().getSender().setYRot(90);
+            //TODO security check
+            context.get().getSender().connection.teleport(x, y, z, turn ? -90 : 180, 90);
+            context.get().getSender().setGameMode(GameType.SPECTATOR);
         } catch (NullPointerException ignored) {
         }
     }
+
 }

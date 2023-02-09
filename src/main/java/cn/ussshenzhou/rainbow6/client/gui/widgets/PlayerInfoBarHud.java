@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * @author USS_Shenzhou
  */
-public class RoundPlayerInfoBarHud extends TImage {
+public class PlayerInfoBarHud extends TImage {
     private final TeamPlayers allies = new TeamPlayers();
     private final TeamPlayers enemies = new TeamPlayers();
     private final TImage allyIcon = new TImage(IconHelper.getAllyIconColored(20));
@@ -30,12 +30,9 @@ public class RoundPlayerInfoBarHud extends TImage {
     private final TLabel allyScore = new TLabel(new TextComponent(String.valueOf(ClientMatch.getAllyScore())));
     private final TLabel enemyScore = new TLabel(new TextComponent(String.valueOf(ClientMatch.getEnemyScore())));
     private final TLabel roundCount = new TLabel(new TranslatableComponent("gui.r6ms.round_player_info_bar.round", ClientMatch.getCurrentRoundNumber()));
-    private final TTimer timer = TTimer.newTimerCountDown(
-            //---dev---
-            30
-    );
+    private TTimer timer;
 
-    public RoundPlayerInfoBarHud() {
+    public PlayerInfoBarHud(int countdownTime) {
         super(new ResourceLocation(R6Constants.MOD_ID, ClientMatch.getTeamColor() == TeamColor.BLUE
                 ? "textures/gui/round_player_info_blue.png"
                 : "textures/gui/round_player_info_orange.png"
@@ -53,13 +50,12 @@ public class RoundPlayerInfoBarHud extends TImage {
         roundCount.setHorizontalAlignment(HorizontalAlignment.CENTER);
         roundCount.setFontSize(3.49f);
         this.add(roundCount);
+        timer = TTimer.newTimerCountDown(countdownTime);
         timer.setHorizontalAlignment(HorizontalAlignment.CENTER);
         timer.setShowFullFormat(true);
         timer.setKeepDigitsLength(false);
         timer.setShowUpto(TTimer.TimeCategory.MIN);
         this.add(timer);
-        //---dev---
-        timer.start();
     }
 
     @Override
@@ -113,6 +109,11 @@ public class RoundPlayerInfoBarHud extends TImage {
 
     public TTimer getTimer() {
         return timer;
+    }
+
+    public void resetTimer(int countdownTime){
+        this.timer = TTimer.newTimerCountDown(countdownTime);
+        this.layout();
     }
 
     public class TeamPlayers extends TPanel {

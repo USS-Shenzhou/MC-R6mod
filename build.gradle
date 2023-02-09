@@ -163,8 +163,10 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.1.86'
 
     //implementation fg.deobf('curse.maven:t88-663112:4332327-sources-4332329')
-    implementation fg.deobf('curse.maven:t88-663112:4380807')
-    annotationProcessor 'curse.maven:t88-663112:4380807'
+    implementation fg.deobf('curse.maven:t88-663112:4386420')
+    annotationProcessor 'curse.maven:t88-663112:4386420'
+
+    runtimeOnly fg.deobf('curse.maven:we-225608:3697298')
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency

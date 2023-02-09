@@ -1,6 +1,7 @@
 package cn.ussshenzhou.rainbow6.client.gui;
 
 import cn.ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
+import cn.ussshenzhou.rainbow6.client.gui.widgets.PlayerInfoBarHud;
 import cn.ussshenzhou.rainbow6.mixin.ForgeHooksClientAccessor;
 import cn.ussshenzhou.t88.gui.HudManager;
 import cn.ussshenzhou.t88.gui.screen.TScreen;
@@ -23,7 +24,7 @@ public class ScreenManager {
     private static final Stack<TScreen> SCREEN_STACK = new Stack<>();
     public static MainMenuScreen mainMenuScreenBuffer = null;
     private static Stack<Screen> screenBuffer = new Stack<>();
-    //TODO full test
+    public static PlayerInfoBarHud playerInfoBarHud = null;
 
     public static void showNewLayerOverBg(TScreen screen) {
         SCREEN_STACK.push(screen);
