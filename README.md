@@ -24,11 +24,11 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 **作为Minecraft模组的GNU GPL版本3第7节额外授权**
 
-如果你通过连接或合并Minecraft修改该程序或者其任何部分，而受到该库许可证（即Minecraft EULA）条款的制约，本程序的许可证授权你输送修改结果的额外权利。修改结果的非源代码形式的相关源代码应当包含所用Minecraft的源代码部分和本软件的源代码部分。
+如果你通过连接或合并Minecraft修改该程序或者其任何部分，而受到该库许可证（即Minecraft EULA）条款的制约，本程序的许可证授权你输送修改结果的额外权利。修改结果的非源代码形式的相关源代码应当包含本软件的源代码部分。
 
 **Additional permission under GNU GPL version 3 section 7 as a Minecraft mod**
 
-If you modify this Program, or any covered work, by linking or combining it with Minecraft, containing parts covered by the terms of Minecraft EULA, the licensors of this Program grant you additional permission to convey the resulting work. Corresponding Source for a non-source form of such a combination shall include the source code for the parts of Minecraft used as well as that of the covered work.
+If you modify this Program, or any covered work, by linking or combining it with Minecraft, containing parts covered by the terms of Minecraft EULA, the licensors of this Program grant you additional permission to convey the resulting work. Corresponding Source for a non-source form of such a combination shall include the source code for the parts of the covered work.
 
 ---
 
