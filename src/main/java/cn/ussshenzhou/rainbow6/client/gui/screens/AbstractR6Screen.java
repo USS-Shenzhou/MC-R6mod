@@ -25,4 +25,5 @@ public abstract class AbstractR6Screen extends TScreen {
         }
         ScreenManager.exitCurrentLayer();
     }
+    //TODO forbidden close on esc
 }

@@ -24,7 +24,7 @@ public class QueuingForMatchBar extends TPanel {
         timer.setBackground(0xff000000);
         timer.setForeground(0xfffff43a);
         timer.setPrefix(" ⌚ ");
-        timer.setFontSize(R6Constants.FONT_SMALL);
+        timer.setFontSize(R6Constants.FONT_SMALL_3);
         this.add(timer);
     }
 

@@ -11,6 +11,7 @@
   "client": [
     "GameRendererMixin",
     "LevelRendererMixin",
+    "MinecraftMixin",
     "PauseScreenMixin"
   ],
   "injectors": {

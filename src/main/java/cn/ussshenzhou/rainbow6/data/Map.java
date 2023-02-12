@@ -146,6 +146,10 @@ public class Map {
         s.setSpawnPosName("SpawnPos 1");
         s.setSpawnPosPos(new BlockPos(-24, -60, 112));
         l.add(s);
+        var s1 = new SpawnPos();
+        s1.setSpawnPosName("SpawnPos 2");
+        s1.setSpawnPosPos(new BlockPos(-68, -59, 26));
+        l.add(s1);
         return l;
         //return spawnPositions;
     }

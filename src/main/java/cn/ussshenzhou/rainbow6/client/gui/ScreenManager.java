@@ -19,7 +19,7 @@ import java.util.Stack;
 /**
  * @author USS_Shenzhou
  */
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE,value = Dist.CLIENT)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ScreenManager {
     private static final Stack<TScreen> SCREEN_STACK = new Stack<>();
     public static MainMenuScreen mainMenuScreenBuffer = null;
@@ -75,13 +75,19 @@ public class ScreenManager {
         }
     }
 
+    public static void clearLayers() {
+        while (!SCREEN_STACK.isEmpty()) {
+            exitCurrentLayer();
+        }
+    }
+
     public static void initResizeScreen(TScreen screen) {
         Minecraft minecraft = Minecraft.getInstance();
         screen.resize(minecraft, minecraft.getWindow().getGuiScaledWidth(), minecraft.getWindow().getGuiScaledHeight());
     }
 
     @SubscribeEvent
-    public static void onPlayerOut(PlayerEvent.PlayerLoggedOutEvent event){
+    public static void onPlayerOut(PlayerEvent.PlayerLoggedOutEvent event) {
         SCREEN_STACK.clear();
         mainMenuScreenBuffer = null;
         screenBuffer.clear();

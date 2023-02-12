@@ -15,6 +15,7 @@ public class FocusSensitiveImageSelectButton extends HoverSensitiveImageButton{
 
     public FocusSensitiveImageSelectButton(Component text1, Button.OnPress onPress, ResourceLocation backgroundImageLocation, ResourceLocation backgroundImageLocationFocused) {
         super(text1, onPress, backgroundImageLocation, backgroundImageLocationFocused);
+        this.remove(button);
         this.button = new TButton(new TextComponent(""), onPress) {
             @Override
             public void renderButton(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {

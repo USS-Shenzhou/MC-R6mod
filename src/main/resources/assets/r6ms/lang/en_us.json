@@ -23,8 +23,12 @@
   "gui.r6ms.match_map_scene.quick_match": "QUICK MATCH",
   "gui.r6ms.match_map_scene.your_team": "YOUR TEAM",
   "gui.r6ms.match_map_scene.enemy": "ENEMY",
-  "gui.r6ms.match_map_scene.round": "Round %s",
+  "gui.r6ms.match_map_scene.round": "ROUND %s",
 
-  "gui.r6ms.round_player_info_bar.round": "Round %s"
+  "gui.r6ms.round_player_info_bar.round": "ROUND %s",
 
+  "gui.r6ms.round_prepare.locations": "LOCATIONS",
+  "gui.r6ms.round_prepare.operators": "OPERATORS",
+  "gui.r6ms.round_prepare.loadout": "LOADOUT",
+  "gui.r6ms.round_prepare.loading_top_view": "Loading map top view"
 }

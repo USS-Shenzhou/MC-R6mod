@@ -12,6 +12,7 @@ import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import cn.ussshenzhou.t88.gui.widegt.TTimer;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -111,7 +112,7 @@ public class PlayerInfoBarHud extends TImage {
         return timer;
     }
 
-    public void resetTimer(int countdownTime){
+    public void resetTimer(int countdownTime) {
         this.timer = TTimer.newTimerCountDown(countdownTime);
         this.layout();
     }

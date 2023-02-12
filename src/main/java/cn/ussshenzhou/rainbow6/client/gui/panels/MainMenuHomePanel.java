@@ -1,23 +1,15 @@
 package cn.ussshenzhou.rainbow6.client.gui.panels;
 
-import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
 import cn.ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
 import cn.ussshenzhou.rainbow6.client.gui.screens.RoundPrepareScreen;
 import cn.ussshenzhou.rainbow6.client.gui.widgets.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton;
-import cn.ussshenzhou.rainbow6.mixinproxy.LevelRendererProxy;
-import cn.ussshenzhou.rainbow6.network.RoundPrepareTopView;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
-import cn.ussshenzhou.t88.network.PacketProxy;
-import com.mojang.math.Vector3d;
-import net.minecraft.client.Minecraft;
-import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.phys.Vec3;
 
 /**
  * @author USS_Shenzhou
@@ -27,7 +19,8 @@ public class MainMenuHomePanel extends TPanel {
             new TranslatableComponent("gui.r6ms.main_menu.home.play"),
             pButton -> {
                 //TODO open modeSelectPanel
-                ScreenManager.showNewLayerClearBg(new RoundPrepareScreen());
+                RoundPrepareScreen.newRoundPrepareScreenAndShow();
+                //ScreenManager.showNewLayerClearBg(new LoadingScreen.WithFullBackground("gui.r6ms.round_prepare.loading_top_view"));
             },
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")
@@ -67,7 +60,7 @@ public class MainMenuHomePanel extends TPanel {
         playButton.setPadding(R6Constants.PADDING_STD);
         this.add(playButton);
         playQuickMatchButton.setPadding(R6Constants.PADDING_STD);
-        playQuickMatchButton.getText().setFontSize(R6Constants.FONT_SMALL);
+        playQuickMatchButton.getText().setFontSize(R6Constants.FONT_SMALL_3);
         this.add(playQuickMatchButton);
         queuing.setPadding(R6Constants.PADDING_STD);
         queuing.setSelected(true);

@@ -1,5 +1,6 @@
-package cn.ussshenzhou.rainbow6.client.gui;
+package cn.ussshenzhou.rainbow6.util;
 
+import cn.ussshenzhou.rainbow6.client.gui.DynamicTextureWithMapData;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.data.Map;
 import cn.ussshenzhou.rainbow6.mixinproxy.GameRendererProxy;
@@ -28,8 +29,8 @@ public class MapHelper {
     /**
      * DO NOT call this in main thread.
      */
-    public static ArrayList<DynamicTexture> generateMap() {
-        ArrayList<DynamicTexture> maps = new ArrayList<>();
+    public static ArrayList<DynamicTextureWithMapData> generateMap() {
+        ArrayList<DynamicTextureWithMapData> maps = new ArrayList<>();
         float playableWidth = ClientMatch.getMap().getZonePointMax().getX() - ClientMatch.getMap().getZonePointMin().getX();
         float playableHeight = ClientMatch.getMap().getZonePointMax().getZ() - ClientMatch.getMap().getZonePointMin().getZ();
         Window window = minecraft.getWindow();
@@ -40,7 +41,6 @@ public class MapHelper {
         Map map = ClientMatch.getMap();
         float playableLeftUpX = map.getZonePointMin().getX();
         float playableLeftUpZ = map.getZonePointMin().getZ();
-        ;
         boolean turn = false;
         if (playableWidth < playableHeight) {
             float a = playableWidth;
@@ -66,10 +66,12 @@ public class MapHelper {
                 ? playableLeftUpZ - completeWidth * 5 / 16 + completeWidth / 2
                 : playableLeftUpZ - completeHeight * 5 / 18 + completeHeight / 2;
         if (ClientMatch.getSide() == Sides.ATTACKER) {
-            maps.add(teleportAndTakeScreenshot(centerX, map.getZonePointMax().getY(), centerZ, cameraZoomFactor, false, turn));
+            maps.add(new DynamicTextureWithMapData(teleportAndTakeScreenshot(centerX, map.getZonePointMax().getY(), centerZ, cameraZoomFactor, false, turn),
+                    centerX, centerZ, completeWidth, completeHeight, turn));
         } else {
             for (Map.BombSite bombSite : map.getBombSites()) {
-                maps.add(teleportAndTakeScreenshot(centerX, bombSite.getSubSite1Pos().getY() + 1, centerZ, cameraZoomFactor, true, turn));
+                maps.add(new DynamicTextureWithMapData(teleportAndTakeScreenshot(centerX, bombSite.getSubSite1Pos().getY() + 1, centerZ, cameraZoomFactor, true, turn),
+                        centerX, centerZ, completeWidth, completeHeight, turn));
             }
         }
         return maps;
@@ -79,7 +81,7 @@ public class MapHelper {
     private static volatile boolean hasRenderedAllChunksOld;
     private static volatile Vec3 playerPos;
 
-    public static DynamicTexture teleportAndTakeScreenshot(float centerX, float y, float centerZ, float cameraZoomFactor, boolean clipRoof, boolean turn) {
+    public static NativeImage teleportAndTakeScreenshot(float centerX, float y, float centerZ, float cameraZoomFactor, boolean clipRoof, boolean turn) {
         PacketProxy.getChannel(RoundPrepareTopView.class).sendToServer(new RoundPrepareTopView(centerX, y, centerZ, turn));
         minecraft.execute(() -> {
             minecraft.options.renderClouds = CloudStatus.OFF;
@@ -115,7 +117,8 @@ public class MapHelper {
                 hasRenderedAllChunksOld = hasRenderedAllChunks;
                 hasRenderedAllChunks = minecraft.levelRenderer.hasRenderedAllChunks();
             });
-            if (hasRenderedAllChunks && hasRenderedAllChunksOld && i >= 20) {
+            //---dev---
+            if (hasRenderedAllChunks && hasRenderedAllChunksOld && i >= 10) {
                 break;
             }
             i++;
@@ -133,8 +136,6 @@ public class MapHelper {
             ((LevelRendererProxy) minecraft.levelRenderer).disableOrthographic();
         });
         hasRenderedAllChunks = false;
-        DynamicTexture map = new DynamicTexture(screenShot);
-        map.upload();
-        return map;
+        return screenShot;
     }
 }

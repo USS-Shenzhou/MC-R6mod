@@ -14,12 +14,14 @@ public class R6Constants {
     public static final int PADDING_STD = 4;
     public static final int PADDING_SMALL = 2;
 
-    public static final float FONT_SMALL = 5.249f;
+    public static final float FONT_SMALL_3 = 5.249f;
 
     public static final int BLUE_STD_ARGB = 0xff1985e2;
     public static final int BLUE_STD_RGB = 0x1985e2;
     public static final int ORANGE_STD_ARGB = 0xfff9952b;
     public static final int ORANGE_STD_RGB = 0xf9952b;
+
+    public static final int CYAN_STD_RGB = 0x0bfff0;
 
     /**
      * 1 m = 8 pixel

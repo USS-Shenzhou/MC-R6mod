@@ -1,66 +1,145 @@
 package cn.ussshenzhou.rainbow6.client.gui.screens;
 
-import cn.ussshenzhou.rainbow6.client.gui.MapHelper;
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
+import cn.ussshenzhou.rainbow6.client.gui.panels.*;
+import cn.ussshenzhou.rainbow6.client.gui.widgets.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.gui.widgets.PlayerInfoBarHud;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
+import cn.ussshenzhou.rainbow6.util.Sides;
 import cn.ussshenzhou.t88.gui.HudManager;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
-import cn.ussshenzhou.t88.gui.util.ImageFit;
-import cn.ussshenzhou.t88.gui.widegt.TImage;
+import cn.ussshenzhou.t88.gui.util.LayoutHelper;
+import cn.ussshenzhou.t88.gui.widegt.TButton;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Stream;
 
 /**
  * @author USS_Shenzhou
  */
 public class RoundPrepareScreen extends AbstractR6Screen {
     private final TLabel header = new TLabel(new TextComponent(ClientMatch.getMap().getName() + "  "));
-    DynamicTexture map = null;
-    private final TImage backgroundMaskL = new TImage(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_prepare_background_mask_left.png"));
-    private final TImage backgroundMaskR = new TImage(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_prepare_background_mask_right.png"));
+    private static final ResourceLocation UNSELECTED_BUTTON = new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button18_cutout_unselected14.png");
+    private static final ResourceLocation SELECTED_BUTTON = new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button18_cutout_selected_centered.png");
+    private final FocusSensitiveImageSelectButton locationsButton = new FocusSensitiveImageSelectButton(
+            new TranslatableComponent("gui.r6ms.round_prepare.locations"),
+            pButton -> {
+                setButtonSelectedAndPanelVisible((FocusSensitiveImageSelectButton) ((TButton) pButton).getParent(), getLocationsPanel());
+            },
+            UNSELECTED_BUTTON,
+            SELECTED_BUTTON
+    );
+    private final FocusSensitiveImageSelectButton operatorsButton = new FocusSensitiveImageSelectButton(
+            new TranslatableComponent("gui.r6ms.round_prepare.operators"),
+            pButton -> {
+                setButtonSelectedAndPanelVisible((FocusSensitiveImageSelectButton) ((TButton) pButton).getParent(), getOperatorsPanel());
+            },
+            UNSELECTED_BUTTON,
+            SELECTED_BUTTON
+    );
+    private final FocusSensitiveImageSelectButton loadoutButton = new FocusSensitiveImageSelectButton(
+            new TranslatableComponent("gui.r6ms.round_prepare.loadout"),
+            pButton -> {
+                setButtonSelectedAndPanelVisible((FocusSensitiveImageSelectButton) ((TButton) pButton).getParent(), getLoadoutPanel());
+            },
+            UNSELECTED_BUTTON,
+            SELECTED_BUTTON
+    );
+    private final RoundPreLocationsPanel locationsPanel;
+    private final RoundPrepareOperatorsPanel operatorsPanel = new RoundPrepareOperatorsPanel();
+    private final RoundPrepareLoadoutPanel loadoutPanel = new RoundPrepareLoadoutPanel();
 
-    public RoundPrepareScreen() {
+    protected RoundPrepareScreen() {
         super("RoundPrepareScreen");
-        //---dev---
-        ScreenManager.playerInfoBarHud = new PlayerInfoBarHud(30);
-        ScreenManager.playerInfoBarHud.getTimer().tickT();
-        HudManager.add(ScreenManager.playerInfoBarHud);
-        CompletableFuture.runAsync(() -> {
-            map = MapHelper.generateMap().get(0);
-            ScreenManager.playerInfoBarHud.getTimer().start();
-        });
-        //---dev---
-        backgroundMaskL.setImageFit(ImageFit.STRETCH);
-        this.add(backgroundMaskL);
-        backgroundMaskR.setImageFit(ImageFit.STRETCH);
-        this.add(backgroundMaskR);
+        initiatePlayerInfoBar();
+        locationsPanel = ClientMatch.getSide() == Sides.ATTACKER
+                ? new RoundPreLocationsPanelAttacker()
+                : new RoundPreLocationsPanelDefender();
+        this.add(locationsPanel);
+        operatorsPanel.setVisibleT(false);
+        this.add(operatorsPanel);
+        loadoutPanel.setVisibleT(false);
+        this.add(loadoutPanel);
         header.setBackground(0x80000000);
         header.setHorizontalAlignment(HorizontalAlignment.RIGHT);
         this.add(header);
+        locationsButton.setPadding(R6Constants.PADDING_SMALL);
+        locationsButton.getText().setHorizontalAlignment(HorizontalAlignment.CENTER);
+        locationsButton.setSelected(true);
+        this.add(locationsButton);
+        operatorsButton.setPadding(R6Constants.PADDING_SMALL);
+        operatorsButton.getText().setHorizontalAlignment(HorizontalAlignment.CENTER);
+        this.add(operatorsButton);
+        loadoutButton.setPadding(R6Constants.PADDING_SMALL);
+        loadoutButton.getText().setHorizontalAlignment(HorizontalAlignment.CENTER);
+        this.add(loadoutButton);
+    }
+
+    public static RoundPrepareScreen newRoundPrepareScreenAndShow() {
+        RoundPrepareScreen a = new RoundPrepareScreen();
+        ScreenManager.showNewLayerClearBg(a);
+        LoadingScreen.WithFullBackground loadingScreen = new LoadingScreen.WithFullBackground("gui.r6ms.round_prepare.loading_top_view");
+        ScreenManager.showNewLayerOverBg(loadingScreen);
+        CompletableFuture.runAsync(() -> {
+            while (!a.locationsPanel.isReady()) {
+            }
+            Minecraft.getInstance().execute(() -> loadingScreen.onClose(true));
+        });
+        return a;
+    }
+
+    private void initiatePlayerInfoBar() {
+        ScreenManager.playerInfoBarHud = new PlayerInfoBarHud(30);
+        HudManager.add(ScreenManager.playerInfoBarHud);
     }
 
     @Override
     public void layout() {
         header.setBounds(0, 0, width, 18);
-        backgroundMaskL.setBounds(0, 0, 50, height);
-        backgroundMaskR.setBounds(width - 50, 0, 50, height);
+        locationsPanel.setBounds(0, 0, width, height);
+        locationsButton.setBounds(10, 36, 64, 18);
+        LayoutHelper.BRightOfA(operatorsButton, -4, locationsButton);
+        LayoutHelper.BRightOfA(loadoutButton, -4, operatorsButton);
+        LayoutHelper.BSameAsA(operatorsPanel, locationsPanel);
+        LayoutHelper.BSameAsA(loadoutPanel, locationsPanel);
         super.layout();
     }
 
-    @Override
-    protected void renderBackGround(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        if (map != null) {
-            RenderSystem.setShaderTexture(0, map.getId());
-            blit(pPoseStack, 0, 0, width, height, 0, 0, map.getPixels().getWidth(), map.getPixels().getHeight(), map.getPixels().getWidth(), map.getPixels().getHeight());
-        }
+    public void setButtonSelectedAndPanelVisible(FocusSensitiveImageSelectButton button, TPanel tPanel) {
+        Stream.of(locationsButton, operatorsButton, loadoutButton).forEach(b -> b.setSelected(false));
+        button.setSelected(true);
+        Stream.of(locationsPanel, operatorsPanel, loadoutPanel).forEach(b -> b.setVisibleT(false));
+        tPanel.setVisibleT(true);
+    }
+
+    public RoundPreLocationsPanel getLocationsPanel() {
+        return locationsPanel;
+    }
+
+    public RoundPrepareOperatorsPanel getOperatorsPanel() {
+        return operatorsPanel;
+    }
+
+    public RoundPrepareLoadoutPanel getLoadoutPanel() {
+        return loadoutPanel;
+    }
+
+    public FocusSensitiveImageSelectButton getLocationsButton() {
+        return locationsButton;
+    }
+
+    public FocusSensitiveImageSelectButton getOperatorsButton() {
+        return operatorsButton;
+    }
+
+    public FocusSensitiveImageSelectButton getLoadoutButton() {
+        return loadoutButton;
     }
 }
