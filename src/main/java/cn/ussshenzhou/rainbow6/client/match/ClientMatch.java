@@ -1,7 +1,7 @@
 package cn.ussshenzhou.rainbow6.client.match;
 
 import cn.ussshenzhou.rainbow6.data.Map;
-import cn.ussshenzhou.rainbow6.util.Sides;
+import cn.ussshenzhou.rainbow6.util.Side;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 
 /**
@@ -19,8 +19,8 @@ public class ClientMatch {
         //TODO
     }
 
-    public static Sides getSide(){
-        return Sides.ATTACKER;
+    public static Side getSide(){
+        return Side.DEFENDER;
         //TODO
     }
 
@@ -36,10 +36,15 @@ public class ClientMatch {
 
     public static int getEnemyScore(){
         return 0;
+        //TODO
     }
 
     public static Map getMap(){
         return new Map();
         //TODO
+    }
+
+    public static int getNumberInTeam(){
+        return 2;
     }
 }

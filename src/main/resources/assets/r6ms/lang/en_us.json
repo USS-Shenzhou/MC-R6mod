@@ -30,5 +30,7 @@
   "gui.r6ms.round_prepare.locations": "LOCATIONS",
   "gui.r6ms.round_prepare.operators": "OPERATORS",
   "gui.r6ms.round_prepare.loadout": "LOADOUT",
-  "gui.r6ms.round_prepare.loading_top_view": "Loading map top view"
+  "gui.r6ms.round_prepare.loading_top_view": "Loading map top view",
+  "gui.r6ms.round_prepare.team_spawn_location": "TEAM SPAWN LOCATION",
+  "gui.r6ms.round_prepare.bomb_location": "目标位置\n§e出生点由系统随机选择"
 }

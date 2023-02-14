@@ -6,7 +6,7 @@ import cn.ussshenzhou.rainbow6.client.gui.widgets.FocusSensitiveImageSelectButto
 import cn.ussshenzhou.rainbow6.client.gui.widgets.PlayerInfoBarHud;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
-import cn.ussshenzhou.rainbow6.util.Sides;
+import cn.ussshenzhou.rainbow6.util.Side;
 import cn.ussshenzhou.t88.gui.HudManager;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
@@ -53,13 +53,13 @@ public class RoundPrepareScreen extends AbstractR6Screen {
             SELECTED_BUTTON
     );
     private final RoundPreLocationsPanel locationsPanel;
-    private final RoundPrepareOperatorsPanel operatorsPanel = new RoundPrepareOperatorsPanel();
-    private final RoundPrepareLoadoutPanel loadoutPanel = new RoundPrepareLoadoutPanel();
+    private final RoundPreOperatorsPanel operatorsPanel = new RoundPreOperatorsPanel();
+    private final RoundPreLoadoutPanel loadoutPanel = new RoundPreLoadoutPanel();
 
     protected RoundPrepareScreen() {
         super("RoundPrepareScreen");
         initiatePlayerInfoBar();
-        locationsPanel = ClientMatch.getSide() == Sides.ATTACKER
+        locationsPanel = ClientMatch.getSide() == Side.ATTACKER
                 ? new RoundPreLocationsPanelAttacker()
                 : new RoundPreLocationsPanelDefender();
         this.add(locationsPanel);
@@ -96,7 +96,7 @@ public class RoundPrepareScreen extends AbstractR6Screen {
     }
 
     private void initiatePlayerInfoBar() {
-        ScreenManager.playerInfoBarHud = new PlayerInfoBarHud(30);
+        ScreenManager.playerInfoBarHud = new PlayerInfoBarHud(40);
         HudManager.add(ScreenManager.playerInfoBarHud);
     }
 
@@ -123,11 +123,11 @@ public class RoundPrepareScreen extends AbstractR6Screen {
         return locationsPanel;
     }
 
-    public RoundPrepareOperatorsPanel getOperatorsPanel() {
+    public RoundPreOperatorsPanel getOperatorsPanel() {
         return operatorsPanel;
     }
 
-    public RoundPrepareLoadoutPanel getLoadoutPanel() {
+    public RoundPreLoadoutPanel getLoadoutPanel() {
         return loadoutPanel;
     }
 

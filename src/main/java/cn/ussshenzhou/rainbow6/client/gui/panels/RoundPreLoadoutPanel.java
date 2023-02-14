@@ -9,10 +9,10 @@ import net.minecraft.resources.ResourceLocation;
 /**
  * @author USS_Shenzhou
  */
-public class RoundPrepareOperatorsPanel extends TPanel {
+public class RoundPreLoadoutPanel extends TPanel {
     private final TImage background = new TImage(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/std_background_full_screen.png"));
 
-    public RoundPrepareOperatorsPanel() {
+    public RoundPreLoadoutPanel() {
         super();
         this.add(background);
         background.setVisibleT(false);

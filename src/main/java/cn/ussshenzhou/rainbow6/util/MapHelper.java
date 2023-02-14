@@ -6,16 +6,11 @@ import cn.ussshenzhou.rainbow6.data.Map;
 import cn.ussshenzhou.rainbow6.mixinproxy.GameRendererProxy;
 import cn.ussshenzhou.rainbow6.mixinproxy.LevelRendererProxy;
 import cn.ussshenzhou.rainbow6.network.RoundPrepareTopView;
-import cn.ussshenzhou.rainbow6.util.Sides;
 import cn.ussshenzhou.t88.network.PacketProxy;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.platform.Window;
-import com.mojang.logging.LogUtils;
-import com.mojang.math.Vector3d;
 import net.minecraft.client.CloudStatus;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
@@ -65,10 +60,10 @@ public class MapHelper {
         float centerZ = turn
                 ? playableLeftUpZ - completeWidth * 5 / 16 + completeWidth / 2
                 : playableLeftUpZ - completeHeight * 5 / 18 + completeHeight / 2;
-        if (ClientMatch.getSide() == Sides.ATTACKER) {
-            maps.add(new DynamicTextureWithMapData(teleportAndTakeScreenshot(centerX, map.getZonePointMax().getY(), centerZ, cameraZoomFactor, false, turn),
-                    centerX, centerZ, completeWidth, completeHeight, turn));
-        } else {
+        maps.add(new DynamicTextureWithMapData(teleportAndTakeScreenshot(centerX, map.getZonePointMax().getY(), centerZ, cameraZoomFactor, false, turn),
+                centerX, centerZ, completeWidth, completeHeight, turn));
+        if (ClientMatch.getSide() == Side.DEFENDER) {
+            alreadyLoaded = false;
             for (Map.BombSite bombSite : map.getBombSites()) {
                 maps.add(new DynamicTextureWithMapData(teleportAndTakeScreenshot(centerX, bombSite.getSubSite1Pos().getY() + 1, centerZ, cameraZoomFactor, true, turn),
                         centerX, centerZ, completeWidth, completeHeight, turn));
@@ -77,6 +72,7 @@ public class MapHelper {
         return maps;
     }
 
+    private static boolean alreadyLoaded = false;
     private static volatile boolean hasRenderedAllChunks;
     private static volatile boolean hasRenderedAllChunksOld;
     private static volatile Vec3 playerPos;
@@ -118,7 +114,8 @@ public class MapHelper {
                 hasRenderedAllChunks = minecraft.levelRenderer.hasRenderedAllChunks();
             });
             //---dev---
-            if (hasRenderedAllChunks && hasRenderedAllChunksOld && i >= 10) {
+            if ((hasRenderedAllChunks && hasRenderedAllChunksOld) && (i >= 5 || alreadyLoaded)) {
+                alreadyLoaded = true;
                 break;
             }
             i++;

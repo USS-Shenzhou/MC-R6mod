@@ -11,6 +11,7 @@ import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.Vec2i;
 import cn.ussshenzhou.t88.gui.widegt.TButton;
+import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -34,24 +35,20 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
     private boolean noneSelected = true;
 
     public RoundPreLocationsPanelAttacker() {
-        super();
+        super(new TLabel(new TranslatableComponent("gui.r6ms.round_prepare.team_spawn_location")));
         CompletableFuture.runAsync(() -> {
             map = MapHelper.generateMap().get(0);
             ScreenManager.playerInfoBarHud.getTimer().start();
             Minecraft.getInstance().execute(this::layout);
         });
         initSpawnPoint();
+
     }
 
     private void initSpawnPoint() {
         ArrayList<Map.SpawnPos> spawnPositions = ClientMatch.getMap().getSpawnPositions();
         for (Map.SpawnPos pos : spawnPositions) {
             SpawnPosButton button = new SpawnPosButton(pos);
-            button.setPadding(R6Constants.PADDING_STD);
-            button.getBackgroundImage().setAlpha(0.5f);
-            button.getBackgroundImage().setImageFit(ImageFit.STRETCH);
-            button.getText().setFontSize(R6Constants.FONT_SMALL_3);
-
             SpawnPosSign sign = new SpawnPosSign(pos, button);
             this.addAll(button, sign);
             spawnPosPairs.put(button, sign);
@@ -66,7 +63,7 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
         spawnPosButton.setSelected(true);
         spawnPosPairs.get(spawnPosButton).setSelected(true);
         //TODO actually select
-        if (noneSelected){
+        if (noneSelected) {
             RoundPrepareScreen screen = (RoundPrepareScreen) this.getParentScreen();
             screen.setButtonSelectedAndPanelVisible(screen.getOperatorsButton(), screen.getOperatorsPanel());
             noneSelected = false;
@@ -103,31 +100,15 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
 
     private class SpawnPosButton extends FocusSensitiveImageSelectButton {
 
-        private boolean relatedHover = false;
-
         public SpawnPosButton(Map.SpawnPos pos) {
-            super(new TranslatableComponent(" ⭘ " + pos.getSpawnPosName()), pButton -> {
-            }, new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"), new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button23_hovered.png"));
-            this.remove(button);
-            this.button = new TButton(new TextComponent(""), pButton -> setSelectedPos((SpawnPosButton) ((TButton) pButton).getParent())) {
-                @Override
-                public void renderButton(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-                    return;
-                }
-
-                @Override
-                public void onPress() {
-                    super.onPress();
-                    setSelected(true);
-                }
-
-                @Override
-                public boolean isHoveredOrFocused() {
-                    return super.isHoveredOrFocused() || isSelected() || relatedHover;
-                }
-            };
-            this.add(button);
-            relatedHover = false;
+            super(new TranslatableComponent(Minecraft.getInstance().options.forceUnicodeFont ? " ◎ " : " ⭘ " + pos.getSpawnPosName()),
+                    pButton -> setSelectedPos((SpawnPosButton) ((TButton) pButton).getParent()),
+                    new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+                    new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button23_hovered.png"));
+            this.setPadding(R6Constants.PADDING_STD);
+            this.getBackgroundImage().setAlpha(0.5f);
+            this.getBackgroundImage().setImageFit(ImageFit.STRETCH);
+            this.getText().setFontSize(R6Constants.FONT_SMALL_3);
         }
 
         @Override
@@ -135,30 +116,21 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
             spawnPosPairs.get(this).setRelatedHover(this.button.isHoveredOrFocused());
             super.tickT();
         }
-
-        public boolean isRelatedHover() {
-            return relatedHover;
-        }
-
-        public void setRelatedHover(boolean relatedHover) {
-            this.relatedHover = relatedHover;
-        }
     }
 
     public class SpawnPosSign extends FocusSensitiveImageSelectButton {
         private final Map.SpawnPos pos;
         private boolean relatedHover = false;
-        private final SpawnPosButton spawnButton;
 
-        public SpawnPosSign(Map.SpawnPos pos, SpawnPosButton button) {
+        public SpawnPosSign(Map.SpawnPos pos, SpawnPosButton spawnPosButton) {
             super(new TextComponent(""),
-                    pButton -> button.getButton().onPress(),
+                    pButton -> spawnPosButton.getButton().onPress(),
                     new ResourceLocation(R6Constants.MOD_ID, "textures/gui/spawn_pos18_unselected12.png"),
                     new ResourceLocation(R6Constants.MOD_ID, "textures/gui/spawn_pos18_selected.png"));
             this.setPadding(3);
             this.pos = pos;
             this.remove(this.button);
-            this.button = new TButton(new TextComponent(""), pButton -> setSelectedPos(button)) {
+            this.button = new TButton(new TextComponent(""), pButton -> setSelectedPos(spawnPosButton)) {
                 @Override
                 public void renderButton(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
                     return;
@@ -176,7 +148,6 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
                 }
             };
             this.add(this.button);
-            this.spawnButton = button;
         }
 
         public boolean isRelatedHover() {

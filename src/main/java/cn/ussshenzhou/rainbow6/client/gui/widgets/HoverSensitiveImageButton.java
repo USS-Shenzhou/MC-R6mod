@@ -17,7 +17,7 @@ public class HoverSensitiveImageButton extends TPanel {
     protected TButton button;
     protected TLabel text;
 
-    private int padding = 0;
+    protected int padding = 0;
     private boolean inTransition = false;
     private boolean transited = false;
     private int transitionTimeMinus1 = 2;
@@ -32,12 +32,11 @@ public class HoverSensitiveImageButton extends TPanel {
                 return;
             }
         };
-        this.backgroundImage = new TImage(backgroundImageLocation);
         this.backgroundImageHovered = new TImage(backgroundImageLocationHovered);
         this.backgroundImageHovered.setVisibleT(false);
-
-        this.add(this.backgroundImage);
         this.add(this.backgroundImageHovered);
+        this.backgroundImage = new TImage(backgroundImageLocation);
+        this.add(this.backgroundImage);
         this.add(this.button);
         this.add(this.text);
     }
@@ -103,7 +102,7 @@ public class HoverSensitiveImageButton extends TPanel {
     /**
      * backgroundImage will be stretched to the size of backgroundImage, then magnified to original.
      */
-    private void renderBgImageHovered(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    protected void renderBgImageHovered(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         if (padding != 0 && inTransition && transitionTick < transitionTimeMinus1) {
             float minScaleX = (float) backgroundImage.getWidth() / backgroundImageHovered.getWidth();
             float minScaleY = (float) backgroundImage.getHeight() / backgroundImageHovered.getHeight();
@@ -129,13 +128,11 @@ public class HoverSensitiveImageButton extends TPanel {
     /**
      * Text will be magnified when focused. To keep text's original shape, scaling will not calculate separately.
      */
-    private void renderText(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    protected void renderText(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         float maxScaleX = (float) backgroundImageHovered.getWidth() / backgroundImage.getWidth();
         float maxScaleY = (float) backgroundImageHovered.getHeight() / backgroundImage.getHeight();
         float maxScale = Math.min(maxScaleX, maxScaleY);
         if (padding != 0 && inTransition && transitionTick < transitionTimeMinus1) {
-            //float scaleX = 1 + transitionTick / transitionTimeMinus1 * (maxScaleX - 1);
-            //float scaleY = 1 + transitionTick / transitionTimeMinus1 * (maxScaleY - 1);
             float scale = 1 + transitionTick / transitionTimeMinus1 * (maxScale - 1);
             renderTextInternal(pPoseStack, pMouseX, pMouseY, pPartialTick, scale, maxScale);
         } else {
@@ -143,9 +140,7 @@ public class HoverSensitiveImageButton extends TPanel {
         }
     }
 
-    private void renderTextInternal(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick, float scale, float maxScale) {
-        //float compensationRelativeX = (1 - scaleX) / (maxScaleX - 1) * padding;
-        //float compensationRelativeY = (1 - scaleY) / (maxScaleY - 1) * padding;
+    public void renderTextInternal(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick, float scale, float maxScale) {
         float compensationRelative = (1 - scale) / (maxScale - 1) * padding;
         pPoseStack.pushPose();
         pPoseStack.translate(

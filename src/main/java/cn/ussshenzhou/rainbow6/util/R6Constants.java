@@ -15,6 +15,7 @@ public class R6Constants {
     public static final int PADDING_SMALL = 2;
 
     public static final float FONT_SMALL_3 = 5.249f;
+    public static final float FONT_TINY_2 = 3.49f;
 
     public static final int BLUE_STD_ARGB = 0xff1985e2;
     public static final int BLUE_STD_RGB = 0x1985e2;

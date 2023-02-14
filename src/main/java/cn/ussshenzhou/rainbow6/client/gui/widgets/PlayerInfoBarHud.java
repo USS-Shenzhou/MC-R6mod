@@ -2,7 +2,7 @@ package cn.ussshenzhou.rainbow6.client.gui.widgets;
 
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.util.IconHelper;
-import cn.ussshenzhou.rainbow6.util.Operators;
+import cn.ussshenzhou.rainbow6.util.Operator;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
@@ -12,7 +12,6 @@ import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import cn.ussshenzhou.t88.gui.widegt.TTimer;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -145,7 +144,7 @@ public class PlayerInfoBarHud extends TImage {
             list.get(index).setImageLocation(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/player_info_bar_prepared.png"));
         }
 
-        public void setPlayerOperator(int index, Operators operator) {
+        public void setPlayerOperator(int index, Operator operator) {
             //list.get(index).setImageLocation(operator);
             //TODO
         }

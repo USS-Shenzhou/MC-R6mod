@@ -122,14 +122,14 @@ public class Map {
         var a = new BombSite();
         a.setSubSite1Name("BombSite 1a");
         a.setSubSite1Pos(new BlockPos(-32, -59, 62));
-        a.setSubSite1Name("BombSite 1b");
-        a.setSubSite1Pos(new BlockPos(-24, -59, 71));
+        a.setSubSite2Name("BombSite 1b");
+        a.setSubSite2Pos(new BlockPos(-24, -59, 71));
         l.add(a);
         var b = new BombSite();
         b.setSubSite1Name("BombSite 2a");
         b.setSubSite1Pos(new BlockPos(-26, -52, 60));
-        b.setSubSite1Name("BombSite 2b");
-        b.setSubSite1Pos(new BlockPos(-18, -52, 60));
+        b.setSubSite2Name("BombSite 2b");
+        b.setSubSite2Pos(new BlockPos(-18, -52, 60));
         l.add(b);
         return l;
         //return bombSites;
