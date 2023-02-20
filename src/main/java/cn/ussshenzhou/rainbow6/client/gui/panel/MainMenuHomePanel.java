@@ -1,9 +1,11 @@
-package cn.ussshenzhou.rainbow6.client.gui.panels;
+package cn.ussshenzhou.rainbow6.client.gui.panel;
 
-import cn.ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
-import cn.ussshenzhou.rainbow6.client.gui.screens.RoundPrepareScreen;
-import cn.ussshenzhou.rainbow6.client.gui.widgets.FocusSensitiveImageSelectButton;
-import cn.ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton;
+import cn.ussshenzhou.rainbow6.client.gui.hud.AutoCloseHud;
+import cn.ussshenzhou.rainbow6.client.gui.hud.PromptHud;
+import cn.ussshenzhou.rainbow6.client.gui.screen.MainMenuScreen;
+import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
+import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
+import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageButton;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
@@ -19,8 +21,8 @@ public class MainMenuHomePanel extends TPanel {
             new TranslatableComponent("gui.r6ms.main_menu.home.play"),
             pButton -> {
                 //TODO open modeSelectPanel
-                RoundPrepareScreen.newRoundPrepareScreenAndShow();
-                //ScreenManager.showNewLayerClearBg(new LoadingScreen.WithFullBackground("gui.r6ms.round_prepare.loading_top_view"));
+                //RoundPrepareScreen.newRoundPrepareScreenAndShow();
+                AutoCloseHud.ifPresentFormerThenRemoveAndAdd(new PromptHud.AliveAmountHud());
             },
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")

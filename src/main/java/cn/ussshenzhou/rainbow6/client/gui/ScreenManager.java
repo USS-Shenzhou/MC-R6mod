@@ -1,7 +1,7 @@
 package cn.ussshenzhou.rainbow6.client.gui;
 
-import cn.ussshenzhou.rainbow6.client.gui.screens.MainMenuScreen;
-import cn.ussshenzhou.rainbow6.client.gui.widgets.PlayerInfoBarHud;
+import cn.ussshenzhou.rainbow6.client.gui.screen.MainMenuScreen;
+import cn.ussshenzhou.rainbow6.client.gui.hud.PlayerInfoBarHud;
 import cn.ussshenzhou.rainbow6.mixin.ForgeHooksClientAccessor;
 import cn.ussshenzhou.t88.gui.HudManager;
 import cn.ussshenzhou.t88.gui.screen.TScreen;

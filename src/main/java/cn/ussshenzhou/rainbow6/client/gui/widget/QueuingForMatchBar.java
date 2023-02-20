@@ -1,4 +1,4 @@
-package cn.ussshenzhou.rainbow6.client.gui.widgets;
+package cn.ussshenzhou.rainbow6.client.gui.widget;
 
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;

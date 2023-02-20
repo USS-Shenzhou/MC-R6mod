@@ -1,10 +1,10 @@
-package cn.ussshenzhou.rainbow6.client.gui.screens;
+package cn.ussshenzhou.rainbow6.client.gui.screen;
 
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
-import cn.ussshenzhou.rainbow6.client.gui.panels.MainMenuHeaderPanel;
-import cn.ussshenzhou.rainbow6.client.gui.panels.MainMenuHomePanel;
-import cn.ussshenzhou.rainbow6.client.gui.panels.MainMenuOperatorsPanel;
-import cn.ussshenzhou.rainbow6.client.gui.widgets.QueuingForMatchBar;
+import cn.ussshenzhou.rainbow6.client.gui.panel.MainMenuHeaderPanel;
+import cn.ussshenzhou.rainbow6.client.gui.panel.MainMenuHomePanel;
+import cn.ussshenzhou.rainbow6.client.gui.panel.MainMenuOperatorsPanel;
+import cn.ussshenzhou.rainbow6.client.gui.widget.QueuingForMatchBar;
 import cn.ussshenzhou.t88.gui.HudManager;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;

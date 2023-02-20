@@ -1,9 +1,9 @@
-package cn.ussshenzhou.rainbow6.client.gui.panels;
+package cn.ussshenzhou.rainbow6.client.gui.panel;
 
 import cn.ussshenzhou.rainbow6.client.gui.DynamicTextureWithMapData;
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
-import cn.ussshenzhou.rainbow6.client.gui.screens.RoundPrepareScreen;
-import cn.ussshenzhou.rainbow6.client.gui.widgets.FocusSensitiveImageSelectButton;
+import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
+import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.data.Map;
 import cn.ussshenzhou.rainbow6.util.MapHelper;
@@ -18,11 +18,15 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import org.lwjgl.opengl.GL43;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.concurrent.CompletableFuture;
+
+import static org.lwjgl.opengl.GL43.GL_DEBUG_OUTPUT;
+import static org.lwjgl.opengl.GL43.GL_DEBUG_OUTPUT_SYNCHRONOUS;
 
 /**
  * @author USS_Shenzhou
@@ -92,6 +96,9 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
     @Override
     public void renderBackground(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         if (map != null) {
+            //GL43.glEnable(GL_DEBUG_OUTPUT);
+            //GL43.glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+            //GL43.glDebugMessageCallback(null,GL43.GL_DEBUG_CALLBACK_USER_PARAM);
             RenderSystem.setShaderTexture(0, map.getId());
             blit(pPoseStack, 0, 0, width, height, 0, 0, map.getPixels().getWidth(), map.getPixels().getHeight(), map.getPixels().getWidth(), map.getPixels().getHeight());
         }

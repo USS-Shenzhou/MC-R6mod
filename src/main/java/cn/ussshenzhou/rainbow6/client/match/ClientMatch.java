@@ -45,6 +45,19 @@ public class ClientMatch {
     }
 
     public static int getNumberInTeam(){
+        //TODO
         return 2;
+    }
+
+    public static int getBombSiteNumber(){
+        return 0;
+    }
+
+    public static int getAttackerAliveAmount(){
+        return 1;
+    }
+
+    public static int getDefenderAliveAmount(){
+        return 5;
     }
 }

@@ -1,9 +1,9 @@
-package cn.ussshenzhou.rainbow6.client.gui.screens;
+package cn.ussshenzhou.rainbow6.client.gui.screen;
 
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
-import cn.ussshenzhou.rainbow6.client.gui.panels.*;
-import cn.ussshenzhou.rainbow6.client.gui.widgets.FocusSensitiveImageSelectButton;
-import cn.ussshenzhou.rainbow6.client.gui.widgets.PlayerInfoBarHud;
+import cn.ussshenzhou.rainbow6.client.gui.panel.*;
+import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
+import cn.ussshenzhou.rainbow6.client.gui.hud.PlayerInfoBarHud;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.rainbow6.util.Side;

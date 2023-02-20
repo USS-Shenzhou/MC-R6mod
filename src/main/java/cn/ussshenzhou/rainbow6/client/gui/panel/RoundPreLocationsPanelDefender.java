@@ -1,9 +1,9 @@
-package cn.ussshenzhou.rainbow6.client.gui.panels;
+package cn.ussshenzhou.rainbow6.client.gui.panel;
 
 import cn.ussshenzhou.rainbow6.client.gui.DynamicTextureWithMapData;
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
-import cn.ussshenzhou.rainbow6.client.gui.screens.RoundPrepareScreen;
-import cn.ussshenzhou.rainbow6.client.gui.widgets.FocusSensitiveImageSelectButton;
+import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
+import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.data.Map;
 import cn.ussshenzhou.rainbow6.util.MapHelper;
@@ -18,9 +18,6 @@ import cn.ussshenzhou.t88.gui.widegt.TWidget;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;

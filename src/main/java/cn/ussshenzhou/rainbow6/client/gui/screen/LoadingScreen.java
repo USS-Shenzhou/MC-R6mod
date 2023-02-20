@@ -1,4 +1,4 @@
-package cn.ussshenzhou.rainbow6.client.gui.screens;
+package cn.ussshenzhou.rainbow6.client.gui.screen;
 
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;

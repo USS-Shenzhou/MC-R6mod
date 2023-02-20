@@ -1,7 +1,7 @@
 package cn.ussshenzhou.rainbow6.mixin;
 
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
-import cn.ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton1;
+import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageButton1;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.ImageFit;

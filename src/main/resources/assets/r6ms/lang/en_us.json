@@ -32,5 +32,14 @@
   "gui.r6ms.round_prepare.loadout": "LOADOUT",
   "gui.r6ms.round_prepare.loading_top_view": "Loading map top view",
   "gui.r6ms.round_prepare.team_spawn_location": "TEAM SPAWN LOCATION",
-  "gui.r6ms.round_prepare.bomb_location": "目标位置\n§e出生点由系统随机选择"
+  "gui.r6ms.round_prepare.bomb_location": "目标位置\n§e出生点由系统随机选择",
+
+  "gui.r6ms.round.pre_stage": "准备阶段",
+  "gui.r6ms.round.pre_stage.atk": "搜寻炸弹",
+  "gui.r6ms.round.pre_stage.def": "加强炸弹所在地点的防御",
+  "gui.r6ms.round.act_stage": "行动阶段",
+  "gui.r6ms.round.act_stage.atk": "将拆弹器装设于任意炸弹所在的地点",
+  "gui.r6ms.round.act_stage.def": "保卫炸弹所在地点",
+  "gui.r6ms.round.found_bomb.atk": "发现炸弹",
+  "gui.r6ms.round.found_bomb.def": "敌方已发现炸弹"
 }

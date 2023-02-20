@@ -1,4 +1,4 @@
-package cn.ussshenzhou.rainbow6.client.gui.widgets;
+package cn.ussshenzhou.rainbow6.client.gui.hud;
 
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.util.IconHelper;
@@ -84,7 +84,7 @@ public class PlayerInfoBarHud extends TImage {
 
     @Override
     public void resizeAsHud(int screenWidth, int screenHeight) {
-        this.setBounds((screenWidth - 216) / 2, 0, 216, 18);
+        this.setAbsBounds((screenWidth - 216) / 2, 0, 216, 18);
         super.resizeAsHud(screenWidth, screenHeight);
     }
 

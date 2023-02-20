@@ -1,6 +1,6 @@
-package cn.ussshenzhou.rainbow6.client.gui.panels;
+package cn.ussshenzhou.rainbow6.client.gui.panel;
 
-import cn.ussshenzhou.rainbow6.client.gui.widgets.FocusSensitiveImageSelectButton;
+import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.util.Operator;
 import cn.ussshenzhou.rainbow6.util.R6Constants;

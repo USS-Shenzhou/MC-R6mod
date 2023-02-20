@@ -1,7 +1,7 @@
-package cn.ussshenzhou.rainbow6.client.gui.screens;
+package cn.ussshenzhou.rainbow6.client.gui.screen;
 
-import cn.ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton;
-import cn.ussshenzhou.rainbow6.client.gui.widgets.HoverSensitiveImageButton1;
+import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageButton;
+import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageButton1;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
