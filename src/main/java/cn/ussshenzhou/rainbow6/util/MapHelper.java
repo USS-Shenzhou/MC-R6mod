@@ -81,7 +81,7 @@ public class MapHelper {
         PacketProxy.getChannel(RoundPrepareTopView.class).sendToServer(new RoundPrepareTopView(centerX, y, centerZ, turn));
         minecraft.execute(() -> {
             minecraft.options.renderClouds = CloudStatus.OFF;
-            ((LevelRendererProxy) minecraft.levelRenderer).enableOrthographic(cameraZoomFactor).setClipRoof(clipRoof);
+            ((LevelRendererProxy) minecraft.levelRenderer).enableOrthographic(cameraZoomFactor).setClipRoof$r6ms(clipRoof);
             //TODO set spectator
         });
         CloudStatus cloudsBuffer = minecraft.options.getCloudsType();
@@ -125,7 +125,7 @@ public class MapHelper {
         gameRenderer.needScreenShot();
         NativeImage screenShot = null;
         while (screenShot == null) {
-            screenShot = gameRenderer.getScreenShot();
+            screenShot = gameRenderer.getScreenShot$r6ms();
         }
         gameRenderer.clearScreenShot();
         minecraft.execute(() -> {

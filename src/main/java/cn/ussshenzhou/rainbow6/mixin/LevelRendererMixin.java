@@ -13,38 +13,39 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 /**
  * @author USS_Shenzhou
  */
+@SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
 @Mixin(LevelRenderer.class)
 public class LevelRendererMixin implements LevelRendererProxy {
-    private float cameraZoomFactor;
-    private boolean enableOrthographic = false;
-    private boolean clipRoof = false;
+    private float cameraZoomFactor$r6ms;
+    private boolean enableOrthographic$r6ms = false;
+    private boolean clipRoof$r6ms = false;
 
     public LevelRendererProxy enableOrthographic(float cameraZoomFactor1) {
-        cameraZoomFactor = cameraZoomFactor1;
-        enableOrthographic = true;
-        clipRoof = false;
+        cameraZoomFactor$r6ms = cameraZoomFactor1;
+        enableOrthographic$r6ms = true;
+        clipRoof$r6ms = false;
         return this;
     }
 
-    public void setClipRoof(boolean clipRoof) {
-        this.clipRoof = clipRoof;
+    public void setClipRoof$r6ms(boolean clipRoof$r6ms) {
+        this.clipRoof$r6ms = clipRoof$r6ms;
     }
 
     public void disableOrthographic() {
-        enableOrthographic = false;
+        enableOrthographic$r6ms = false;
     }
 
     @ModifyVariable(method = "renderLevel", at = @At("HEAD"), argsOnly = true)
     private Matrix4f modifyMatrix4fR6ms(Matrix4f m) {
-        if (enableOrthographic) {
+        if (enableOrthographic$r6ms) {
             Window window = Minecraft.getInstance().getWindow();
-            float width = cameraZoomFactor * window.getWidth() / window.getHeight();
-            float height = cameraZoomFactor;
+            float width = cameraZoomFactor$r6ms * window.getWidth() / window.getHeight();
+            float height = cameraZoomFactor$r6ms;
             //80 - 108
             //40 - 216
             //20 - 432
             // x * y = 8640
-            Matrix4f matrix4f = Matrix4f.orthographic(-width, width, height, -height, clipRoof ? 0 : -9999, 9999);
+            Matrix4f matrix4f = Matrix4f.orthographic(-width, width, height, -height, clipRoof$r6ms ? 0 : -9999, 9999);
             RenderSystem.setProjectionMatrix(matrix4f);
             return matrix4f;
         } else {
@@ -54,11 +55,11 @@ public class LevelRendererMixin implements LevelRendererProxy {
 
     @ModifyVariable(method = "prepareCullFrustum", at = @At("HEAD"), argsOnly = true)
     private Matrix4f modifyMatrix4fR6ms1(Matrix4f m) {
-        if (enableOrthographic) {
+        if (enableOrthographic$r6ms) {
             Window window = Minecraft.getInstance().getWindow();
-            float width = cameraZoomFactor * window.getWidth() / window.getHeight();
-            float height = cameraZoomFactor;
-            return Matrix4f.orthographic(-width, width, height, -height, clipRoof ? 0 : -9999, 9999);
+            float width = cameraZoomFactor$r6ms * window.getWidth() / window.getHeight();
+            float height = cameraZoomFactor$r6ms;
+            return Matrix4f.orthographic(-width, width, height, -height, clipRoof$r6ms ? 0 : -9999, 9999);
         } else {
             return m;
         }

@@ -14,37 +14,38 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /**
  * @author USS_Shenzhou
  */
+@SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
 @Mixin(GameRenderer.class)
 public class GameRendererMixin implements GameRendererProxy {
-    private boolean needScreenShot = false;
-    private volatile NativeImage screenShot = null;
+    private boolean needScreenShot$r6ms = false;
+    private volatile NativeImage screenShot$r6ms = null;
 
     @Shadow
-    boolean renderHand;
+    private boolean renderHand;
 
     public void needScreenShot() {
         Minecraft.getInstance().execute(()->{
-            needScreenShot = true;
+            needScreenShot$r6ms = true;
             renderHand = false;
         });
     }
 
-    public NativeImage getScreenShot() {
-        return screenShot;
+    public NativeImage getScreenShot$r6ms() {
+        return screenShot$r6ms;
     }
 
     public void clearScreenShot(){
         Minecraft.getInstance().execute(()->{
-            screenShot = null;
+            screenShot$r6ms = null;
             renderHand = true;
         });
     }
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/pipeline/RenderTarget;bindWrite(Z)V", shift = At.Shift.AFTER))
     private void getScreenShot(float pPartialTicks, long pNanoTime, boolean pRenderLevel, CallbackInfo ci) {
-        if (needScreenShot) {
-            screenShot = Screenshot.takeScreenshot(Minecraft.getInstance().getMainRenderTarget());
-            needScreenShot = false;
+        if (needScreenShot$r6ms) {
+            screenShot$r6ms = Screenshot.takeScreenshot(Minecraft.getInstance().getMainRenderTarget());
+            needScreenShot$r6ms = false;
         }
     }
 }

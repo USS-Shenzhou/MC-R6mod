@@ -11,5 +11,5 @@ public interface LevelRendererProxy {
 
     default void disableOrthographic(){}
 
-    default void setClipRoof(boolean clipRoof) {}
+    default void setClipRoof$r6ms(boolean clipRoof$r6ms) {}
 }
