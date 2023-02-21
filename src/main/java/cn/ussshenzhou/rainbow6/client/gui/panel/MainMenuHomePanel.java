@@ -3,6 +3,7 @@ package cn.ussshenzhou.rainbow6.client.gui.panel;
 import cn.ussshenzhou.rainbow6.client.gui.hud.AutoCloseHud;
 import cn.ussshenzhou.rainbow6.client.gui.hud.PromptHud;
 import cn.ussshenzhou.rainbow6.client.gui.screen.MainMenuScreen;
+import cn.ussshenzhou.rainbow6.client.gui.screen.RoundEndScreen;
 import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
 import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageButton;
@@ -22,7 +23,7 @@ public class MainMenuHomePanel extends TPanel {
             pButton -> {
                 //TODO open modeSelectPanel
                 //RoundPrepareScreen.newRoundPrepareScreenAndShow();
-                AutoCloseHud.ifPresentFormerThenRemoveAndAdd(new PromptHud.AliveAmountHud());
+                RoundEndScreen.roundEnd(true);
             },
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")

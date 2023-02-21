@@ -41,5 +41,9 @@
   "gui.r6ms.round.act_stage.atk": "将拆弹器装设于任意炸弹所在的地点",
   "gui.r6ms.round.act_stage.def": "保卫炸弹所在地点",
   "gui.r6ms.round.found_bomb.atk": "发现炸弹",
-  "gui.r6ms.round.found_bomb.def": "敌方已发现炸弹"
+  "gui.r6ms.round.found_bomb.def": "敌方已发现炸弹",
+
+  "gui.r6ms.round_end.your_team": "你方队伍",
+  "gui.r6ms.round_end.win": "第%s回合获胜",
+  "gui.r6ms.round_end.lose": "第%s回合战败"
 }
