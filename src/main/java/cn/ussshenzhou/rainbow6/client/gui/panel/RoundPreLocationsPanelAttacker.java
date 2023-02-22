@@ -6,7 +6,7 @@ import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
 import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.data.Map;
-import cn.ussshenzhou.rainbow6.util.MapHelper;
+import cn.ussshenzhou.rainbow6.util.MapTopViewHelper;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.Vec2i;
@@ -18,15 +18,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import org.lwjgl.opengl.GL43;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.concurrent.CompletableFuture;
-
-import static org.lwjgl.opengl.GL43.GL_DEBUG_OUTPUT;
-import static org.lwjgl.opengl.GL43.GL_DEBUG_OUTPUT_SYNCHRONOUS;
 
 /**
  * @author USS_Shenzhou
@@ -41,7 +37,7 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
     public RoundPreLocationsPanelAttacker() {
         super(new TLabel(new TranslatableComponent("gui.r6ms.round_prepare.team_spawn_location")));
         CompletableFuture.runAsync(() -> {
-            map = MapHelper.generateMap().get(0);
+            map = MapTopViewHelper.generateMap().get(0);
             ScreenManager.playerInfoBarHud.getTimer().start();
             Minecraft.getInstance().execute(this::layout);
         });

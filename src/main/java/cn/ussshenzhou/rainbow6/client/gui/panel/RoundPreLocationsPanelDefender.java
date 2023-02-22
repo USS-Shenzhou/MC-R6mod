@@ -6,7 +6,7 @@ import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
 import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.data.Map;
-import cn.ussshenzhou.rainbow6.util.MapHelper;
+import cn.ussshenzhou.rainbow6.util.MapTopViewHelper;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
@@ -39,7 +39,7 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
     public RoundPreLocationsPanelDefender() {
         super(new TLabel(new TranslatableComponent("gui.r6ms.round_prepare.bomb_location")));
         CompletableFuture.runAsync(() -> {
-            map = MapHelper.generateMap();
+            map = MapTopViewHelper.generateMap();
             ScreenManager.playerInfoBarHud.getTimer().start();
         });
         initBombSites();

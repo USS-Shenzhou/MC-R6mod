@@ -1,33 +1,69 @@
 package cn.ussshenzhou.rainbow6.server.match;
 
+import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
+import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.util.TeamColor;
+import cn.ussshenzhou.t88.network.PacketProxy;
+import com.mojang.blaze3d.platform.Window;
+import com.mojang.logging.LogUtils;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.UUID;
 
+import static cn.ussshenzhou.rainbow6.util.MapTopViewHelper.minecraft;
+
 /**
  * @author USS_Shenzhou
+ * </p>
+ * ServerMatch is resbonsible for storing data, and ServerMatchController is resbonsible for process controlling.
  */
 public class ServerMatch {
-    private final UUID id = UUID.randomUUID();
-    private final LinkedHashSet<ServerPlayer> teamOrange = new LinkedHashSet<>();
-    private final LinkedHashSet<ServerPlayer> teamBlue = new LinkedHashSet<>();
-    private final ServerMatchHandler handler = new ServerMatchHandler();
+    final UUID id = UUID.randomUUID();
+    final LinkedHashSet<ServerPlayer> teamOrange = new LinkedHashSet<>();
+    final LinkedHashSet<ServerPlayer> teamBlue = new LinkedHashSet<>();
+    final ServerMatchController controller = new ServerMatchController(this);
+    final Map map;
+    int currentRoundNumber = 0;
+    TeamColor attackerColor;
+    int bombSiteIndex = 0;
 
-    public ServerMatch(Collection<ServerPlayer> players) {
-        //TODO maybe random?
-        teamOrange.addAll(players.stream().toList().subList(0,5));
-        teamBlue.addAll(players.stream().toList().subList(5,10));
-
+    public ServerMatch(Collection<ServerPlayer> players, Map map) {
+        //player team randomization should be in MatchMaker
+        teamOrange.addAll(players.stream().toList().subList(0, 5));
+        teamBlue.addAll(players.stream().toList().subList(5, 10));
+        this.map = map;
+        controller.startMatch();
     }
+
+    public void tick() {
+        controller.tick();
+    }
+
+    public <MSG> void sendPacketsTo(Collection<ServerPlayer> players, MSG packet) {
+        SimpleChannel channel = PacketProxy.getChannel(packet.getClass());
+        if (channel == null) {
+            LogUtils.getLogger().error("Failed to find channel for {}.", packet.getClass().getName());
+            return;
+        }
+        players.forEach(player -> channel.send(PacketDistributor.PLAYER.with(() -> player), packet));
+    }
+
+    public <MSG> void sendPacketsToEveryOne(MSG packet) {
+        sendPacketsTo(teamOrange, packet);
+        sendPacketsTo(teamBlue, packet);
+    }
+
 
     public UUID getId() {
         return id;
     }
 
-    public void tick(){
-
+    public Map getMap() {
+        return map;
     }
 
     @Override

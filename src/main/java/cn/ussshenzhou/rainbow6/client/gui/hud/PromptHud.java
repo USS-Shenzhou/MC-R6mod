@@ -83,7 +83,7 @@ public class PromptHud extends AutoCloseHud {
         }
 
         private static String getBombSiteNamePrompt() {
-            Map.BombSite bombSite = ClientMatch.getMap().getBombSites().get(ClientMatch.getBombSiteNumber());
+            Map.BombSite bombSite = ClientMatch.getMap().getBombSites().get(ClientMatch.getBombSiteIndex());
             return R6Constants.YELLOW + bombSite.getSubSite1Name() + "\n" + R6Constants.YELLOW + bombSite.getSubSite2Name();
         }
     }

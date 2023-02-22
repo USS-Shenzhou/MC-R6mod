@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * @author USS_Shenzhou
  */
-public class MapHelper {
+public class MapTopViewHelper {
     public static Minecraft minecraft = Minecraft.getInstance();
 
     /**
@@ -87,7 +87,7 @@ public class MapHelper {
         CloudStatus cloudsBuffer = minecraft.options.getCloudsType();
         playerPos = minecraft.player.getPosition(1);
         //wait for tp
-        while (!(Math.abs(playerPos.x - centerX) < 0.5 && Math.abs(playerPos.y - y) < 0.5 && Math.abs(playerPos.z - centerZ) < 0.5)) {
+        while (!(Math.abs(playerPos.x - centerX) < 1 && Math.abs(playerPos.y - y) < 1 && Math.abs(playerPos.z - centerZ) < 1)) {
             Minecraft.getInstance().execute(() -> {
                 playerPos = minecraft.player.getPosition(1);
             });

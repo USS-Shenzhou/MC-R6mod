@@ -1,15 +1,20 @@
 package cn.ussshenzhou.rainbow6.network;
 
+import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.server.match.ServerMatchManager;
 import cn.ussshenzhou.t88.network.annotation.Consumer;
 import cn.ussshenzhou.t88.network.annotation.Decoder;
 import cn.ussshenzhou.t88.network.annotation.Encoder;
 import cn.ussshenzhou.t88.network.annotation.NetPacket;
+import com.mojang.logging.LogUtils;
 import com.mojang.math.Vector3d;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
@@ -20,6 +25,7 @@ import net.minecraftforge.common.util.LogicalSidedProvider;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
+import org.apache.logging.log4j.core.jmx.Server;
 
 import java.util.function.Supplier;
 
@@ -76,14 +82,49 @@ public class RoundPrepareTopView {
 
     public void serverHandler(Supplier<NetworkEvent.Context> context) {
         try {
-            //TODO security check
-            //MinecraftServer minecraftServer = (MinecraftServer) LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
-            //ServerLevel serverLevel = minecraftServer.getLevel(Level.OVERWORLD);
-            //TODO multi-level support : ServerLevelData#getLevelName
-            context.get().getSender().connection.teleport(x, y, z, turn ? -90 : 180, 90);
-            context.get().getSender().setGameMode(GameType.SPECTATOR);
+            ServerPlayer player = context.get().getSender();
+            Map map = ServerMatchManager.getPlayerMatch(player).getMap();
+            if (posCheck(player, map)) {
+                MinecraftServer minecraftServer = (MinecraftServer) LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
+                ServerLevel serverLevel = minecraftServer.getLevel(map.getDimension());
+                if (serverLevel == null) {
+                    LogUtils.getLogger().error("Failed to find world {}.", map.getDimension().location());
+                    //TODO cancel match
+                    return;
+                }
+                if (player.getLevel() == serverLevel) {
+                    player.connection.teleport(x, y, z, turn ? -90 : 180, 90);
+                } else {
+                    player.teleportTo(serverLevel, x, y, z, turn ? -90 : 180, 90);
+                }
+                player.setGameMode(GameType.SPECTATOR);
+                //TODO Make other player invisible
+            }
         } catch (NullPointerException ignored) {
         }
+    }
+
+    private boolean posCheck(ServerPlayer player, Map map) {
+        if (map == null) {
+            LogUtils.getLogger().warn("Player {} sent a RoundPrepareTopView packet, but it looks like this player is not in a match.",
+                    player.getName().getContents());
+            return false;
+        }
+        BlockPos p1 = map.getZonePointMin();
+        BlockPos p2 = map.getZonePointMax();
+        int dX = (p2.getX() - p1.getX()) * 4;
+        int dZ = (p2.getZ() - p1.getZ()) * 4;
+        if (x < p1.getX() - dX || x > p2.getX() + dX
+                || y < 0 || y > 320
+                || z < p1.getZ() - dZ || z > p2.getZ() + dZ
+        ) {
+            LogUtils.getLogger().warn("Player {} sent a RoundPrepareTopView packet and wants to teleport to ({}, {}, {}),"
+                            + " but it looks like this pos is not in the range of designated map.",
+                    player.getName().getContents(), x, y, z
+            );
+            return false;
+        }
+        return true;
     }
 
 }

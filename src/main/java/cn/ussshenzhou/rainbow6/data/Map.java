@@ -2,6 +2,11 @@ package cn.ussshenzhou.rainbow6.data;
 
 import com.google.gson.annotations.SerializedName;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
@@ -11,8 +16,15 @@ import java.util.ArrayList;
  * @author USS_Shenzhou
  */
 public class Map {
+
+    public Map() {
+    }
+
     @SerializedName("map name")
     private String name;
+
+    @SerializedName("world name")
+    private ResourceKey<Level> dimension;
 
     @SerializedName("bomb sites")
     private ArrayList<BombSite> bombSites = new ArrayList<>();
@@ -35,7 +47,53 @@ public class Map {
     @SerializedName("usable")
     private Boolean isUsable;
 
-    public class BombSite {
+    public Map(FriendlyByteBuf buf) {
+        this.name = buf.readUtf();
+        this.dimension = ResourceKey.create(Registry.DIMENSION_REGISTRY, buf.readResourceLocation());
+        this.bombSites = buf.readCollection(ArrayList::new, b -> {
+            BombSite site = new BombSite();
+            site.setSubSite1Name(b.readUtf());
+            site.setSubSite1Pos(b.readBlockPos());
+            site.setSubSite2Name(b.readUtf());
+            site.setSubSite2Pos(b.readBlockPos());
+            return site;
+        });
+        this.spawnPositions = buf.readCollection(ArrayList::new, b -> {
+            SpawnPos pos = new SpawnPos();
+            pos.setSpawnPosName(b.readUtf());
+            pos.setSpawnPosPos(b.readBlockPos());
+            return pos;
+        });
+        this.zonePointMin = buf.readBlockPos();
+        this.zonePointMax = buf.readBlockPos();
+        this.scenePos = new Vec3(buf.readDouble(), buf.readDouble(), buf.readDouble());
+        this.sceneDir = new Vec2(buf.readFloat(), buf.readFloat());
+        this.isUsable = true;
+    }
+
+    public void write(FriendlyByteBuf buf) {
+        buf.writeUtf(name);
+        buf.writeResourceLocation(dimension.location());
+        buf.writeCollection(bombSites, (b, bombSite) -> {
+            b.writeUtf(bombSite.subSite1Name);
+            b.writeBlockPos(bombSite.subSite1Pos);
+            b.writeUtf(bombSite.subSite2Name);
+            b.writeBlockPos(bombSite.subSite2Pos);
+        });
+        buf.writeCollection(spawnPositions, (b, spawnPos) -> {
+            b.writeUtf(spawnPos.spawnPosName);
+            b.writeBlockPos(spawnPos.spawnPosPos);
+        });
+        buf.writeBlockPos(zonePointMin);
+        buf.writeBlockPos(zonePointMax);
+        buf.writeDouble(scenePos.x);
+        buf.writeDouble(scenePos.y);
+        buf.writeDouble(scenePos.z);
+        buf.writeFloat(sceneDir.x);
+        buf.writeFloat(sceneDir.y);
+    }
+
+    public static class BombSite {
 
         @SerializedName("subSite1 name")
         private String subSite1Name;
@@ -82,7 +140,7 @@ public class Map {
         }
     }
 
-    public class SpawnPos {
+    public static class SpawnPos {
         @SerializedName("spawnPos name")
         private String spawnPosName;
 
@@ -170,7 +228,7 @@ public class Map {
 
     public BlockPos getZonePointMax() {
         //---dev---
-        return new BlockPos(57,-30,122);
+        return new BlockPos(57, -30, 122);
         //return zonePointMax;
     }
 
@@ -200,5 +258,13 @@ public class Map {
 
     public void setUsable(Boolean usable) {
         isUsable = usable;
+    }
+
+    public ResourceKey<Level> getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(ResourceKey<Level> dimension) {
+        this.dimension = dimension;
     }
 }

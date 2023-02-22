@@ -1,6 +1,9 @@
 package cn.ussshenzhou.rainbow6.network;
 
-import cn.ussshenzhou.rainbow6.server.match.MatchMaker;
+import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
+import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.util.Side;
+import cn.ussshenzhou.rainbow6.util.TeamColor;
 import cn.ussshenzhou.t88.network.annotation.Consumer;
 import cn.ussshenzhou.t88.network.annotation.Decoder;
 import cn.ussshenzhou.t88.network.annotation.Encoder;
@@ -11,27 +14,33 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 
+import java.util.ArrayList;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 /**
  * @author USS_Shenzhou
  */
 @NetPacket
-public class MatchMakerChange {
-    private final Flag flag;
+public class MatchInitPacket {
+    Map map;
+    ArrayList<UUID> playerUuids;
 
-    public MatchMakerChange(Flag flag) {
-        this.flag = flag;
+    public MatchInitPacket(Map map, ArrayList<UUID> playerUuids) {
+        this.map = map;
+        this.playerUuids = playerUuids;
     }
 
     @Decoder
-    public MatchMakerChange(FriendlyByteBuf buf) {
-        this.flag = buf.readEnum(Flag.class);
+    public MatchInitPacket(FriendlyByteBuf buf) {
+        map = new Map(buf);
+        playerUuids = buf.readCollection(ArrayList::new, FriendlyByteBuf::readUUID);
     }
 
     @Encoder
     public void write(FriendlyByteBuf buf) {
-        buf.writeEnum(flag);
+        map.write(buf);
+        buf.writeCollection(playerUuids, FriendlyByteBuf::writeUUID);
     }
 
     @Consumer
@@ -39,7 +48,7 @@ public class MatchMakerChange {
         context.get().enqueueWork(
                 () -> {
                     if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-                        serverHandler(context);
+                        serverHandler();
                     } else {
                         clientHandler();
                     }
@@ -50,20 +59,11 @@ public class MatchMakerChange {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void clientHandler(){
-
+    public void clientHandler() {
+        ClientMatch.init(map, playerUuids);
     }
 
-    public void serverHandler(Supplier<NetworkEvent.Context> context){
-        switch (flag){
-            case JOIN -> MatchMaker.addWaiting(context.get().getSender());
-            default -> {}
-        }
-    }
+    public void serverHandler() {
 
-
-    @SuppressWarnings("AlibabaEnumConstantsMustHaveComment")
-    public enum Flag {
-        JOIN
     }
 }
