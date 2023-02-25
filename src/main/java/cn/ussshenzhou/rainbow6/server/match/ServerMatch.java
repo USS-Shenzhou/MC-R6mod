@@ -1,20 +1,17 @@
 package cn.ussshenzhou.rainbow6.server.match;
 
-import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.server.DelayedTaskManager;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import cn.ussshenzhou.t88.network.PacketProxy;
-import com.mojang.blaze3d.platform.Window;
 import com.mojang.logging.LogUtils;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.UUID;
-
-import static cn.ussshenzhou.rainbow6.util.MapTopViewHelper.minecraft;
+import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * @author USS_Shenzhou
@@ -30,6 +27,8 @@ public class ServerMatch {
     int currentRoundNumber = 0;
     TeamColor attackerColor;
     int bombSiteIndex = 0;
+    LinkedHashMap<ServerPlayer,CompoundTag> playerDataBeforeMatch = new LinkedHashMap<>();
+    DelayedTaskManager taskManager = new DelayedTaskManager();
 
     public ServerMatch(Collection<ServerPlayer> players, Map map) {
         //player team randomization should be in MatchMaker
@@ -40,7 +39,7 @@ public class ServerMatch {
     }
 
     public void tick() {
-        controller.tick();
+        taskManager.tick();
     }
 
     public <MSG> void sendPacketsTo(Collection<ServerPlayer> players, MSG packet) {
@@ -53,8 +52,12 @@ public class ServerMatch {
     }
 
     public <MSG> void sendPacketsToEveryOne(MSG packet) {
-        sendPacketsTo(teamOrange, packet);
-        sendPacketsTo(teamBlue, packet);
+        forEachPlayer(player -> PacketProxy.getChannel(packet.getClass()).send(PacketDistributor.PLAYER.with(() -> player), packet));
+    }
+
+    public void forEachPlayer(Consumer<ServerPlayer> playerConsumer) {
+        teamOrange.forEach(playerConsumer);
+        teamBlue.forEach(playerConsumer);
     }
 
 

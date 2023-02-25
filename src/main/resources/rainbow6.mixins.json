@@ -6,6 +6,7 @@
   "refmap": "rainbow6.refmap.json",
   "mixins": [
     "ForgeHooksClientAccessor",
+    "PlayerAccessor",
     "SimpleBakedModelAccessor"
   ],
   "client": [

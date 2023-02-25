@@ -1,16 +1,14 @@
 package cn.ussshenzhou.rainbow6.client.gui.panel;
 
-import cn.ussshenzhou.rainbow6.client.gui.hud.AutoCloseHud;
-import cn.ussshenzhou.rainbow6.client.gui.hud.PromptHud;
 import cn.ussshenzhou.rainbow6.client.gui.screen.MainMenuScreen;
-import cn.ussshenzhou.rainbow6.client.gui.screen.RoundEndScreen;
-import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
 import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageButton;
+import cn.ussshenzhou.rainbow6.network.Test;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
+import cn.ussshenzhou.t88.network.PacketProxy;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
@@ -23,7 +21,7 @@ public class MainMenuHomePanel extends TPanel {
             pButton -> {
                 //TODO open modeSelectPanel
                 //RoundPrepareScreen.newRoundPrepareScreenAndShow();
-                RoundEndScreen.roundEnd(true);
+                PacketProxy.getChannel(Test.class).sendToServer(new Test());
             },
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")

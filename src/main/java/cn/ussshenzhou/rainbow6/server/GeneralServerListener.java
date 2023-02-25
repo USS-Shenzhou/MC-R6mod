@@ -18,7 +18,6 @@ public class GeneralServerListener {
         if (event.phase == TickEvent.Phase.END && event.haveTime()) {
             MatchMaker.tick();
             ServerMatchManager.tick();
-            DelayedTaskManager.tick();
         }
     }
 

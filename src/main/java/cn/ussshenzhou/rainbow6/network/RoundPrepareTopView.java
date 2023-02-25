@@ -95,10 +95,10 @@ public class RoundPrepareTopView {
                 if (player.getLevel() == serverLevel) {
                     player.connection.teleport(x, y, z, turn ? -90 : 180, 90);
                 } else {
+                    //TODO need test
                     player.teleportTo(serverLevel, x, y, z, turn ? -90 : 180, 90);
                 }
                 player.setGameMode(GameType.SPECTATOR);
-                //TODO Make other player invisible
             }
         } catch (NullPointerException ignored) {
         }
