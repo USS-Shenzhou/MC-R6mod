@@ -21,7 +21,7 @@ public class MinecraftMixin {
     public Screen screen;
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;wrapScreenError(Ljava/lang/Runnable;Ljava/lang/String;Ljava/lang/String;)V"))
-    private void tickAllScreenLayers(Runnable crashreport, String crashreportcategory, String throwable) {
+    private void r6msTickAllScreenLayers(Runnable crashreport, String crashreportcategory, String throwable) {
         Screen.wrapScreenError(screen::tick, "Ticking screen", screen.getClass().getCanonicalName());
         for (Screen s : ForgeHooksClientAccessor.getGuiLayers()) {
             if (s instanceof TScreen && s != screen) {

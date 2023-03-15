@@ -25,7 +25,7 @@ public class PauseScreenMixin extends Screen {
         super(pTitle);
     }
 
-    HoverSensitiveImageButton1 initiateR6msButton$r6ms = new HoverSensitiveImageButton1(
+    HoverSensitiveImageButton1 r6msInitiateR6msButton = new HoverSensitiveImageButton1(
             new TranslatableComponent("gui.r6ms.pause_screen.button"),
             pButton -> {
                 ScreenManager.openMainMenuScreen();
@@ -37,18 +37,18 @@ public class PauseScreenMixin extends Screen {
     @Inject(method = "createPauseMenu",at=@At("RETURN"))
     private void addR6msButton(CallbackInfo ci){
         //TODO Do not add if already opened. PauseScreen during match needs remake.
-        initiateR6msButton$r6ms.setPadding(1);
-        initiateR6msButton$r6ms.getText().setHorizontalAlignment(HorizontalAlignment.CENTER);
-        initiateR6msButton$r6ms.getBackgroundImage().setImageFit(ImageFit.STRETCH);
-        initiateR6msButton$r6ms.getBackgroundImageHovered().setImageFit(ImageFit.STRETCH);
+        r6msInitiateR6msButton.setPadding(1);
+        r6msInitiateR6msButton.getText().setHorizontalAlignment(HorizontalAlignment.CENTER);
+        r6msInitiateR6msButton.getBackgroundImage().setImageFit(ImageFit.STRETCH);
+        r6msInitiateR6msButton.getBackgroundImageHovered().setImageFit(ImageFit.STRETCH);
 
-        initiateR6msButton$r6ms.setAbsBounds(this.width / 2 - 102, this.height / 4 + 144 + -16, 204, 20);
-        initiateR6msButton$r6ms.layout();
-        this.addRenderableWidget(initiateR6msButton$r6ms);
+        r6msInitiateR6msButton.setAbsBounds(this.width / 2 - 102, this.height / 4 + 144 + -16, 204, 20);
+        r6msInitiateR6msButton.layout();
+        this.addRenderableWidget(r6msInitiateR6msButton);
     }
 
     @Inject(method = "tick",at = @At("RETURN"))
     private void tickR6msButton(CallbackInfo ci){
-        initiateR6msButton$r6ms.tickT();
+        r6msInitiateR6msButton.tickT();
     }
 }

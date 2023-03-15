@@ -5,11 +5,11 @@ package cn.ussshenzhou.rainbow6.mixinproxy;
  */
 @SuppressWarnings("AlibabaAbstractMethodOrInterfaceMethodMustUseJavadoc")
 public interface LevelRendererProxy {
-    default LevelRendererProxy enableOrthographic(float cameraDistance1){
+    default LevelRendererProxy r6msEnableOrthographic(float cameraDistance1){
         return this;
     }
 
-    default void disableOrthographic(){}
+    default void r6msDisableOrthographic(){}
 
-    default void setClipRoof$r6ms(boolean clipRoof$r6ms) {}
+    default void setR6msClipRoof(boolean r6msClipRoof) {}
 }

@@ -81,7 +81,7 @@ public class MapTopViewHelper {
         PacketProxy.getChannel(RoundPrepareTopView.class).sendToServer(new RoundPrepareTopView(centerX, y, centerZ, turn));
         minecraft.execute(() -> {
             minecraft.options.renderClouds = CloudStatus.OFF;
-            ((LevelRendererProxy) minecraft.levelRenderer).enableOrthographic(cameraZoomFactor).setClipRoof$r6ms(clipRoof);
+            ((LevelRendererProxy) minecraft.levelRenderer).r6msEnableOrthographic(cameraZoomFactor).setR6msClipRoof(clipRoof);
             //TODO set spectator
         });
         CloudStatus cloudsBuffer = minecraft.options.getCloudsType();
@@ -125,12 +125,12 @@ public class MapTopViewHelper {
         gameRenderer.needScreenShot();
         NativeImage screenShot = null;
         while (screenShot == null) {
-            screenShot = gameRenderer.getScreenShot$r6ms();
+            screenShot = gameRenderer.getR6msScreenShot();
         }
         gameRenderer.clearScreenShot();
         minecraft.execute(() -> {
             minecraft.options.renderClouds = cloudsBuffer;
-            ((LevelRendererProxy) minecraft.levelRenderer).disableOrthographic();
+            ((LevelRendererProxy) minecraft.levelRenderer).r6msDisableOrthographic();
         });
         hasRenderedAllChunks = false;
         return screenShot;

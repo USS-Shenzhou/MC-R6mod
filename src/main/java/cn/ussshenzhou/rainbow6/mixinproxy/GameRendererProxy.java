@@ -12,7 +12,7 @@ public interface GameRendererProxy {
 
     }
 
-    default NativeImage getScreenShot$r6ms() {
+    default NativeImage getR6msScreenShot() {
         return null;
     }
 
