@@ -13,7 +13,8 @@
     "GameRendererMixin",
     "LevelRendererMixin",
     "MinecraftMixin",
-    "PauseScreenMixin"
+    "PauseScreenMixin",
+    "PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

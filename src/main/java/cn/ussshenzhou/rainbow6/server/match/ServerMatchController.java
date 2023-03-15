@@ -1,7 +1,7 @@
 package cn.ussshenzhou.rainbow6.server.match;
 
-import cn.ussshenzhou.rainbow6.network.MatchInitPacket;
-import cn.ussshenzhou.rainbow6.server.DelayedTaskManager;
+import cn.ussshenzhou.rainbow6.network.onlyto.client.MatchInitPacket;
+import cn.ussshenzhou.rainbow6.network.onlyto.client.RoundStartPacket;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.Registry;
@@ -14,7 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.storage.LevelData;
 import net.minecraftforge.common.util.LogicalSidedProvider;
 import net.minecraftforge.fml.LogicalSide;
 
@@ -25,26 +25,25 @@ import java.util.UUID;
  * @author USS_Shenzhou
  */
 public class ServerMatchController {
-    private final ServerMatch match;
+    private ServerMatch match;
 
     public ServerMatchController(ServerMatch match) {
         this.match = match;
     }
 
+    //----------Start a new Match----------
+
     public void startMatch() {
         //send to players
         ArrayList<UUID> uuids = new ArrayList<>();
         match.forEachPlayer(player -> uuids.add(player.getUUID()));
-        savePlayerDataAndInit();
+        match.forEachPlayer(player -> match.playerDataBeforeMatch.put(player, player.saveWithoutId(new CompoundTag())));
         match.sendPacketsToEveryOne(new MatchInitPacket(match.map, uuids));
+        //----------Give additional 1 sec to QueuingForMatchBar to notify player----------
         match.taskManager.arrange(20, this::newRound);
     }
 
-    private void savePlayerDataAndInit() {
-        match.forEachPlayer(player -> match.playerDataBeforeMatch.put(player, player.saveWithoutId(new CompoundTag())));
-        //TODO
-        //TODO Make other player invisible
-    }
+    //----------Start a new Round----------
 
     private void newRound() {
         //init roundNumber
@@ -55,7 +54,18 @@ public class ServerMatchController {
         } else if (match.currentRoundNumber % 2 == 1) {
             match.attackerColor = match.attackerColor.opposite();
         }
+        match.sendPacketsToEveryOne(new RoundStartPacket(match.attackerColor));
+        match.forEachPlayer(player -> player.setGameMode(GameType.SPECTATOR));
+    }
+    //TODO response player choices
+
+    //----------?----------
+
+    private void endMatch() {
         //TODO
+
+        //Break circular references for GC convenience.
+        match = null;
     }
 
     private void restorePlayerData() {
@@ -66,14 +76,17 @@ public class ServerMatchController {
             } catch (NullBeforeMatchDataException ignored) {
                 player.load(new CompoundTag());
                 player.setGameMode(minecraftServer.getDefaultGameType());
-
+                teleportToOverWorldSpawn(minecraftServer, player);
             } catch (WorldNotFoundException ignored) {
-
+                teleportToOverWorldSpawn(minecraftServer, player);
             }
-            //if any anomaly, clear and teleport to world spawn.
-            //TODO
-
         });
+    }
+
+    private void teleportToOverWorldSpawn(MinecraftServer minecraftServer, ServerPlayer player) {
+        ServerLevel overWorld = minecraftServer.overworld();
+        LevelData data = overWorld.getLevelData();
+        player.teleportTo(overWorld, data.getXSpawn(), data.getYSpawn(), data.getZSpawn(), data.getSpawnAngle(), 0);
     }
 
     private void restorePlayerDataInternal(ServerPlayer player, MinecraftServer minecraftServer) throws NullBeforeMatchDataException, WorldNotFoundException {

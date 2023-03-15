@@ -47,7 +47,12 @@ public class QueuingForMatchBar extends TPanel {
     }
 
     public void stop() {
+        //TODO
         this.setVisibleT(false);
         timer.stop();
+    }
+
+    public void showGetQueued() {
+
     }
 }

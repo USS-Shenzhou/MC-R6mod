@@ -1,5 +1,7 @@
 package cn.ussshenzhou.rainbow6.client.match;
 
+import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
+import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
 import cn.ussshenzhou.rainbow6.data.Map;
 import cn.ussshenzhou.rainbow6.util.Side;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
@@ -23,6 +25,7 @@ public class ClientMatch {
     private static Side side = Side.DEFENDER;
     private static int bombSiteIndex = 0;
     private static int currentRound = 0;
+    private static boolean renderPlayer = true;
 
     //----------Start a new Match----------
 
@@ -32,21 +35,37 @@ public class ClientMatch {
         Level level = minecraft.level;
         u.subList(0, 5).forEach(uuid -> teamOrange.add(level.getPlayerByUUID(uuid)));
         u.subList(5, 10).forEach(uuid -> teamBlue.add(level.getPlayerByUUID(uuid)));
-        if (teamOrange.size() < 5 || teamBlue.size() < 5) {
+        if (teamOrange.size() != 5 || teamBlue.size() != 5) {
             //TODO
         }
-        notifyQueuingForMatchBar();
+        notifyGui();
     }
 
-    private static void notifyQueuingForMatchBar(){
-        //TODO
+    private static void notifyGui() {
+        ScreenManager.mainMenuScreenBuffer.queuingForMatchBar.showGetQueued();
+        ScreenManager.mainMenuScreenBuffer.stopQueuing();
     }
 
     //----------Start a new Round----------
 
-    public static void newRound( TeamColor attackerColor) {
+    public static void newRound(TeamColor attackerColor) {
         currentRound++;
         side = getTeamColor() == attackerColor ? Side.ATTACKER : Side.DEFENDER;
+        RoundPrepareScreen.newRoundPrepareScreenAndShow();
+    }
+
+    //--------------------
+
+    public static void stopRenderPlayer() {
+        renderPlayer = false;
+    }
+
+    public static void resumeRenderPlayer() {
+        renderPlayer = true;
+    }
+
+    public static boolean isRenderPlayer() {
+        return renderPlayer;
     }
 
     public static TeamColor getTeamColor() {

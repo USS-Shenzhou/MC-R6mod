@@ -1,4 +1,4 @@
-package cn.ussshenzhou.rainbow6.network;
+package cn.ussshenzhou.rainbow6.network.onlyto.server;
 
 import cn.ussshenzhou.rainbow6.data.Map;
 import cn.ussshenzhou.rainbow6.server.match.ServerMatchManager;
@@ -7,25 +7,18 @@ import cn.ussshenzhou.t88.network.annotation.Decoder;
 import cn.ussshenzhou.t88.network.annotation.Encoder;
 import cn.ussshenzhou.t88.network.annotation.NetPacket;
 import com.mojang.logging.LogUtils;
-import com.mojang.math.Vector3d;
-import net.minecraft.client.Minecraft;
-import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Mth;
 import net.minecraft.world.level.GameType;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.LogicalSidedProvider;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
-import org.apache.logging.log4j.core.jmx.Server;
 
 import java.util.function.Supplier;
 

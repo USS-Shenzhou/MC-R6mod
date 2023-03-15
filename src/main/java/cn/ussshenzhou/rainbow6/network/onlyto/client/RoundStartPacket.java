@@ -1,8 +1,6 @@
-package cn.ussshenzhou.rainbow6.network;
+package cn.ussshenzhou.rainbow6.network.onlyto.client;
 
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
-import cn.ussshenzhou.rainbow6.data.Map;
-import cn.ussshenzhou.rainbow6.util.Side;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import cn.ussshenzhou.t88.network.annotation.Consumer;
 import cn.ussshenzhou.t88.network.annotation.Decoder;
@@ -14,33 +12,27 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 
-import java.util.ArrayList;
-import java.util.UUID;
 import java.util.function.Supplier;
 
 /**
  * @author USS_Shenzhou
  */
 @NetPacket
-public class MatchInitPacket {
-    Map map;
-    ArrayList<UUID> playerUuids;
+public class RoundStartPacket {
+    TeamColor attackColor;
 
-    public MatchInitPacket(Map map, ArrayList<UUID> playerUuids) {
-        this.map = map;
-        this.playerUuids = playerUuids;
+    public RoundStartPacket(TeamColor attackColor) {
+        this.attackColor = attackColor;
     }
 
     @Decoder
-    public MatchInitPacket(FriendlyByteBuf buf) {
-        map = new Map(buf);
-        playerUuids = buf.readCollection(ArrayList::new, FriendlyByteBuf::readUUID);
+    public RoundStartPacket(FriendlyByteBuf buf) {
+        attackColor = buf.readEnum(TeamColor.class);
     }
 
     @Encoder
     public void write(FriendlyByteBuf buf) {
-        map.write(buf);
-        buf.writeCollection(playerUuids, FriendlyByteBuf::writeUUID);
+        buf.writeEnum(attackColor);
     }
 
     @Consumer
@@ -60,7 +52,7 @@ public class MatchInitPacket {
 
     @OnlyIn(Dist.CLIENT)
     public void clientHandler() {
-        ClientMatch.init(map, playerUuids);
+        ClientMatch.newRound(attackColor);
     }
 
     public void serverHandler() {

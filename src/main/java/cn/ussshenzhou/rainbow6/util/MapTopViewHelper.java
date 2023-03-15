@@ -5,7 +5,7 @@ import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.data.Map;
 import cn.ussshenzhou.rainbow6.mixinproxy.GameRendererProxy;
 import cn.ussshenzhou.rainbow6.mixinproxy.LevelRendererProxy;
-import cn.ussshenzhou.rainbow6.network.RoundPrepareTopView;
+import cn.ussshenzhou.rainbow6.network.onlyto.server.RoundPrepareTopView;
 import cn.ussshenzhou.t88.network.PacketProxy;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.platform.Window;
@@ -82,7 +82,7 @@ public class MapTopViewHelper {
         minecraft.execute(() -> {
             minecraft.options.renderClouds = CloudStatus.OFF;
             ((LevelRendererProxy) minecraft.levelRenderer).r6msEnableOrthographic(cameraZoomFactor).setR6msClipRoof(clipRoof);
-            //TODO set spectator
+            ClientMatch.stopRenderPlayer();
         });
         CloudStatus cloudsBuffer = minecraft.options.getCloudsType();
         playerPos = minecraft.player.getPosition(1);
@@ -131,6 +131,7 @@ public class MapTopViewHelper {
         minecraft.execute(() -> {
             minecraft.options.renderClouds = cloudsBuffer;
             ((LevelRendererProxy) minecraft.levelRenderer).r6msDisableOrthographic();
+            ClientMatch.resumeRenderPlayer();
         });
         hasRenderedAllChunks = false;
         return screenShot;
