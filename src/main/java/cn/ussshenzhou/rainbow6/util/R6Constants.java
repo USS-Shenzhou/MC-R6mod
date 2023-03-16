@@ -23,6 +23,7 @@ public class R6Constants {
     public static final int ORANGE_STD_RGB = 0xf9952b;
 
     public static final int CYAN_STD_RGB = 0x0bfff0;
+    public static final int CYAN_STD_ARGB = 0xff0bfff0;
 
     public static final String YELLOW = "§g";
 

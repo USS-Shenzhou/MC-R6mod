@@ -7,6 +7,7 @@ import cn.ussshenzhou.t88.network.PacketProxy;
 import com.mojang.logging.LogUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
@@ -27,8 +28,9 @@ public class ServerMatch {
     int currentRoundNumber = 0;
     TeamColor attackerColor;
     int bombSiteIndex = 0;
-    LinkedHashMap<ServerPlayer,CompoundTag> playerDataBeforeMatch = new LinkedHashMap<>();
+    LinkedHashMap<ServerPlayer, CompoundTag> playerDataBeforeMatch = new LinkedHashMap<>();
     DelayedTaskManager taskManager = new DelayedTaskManager();
+    final LinkedHashMap<ServerPlayer, Integer> attackerSpawns = new LinkedHashMap<>();
 
     public ServerMatch(Collection<ServerPlayer> players, Map map) {
         //player team randomization should be in MatchMaker
@@ -41,6 +43,8 @@ public class ServerMatch {
     public void tick() {
         taskManager.tick();
     }
+
+    //----------Network----------
 
     public <MSG> void sendPacketsTo(Collection<ServerPlayer> players, MSG packet) {
         SimpleChannel channel = PacketProxy.getChannel(packet.getClass());
@@ -55,11 +59,32 @@ public class ServerMatch {
         forEachPlayer(player -> PacketProxy.getChannel(packet.getClass()).send(PacketDistributor.PLAYER.with(() -> player), packet));
     }
 
+    public <MSG> void sendPacketsToAttackers(MSG packet) {
+        getAttackers().forEach(player -> PacketProxy.getChannel(packet.getClass()).send(PacketDistributor.PLAYER.with(() -> player), packet));
+    }
+
+    public <MSG> void sendPacketsToDefenders(MSG packet) {
+        getDefenders().forEach(player -> PacketProxy.getChannel(packet.getClass()).send(PacketDistributor.PLAYER.with(() -> player), packet));
+    }
+
     public void forEachPlayer(Consumer<ServerPlayer> playerConsumer) {
         teamOrange.forEach(playerConsumer);
         teamBlue.forEach(playerConsumer);
     }
 
+    public <MSG> void receivePacket(MSG packet, NetworkEvent.Context context) {
+        controller.receivePacket(packet, context);
+    }
+
+    //--------------------
+
+    LinkedHashSet<ServerPlayer> getAttackers() {
+        return attackerColor == TeamColor.ORANGE ? teamOrange : teamBlue;
+    }
+
+    LinkedHashSet<ServerPlayer> getDefenders() {
+        return attackerColor == TeamColor.ORANGE ? teamBlue : teamOrange;
+    }
 
     public UUID getId() {
         return id;

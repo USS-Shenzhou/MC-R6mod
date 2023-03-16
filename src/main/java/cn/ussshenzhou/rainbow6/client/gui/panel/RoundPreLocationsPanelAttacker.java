@@ -32,7 +32,7 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
     @Nullable
     volatile DynamicTextureWithMapData map = null;
     LinkedHashMap<SpawnPosButton, SpawnPosSign> spawnPosPairs = new LinkedHashMap<>();
-    private boolean noneSelected = true;
+    private boolean noneSelectedBefore = true;
 
     public RoundPreLocationsPanelAttacker() {
         super(new TLabel(new TranslatableComponent("gui.r6ms.round_prepare.team_spawn_location")));
@@ -63,10 +63,10 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
         spawnPosButton.setSelected(true);
         spawnPosPairs.get(spawnPosButton).setSelected(true);
         //TODO actually select
-        if (noneSelected) {
+        if (noneSelectedBefore) {
             RoundPrepareScreen screen = (RoundPrepareScreen) this.getParentScreen();
             screen.setButtonSelectedAndPanelVisible(screen.getOperatorsButton(), screen.getOperatorsPanel());
-            noneSelected = false;
+            noneSelectedBefore = false;
         }
     }
 

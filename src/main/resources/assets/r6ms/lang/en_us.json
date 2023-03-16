@@ -8,6 +8,7 @@
   "gui.r6ms.defender": "Defender",
 
   "gui.r6ms.main_menu.header.quick_match": "§b→§r QUICK MATCH  ",
+  "gui.r6ms.main_menu.header.queued": "§b→§r 对战已开始 ",
 
   "gui.r6ms.main_menu.home": "HOME",
   "gui.r6ms.main_menu.home.play": " play\n ",

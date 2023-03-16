@@ -182,6 +182,7 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
         public void disable() {
             this.enable = false;
             this.backgroundImage.setImageLocation(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button23_disabled15.png"));
+            //TODO
         }
 
         @Override

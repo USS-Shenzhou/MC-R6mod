@@ -2,6 +2,7 @@ package cn.ussshenzhou.rainbow6.server.match;
 
 import cn.ussshenzhou.rainbow6.data.Map;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -31,5 +32,9 @@ public class ServerMatchManager {
 
     public static void tick() {
         MATCHES.forEach(ServerMatch::tick);
+    }
+
+    public static <MSG> void receiveNetPacket(MSG packet, NetworkEvent.Context context) {
+        PLAYERS_IN_MATCH.get(context.getSender()).receivePacket(packet, context);
     }
 }

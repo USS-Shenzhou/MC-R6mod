@@ -113,6 +113,10 @@ public class ClientMatch {
         return -1;
     }
 
+    public static void setBombSiteIndex(int bombSiteIndex) {
+        ClientMatch.bombSiteIndex = bombSiteIndex;
+    }
+
     public static int getBombSiteIndex() {
         return bombSiteIndex;
     }

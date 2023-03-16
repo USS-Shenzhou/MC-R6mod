@@ -13,6 +13,8 @@ import net.minecraft.network.chat.TranslatableComponent;
 public class QueuingForMatchBar extends TPanel {
     private TLabel gameMode = new TLabel(new TranslatableComponent("gui.r6ms.main_menu.header.quick_match"));
     private TTimer timer = new TTimer();
+    private int showGetQueued = -1;
+    private TLabel getQueued = new TLabel(new TranslatableComponent("gui.r6ms.main_menu.header.queued"));
 
     public QueuingForMatchBar() {
         super();
@@ -26,6 +28,8 @@ public class QueuingForMatchBar extends TPanel {
         timer.setPrefix(" ⌚ ");
         timer.setFontSize(R6Constants.FONT_SMALL_3);
         this.add(timer);
+        this.add(getQueued);
+        getQueued.setVisibleT(false);
     }
 
     @Override
@@ -41,18 +45,31 @@ public class QueuingForMatchBar extends TPanel {
         super.resizeAsHud(screenWidth, screenHeight);
     }
 
+    @Override
+    public void tickT() {
+        if (showGetQueued >= 0) {
+            showGetQueued--;
+        }
+        super.tickT();
+    }
+
     public void start() {
         this.setVisibleT(true);
         timer.start();
     }
 
     public void stop() {
-        //TODO
-        this.setVisibleT(false);
+        if (showGetQueued < 0) {
+            this.setVisibleT(false);
+        }
         timer.stop();
     }
 
     public void showGetQueued() {
-
+        showGetQueued = 20;
+        timer.setVisibleT(false);
+        gameMode.setVisibleT(false);
+        getQueued.setVisibleT(true);
+        this.setBackground(R6Constants.CYAN_STD_ARGB);
     }
 }

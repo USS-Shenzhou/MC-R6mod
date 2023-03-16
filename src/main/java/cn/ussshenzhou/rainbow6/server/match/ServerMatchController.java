@@ -1,7 +1,9 @@
 package cn.ussshenzhou.rainbow6.server.match;
 
 import cn.ussshenzhou.rainbow6.network.onlyto.client.MatchInitPacket;
+import cn.ussshenzhou.rainbow6.network.onlyto.client.NotifyBombSitePacket;
 import cn.ussshenzhou.rainbow6.network.onlyto.client.RoundStartPacket;
+import cn.ussshenzhou.rainbow6.network.onlyto.server.ChooseAttackerSpawnPacket;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.Registry;
@@ -12,13 +14,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraftforge.common.util.LogicalSidedProvider;
 import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -54,12 +59,19 @@ public class ServerMatchController {
         } else if (match.currentRoundNumber % 2 == 1) {
             match.attackerColor = match.attackerColor.opposite();
         }
-        match.sendPacketsToEveryOne(new RoundStartPacket(match.attackerColor));
-        match.forEachPlayer(player -> player.setGameMode(GameType.SPECTATOR));
-    }
-    //TODO response player choices
+        //choose bombSite
+        match.bombSiteIndex = Mth.randomBetweenInclusive(new Random(), 0, match.map.getBombSites().size() - 1);
+        match.sendPacketsToDefenders(new NotifyBombSitePacket(match.bombSiteIndex));
 
-    //----------?----------
+        match.forEachPlayer(player -> player.setGameMode(GameType.SPECTATOR));
+        match.sendPacketsToEveryOne(new RoundStartPacket(match.attackerColor));
+    }
+
+    private void preStage() {
+        //TODO
+    }
+
+    //----------End Match----------
 
     private void endMatch() {
         //TODO
@@ -120,5 +132,25 @@ public class ServerMatchController {
     }
 
     public static class WorldNotFoundException extends Exception {
+    }
+
+    //----------Network----------
+
+    public <MSG> void receivePacket(MSG packet, NetworkEvent.Context context) {
+        if (packet instanceof ChooseAttackerSpawnPacket chooseAttackerSpawn) {
+            if (!match.getAttackers().contains(context.getSender())) {
+                incorrectPacket(packet, context);
+                return;
+            }
+            match.attackerSpawns.put(context.getSender(), chooseAttackerSpawn.spawnPosIndex);
+        }
+    }
+
+    private <MSG> void incorrectPacket(MSG packet, NetworkEvent.Context context) {
+        incorrectPacket(packet, context, "");
+    }
+
+    private <MSG> void incorrectPacket(MSG packet, NetworkEvent.Context context, String message) {
+        LogUtils.getLogger().warn("Received illogical network packet {} from {}. {}", packet, context.getSender(), message);
     }
 }
