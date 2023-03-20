@@ -37,37 +37,33 @@ public class Test {
 
     @Consumer
     public void handler(Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(
-                () -> {
-                    if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-                        serverHandler(context.get().getSender());
-                    } else {
-                        clientHandler();
-                    }
-                }
-        );
-        context.get().setPacketHandled(true);
-
+        if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
+            serverHandler(context.get().getSender());
+        } else {
+            clientHandler();
+        }
     }
 
     @OnlyIn(Dist.CLIENT)
     public void clientHandler() {
     }
+
     CompoundTag tag;
+
     public void serverHandler(ServerPlayer player) {
         //var a = PlayerDataTempStore.storeAndClear(player);
         tag = player.saveWithoutId(new CompoundTag());
         player.getInventory().clearContent();
         player.containerMenu.broadcastFullState();
         player.inventoryMenu.slotsChanged(player.getInventory());
-        CompletableFuture.runAsync(()->{
+        CompletableFuture.runAsync(() -> {
             try {
-                Thread.sleep(10*1000);
+                Thread.sleep(10 * 1000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
             MinecraftServer minecraftServer = (MinecraftServer) LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
-            minecraftServer.execute(()->{
+            minecraftServer.execute(() -> {
                 player.load(tag);
                 /*
                 need manual restore:

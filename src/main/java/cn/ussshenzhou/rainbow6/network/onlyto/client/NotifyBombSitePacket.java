@@ -1,7 +1,6 @@
 package cn.ussshenzhou.rainbow6.network.onlyto.client;
 
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
-import cn.ussshenzhou.rainbow6.data.Map;
 import cn.ussshenzhou.t88.network.annotation.Consumer;
 import cn.ussshenzhou.t88.network.annotation.Decoder;
 import cn.ussshenzhou.t88.network.annotation.Encoder;
@@ -12,7 +11,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 
-import java.util.ArrayList;
 import java.util.function.Supplier;
 
 /**
@@ -38,17 +36,11 @@ public class NotifyBombSitePacket {
 
     @Consumer
     public void handler(Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(
-                () -> {
-                    if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-                        serverHandler();
-                    } else {
-                        clientHandler();
-                    }
-                }
-        );
-        context.get().setPacketHandled(true);
-
+        if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
+            serverHandler();
+        } else {
+            clientHandler();
+        }
     }
 
     @OnlyIn(Dist.CLIENT)

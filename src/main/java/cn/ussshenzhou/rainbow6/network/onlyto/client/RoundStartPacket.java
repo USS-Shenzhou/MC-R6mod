@@ -37,17 +37,11 @@ public class RoundStartPacket {
 
     @Consumer
     public void handler(Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(
-                () -> {
-                    if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-                        serverHandler();
-                    } else {
-                        clientHandler();
-                    }
-                }
-        );
-        context.get().setPacketHandled(true);
-
+        if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
+            serverHandler();
+        } else {
+            clientHandler();
+        }
     }
 
     @OnlyIn(Dist.CLIENT)

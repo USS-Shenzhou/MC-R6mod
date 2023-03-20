@@ -36,28 +36,23 @@ public class MatchMakerChangePacket {
 
     @Consumer
     public void handler(Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(
-                () -> {
-                    if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-                        serverHandler(context);
-                    } else {
-                        clientHandler();
-                    }
-                }
-        );
-        context.get().setPacketHandled(true);
-
+        if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
+            serverHandler(context);
+        } else {
+            clientHandler();
+        }
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void clientHandler(){
+    public void clientHandler() {
 
     }
 
-    public void serverHandler(Supplier<NetworkEvent.Context> context){
-        switch (flag){
+    public void serverHandler(Supplier<NetworkEvent.Context> context) {
+        switch (flag) {
             case JOIN -> MatchMaker.addWaiting(context.get().getSender());
-            default -> {}
+            default -> {
+            }
         }
     }
 

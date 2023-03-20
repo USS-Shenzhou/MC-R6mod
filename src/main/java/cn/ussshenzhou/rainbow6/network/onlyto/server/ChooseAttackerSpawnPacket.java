@@ -36,14 +36,9 @@ public class ChooseAttackerSpawnPacket {
 
     @Consumer
     public void handler(Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(
-                () -> {
-                    if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-                        ServerMatchManager.receiveNetPacket(this, context.get());
-                    }
-                }
-        );
-        context.get().setPacketHandled(true);
+        if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
+            ServerMatchManager.receiveNetPacket(this, context.get());
+        }
     }
 
 }
