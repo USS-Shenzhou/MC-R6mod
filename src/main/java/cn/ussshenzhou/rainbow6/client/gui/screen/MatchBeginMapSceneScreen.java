@@ -9,25 +9,24 @@ import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 /**
  * @author USS_Shenzhou
  */
 public class MatchBeginMapSceneScreen extends AbstractR6Screen {
-    private final TLabel bomb = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.bomb"));
-    private final TLabel quickMatch = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.quick_match"));
+    private final TLabel bomb = new TLabel(Component.translatable("gui.r6ms.match_map_scene.bomb"));
+    private final TLabel quickMatch = new TLabel(Component.translatable("gui.r6ms.match_map_scene.quick_match"));
     private final TImage background = new TImage(ClientMatch.getTeamColor() == TeamColor.BLUE
             ? new ResourceLocation(R6Constants.MOD_ID, "textures/gui/match_begin_map_scene_blue.png")
             : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/match_begin_map_scene_orange.png")
     );
-    private final TLabel ally = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.your_team"));
-    private final TLabel enemy = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.enemy"));
+    private final TLabel ally = new TLabel(Component.translatable("gui.r6ms.match_map_scene.your_team"));
+    private final TLabel enemy = new TLabel(Component.translatable("gui.r6ms.match_map_scene.enemy"));
     private final TImage allyIcon = new TImage(IconHelper.getAllyIconWhite(19));
     private final TImage enemyIcon = new TImage(IconHelper.getEnemyIconWhite(13));
-    private final TLabel mapName = new TLabel(new TextComponent(ClientMatch.getMap().getName()));
+    private final TLabel mapName = new TLabel(Component.literal(ClientMatch.getMap().getName()));
 
     public MatchBeginMapSceneScreen() {
         super("MatchMapSceneScreen");

@@ -8,8 +8,6 @@ import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 
 /**
  * @author USS_Shenzhou
@@ -51,8 +49,8 @@ public class PromptHud extends AutoCloseHud {
 
         public ActStage() {
             super(
-                    new TranslatableComponent("gui.r6ms.round.act_stage"),
-                    new TranslatableComponent(
+                    Component.translatable("gui.r6ms.round.act_stage"),
+                    Component.translatable(
                             ClientMatch.getSide() == Side.ATTACKER ? "gui.r6ms.round.act_stage.atk" : "gui.r6ms.round.act_stage.def"));
         }
     }
@@ -61,8 +59,8 @@ public class PromptHud extends AutoCloseHud {
 
         public PrepareStage() {
             super(
-                    new TranslatableComponent("gui.r6ms.round.pre_stage"),
-                    new TranslatableComponent(
+                    Component.translatable("gui.r6ms.round.pre_stage"),
+                    Component.translatable(
                             ClientMatch.getSide() == Side.ATTACKER ? "gui.r6ms.round.pre_stage.atk" : "gui.r6ms.round.pre_stage.def")
 
             );
@@ -73,10 +71,10 @@ public class PromptHud extends AutoCloseHud {
 
         public BombFound() {
             super(
-                    new TranslatableComponent(
+                    Component.translatable(
                             ClientMatch.getSide() == Side.ATTACKER ? "gui.r6ms.round.found_bomb.atk" : "gui.r6ms.round.found_bomb.def"
                     ),
-                    new TranslatableComponent(
+                    Component.translatable(
                             ClientMatch.getSide() == Side.ATTACKER ? getBombSiteNamePrompt() : ""
                     )
             );
@@ -91,12 +89,12 @@ public class PromptHud extends AutoCloseHud {
     public static class AliveAmountHud extends PromptHud {
         public AliveAmountHud() {
             super(
-                    new TextComponent(
+                    Component.literal(
                             ClientMatch.getSide() == Side.ATTACKER ?
                                     ClientMatch.getAttackerAliveAmount() + " VS " + ClientMatch.getDefenderAliveAmount()
                                     : ClientMatch.getDefenderAliveAmount() + " VS " + ClientMatch.getAttackerAliveAmount()
                     ),
-                    new TextComponent("")
+                    Component.literal("")
             );
             headerY0 = 0.2f;
         }

@@ -9,7 +9,7 @@ import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import cn.ussshenzhou.t88.network.PacketProxy;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 /**
@@ -17,7 +17,7 @@ import net.minecraft.resources.ResourceLocation;
  */
 public class MainMenuHomePanel extends TPanel {
     private final HoverSensitiveImageButton playButton = new HoverSensitiveImageButton(
-            new TranslatableComponent("gui.r6ms.main_menu.home.play"),
+            Component.translatable("gui.r6ms.main_menu.home.play"),
             pButton -> {
                 //TODO open modeSelectPanel
                 //RoundPrepareScreen.newRoundPrepareScreenAndShow();
@@ -30,21 +30,21 @@ public class MainMenuHomePanel extends TPanel {
      * TODO This should be PlayLastPlayedModeButton. To simplify, we make it just start quick match.
      */
     private final HoverSensitiveImageButton playQuickMatchButton = new HoverSensitiveImageButton(
-            new TranslatableComponent("gui.r6ms.main_menu.home.play_quick_match"),
+            Component.translatable("gui.r6ms.main_menu.home.play_quick_match"),
             pButton -> {
                 startQueuing();
             },
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png"));
     private final FocusSensitiveImageSelectButton queuing = new FocusSensitiveImageSelectButton(
-            new TranslatableComponent("gui.r6ms.main_menu.home.queuing"),
+            Component.translatable("gui.r6ms.main_menu.home.queuing"),
             pButton -> {
             },
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")
     );
     private final HoverSensitiveImageButton cancelButton = new HoverSensitiveImageButton(
-            new TranslatableComponent("gui.r6ms.main_menu.home.cancel_match"),
+            Component.translatable("gui.r6ms.main_menu.home.cancel_match"),
             pButton -> {
                 stopQueuing();
             },

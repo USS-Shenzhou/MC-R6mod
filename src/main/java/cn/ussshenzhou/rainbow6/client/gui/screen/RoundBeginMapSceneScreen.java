@@ -10,26 +10,25 @@ import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 /**
  * @author USS_Shenzhou
  */
 public class RoundBeginMapSceneScreen extends AbstractR6Screen {
-    private final TLabel round = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.round", ClientMatch.getCurrentRoundNumber()));
-    private final TLabel side = new TLabel(new TranslatableComponent(ClientMatch.getSide().getTranslateKey()));
-    private final TLabel mapName = new TLabel(new TextComponent(ClientMatch.getMap().getName()));
+    private final TLabel round = new TLabel(Component.translatable("gui.r6ms.match_map_scene.round", ClientMatch.getCurrentRoundNumber()));
+    private final TLabel side = new TLabel(Component.translatable(ClientMatch.getSide().getTranslateKey()));
+    private final TLabel mapName = new TLabel(Component.literal(ClientMatch.getMap().getName()));
     private final TImage background = new TImage(ClientMatch.getTeamColor() == TeamColor.BLUE ?
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_begin_map_scene_blue.png")
             : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_begin_map_scene_orange.png")
     );
-    private final TLabel ally = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.your_team"));
-    private final TLabel enemy = new TLabel(new TranslatableComponent("gui.r6ms.match_map_scene.enemy"));
+    private final TLabel ally = new TLabel(Component.translatable("gui.r6ms.match_map_scene.your_team"));
+    private final TLabel enemy = new TLabel(Component.translatable("gui.r6ms.match_map_scene.enemy"));
     private final TImage allyIcon = new TImage(IconHelper.getAllyIconWhite(15));
     private final TImage enemyIcon = new TImage(IconHelper.getAllyIconWhite(15));
-    private final TLabel roundsLeftToExchange = new TLabel(new TextComponent(String.valueOf(ClientMatch.getRoundsLeftToExchange())));
+    private final TLabel roundsLeftToExchange = new TLabel(Component.literal(String.valueOf(ClientMatch.getRoundsLeftToExchange())));
     private final TImage exchange = new TImage(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_begin_map_scene_exchange.png"));
 
     public RoundBeginMapSceneScreen() {

@@ -2,6 +2,7 @@ package cn.ussshenzhou.rainbow6.server;
 
 import cn.ussshenzhou.rainbow6.server.match.MatchMaker;
 import cn.ussshenzhou.rainbow6.server.match.ServerMatchManager;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -23,7 +24,7 @@ public class GeneralServerListener {
 
     @SubscribeEvent
     public static void playerDisconnect(PlayerEvent.PlayerLoggedOutEvent event) {
-        MatchMaker.getWaitingPlayers().remove(event.getPlayer());
+        MatchMaker.getWaitingPlayers().remove((ServerPlayer) event.getEntity());
         //TODO player during match
     }
 }

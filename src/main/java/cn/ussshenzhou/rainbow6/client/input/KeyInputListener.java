@@ -22,7 +22,7 @@ public class KeyInputListener {
     );
 
     @SubscribeEvent
-    public static void onKeyInput(InputEvent.KeyInputEvent event) {
+    public static void onKeyInput(InputEvent.Key event) {
         if (MAIN_MENU.consumeClick()) {
             ScreenManager.openMainMenuScreen();
         }

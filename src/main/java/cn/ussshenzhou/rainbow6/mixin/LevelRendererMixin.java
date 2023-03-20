@@ -3,9 +3,9 @@ package cn.ussshenzhou.rainbow6.mixin;
 import cn.ussshenzhou.rainbow6.mixinproxy.LevelRendererProxy;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.math.Matrix4f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
+import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -48,7 +48,7 @@ public class LevelRendererMixin implements LevelRendererProxy {
             //40 - 216
             //20 - 432
             // x * y = 8640
-            Matrix4f matrix4f = Matrix4f.orthographic(-width, width, height, -height, r6msClipRoof ? 0 : -9999, 9999);
+            Matrix4f matrix4f = new Matrix4f().ortho(-width, width, height, -height, r6msClipRoof ? 0 : -9999, 9999);
             RenderSystem.setProjectionMatrix(matrix4f);
             return matrix4f;
         } else {
@@ -62,7 +62,7 @@ public class LevelRendererMixin implements LevelRendererProxy {
             Window window = Minecraft.getInstance().getWindow();
             float width = r6msCameraZoomFactor * window.getWidth() / window.getHeight();
             float height = r6msCameraZoomFactor;
-            return Matrix4f.orthographic(-width, width, height, -height, r6msClipRoof ? 0 : -9999, 9999);
+            return new Matrix4f().ortho(-width, width, height, -height, r6msClipRoof ? 0 : -9999, 9999);
         } else {
             return m;
         }

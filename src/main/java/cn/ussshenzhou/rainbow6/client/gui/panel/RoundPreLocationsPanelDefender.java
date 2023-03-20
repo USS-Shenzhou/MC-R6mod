@@ -18,8 +18,7 @@ import cn.ussshenzhou.t88.gui.widegt.TWidget;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
     private boolean noneSelected = true;
 
     public RoundPreLocationsPanelDefender() {
-        super(new TLabel(new TranslatableComponent("gui.r6ms.round_prepare.bomb_location")));
+        super(new TLabel(Component.translatable("gui.r6ms.round_prepare.bomb_location")));
         CompletableFuture.runAsync(() -> {
             map = MapTopViewHelper.generateMap();
             ScreenManager.playerInfoBarHud.getTimer().start();
@@ -132,11 +131,11 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
 
     public class BombSiteButton extends FocusSensitiveImageSelectButton {
         private boolean enable = true;
-        private final TLabel prefix = new TLabel(new TextComponent(Minecraft.getInstance().options.forceUnicodeFont ? " ◎ " : " ⭘ " ));
+        private final TLabel prefix = new TLabel(Component.literal(Minecraft.getInstance().options.forceUnicodeFont().get() ? " ◎ " : " ⭘ " ));
         private final Map.BombSite site;
 
         public BombSiteButton(Map.BombSite site) {
-            super(new TranslatableComponent("    " + site.getSubSite1Name() + "\n    " + site.getSubSite2Name()),
+            super(Component.translatable("    " + site.getSubSite1Name() + "\n    " + site.getSubSite2Name()),
                     pButton -> {
                     },
                     new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
@@ -144,9 +143,9 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
             prefix.setFontSize(R6Constants.FONT_SMALL_3);
             this.add(prefix);
             this.remove(button);
-            this.button = new TButton(new TextComponent(""), pButton -> setSelectedSite(this)) {
+            this.button = new TButton(Component.literal(""), pButton -> setSelectedSite(this)) {
                 @Override
-                public void renderButton(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+                public void renderWidget(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
                     return;
                 }
 

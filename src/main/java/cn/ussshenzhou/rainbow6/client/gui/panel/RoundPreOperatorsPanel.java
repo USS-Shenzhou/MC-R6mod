@@ -11,7 +11,7 @@ import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import cn.ussshenzhou.t88.gui.widegt.TWidget;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class RoundPreOperatorsPanel extends TPanel {
 
         public OperatorIconButton(Operator operator) {
             super(
-                    new TextComponent("\n\n\n\n\n\n" + operator.getNameUpperCase()),
+                    Component.literal("\n\n\n\n\n\n" + operator.getNameUpperCase()),
                     pButton -> {
                     },
                     operator.getIcon(52),

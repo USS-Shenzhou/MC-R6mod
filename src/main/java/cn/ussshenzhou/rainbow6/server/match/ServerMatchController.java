@@ -6,7 +6,7 @@ import cn.ussshenzhou.rainbow6.network.onlyto.client.RoundStartPacket;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.ChooseAttackerSpawnPacket;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import com.mojang.logging.LogUtils;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceKey;
@@ -15,6 +15,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelData;
@@ -23,7 +24,6 @@ import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -60,7 +60,7 @@ public class ServerMatchController {
             match.attackerColor = match.attackerColor.opposite();
         }
         //choose bombSite
-        match.bombSiteIndex = Mth.randomBetweenInclusive(new Random(), 0, match.map.getBombSites().size() - 1);
+        match.bombSiteIndex = Mth.randomBetweenInclusive(RandomSource.create(), 0, match.map.getBombSites().size() - 1);
         match.sendPacketsToDefenders(new NotifyBombSitePacket(match.bombSiteIndex));
 
         match.forEachPlayer(player -> player.setGameMode(GameType.SPECTATOR));
@@ -112,7 +112,7 @@ public class ServerMatchController {
         player.load(tag);
         //gameMode seems not working, need manual restoring.
         player.setGameMode(GameType.byId(tag.getInt("playerGameType")));
-        ResourceKey<Level> originalDimension = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(tag.getString("Dimension")));
+        ResourceKey<Level> originalDimension = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(tag.getString("Dimension")));
         ServerLevel serverLevel = minecraftServer.getLevel(originalDimension);
         if (serverLevel == null) {
             LogUtils.getLogger().warn("Failed to find world {}.", originalDimension.location());

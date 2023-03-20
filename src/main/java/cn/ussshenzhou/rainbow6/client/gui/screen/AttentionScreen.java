@@ -8,7 +8,6 @@ import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 /**
@@ -72,14 +71,14 @@ public class AttentionScreen extends AbstractR6Screen {
         private final TLabel abstractMessage = new TLabel();
         private final TLabel detailMessage = new TLabel();
         private final HoverSensitiveImageButton confirmButton = new HoverSensitiveImageButton1(
-                new TranslatableComponent("gui.r6ms.confirm"),
+                Component.translatable("gui.r6ms.confirm"),
                 pButton -> {
                 },
                 new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
                 new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_17_hovered.png")
         );
         private final HoverSensitiveImageButton cancelButton = new HoverSensitiveImageButton1(
-                new TranslatableComponent("gui.r6ms.cancel"),
+                Component.translatable("gui.r6ms.cancel"),
                 pButton -> {
                 },
                 new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),

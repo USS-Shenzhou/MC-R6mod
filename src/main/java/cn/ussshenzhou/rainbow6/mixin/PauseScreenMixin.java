@@ -8,7 +8,6 @@ import cn.ussshenzhou.t88.gui.util.ImageFit;
 import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,7 +25,7 @@ public class PauseScreenMixin extends Screen {
     }
 
     HoverSensitiveImageButton1 r6msInitiateR6msButton = new HoverSensitiveImageButton1(
-            new TranslatableComponent("gui.r6ms.pause_screen.button"),
+            Component.translatable("gui.r6ms.pause_screen.button"),
             pButton -> {
                 ScreenManager.openMainMenuScreen();
             },

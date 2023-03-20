@@ -2,10 +2,9 @@ package cn.ussshenzhou.rainbow6.data;
 
 import com.google.gson.annotations.SerializedName;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
@@ -49,7 +48,7 @@ public class Map {
 
     public Map(FriendlyByteBuf buf) {
         this.name = buf.readUtf();
-        this.dimension = ResourceKey.create(Registry.DIMENSION_REGISTRY, buf.readResourceLocation());
+        this.dimension = ResourceKey.create(Registries.DIMENSION, buf.readResourceLocation());
         this.bombSites = buf.readCollection(ArrayList::new, b -> {
             BombSite site = new BombSite();
             site.setSubSite1Name(b.readUtf());

@@ -6,7 +6,7 @@ import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 /**
@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
  */
 public class MainMenuHeaderPanel extends TPanel {
     private final FocusSensitiveImageSelectButton homeButton = new FocusSensitiveImageSelectButton(
-            new TranslatableComponent("gui.r6ms.main_menu.home"),
+            Component.translatable("gui.r6ms.main_menu.home"),
             pButton -> {
                 MainMenuScreen mainMenu = ((MainMenuScreen) getParentScreen());
                 mainMenu.setVisiblePanel(mainMenu.homePanel);
@@ -24,7 +24,7 @@ public class MainMenuHeaderPanel extends TPanel {
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button18_cutout_selected.png")
     );
     private final FocusSensitiveImageSelectButton operatorsButton = new FocusSensitiveImageSelectButton(
-            new TranslatableComponent("gui.r6ms.main_menu.operators"),
+            Component.translatable("gui.r6ms.main_menu.operators"),
             pButton -> {
                 MainMenuScreen mainMenu = ((MainMenuScreen) getParentScreen());
                 mainMenu.setVisiblePanel(mainMenu.operatorsPanel);

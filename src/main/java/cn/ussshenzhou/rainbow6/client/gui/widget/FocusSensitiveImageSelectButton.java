@@ -4,7 +4,6 @@ import cn.ussshenzhou.t88.gui.widegt.TButton;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 
 /**
@@ -16,9 +15,9 @@ public class FocusSensitiveImageSelectButton extends HoverSensitiveImageButton{
     public FocusSensitiveImageSelectButton(Component text1, Button.OnPress onPress, ResourceLocation backgroundImageLocation, ResourceLocation backgroundImageLocationFocused) {
         super(text1, onPress, backgroundImageLocation, backgroundImageLocationFocused);
         this.remove(button);
-        this.button = new TButton(new TextComponent(""), onPress) {
+        this.button = new TButton(Component.literal(""), onPress) {
             @Override
-            public void renderButton(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+            public void renderWidget(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
                 return;
             }
 

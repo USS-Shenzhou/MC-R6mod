@@ -5,7 +5,7 @@ import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 /**
@@ -19,7 +19,7 @@ public class LoadingScreen extends AbstractR6Screen {
     public LoadingScreen(String promptTranslateKey) {
         super("LoadingScreen");
         this.add(mover);
-        this.prompt = new TLabel(new TranslatableComponent(promptTranslateKey));
+        this.prompt = new TLabel(Component.translatable(promptTranslateKey));
         this.add(prompt);
         this.add(footer);
     }

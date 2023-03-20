@@ -5,7 +5,6 @@ import cn.ussshenzhou.t88.gui.widegt.*;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 
 /**
@@ -26,9 +25,9 @@ public class HoverSensitiveImageButton extends TPanel {
     public HoverSensitiveImageButton(Component text1, Button.OnPress onPress, ResourceLocation backgroundImageLocation, ResourceLocation backgroundImageLocationHovered) {
         super();
         this.text = new TLabel(text1);
-        this.button = new TButton(new TextComponent(""), onPress) {
+        this.button = new TButton(Component.literal(""), onPress) {
             @Override
-            public void renderButton(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+            public void renderWidget(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
                 return;
             }
         };

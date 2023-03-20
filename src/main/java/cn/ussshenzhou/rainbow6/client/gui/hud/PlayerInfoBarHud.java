@@ -13,8 +13,7 @@ import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import cn.ussshenzhou.t88.gui.widegt.TTimer;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -27,9 +26,9 @@ public class PlayerInfoBarHud extends TImage {
     private final TeamPlayers enemies = new TeamPlayers();
     private final TImage allyIcon = new TImage(IconHelper.getAllyIconColored(20));
     private final TImage enemyIcon = new TImage(IconHelper.getEnemyIconColored(20));
-    private final TLabel allyScore = new TLabel(new TextComponent(String.valueOf(ClientMatch.getAllyScore())));
-    private final TLabel enemyScore = new TLabel(new TextComponent(String.valueOf(ClientMatch.getEnemyScore())));
-    private final TLabel roundCount = new TLabel(new TranslatableComponent("gui.r6ms.round_player_info_bar.round", ClientMatch.getCurrentRoundNumber()));
+    private final TLabel allyScore = new TLabel(Component.literal(String.valueOf(ClientMatch.getAllyScore())));
+    private final TLabel enemyScore = new TLabel(Component.literal(String.valueOf(ClientMatch.getEnemyScore())));
+    private final TLabel roundCount = new TLabel(Component.translatable("gui.r6ms.round_player_info_bar.round", ClientMatch.getCurrentRoundNumber()));
     private TTimer timer;
 
     public PlayerInfoBarHud(int countdownTime) {

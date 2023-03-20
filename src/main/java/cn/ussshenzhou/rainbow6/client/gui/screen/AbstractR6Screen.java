@@ -3,14 +3,14 @@ package cn.ussshenzhou.rainbow6.client.gui.screen;
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
 import cn.ussshenzhou.t88.gui.screen.TScreen;
 import cn.ussshenzhou.t88.gui.widegt.TWidget;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 
 /**
  * @author USS_Shenzhou
  */
 public abstract class AbstractR6Screen extends TScreen {
     public AbstractR6Screen(String screenName) {
-        super(new TextComponent(screenName));
+        super(Component.literal(screenName));
     }
 
     @Override

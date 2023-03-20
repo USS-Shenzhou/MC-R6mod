@@ -15,8 +15,7 @@ import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nullable;
@@ -35,7 +34,7 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
     private boolean noneSelectedBefore = true;
 
     public RoundPreLocationsPanelAttacker() {
-        super(new TLabel(new TranslatableComponent("gui.r6ms.round_prepare.team_spawn_location")));
+        super(new TLabel(Component.translatable("gui.r6ms.round_prepare.team_spawn_location")));
         CompletableFuture.runAsync(() -> {
             map = MapTopViewHelper.generateMap().get(0);
             ScreenManager.playerInfoBarHud.getTimer().start();
@@ -104,7 +103,7 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
     private class SpawnPosButton extends FocusSensitiveImageSelectButton {
 
         public SpawnPosButton(Map.SpawnPos pos) {
-            super(new TranslatableComponent(Minecraft.getInstance().options.forceUnicodeFont ? " ◎ " : " ⭘ " + pos.getSpawnPosName()),
+            super(Component.translatable(Minecraft.getInstance().options.forceUnicodeFont().get() ? " ◎ " : " ⭘ " + pos.getSpawnPosName()),
                     pButton -> setSelectedPos((SpawnPosButton) ((TButton) pButton).getParent()),
                     new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
                     new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button23_hovered.png"));
@@ -126,16 +125,16 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
         private boolean relatedHover = false;
 
         public SpawnPosSign(Map.SpawnPos pos, SpawnPosButton spawnPosButton) {
-            super(new TextComponent(""),
+            super(Component.literal(""),
                     pButton -> spawnPosButton.getButton().onPress(),
                     new ResourceLocation(R6Constants.MOD_ID, "textures/gui/spawn_pos18_unselected12.png"),
                     new ResourceLocation(R6Constants.MOD_ID, "textures/gui/spawn_pos18_selected.png"));
             this.setPadding(3);
             this.pos = pos;
             this.remove(this.button);
-            this.button = new TButton(new TextComponent(""), pButton -> setSelectedPos(spawnPosButton)) {
+            this.button = new TButton(Component.literal(""), pButton -> setSelectedPos(spawnPosButton)) {
                 @Override
-                public void renderButton(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+                public void renderWidget(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
                     return;
                 }
 

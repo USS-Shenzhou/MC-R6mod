@@ -5,16 +5,16 @@ import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import cn.ussshenzhou.t88.gui.widegt.TTimer;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 
 /**
  * @author USS_Shenzhou
  */
 public class QueuingForMatchBar extends TPanel {
-    private TLabel gameMode = new TLabel(new TranslatableComponent("gui.r6ms.main_menu.header.quick_match"));
+    private TLabel gameMode = new TLabel(Component.translatable("gui.r6ms.main_menu.header.quick_match"));
     private TTimer timer = new TTimer();
     private int showGetQueued = -1;
-    private TLabel getQueued = new TLabel(new TranslatableComponent("gui.r6ms.main_menu.header.queued"));
+    private TLabel getQueued = new TLabel(Component.translatable("gui.r6ms.main_menu.header.queued"));
 
     public QueuingForMatchBar() {
         super();

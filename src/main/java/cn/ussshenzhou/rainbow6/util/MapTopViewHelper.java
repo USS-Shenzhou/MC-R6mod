@@ -80,11 +80,11 @@ public class MapTopViewHelper {
     public static NativeImage teleportAndTakeScreenshot(float centerX, float y, float centerZ, float cameraZoomFactor, boolean clipRoof, boolean turn) {
         PacketProxy.getChannel(RoundPrepareTopView.class).sendToServer(new RoundPrepareTopView(centerX, y, centerZ, turn));
         minecraft.execute(() -> {
-            minecraft.options.renderClouds = CloudStatus.OFF;
+            minecraft.options.cloudStatus().set(CloudStatus.OFF);
             ((LevelRendererProxy) minecraft.levelRenderer).r6msEnableOrthographic(cameraZoomFactor).setR6msClipRoof(clipRoof);
             ClientMatch.stopRenderPlayer();
         });
-        CloudStatus cloudsBuffer = minecraft.options.getCloudsType();
+        CloudStatus cloudsBuffer = minecraft.options.cloudStatus().get();
         playerPos = minecraft.player.getPosition(1);
         //wait for tp
         while (!(Math.abs(playerPos.x - centerX) < 1 && Math.abs(playerPos.y - y) < 1 && Math.abs(playerPos.z - centerZ) < 1)) {
@@ -129,7 +129,7 @@ public class MapTopViewHelper {
         }
         gameRenderer.clearScreenShot();
         minecraft.execute(() -> {
-            minecraft.options.renderClouds = cloudsBuffer;
+            minecraft.options.cloudStatus().set(cloudsBuffer);
             ((LevelRendererProxy) minecraft.levelRenderer).r6msDisableOrthographic();
             ClientMatch.resumeRenderPlayer();
         });
