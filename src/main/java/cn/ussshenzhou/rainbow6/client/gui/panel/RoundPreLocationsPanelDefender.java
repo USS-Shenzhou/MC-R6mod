@@ -45,6 +45,12 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
     }
 
     private void initBombSites() {
+        //TODO what if client get RoundStartPacket before NotifyBombSitePacket?
+        //-----casual - bombSite assigned by server-----
+        int bombSiteIndex = ClientMatch.getBombSiteIndex();
+        int i = 0;
+        BombSiteButton assigned = null;
+
         ArrayList<Map.BombSite> bombSites = ClientMatch.getMap().getBombSites();
         for (Map.BombSite site : bombSites) {
             BombSiteButton button = new BombSiteButton(site);
@@ -54,7 +60,19 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
             this.add(button);
             this.addAll(signs);
             bombSitePairs.put(button, signs);
+            //-----casual - bombSite assigned by server-----
+            button.disable();
+            if (i == bombSiteIndex) {
+                assigned = button;
+            }
+            i++;
         }
+        //-----casual - bombSite assigned by server-----
+        if (assigned == null) {
+            //TODO something wrong
+            return;
+        }
+        setSelectedSite(assigned);
     }
 
     private void setSelectedSite(BombSiteButton siteButton) {
@@ -66,7 +84,7 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
         Arrays.stream(bombSitePairs.get(siteButton)).forEach(tImage -> {
             tImage.setVisibleT(true);
         });
-        //TODO actually select
+        //TODO actually select - do not need now because bomb site is assigned by server randomly.
         if (noneSelected) {
             RoundPrepareScreen screen = (RoundPrepareScreen) this.getParentScreen();
             screen.setButtonSelectedAndPanelVisible(screen.getOperatorsButton(), screen.getOperatorsPanel());
@@ -131,7 +149,7 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
 
     public class BombSiteButton extends FocusSensitiveImageSelectButton {
         private boolean enable = true;
-        private final TLabel prefix = new TLabel(Component.literal(Minecraft.getInstance().options.forceUnicodeFont().get() ? " ◎ " : " ⭘ " ));
+        private final TLabel prefix = new TLabel(Component.literal(Minecraft.getInstance().options.forceUnicodeFont().get() ? " ◎ " : " ⭘ "));
         private final Map.BombSite site;
 
         public BombSiteButton(Map.BombSite site) {
@@ -169,6 +187,11 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
                 public boolean isInRange(double pMouseX, double pMouseY, double xPadding, double yPadding) {
                     return enable && super.isInRange(pMouseX, pMouseY, xPadding, yPadding);
                 }
+
+                @Override
+                public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
+                    return enable && super.mouseClicked(pMouseX, pMouseY, pButton);
+                }
             };
             this.add(button);
             this.setPadding(R6Constants.PADDING_STD);
@@ -181,7 +204,6 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
         public void disable() {
             this.enable = false;
             this.backgroundImage.setImageLocation(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button23_disabled15.png"));
-            //TODO
         }
 
         @Override

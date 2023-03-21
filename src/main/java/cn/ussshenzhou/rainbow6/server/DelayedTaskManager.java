@@ -19,8 +19,8 @@ public class DelayedTaskManager {
         NEED_REMOVE.add(task);
     }
 
-    public void arrange(int lifeTime, Runnable task) {
-        addTask(new DelayedTask(lifeTime, task));
+    public void arrange(int after, Runnable task) {
+        addTask(new DelayedTask(after, task));
     }
 
     public void tick() {

@@ -26,11 +26,11 @@ import java.util.function.Supplier;
  * @author USS_Shenzhou
  */
 @NetPacket
-public class RoundPrepareTopView {
+public class RoundPreTopViewPacket {
     final double x, y, z;
     final boolean turn;
 
-    public RoundPrepareTopView(double x, double y, double z, boolean turn) {
+    public RoundPreTopViewPacket(double x, double y, double z, boolean turn) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -38,7 +38,7 @@ public class RoundPrepareTopView {
     }
 
     @Decoder
-    public RoundPrepareTopView(FriendlyByteBuf buf) {
+    public RoundPreTopViewPacket(FriendlyByteBuf buf) {
         x = buf.readDouble();
         y = buf.readDouble();
         z = buf.readDouble();

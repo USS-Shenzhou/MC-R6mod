@@ -1,11 +1,17 @@
 package cn.ussshenzhou.rainbow6.server.match;
 
+import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.mixinproxy.FoodDataProxy;
 import cn.ussshenzhou.rainbow6.network.onlyto.client.MatchInitPacket;
 import cn.ussshenzhou.rainbow6.network.onlyto.client.NotifyBombSitePacket;
+import cn.ussshenzhou.rainbow6.network.onlyto.client.PreparationStagePacket;
 import cn.ussshenzhou.rainbow6.network.onlyto.client.RoundStartPacket;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.ChooseAttackerSpawnPacket;
+import cn.ussshenzhou.rainbow6.network.onlyto.server.RoundPreDonePacket;
+import cn.ussshenzhou.rainbow6.server.DelayedTask;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import com.mojang.logging.LogUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -15,7 +21,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelData;
@@ -46,29 +51,106 @@ public class ServerMatchController {
         match.sendPacketsToEveryOne(new MatchInitPacket(match.map, uuids));
         //----------Give additional 1 sec to QueuingForMatchBar to notify player----------
         match.taskManager.arrange(20, this::newRound);
+        //TODO tp to mapScene
+        //TODO map border
     }
 
     //----------Start a new Round----------
+    DelayedTask roundPreTimeout;
 
     private void newRound() {
         //init roundNumber
         match.currentRoundNumber++;
         //choose a&d
         if (match.currentRoundNumber == 1) {
-            match.attackerColor = Math.random() < 0.5 ? TeamColor.ORANGE : TeamColor.BLUE;
+            match.attackerColor = match.random.nextBoolean() ? TeamColor.ORANGE : TeamColor.BLUE;
         } else if (match.currentRoundNumber % 2 == 1) {
             match.attackerColor = match.attackerColor.opposite();
         }
         //choose bombSite
-        match.bombSiteIndex = Mth.randomBetweenInclusive(RandomSource.create(), 0, match.map.getBombSites().size() - 1);
+        match.bombSiteIndex = Mth.randomBetweenInclusive(match.random, 0, match.map.getBombSites().size() - 1);
         match.sendPacketsToDefenders(new NotifyBombSitePacket(match.bombSiteIndex));
-
+        //be ready for map top view
         match.forEachPlayer(player -> player.setGameMode(GameType.SPECTATOR));
         match.sendPacketsToEveryOne(new RoundStartPacket(match.attackerColor));
+        //TODO tp to mapScene
+        //TODO Operator select handler
+        //TODO loadout select handler
+        //RoundBeginMapScene: 4s
+        //MapTopViewHelper.checkPlayerPosition: 10s
+        //MapTopViewHelper.checkChunkRender: 20s
+        //checkPlayerPosition - multiple time as Defender: should cost less than 10s
+        //preRoundScreen: 40s
+        //redundant: 10s
+        roundPreTimeout = new DelayedTask(20 * (4 + 10 + 20 + 10 + 40), () -> {
+            //TODO timeout
+        });
+        match.taskManager.addTask(roundPreTimeout);
     }
 
-    private void preStage() {
-        //TODO
+    /**
+     * Fired by roundPreDone
+     */
+    private void preparationStage() {
+        //TODO give loadout
+        CompoundTag blankTag = new CompoundTag();
+        match.forEachPlayer(player -> {
+            player.setGameMode(GameType.ADVENTURE);
+            player.load(blankTag);
+            //needtest will this pass to client automatically?
+            ((FoodDataProxy) player.getFoodData()).setR6msFoodEnabled(false);
+        });
+        //----attackers----
+        match.getAttackers().forEach(player -> {
+            int spawnIndex = match.attackerSpawns.getOrDefault(player, Mth.randomBetweenInclusive(match.random, 0, match.map.getSpawnPositions().size() - 1));
+            BlockPos spawnPos = match.map.getSpawnPositions().get(spawnIndex).getSpawnPosPos();
+            findAndSpawn(player, spawnPos);
+        });
+        //----defenders----
+        Map.BombSite bombSites = match.map.getBombSites().get(match.bombSiteIndex);
+        match.getDefenders().forEach(player -> {
+            BlockPos bombPos = match.random.nextBoolean() ? bombSites.getSubSite1Pos() : bombSites.getSubSite2Pos();
+            findAndSpawn(player, bombPos);
+        });
+        //TODO use cellphone
+
+        match.sendPacketsToEveryOne(new PreparationStagePacket());
+        //TODO set inside-outside border
+        match.taskManager.arrange(45 * 20, this::actStage);
+    }
+
+    /**
+     * @see ServerPlayer#fudgeSpawnLocation(ServerLevel)
+     */
+    private void findAndSpawn(ServerPlayer player, BlockPos center) {
+        ServerLevel level = player.getLevel();
+        int radius = 7;
+        int diameter = radius * 2 + 1;
+        int square = diameter * diameter;
+        int j1 = 17;
+        int k1 = match.random.nextInt(square);
+        for (int i = 0; i < square; ++i) {
+            int i2 = (k1 + j1 * i) % square;
+            int j2 = i2 % (radius * 2 + 1);
+            int k2 = i2 / (radius * 2 + 1);
+            BlockPos randomPos = new BlockPos(center.getX() + j2 - radius, center.getY(), center.getZ() + k2 - radius);
+            player.moveTo(randomPos, 0, 0);
+            if (level.noCollision(player)) {
+                break;
+            }
+            if (i == square - 1) {
+                //can't find a spawn pos
+                player.moveTo(center, 0, 0);
+            }
+        }
+    }
+
+    private void actStage() {
+        //TODO remove inside-outside border
+    }
+
+    private void afterRound() {
+        match.preparedPlayers.clear();
     }
 
     //----------End Match----------
@@ -76,23 +158,31 @@ public class ServerMatchController {
     private void endMatch() {
         //TODO
 
+
+        afterMatch();
+    }
+
+    private void afterMatch() {
         //Break circular references for GC convenience.
         match = null;
     }
 
-    private void restorePlayerData() {
+    private void playerAfterMatch(ServerPlayer player) {
+        ((FoodDataProxy) player.getFoodData()).setR6msFoodEnabled(true);
+        restorePlayerData(player);
+    }
+
+    private void restorePlayerData(ServerPlayer player) {
         MinecraftServer minecraftServer = (MinecraftServer) LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
-        match.forEachPlayer(player -> {
-            try {
-                restorePlayerDataInternal(player, minecraftServer);
-            } catch (NullBeforeMatchDataException ignored) {
-                player.load(new CompoundTag());
-                player.setGameMode(minecraftServer.getDefaultGameType());
-                teleportToOverWorldSpawn(minecraftServer, player);
-            } catch (WorldNotFoundException ignored) {
-                teleportToOverWorldSpawn(minecraftServer, player);
-            }
-        });
+        try {
+            restorePlayerDataInternal(player, minecraftServer);
+        } catch (NullBeforeMatchDataException ignored) {
+            player.load(new CompoundTag());
+            player.setGameMode(minecraftServer.getDefaultGameType());
+            teleportToOverWorldSpawn(minecraftServer, player);
+        } catch (WorldNotFoundException ignored) {
+            teleportToOverWorldSpawn(minecraftServer, player);
+        }
     }
 
     private void teleportToOverWorldSpawn(MinecraftServer minecraftServer, ServerPlayer player) {
@@ -134,15 +224,29 @@ public class ServerMatchController {
     public static class WorldNotFoundException extends Exception {
     }
 
-    //----------Network----------
+    //----------Network Handle----------
 
     public <MSG> void receivePacket(MSG packet, NetworkEvent.Context context) {
         if (packet instanceof ChooseAttackerSpawnPacket chooseAttackerSpawn) {
-            if (!match.getAttackers().contains(context.getSender())) {
-                incorrectPacket(packet, context);
-                return;
-            }
-            match.attackerSpawns.put(context.getSender(), chooseAttackerSpawn.spawnPosIndex);
+            attackerChooseSpawn(chooseAttackerSpawn, context);
+        } else if (packet instanceof RoundPreDonePacket roundPreDonePacket) {
+            roundPreDone(context);
+        }
+    }
+
+    private void attackerChooseSpawn(ChooseAttackerSpawnPacket chooseAttackerSpawn, NetworkEvent.Context context) {
+        if (!match.getAttackers().contains(context.getSender())) {
+            incorrectPacket(chooseAttackerSpawn, context);
+            return;
+        }
+        match.attackerSpawns.put(context.getSender(), chooseAttackerSpawn.spawnPosIndex);
+    }
+
+    private void roundPreDone(NetworkEvent.Context context) {
+        match.preparedPlayers.add(context.getSender());
+        if (match.preparedPlayers.size() == 10) {
+            match.taskManager.removeTask(roundPreTimeout);
+            preparationStage();
         }
     }
 

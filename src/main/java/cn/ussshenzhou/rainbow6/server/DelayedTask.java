@@ -5,17 +5,17 @@ package cn.ussshenzhou.rainbow6.server;
  */
 public class DelayedTask {
     private int age = 0;
-    private int lifeTime;
+    private int runAfter;
     private Runnable task;
     private boolean done = false;
 
-    public DelayedTask(int lifeTime, Runnable task) {
-        this.lifeTime = lifeTime;
+    public DelayedTask(int runAfter, Runnable task) {
+        this.runAfter = runAfter;
         this.task = task;
     }
 
     public void tick() {
-        if (age >= lifeTime && !done) {
+        if (age >= runAfter && !done) {
             task.run();
             done = true;
         }

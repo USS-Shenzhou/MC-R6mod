@@ -1,7 +1,10 @@
 package cn.ussshenzhou.rainbow6.client.match;
 
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
-import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
+import cn.ussshenzhou.rainbow6.client.gui.hud.AutoCloseHud;
+import cn.ussshenzhou.rainbow6.client.gui.hud.PromptHud;
+import cn.ussshenzhou.rainbow6.client.gui.screen.MatchBeginMapSceneScreen;
+import cn.ussshenzhou.rainbow6.client.gui.screen.RoundBeginMapSceneScreen;
 import cn.ussshenzhou.rainbow6.data.Map;
 import cn.ussshenzhou.rainbow6.util.Side;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
@@ -26,10 +29,12 @@ public class ClientMatch {
     private static int bombSiteIndex = 0;
     private static int currentRound = 0;
     private static boolean renderPlayer = true;
+    private static boolean isInMatch = false;
 
     //----------Start a new Match----------
 
     public static void init(Map m, ArrayList<UUID> u) {
+        isInMatch = true;
         map = m;
         teamOrange = new LinkedHashSet<>();
         Level level = minecraft.level;
@@ -44,6 +49,9 @@ public class ClientMatch {
     private static void notifyGui() {
         ScreenManager.mainMenuScreenBuffer.queuingForMatchBar.showGetQueued();
         ScreenManager.mainMenuScreenBuffer.stopQueuing();
+        ScreenManager.clearLayers();
+        ScreenManager.showNewLayerClearBg(new MatchBeginMapSceneScreen());
+        //TODO disable food hud
     }
 
     //----------Start a new Round----------
@@ -51,10 +59,28 @@ public class ClientMatch {
     public static void newRound(TeamColor attackerColor) {
         currentRound++;
         side = getTeamColor() == attackerColor ? Side.ATTACKER : Side.DEFENDER;
-        RoundPrepareScreen.newRoundPrepareScreenAndShow();
+        ScreenManager.clearLayers();
+        ScreenManager.showNewLayerClearBg(new RoundBeginMapSceneScreen());
+        //RoundPrepareScreen will be called by RoundBeginMapSceneScreen
+        //RoundPrepareScreen.newRoundPrepareScreenAndShow();
+    }
+
+    public static void preStage() {
+        ScreenManager.clearLayers();
+        AutoCloseHud.ifPresentFormerThenRemoveAndAdd(new PromptHud.PrepareStage());
+        //TODO other HUD
+    }
+
+    public static void actStage() {
+        AutoCloseHud.ifPresentFormerThenRemoveAndAdd(new PromptHud.ActStage());
+        //TODO other HUD
     }
 
     //--------------------
+
+    public static boolean isInMatch() {
+        return isInMatch;
+    }
 
     public static void stopRenderPlayer() {
         renderPlayer = false;
@@ -122,12 +148,12 @@ public class ClientMatch {
     }
 
     public static int getAttackerAliveAmount() {
-        //TODO billboard
+        //TODO scoreboard
         return 1;
     }
 
     public static int getDefenderAliveAmount() {
-        //TODO billboard
+        //TODO scoreboard
         return 5;
     }
 }

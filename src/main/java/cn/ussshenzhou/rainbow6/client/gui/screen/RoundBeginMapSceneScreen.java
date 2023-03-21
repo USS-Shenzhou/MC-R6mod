@@ -1,5 +1,6 @@
 package cn.ussshenzhou.rainbow6.client.gui.screen;
 
+import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.util.IconHelper;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
@@ -30,6 +31,7 @@ public class RoundBeginMapSceneScreen extends AbstractR6Screen {
     private final TImage enemyIcon = new TImage(IconHelper.getAllyIconWhite(15));
     private final TLabel roundsLeftToExchange = new TLabel(Component.literal(String.valueOf(ClientMatch.getRoundsLeftToExchange())));
     private final TImage exchange = new TImage(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_begin_map_scene_exchange.png"));
+    private int lifetime = 80;
 
     public RoundBeginMapSceneScreen() {
         super("RoundBeginMapSceneScreen");
@@ -81,5 +83,15 @@ public class RoundBeginMapSceneScreen extends AbstractR6Screen {
 
     @Override
     protected void renderBackGround(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.lifetime<=0){
+            ScreenManager.exitCurrentLayer();
+            RoundPrepareScreen.newRoundPrepareScreenAndShow();
+        }
+        this.lifetime--;
     }
 }

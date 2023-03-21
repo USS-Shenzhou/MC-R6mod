@@ -1,16 +1,18 @@
 package cn.ussshenzhou.rainbow6.util;
 
+import cn.ussshenzhou.rainbow6.Rainbow6;
 import cn.ussshenzhou.rainbow6.client.gui.DynamicTextureWithMapData;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.data.Map;
 import cn.ussshenzhou.rainbow6.mixinproxy.GameRendererProxy;
 import cn.ussshenzhou.rainbow6.mixinproxy.LevelRendererProxy;
-import cn.ussshenzhou.rainbow6.network.onlyto.server.RoundPrepareTopView;
+import cn.ussshenzhou.rainbow6.network.onlyto.server.RoundPreTopViewPacket;
 import cn.ussshenzhou.t88.network.PacketProxy;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.CloudStatus;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
@@ -78,48 +80,15 @@ public class MapTopViewHelper {
     private static volatile Vec3 playerPos;
 
     public static NativeImage teleportAndTakeScreenshot(float centerX, float y, float centerZ, float cameraZoomFactor, boolean clipRoof, boolean turn) {
-        PacketProxy.getChannel(RoundPrepareTopView.class).sendToServer(new RoundPrepareTopView(centerX, y, centerZ, turn));
+        PacketProxy.getChannel(RoundPreTopViewPacket.class).sendToServer(new RoundPreTopViewPacket(centerX, y, centerZ, turn));
         minecraft.execute(() -> {
             minecraft.options.cloudStatus().set(CloudStatus.OFF);
             ((LevelRendererProxy) minecraft.levelRenderer).r6msEnableOrthographic(cameraZoomFactor).setR6msClipRoof(clipRoof);
             ClientMatch.stopRenderPlayer();
         });
         CloudStatus cloudsBuffer = minecraft.options.cloudStatus().get();
-        playerPos = minecraft.player.getPosition(1);
-        //wait for tp
-        while (!(Math.abs(playerPos.x - centerX) < 1 && Math.abs(playerPos.y - y) < 1 && Math.abs(playerPos.z - centerZ) < 1)) {
-            Minecraft.getInstance().execute(() -> {
-                playerPos = minecraft.player.getPosition(1);
-            });
-        }
-        hasRenderedAllChunksOld = hasRenderedAllChunks = minecraft.levelRenderer.hasRenderedAllChunks();
-        //wait for chunkLoad
-        Minecraft.getInstance().execute(() -> {
-            hasRenderedAllChunksOld = hasRenderedAllChunks;
-            hasRenderedAllChunks = minecraft.levelRenderer.hasRenderedAllChunks();
-        });
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException ignored) {
-        }
-        int i = 0;
-        //TODO any better way?
-        while (!hasRenderedAllChunks || hasRenderedAllChunksOld) {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException ignored) {
-            }
-            Minecraft.getInstance().execute(() -> {
-                hasRenderedAllChunksOld = hasRenderedAllChunks;
-                hasRenderedAllChunks = minecraft.levelRenderer.hasRenderedAllChunks();
-            });
-            //---dev---
-            if ((hasRenderedAllChunks && hasRenderedAllChunksOld) && (i >= 5 || alreadyLoaded)) {
-                alreadyLoaded = true;
-                break;
-            }
-            i++;
-        }
+        checkPlayerPosition(centerX, y, centerZ);
+        checkChunkRender(centerX, y, centerZ);
         //call and wait for screenShot
         GameRendererProxy gameRenderer = ((GameRendererProxy) minecraft.gameRenderer);
         gameRenderer.needScreenShot();
@@ -135,5 +104,70 @@ public class MapTopViewHelper {
         });
         hasRenderedAllChunks = false;
         return screenShot;
+    }
+
+    private static void checkPlayerPosition(float centerX, float y, float centerZ) {
+        playerPos = minecraft.player.getPosition(1);
+        boolean tpDone = false;
+        //timeout: 10s
+        int i = 0;
+        while (!tpDone) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ignored) {
+            }
+            Minecraft.getInstance().execute(() -> playerPos = minecraft.player.getPosition(1));
+            tpDone = Math.abs(playerPos.x - centerX) < 1 && Math.abs(playerPos.y - y) < 1 && Math.abs(playerPos.z - centerZ) < 1;
+            if (i >= 20) {
+                break;
+            }
+            i++;
+        }
+    }
+
+    private static void checkChunkRender(float centerX, float y, float centerZ) {
+        if (alreadyLoaded) {
+            return;
+        }
+        hasRenderedAllChunksOld = false;
+        hasRenderedAllChunks = minecraft.levelRenderer.hasRenderedAllChunks();
+        boolean chunkRenderDoneClaimed = hasRenderedAllChunks && hasRenderedAllChunksOld;
+        boolean chunkRenderDoneReally;
+        //timeout: 20s
+        int i = 0;
+        while (true) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ignored) {
+            }
+            boolean timeOut = i >= (Rainbow6.TEST ? 5 : 40);
+            chunkRenderDoneReally = chunkRenderDoneClaimed && checkCoreChunkRendered(centerX, y, centerZ);
+            if (chunkRenderDoneReally || timeOut) {
+                alreadyLoaded = true;
+                break;
+            }
+            Minecraft.getInstance().execute(() -> {
+                hasRenderedAllChunksOld = hasRenderedAllChunks;
+                hasRenderedAllChunks = minecraft.levelRenderer.hasRenderedAllChunks();
+            });
+            chunkRenderDoneClaimed = hasRenderedAllChunksOld && hasRenderedAllChunks;
+            i++;
+        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ignored) {
+        }
+    }
+
+    private static boolean checkCoreChunkRendered(float centerX, float y, float centerZ) {
+        //needtest Does this really work?
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (!minecraft.levelRenderer.isChunkCompiled(new BlockPos((int) (centerX) + i * 16, (int) y, (int) (centerZ) + i * 16))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

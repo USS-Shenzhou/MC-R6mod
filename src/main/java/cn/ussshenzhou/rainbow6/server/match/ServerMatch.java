@@ -7,6 +7,7 @@ import cn.ussshenzhou.t88.network.PacketProxy;
 import com.mojang.logging.LogUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
@@ -28,9 +29,11 @@ public class ServerMatch {
     int currentRoundNumber = 0;
     TeamColor attackerColor;
     int bombSiteIndex = 0;
-    LinkedHashMap<ServerPlayer, CompoundTag> playerDataBeforeMatch = new LinkedHashMap<>();
+    final LinkedHashMap<ServerPlayer, CompoundTag> playerDataBeforeMatch = new LinkedHashMap<>();
     DelayedTaskManager taskManager = new DelayedTaskManager();
     final LinkedHashMap<ServerPlayer, Integer> attackerSpawns = new LinkedHashMap<>();
+    final LinkedHashSet<ServerPlayer> preparedPlayers = new LinkedHashSet<>();
+    RandomSource random = RandomSource.create();
 
     public ServerMatch(Collection<ServerPlayer> players, Map map) {
         //player team randomization should be in MatchMaker
@@ -67,16 +70,16 @@ public class ServerMatch {
         getDefenders().forEach(player -> PacketProxy.getChannel(packet.getClass()).send(PacketDistributor.PLAYER.with(() -> player), packet));
     }
 
-    public void forEachPlayer(Consumer<ServerPlayer> playerConsumer) {
-        teamOrange.forEach(playerConsumer);
-        teamBlue.forEach(playerConsumer);
-    }
-
     public <MSG> void receivePacket(MSG packet, NetworkEvent.Context context) {
         controller.receivePacket(packet, context);
     }
 
     //--------------------
+
+    public void forEachPlayer(Consumer<ServerPlayer> playerConsumer) {
+        teamOrange.forEach(playerConsumer);
+        teamBlue.forEach(playerConsumer);
+    }
 
     LinkedHashSet<ServerPlayer> getAttackers() {
         return attackerColor == TeamColor.ORANGE ? teamOrange : teamBlue;

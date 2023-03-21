@@ -6,12 +6,14 @@ import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
 import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.network.onlyto.server.ChooseAttackerSpawnPacket;
 import cn.ussshenzhou.rainbow6.util.MapTopViewHelper;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.Vec2i;
 import cn.ussshenzhou.t88.gui.widegt.TButton;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
+import cn.ussshenzhou.t88.network.PacketProxy;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -61,7 +63,7 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
         });
         spawnPosButton.setSelected(true);
         spawnPosPairs.get(spawnPosButton).setSelected(true);
-        //TODO actually select
+        PacketProxy.getChannel(ChooseAttackerSpawnPacket.class).sendToServer(new ChooseAttackerSpawnPacket(spawnPosPairs.keySet().stream().toList().indexOf(spawnPosButton)));
         if (noneSelectedBefore) {
             RoundPrepareScreen screen = (RoundPrepareScreen) this.getParentScreen();
             screen.setButtonSelectedAndPanelVisible(screen.getOperatorsButton(), screen.getOperatorsPanel());
