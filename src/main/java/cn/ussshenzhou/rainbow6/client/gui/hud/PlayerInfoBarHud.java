@@ -115,7 +115,7 @@ public class PlayerInfoBarHud extends TImage {
         this.layout();
     }
 
-    public class TeamPlayers extends TPanel {
+    public static class TeamPlayers extends TPanel {
         //TODO HP
         private ArrayList<TImage> list = new ArrayList<>(5);
 

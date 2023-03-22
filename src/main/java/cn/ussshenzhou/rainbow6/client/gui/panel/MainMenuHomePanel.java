@@ -8,7 +8,7 @@ import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
-import cn.ussshenzhou.t88.network.PacketProxy;
+import cn.ussshenzhou.t88.network.NetworkHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -21,7 +21,7 @@ public class MainMenuHomePanel extends TPanel {
             pButton -> {
                 //TODO open modeSelectPanel
                 //RoundPrepareScreen.newRoundPrepareScreenAndShow();
-                PacketProxy.getChannel(Test.class).sendToServer(new Test());
+                NetworkHelper.getChannel(Test.class).sendToServer(new Test());
             },
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")

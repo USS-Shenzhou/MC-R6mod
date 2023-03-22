@@ -4,6 +4,7 @@ import cn.ussshenzhou.rainbow6.server.match.MatchMaker;
 import cn.ussshenzhou.rainbow6.server.match.ServerMatchManager;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,5 +27,12 @@ public class GeneralServerListener {
     public static void playerDisconnect(PlayerEvent.PlayerLoggedOutEvent event) {
         MatchMaker.getWaitingPlayers().remove((ServerPlayer) event.getEntity());
         //TODO player during match
+    }
+
+    @SubscribeEvent
+    public static void playerInjured(LivingHurtEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            ServerMatchManager.receiveEvent(player, event);
+        }
     }
 }

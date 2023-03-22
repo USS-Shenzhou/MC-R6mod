@@ -86,6 +86,10 @@ public class ScreenManager {
         screen.resize(minecraft, minecraft.getWindow().getGuiScaledWidth(), minecraft.getWindow().getGuiScaledHeight());
     }
 
+    public static TScreen getCurrentLayer() {
+        return SCREEN_STACK.peek();
+    }
+
     @SubscribeEvent
     public static void onPlayerOut(PlayerEvent.PlayerLoggedOutEvent event) {
         SCREEN_STACK.clear();

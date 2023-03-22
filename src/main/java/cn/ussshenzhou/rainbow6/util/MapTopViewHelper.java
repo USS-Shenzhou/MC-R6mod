@@ -7,7 +7,7 @@ import cn.ussshenzhou.rainbow6.data.Map;
 import cn.ussshenzhou.rainbow6.mixinproxy.GameRendererProxy;
 import cn.ussshenzhou.rainbow6.mixinproxy.LevelRendererProxy;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.RoundPreTopViewPacket;
-import cn.ussshenzhou.t88.network.PacketProxy;
+import cn.ussshenzhou.t88.network.NetworkHelper;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.CloudStatus;
@@ -80,7 +80,7 @@ public class MapTopViewHelper {
     private static volatile Vec3 playerPos;
 
     public static NativeImage teleportAndTakeScreenshot(float centerX, float y, float centerZ, float cameraZoomFactor, boolean clipRoof, boolean turn) {
-        PacketProxy.getChannel(RoundPreTopViewPacket.class).sendToServer(new RoundPreTopViewPacket(centerX, y, centerZ, turn));
+        NetworkHelper.getChannel(RoundPreTopViewPacket.class).sendToServer(new RoundPreTopViewPacket(centerX, y, centerZ, turn));
         minecraft.execute(() -> {
             minecraft.options.cloudStatus().set(CloudStatus.OFF);
             ((LevelRendererProxy) minecraft.levelRenderer).r6msEnableOrthographic(cameraZoomFactor).setR6msClipRoof(clipRoof);

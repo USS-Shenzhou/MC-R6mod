@@ -8,6 +8,24 @@ To play R6S in Minecraft.
 
 Trying balancing between Minecraft vanilla style and R6S style.
 
+更多信息请在[**Holo Janeway**](https://holojaneway.uss-shenzhou.cn/r6ms)上查看。
+
+For more information, check [**Holo Janeway**](https://holojaneway.uss-shenzhou.cn/r6ms).
+
+请确保你在使用本模组前已经阅读了[统计数据收集说明](https://holojaneway.uss-shenzhou.cn/r6ms/data_collect)。
+
+Please make sure you have read the [Statistic data collection instructions](https://holojaneway.uss-shenzhou.cn/r6ms/data_collect). If you can't read Chinese, please contact the developers. Translation will not begin until the first foreigner's message is received.
+
+---
+
+跨服务器数据同步服务（CSSS, 或Voyager）虽然由相同开发者提供，但它不是R6MS模组本身的一部分。
+
+*Cross-Server Synchronization Service*, aka *CSSS* or *Voyager*, is not a part of the R6MS mod itself, although it's provided by the same developers.
+
+模组中有关改变玩家动作的部分，包括，是在GPLv3下，受[跑酷](https://github.com/alRex-U/ParCool)模组启发、复制和演绎。
+
+Parts of this mod about changing player model actions and animations, including, are inspired, copied and interpreted from the [ParCool](https://github.com/alRex-U/ParCool) mod under GPLv3.
+
 ---
 
 **Copyright 2022 USS_Shenzhou**

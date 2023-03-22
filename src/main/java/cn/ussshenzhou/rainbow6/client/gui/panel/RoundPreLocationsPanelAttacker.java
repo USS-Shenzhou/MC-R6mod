@@ -13,7 +13,7 @@ import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.Vec2i;
 import cn.ussshenzhou.t88.gui.widegt.TButton;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
-import cn.ussshenzhou.t88.network.PacketProxy;
+import cn.ussshenzhou.t88.network.NetworkHelper;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -63,7 +63,7 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
         });
         spawnPosButton.setSelected(true);
         spawnPosPairs.get(spawnPosButton).setSelected(true);
-        PacketProxy.getChannel(ChooseAttackerSpawnPacket.class).sendToServer(new ChooseAttackerSpawnPacket(spawnPosPairs.keySet().stream().toList().indexOf(spawnPosButton)));
+        NetworkHelper.getChannel(ChooseAttackerSpawnPacket.class).sendToServer(new ChooseAttackerSpawnPacket(spawnPosPairs.keySet().stream().toList().indexOf(spawnPosButton)));
         if (noneSelectedBefore) {
             RoundPrepareScreen screen = (RoundPrepareScreen) this.getParentScreen();
             screen.setButtonSelectedAndPanelVisible(screen.getOperatorsButton(), screen.getOperatorsPanel());

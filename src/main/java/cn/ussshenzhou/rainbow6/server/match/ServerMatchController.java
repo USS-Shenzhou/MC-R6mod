@@ -2,13 +2,12 @@ package cn.ussshenzhou.rainbow6.server.match;
 
 import cn.ussshenzhou.rainbow6.data.Map;
 import cn.ussshenzhou.rainbow6.mixinproxy.FoodDataProxy;
-import cn.ussshenzhou.rainbow6.network.onlyto.client.MatchInitPacket;
-import cn.ussshenzhou.rainbow6.network.onlyto.client.NotifyBombSitePacket;
-import cn.ussshenzhou.rainbow6.network.onlyto.client.PreparationStagePacket;
-import cn.ussshenzhou.rainbow6.network.onlyto.client.RoundStartPacket;
+import cn.ussshenzhou.rainbow6.network.onlyto.client.*;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.ChooseAttackerSpawnPacket;
+import cn.ussshenzhou.rainbow6.network.onlyto.server.ChooseOperatorPacket;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.RoundPreDonePacket;
 import cn.ussshenzhou.rainbow6.server.DelayedTask;
+import cn.ussshenzhou.rainbow6.util.Operator;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
@@ -25,6 +24,8 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraftforge.common.util.LogicalSidedProvider;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -150,7 +151,9 @@ public class ServerMatchController {
     }
 
     private void afterRound() {
+        match.attackerSpawns.clear();
         match.preparedPlayers.clear();
+        match.chosenOperators.clear();
     }
 
     //----------End Match----------
@@ -164,6 +167,7 @@ public class ServerMatchController {
 
     private void afterMatch() {
         //Break circular references for GC convenience.
+        ServerMatchManager.removeMatch(match);
         match = null;
     }
 
@@ -229,8 +233,10 @@ public class ServerMatchController {
     public <MSG> void receivePacket(MSG packet, NetworkEvent.Context context) {
         if (packet instanceof ChooseAttackerSpawnPacket chooseAttackerSpawn) {
             attackerChooseSpawn(chooseAttackerSpawn, context);
-        } else if (packet instanceof RoundPreDonePacket roundPreDonePacket) {
-            roundPreDone(context);
+        } else if (packet instanceof RoundPreDonePacket roundPreDone) {
+            roundPreDone(context.getSender());
+        } else if (packet instanceof ChooseOperatorPacket chooseOperator) {
+            chooseOperator(context.getSender(), chooseOperator.operator);
         }
     }
 
@@ -242,12 +248,17 @@ public class ServerMatchController {
         match.attackerSpawns.put(context.getSender(), chooseAttackerSpawn.spawnPosIndex);
     }
 
-    private void roundPreDone(NetworkEvent.Context context) {
-        match.preparedPlayers.add(context.getSender());
+    private void roundPreDone(ServerPlayer player) {
+        match.preparedPlayers.add(player);
         if (match.preparedPlayers.size() == 10) {
             match.taskManager.removeTask(roundPreTimeout);
             preparationStage();
         }
+    }
+
+    private void chooseOperator(ServerPlayer player, Operator operator) {
+        match.chosenOperators.put(player, operator);
+        match.sendToFriendly(player, new OperatorRevealedPacket(player.getUUID(), operator));
     }
 
     private <MSG> void incorrectPacket(MSG packet, NetworkEvent.Context context) {
@@ -256,5 +267,13 @@ public class ServerMatchController {
 
     private <MSG> void incorrectPacket(MSG packet, NetworkEvent.Context context, String message) {
         LogUtils.getLogger().warn("Received illogical network packet {} from {}. {}", packet, context.getSender(), message);
+    }
+
+    //----------Event Handle----------
+
+    public void receiveEvent(ServerPlayer player, Event event) {
+        if (event instanceof LivingHurtEvent hurt) {
+            //TODO assist
+        }
     }
 }

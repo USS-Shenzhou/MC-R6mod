@@ -5,7 +5,9 @@ import cn.ussshenzhou.rainbow6.client.gui.hud.AutoCloseHud;
 import cn.ussshenzhou.rainbow6.client.gui.hud.PromptHud;
 import cn.ussshenzhou.rainbow6.client.gui.screen.MatchBeginMapSceneScreen;
 import cn.ussshenzhou.rainbow6.client.gui.screen.RoundBeginMapSceneScreen;
+import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
 import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.util.Operator;
 import cn.ussshenzhou.rainbow6.util.Side;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import net.minecraft.client.Minecraft;
@@ -37,9 +39,8 @@ public class ClientMatch {
         isInMatch = true;
         map = m;
         teamOrange = new LinkedHashSet<>();
-        Level level = minecraft.level;
-        u.subList(0, 5).forEach(uuid -> teamOrange.add(level.getPlayerByUUID(uuid)));
-        u.subList(5, 10).forEach(uuid -> teamBlue.add(level.getPlayerByUUID(uuid)));
+        u.subList(0, 5).forEach(uuid -> teamOrange.add(getPlayerById(uuid)));
+        u.subList(5, 10).forEach(uuid -> teamBlue.add(getPlayerById(uuid)));
         if (teamOrange.size() != 5 || teamBlue.size() != 5) {
             //TODO
         }
@@ -76,7 +77,58 @@ public class ClientMatch {
         //TODO other HUD
     }
 
-    //--------------------
+    //----------Event handler----------
+
+    public static void operatorRevealed(UUID revealed, Operator operator) {
+        Player player = getPlayerById(revealed);
+        if (isAlly(player)) {
+            //allies operator
+            if (ScreenManager.getCurrentLayer() instanceof RoundPrepareScreen roundPrepareScreen) {
+                roundPrepareScreen.getOperatorsPanel().disableOperator(operator);
+            }
+            ScreenManager.playerInfoBarHud.getAllies().setPlayerOperator(getIndexOf(getAllies(), player), operator);
+        } else {
+            //enemies operator
+            ScreenManager.playerInfoBarHud.getEnemies().setPlayerOperator(getIndexOf(getEnemies(), player), operator);
+        }
+    }
+
+
+    //----------Util----------
+
+    public static Player getPlayerById(UUID playerId) {
+        Level level = minecraft.level;
+        return level == null ? null : level.getPlayerByUUID(playerId);
+    }
+
+    public static TeamColor getTeamColor() {
+        return teamOrange.contains(minecraft.player) ? TeamColor.ORANGE : TeamColor.BLUE;
+    }
+
+    public static TeamColor getTeamColor(Player player) {
+        return teamOrange.contains(player) ? TeamColor.ORANGE : TeamColor.BLUE;
+    }
+
+    public static boolean isAlly(Player player) {
+        return getTeamColor() == getTeamColor(player);
+    }
+
+    private static <T> int getIndexOf(Collection<T> collection, T t) {
+        for (int i = 0; i < collection.size(); i++) {
+            if (collection.stream().toList().get(i).equals(t)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static LinkedHashSet<Player> getAllies() {
+        return teamOrange.contains(minecraft.player) ? teamOrange : teamBlue;
+    }
+
+    public static LinkedHashSet<Player> getEnemies() {
+        return teamOrange.contains(minecraft.player) ? teamBlue : teamOrange;
+    }
 
     public static boolean isInMatch() {
         return isInMatch;
@@ -94,10 +146,6 @@ public class ClientMatch {
         return renderPlayer;
     }
 
-    public static TeamColor getTeamColor() {
-        return teamOrange.contains(minecraft.player) ? TeamColor.ORANGE : TeamColor.BLUE;
-    }
-
     public static int getCurrentRoundNumber() {
         return currentRound;
     }
@@ -111,13 +159,13 @@ public class ClientMatch {
     }
 
     public static int getAllyScore() {
-        //TODO billboard
+        //TODO scoreboard
         return 0;
     }
 
     public static int getEnemyScore() {
         return 0;
-        //TODO billboard
+        //TODO scoreboard
     }
 
     public static Map getMap() {
@@ -126,17 +174,8 @@ public class ClientMatch {
 
     public static int getNumberInTeam() {
         //---dev---
-        //return getIndexOf(teamOrange.contains(minecraft.player) ? teamOrange : teamBlue, minecraft.player);
+        //return getIndexOf(getAllies(), minecraft.player);
         return 2;
-    }
-
-    private static <T> int getIndexOf(Collection<T> collection, T t) {
-        for (int i = 0; i < collection.size(); i++) {
-            if (collection.stream().toList().get(i).equals(t)) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     public static void setBombSiteIndex(int bombSiteIndex) {
