@@ -2,12 +2,45 @@ package cn.ussshenzhou.rainbow6.util;
 
 import cn.ussshenzhou.t88.gui.util.Vec2i;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.DedicatedServer;
+import net.minecraft.server.dedicated.DedicatedServerProperties;
+import net.minecraftforge.common.util.LogicalSidedProvider;
+import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.gametest.ForgeGameTestHooks;
+
+import java.lang.management.ManagementFactory;
 
 /**
  * @author USS_Shenzhou
  */
 public class R6Constants {
     public static final String MOD_ID = "r6ms";
+    public static final boolean TEST = ForgeGameTestHooks.isGametestEnabled();
+    public static final boolean IS_ONLINE_SERVER = getIsOnLineServer();
+
+    private static boolean getIsOnLineServer() {
+        MinecraftServer minecraftServer = (MinecraftServer) LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
+        if (minecraftServer instanceof DedicatedServer server) {
+            DedicatedServerProperties properties = server.getProperties();
+            if (properties.onlineMode) {
+                //check authlib-injector
+                for (String arg : ManagementFactory.getRuntimeMXBean().getInputArguments()) {
+                    if (arg.startsWith("-javaagent:")) {
+                        String agent = arg.substring("-javaagent:".length());
+                        if (agent.contains("authlib-injector.jar")) {
+                            if (!"https://authserver.mojang.com".equals(agent.split("=")[1])){
+                                return false;
+                            }
+                        }
+                    }
+                }
+                return true;
+                //MultiLogin is allowed.
+            }
+        }
+        return false;
+    }
 
     public static final ResourceLocation PLACEHOLDER_IMAGE = new ResourceLocation(MOD_ID, "textures/gui/placeholder.png");
 
@@ -52,5 +85,4 @@ public class R6Constants {
      */
     public static final Vec2i HUGE_MAP_PLAYABLE = new Vec2i(1080, 720);
     public static final Vec2i HUGE_MAP_COMPLETE = new Vec2i(1920, 1080);
-
 }

@@ -1,6 +1,5 @@
 package cn.ussshenzhou.rainbow6.util;
 
-import cn.ussshenzhou.rainbow6.Rainbow6;
 import cn.ussshenzhou.rainbow6.client.gui.DynamicTextureWithMapData;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.data.Map;
@@ -140,7 +139,7 @@ public class MapTopViewHelper {
                 Thread.sleep(500);
             } catch (InterruptedException ignored) {
             }
-            boolean timeOut = i >= (Rainbow6.TEST ? 5 : 40);
+            boolean timeOut = i >= (R6Constants.TEST ? 5 : 40);
             chunkRenderDoneReally = chunkRenderDoneClaimed && checkCoreChunkRendered(centerX, y, centerZ);
             if (chunkRenderDoneReally || timeOut) {
                 alreadyLoaded = true;
