@@ -22,9 +22,9 @@ Please make sure you have read the [Statistic data collection instructions](http
 
 *Cross-Server Synchronization Service*, aka *CSSS* or *Voyager*, is not a part of the R6MS mod itself, although it's provided by the same developers.
 
-模组中有关改变玩家动作的部分，包括，是在GPLv3下，受[跑酷](https://github.com/alRex-U/ParCool)模组启发、复制和演绎。
+模组中有关改变玩家动作的部分，包括`cn.ussshenzhou.rainbow6.action`包、其他与`Action`有关的类，是在GPLv3下，受[跑酷](https://github.com/alRex-U/ParCool)模组启发、从其复制和由其演绎。
 
-Parts of this mod about changing player model actions and animations, including, are inspired, copied and interpreted from the [ParCool](https://github.com/alRex-U/ParCool) mod under GPLv3.
+Parts of this mod about changing player model actions and animations, including `cn.ussshenzhou.rainbow6.action` package and other classes about `Action`, are inspired by, copied and interpreted from the [ParCool](https://github.com/alRex-U/ParCool) mod under GPLv3.
 
 ---
 
@@ -40,13 +40,19 @@ This mod is free software; you can redistribute it and/or modify them under the 
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-**作为Minecraft模组的GNU GPL版本3第7节额外授权**
+**附加条款**
 
-如果你通过连接或合并Minecraft修改该程序或者其任何部分，而受到该库许可证（即Minecraft EULA）条款的制约，本程序的许可证授权你输送修改结果的额外权利。修改结果的非源代码形式的相关源代码应当包含本软件的源代码部分。
+根据GNU GPL版本3第7节所述，对协议补充如下：
 
-**Additional permission under GNU GPL version 3 section 7 as a Minecraft mod**
+- a)作为Minecraft模组的额外授权：如果你通过连接或合并Minecraft修改该程序或者其任何部分，而受到该库许可证（即Minecraft EULA）条款的制约，本程序的许可证授权你输送修改结果的额外权利。修改结果的非源代码形式的相关源代码应当包含本软件的源代码部分。
+- b)如果你对本软件进行了修改，你在转发修改后的版本时，应当明确说明其修改自本软件，并说明本软件开发者不对修改后的版本提供任何保证。不得使用本软件任一开发者或本软件的的名义来宣传修改后的版本。
 
-If you modify this Program, or any covered work, by linking or combining it with Minecraft, containing parts covered by the terms of Minecraft EULA, the licensors of this Program grant you additional permission to convey the resulting work. Corresponding Source for a non-source form of such a combination shall include the source code for the parts of the covered work.
+**Additional terms**
+
+The protocol is supplemented as described in section 7 of the GNU GPL version 3 as follows:
+
+- a)Additional permission as a Minecraft mod: If you modify this Program, or any covered work, by linking or combining it with Minecraft, containing parts covered by the terms of Minecraft EULA, the licensors of this Program grant you additional permission to convey the resulting work. Corresponding Source for a non-source form of such a combination shall include the source code for the parts of the covered work.
+- b)If you modify this Program, you should clearly state that modified programs are modified from this Program when you propagate the modified version and that the Developers of this Software do not provide any warranty for the modified programs. You may not use the name of any of the developers of this Software or this Software to for publicity purposes.
 
 ---
 

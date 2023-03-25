@@ -15,6 +15,7 @@
     "LevelRendererMixin",
     "MinecraftMixin",
     "PauseScreenMixin",
+    "PlayerModelMixin",
     "PlayerRendererMixin"
   ],
   "injectors": {
