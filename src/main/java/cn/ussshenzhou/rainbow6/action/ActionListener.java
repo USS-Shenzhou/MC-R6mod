@@ -3,7 +3,7 @@ package cn.ussshenzhou.rainbow6.action;
 import cn.ussshenzhou.rainbow6.capability.ActionCapability;
 import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
 import cn.ussshenzhou.rainbow6.network.SyncActionPacket;
-import cn.ussshenzhou.rainbow6.network.SyncActionStateHelper;
+import cn.ussshenzhou.rainbow6.network.SyncActionHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
@@ -140,7 +140,7 @@ public class ActionListener {
             }
         }
         if (needSync) {
-            SyncActionStateHelper.syncFromClient(player, builder);
+            SyncActionHelper.syncFromClient(player, builder);
         }
     }
 

@@ -266,7 +266,7 @@ public class ServerMatchController {
     }
 
     private <MSG> void incorrectPacket(MSG packet, NetworkEvent.Context context, String message) {
-        LogUtils.getLogger().warn("Received illogical network packet {} from {}. {}", packet, context.getSender(), message);
+        LogUtils.getLogger().warn("Received unreasonable network packet {} from {}. {}", packet, context.getSender(), message);
     }
 
     //----------Event Handle----------

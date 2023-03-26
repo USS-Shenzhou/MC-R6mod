@@ -9,11 +9,10 @@ import cn.ussshenzhou.t88.network.annotation.NetPacket;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
@@ -66,11 +65,11 @@ public class SyncActionPacket {
 
     public void serverHandler(Supplier<NetworkEvent.Context> contextSupplier) {
         Player player = contextSupplier.get().getSender();
-        NetworkHelper.getChannel(SyncActionPacket.class).send(PacketDistributor.ALL.noArg(), this);
         if (player == null) {
             return;
         }
-
+        player.getLevel().getNearbyPlayers(TargetingConditions.forNonCombat(), player, player.getBoundingBox().inflate(16 * 12))
+                .forEach(p -> NetworkHelper.getChannel(SyncActionPacket.class).send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) p), this));
         ActionCapability actionCapability = ActionCapability.get(player);
         if (actionCapability == null) {
             return;
@@ -99,29 +98,17 @@ public class SyncActionPacket {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     public void clientHandler(Supplier<NetworkEvent.Context> contextSupplier) {
         Player player;
         boolean clientSide;
-        if (contextSupplier.get().getDirection().getReceptionSide() == LogicalSide.CLIENT) {
-            Level world = Minecraft.getInstance().level;
-            if (world == null) {
-                return;
-            }
-            player = world.getPlayerByUUID(senderUUID);
-            if (player == null || player.isLocalPlayer()) {
-                return;
-            }
-            clientSide = true;
-        } else {
-            player = contextSupplier.get().getSender();
-            NetworkHelper.getChannel(SyncActionPacket.class).send(PacketDistributor.ALL.noArg(), this);
-            if (player == null) {
-                return;
-            }
-            clientSide = false;
+        Level world = Minecraft.getInstance().level;
+        if (world == null) {
+            return;
         }
-
+        player = world.getPlayerByUUID(senderUUID);
+        if (player == null || player.isLocalPlayer()) {
+            return;
+        }
         ActionCapability actionCapability = ActionCapability.get(player);
         if (actionCapability == null) {
             return;
@@ -137,20 +124,12 @@ public class SyncActionPacket {
             switch (item.getType()) {
                 case START -> {
                     action.setDoing(true);
-                    if (clientSide) {
-                        action.onStartInOtherClient(player, actionCapability, item.getBuffer());
-                    } else {
-                        action.onStartInServer(player, actionCapability, item.getBuffer());
-                    }
+                    action.onStartInOtherClient(player, actionCapability, item.getBuffer());
                     action.onStart(player, actionCapability);
                 }
                 case FINISH -> {
                     action.setDoing(false);
-                    if (clientSide) {
-                        action.onStopInOtherClient(player);
-                    } else {
-                        action.onStopInServer(player);
-                    }
+                    action.onStopInOtherClient(player);
                     action.onStop(player);
                 }
                 case NORMAL -> action.restoreSynchronizedState(item.getBuffer());

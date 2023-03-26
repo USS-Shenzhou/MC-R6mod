@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
  *
  * @author USS_Shenzhou
  */
-public class SyncActionStateHelper {
+public class SyncActionHelper {
 
     public static void syncFromClient(Player player, SyncActionPacket.Encoder builder) {
         ByteBuffer buffer1 = builder.build();
