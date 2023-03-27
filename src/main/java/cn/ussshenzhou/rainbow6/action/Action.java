@@ -1,6 +1,7 @@
 package cn.ussshenzhou.rainbow6.action;
 
 import cn.ussshenzhou.rainbow6.capability.ActionCapability;
+import cn.ussshenzhou.rainbow6.util.KeyTrig;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 
@@ -105,5 +106,9 @@ public abstract class Action {
     }
 
     public void saveSynchronizedState(ByteBuffer buffer) {
+    }
+
+    protected static boolean canContinue(KeyTrig keyTrig, boolean isDown, boolean isPressed) {
+        return keyTrig == KeyTrig.HOLD ? isDown : !isPressed;
     }
 }

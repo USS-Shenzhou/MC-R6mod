@@ -1,7 +1,7 @@
 package cn.ussshenzhou.rainbow6.client.gui.hud;
 
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
-import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.config.Map;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.rainbow6.util.Side;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;

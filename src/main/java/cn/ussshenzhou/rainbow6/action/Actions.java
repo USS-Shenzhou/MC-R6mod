@@ -9,7 +9,7 @@ import java.util.function.Supplier;
  * @author USS_Shenzhou
  */
 public enum Actions {
-    CRAWL(Crawl.class, Crawl::new);
+    PRONE(Prone.class, Prone::new);
 
     final Class<? extends Action> type;
     final Supplier<? extends Action> constructor;

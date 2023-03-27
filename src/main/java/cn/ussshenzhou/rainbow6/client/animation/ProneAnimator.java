@@ -9,10 +9,10 @@ import net.minecraft.world.entity.player.Player;
  *
  * @author USS_Shenzhou
  */
-public class CrawlAnimator extends Animator {
+public class ProneAnimator extends Animator {
     @Override
     public boolean shouldRemoved(Player player, ActionCapability actionCapability) {
-        return !actionCapability.getInstanceOf(Actions.CRAWL).isDoing();
+        return !actionCapability.getInstanceOf(Actions.PRONE).isDoing();
     }
 
     @Override

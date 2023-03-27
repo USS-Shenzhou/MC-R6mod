@@ -1,5 +1,6 @@
-package cn.ussshenzhou.rainbow6.data;
+package cn.ussshenzhou.rainbow6.config;
 
+import cn.ussshenzhou.t88.config.TMultiInstanceConfig;
 import com.google.gson.annotations.SerializedName;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 /**
  * @author USS_Shenzhou
  */
-public class Map {
+public class Map implements TMultiInstanceConfig {
 
     public Map() {
     }
@@ -90,6 +91,11 @@ public class Map {
         buf.writeDouble(scenePos.z);
         buf.writeFloat(sceneDir.x);
         buf.writeFloat(sceneDir.y);
+    }
+
+    @Override
+    public String getFileName() {
+        return name;
     }
 
     public static class BombSite {

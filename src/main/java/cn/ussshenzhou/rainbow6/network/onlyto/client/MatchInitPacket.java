@@ -1,7 +1,7 @@
 package cn.ussshenzhou.rainbow6.network.onlyto.client;
 
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
-import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.config.Map;
 import cn.ussshenzhou.t88.network.annotation.Consumer;
 import cn.ussshenzhou.t88.network.annotation.Decoder;
 import cn.ussshenzhou.t88.network.annotation.Encoder;

@@ -1,6 +1,6 @@
 package cn.ussshenzhou.rainbow6.server.match;
 
-import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.config.Map;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.network.NetworkEvent;

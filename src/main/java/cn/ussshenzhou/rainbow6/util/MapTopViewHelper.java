@@ -2,7 +2,7 @@ package cn.ussshenzhou.rainbow6.util;
 
 import cn.ussshenzhou.rainbow6.client.gui.DynamicTextureWithMapData;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
-import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.config.Map;
 import cn.ussshenzhou.rainbow6.mixinproxy.GameRendererProxy;
 import cn.ussshenzhou.rainbow6.mixinproxy.LevelRendererProxy;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.RoundPreTopViewPacket;

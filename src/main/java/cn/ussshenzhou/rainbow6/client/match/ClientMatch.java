@@ -6,7 +6,7 @@ import cn.ussshenzhou.rainbow6.client.gui.hud.PromptHud;
 import cn.ussshenzhou.rainbow6.client.gui.screen.MatchBeginMapSceneScreen;
 import cn.ussshenzhou.rainbow6.client.gui.screen.RoundBeginMapSceneScreen;
 import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
-import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.config.Map;
 import cn.ussshenzhou.rainbow6.util.Operator;
 import cn.ussshenzhou.rainbow6.util.Side;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
@@ -31,7 +31,8 @@ public class ClientMatch {
     private static int bombSiteIndex = 0;
     private static int currentRound = 0;
     private static boolean renderPlayer = true;
-    private static boolean isInMatch = false;
+    //---dev---
+    private static boolean isInMatch = true;
 
     //----------Start a new Match----------
 

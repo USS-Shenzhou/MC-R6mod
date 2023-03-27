@@ -1,6 +1,6 @@
 package cn.ussshenzhou.rainbow6.server.match;
 
-import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.config.Map;
 import cn.ussshenzhou.rainbow6.server.DelayedTaskManager;
 import cn.ussshenzhou.rainbow6.util.Operator;
 import cn.ussshenzhou.rainbow6.util.TeamColor;

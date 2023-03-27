@@ -1,6 +1,6 @@
 package cn.ussshenzhou.rainbow6.server.match;
 
-import cn.ussshenzhou.rainbow6.data.Map;
+import cn.ussshenzhou.rainbow6.config.Map;
 import cn.ussshenzhou.rainbow6.mixinproxy.FoodDataProxy;
 import cn.ussshenzhou.rainbow6.network.onlyto.client.*;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.ChooseAttackerSpawnPacket;
