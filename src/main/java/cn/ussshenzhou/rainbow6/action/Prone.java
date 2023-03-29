@@ -33,7 +33,7 @@ public class Prone extends Action {
 
     @Override
     public boolean canContinueInClient(Player player, ActionCapability actionCapability) {
-        return canContinue(ConfigHelper.getConfigRead(ConfigControls.class).prone(), ModKeyMappingRegistry.CRAWL.isDown(), KeyInputListener.CRAWL.isPressed());
+        return canContinue(ConfigHelper.getConfigRead(ConfigControls.class).prone, ModKeyMappingRegistry.CRAWL.isDown(), KeyInputListener.CRAWL.isPressed());
     }
 
     @Override

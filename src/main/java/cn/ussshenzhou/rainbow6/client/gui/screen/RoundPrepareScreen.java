@@ -81,7 +81,7 @@ public class RoundPrepareScreen extends AbstractR6Screen {
         this.add(loadoutButton);
     }
 
-    public static RoundPrepareScreen newRoundPrepareScreenAndShow() {
+    public static void newRoundPrepareScreenAndShow() {
         RoundPrepareScreen a = new RoundPrepareScreen();
         ScreenManager.showNewLayerClearBg(a);
         LoadingScreen.WithFullBackground loadingScreen = new LoadingScreen.WithFullBackground("gui.r6ms.round_prepare.loading_top_view");
@@ -91,7 +91,6 @@ public class RoundPrepareScreen extends AbstractR6Screen {
             }
             Minecraft.getInstance().execute(() -> loadingScreen.onClose(true));
         });
-        return a;
     }
 
     private void initiatePlayerInfoBar() {

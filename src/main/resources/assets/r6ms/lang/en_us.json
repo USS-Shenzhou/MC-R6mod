@@ -19,6 +19,15 @@
 
   "gui.r6ms.main_menu.operators": "OPERATORS",
 
+  "gui.r6ms.main_menu.options.controls": "CONTROLS",
+  "gui.r6ms.main_menu.options.controls.aim": "Aim  ",
+  "gui.r6ms.main_menu.options.controls.lean": "Lean  ",
+  "gui.r6ms.main_menu.options.controls.sprint": "Sprint  ",
+  "gui.r6ms.main_menu.options.controls.crouch": "Crouch  ",
+  "gui.r6ms.main_menu.options.controls.prone": "Prone  ",
+  "gui.r6ms.main_menu.options.controls.walk": "Walk  ",
+
+
   "gui.r6ms.pause_screen.button": "Play R6MS",
 
   "gui.r6ms.match_map_scene.bomb": "BOMB",
@@ -47,5 +56,8 @@
 
   "gui.r6ms.round_end.your_team": "你方队伍",
   "gui.r6ms.round_end.win": "第%s回合获胜",
-  "gui.r6ms.round_end.lose": "第%s回合战败"
+  "gui.r6ms.round_end.lose": "第%s回合战败",
+
+  "gui.r6ms.options.key_trig.hold": "长按",
+  "gui.r6ms.options.key_trig.toggle": "切换"
 }

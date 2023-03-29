@@ -4,11 +4,13 @@ import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
 import cn.ussshenzhou.rainbow6.client.gui.panel.MainMenuHeaderPanel;
 import cn.ussshenzhou.rainbow6.client.gui.panel.MainMenuHomePanel;
 import cn.ussshenzhou.rainbow6.client.gui.panel.MainMenuOperatorsPanel;
+import cn.ussshenzhou.rainbow6.client.gui.panel.MainMenuOptionsPanel;
 import cn.ussshenzhou.rainbow6.client.gui.widget.QueuingForMatchBar;
 import cn.ussshenzhou.t88.gui.HudManager;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import com.mojang.blaze3d.vertex.PoseStack;
+import org.lwjgl.glfw.GLFW;
 
 /**
  * @author USS_Shenzhou
@@ -19,6 +21,8 @@ public class MainMenuScreen extends AbstractR6Screen {
 
     public final MainMenuHomePanel homePanel = new MainMenuHomePanel();
     public final MainMenuOperatorsPanel operatorsPanel = new MainMenuOperatorsPanel();
+    public final MainMenuOptionsPanel optionsPanel = new MainMenuOptionsPanel();
+
     /**
      * Only use for UI change (headerPanel move).
      */
@@ -34,11 +38,14 @@ public class MainMenuScreen extends AbstractR6Screen {
         headerPanel.getHomeButton().setSelected(true);
         operatorsPanel.setVisibleT(false);
         this.add(operatorsPanel);
+        this.add(optionsPanel);
+        optionsPanel.setVisibleT(false);
     }
 
     public void setVisiblePanel(TPanel visiblePanel) {
         homePanel.setVisibleT(false);
         operatorsPanel.setVisibleT(false);
+        optionsPanel.setVisibleT(false);
         visiblePanel.setVisibleT(true);
     }
 
@@ -49,6 +56,7 @@ public class MainMenuScreen extends AbstractR6Screen {
         //Don't use LayoutHelper, cause headerPanel may move.
         homePanel.setBounds(0, headerPanel.getHeight(), this.width, this.height - headerPanel.getHeight());
         LayoutHelper.BSameAsA(operatorsPanel, homePanel);
+        LayoutHelper.BSameAsA(optionsPanel, operatorsPanel);
         super.layout();
     }
 
@@ -87,4 +95,12 @@ public class MainMenuScreen extends AbstractR6Screen {
         }
     }
 
+    @Override
+    public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
+        if (pKeyCode == GLFW.GLFW_KEY_ESCAPE && optionsPanel.isVisibleT()) {
+            setVisiblePanel(homePanel);
+            return true;
+        }
+        return super.keyPressed(pKeyCode, pScanCode, pModifiers);
+    }
 }

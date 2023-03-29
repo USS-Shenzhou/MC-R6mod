@@ -2,7 +2,6 @@ package cn.ussshenzhou.rainbow6.client.gui.panel;
 
 import cn.ussshenzhou.rainbow6.client.gui.DynamicTextureWithMapData;
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
-import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
 import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.config.Map;
@@ -41,7 +40,6 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
             map = MapTopViewHelper.generateMap();
             ScreenManager.playerInfoBarHud.getTimer().start();
         });
-        initBombSites();
     }
 
     private void initBombSites() {
@@ -84,12 +82,14 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
         Arrays.stream(bombSitePairs.get(siteButton)).forEach(tImage -> {
             tImage.setVisibleT(true);
         });
-        //TODO actually select - do not need now because bomb site is assigned by server randomly.
-        if (noneSelected) {
+        //TODO actually select - do not need now, because bomb site is assigned by server randomly.
+
+        //Do not need now
+        /*if (noneSelected) {
             RoundPrepareScreen screen = (RoundPrepareScreen) this.getParentScreen();
             screen.setButtonSelectedAndPanelVisible(screen.getOperatorsButton(), screen.getOperatorsPanel());
             noneSelected = false;
-        }
+        }*/
     }
 
     @Override
@@ -114,9 +114,15 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
     }
 
     int mapIndex = 0;
+    boolean fresh = true;
 
     @Override
     public void tickT() {
+        if (fresh) {
+            initBombSites();
+            fresh = false;
+        }
+
         BombSiteButton[] buttons = bombSitePairs.keySet().toArray(new BombSiteButton[0]);
         bombSitePairs.values().forEach(tImages -> {
             tImages[0].setVisibleT(false);

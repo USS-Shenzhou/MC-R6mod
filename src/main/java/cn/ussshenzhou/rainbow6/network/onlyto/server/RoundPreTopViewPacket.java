@@ -2,6 +2,7 @@ package cn.ussshenzhou.rainbow6.network.onlyto.server;
 
 import cn.ussshenzhou.rainbow6.config.Map;
 import cn.ussshenzhou.rainbow6.server.match.ServerMatchManager;
+import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.network.annotation.Consumer;
 import cn.ussshenzhou.t88.network.annotation.Decoder;
 import cn.ussshenzhou.t88.network.annotation.Encoder;
@@ -68,6 +69,11 @@ public class RoundPreTopViewPacket {
     }
 
     public void serverHandler(Supplier<NetworkEvent.Context> context) {
+        if (R6Constants.TEST){
+            ServerPlayer player = context.get().getSender();
+            player.connection.teleport(x, y, z, turn ? -90 : 180, 90);
+            return;
+        }
         try {
             ServerPlayer player = context.get().getSender();
             Map map = ServerMatchManager.getPlayerMatch(player).getMap();

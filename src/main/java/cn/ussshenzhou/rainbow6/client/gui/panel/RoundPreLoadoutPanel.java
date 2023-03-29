@@ -4,13 +4,12 @@ import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.resources.ResourceLocation;
 
 /**
  * @author USS_Shenzhou
  */
 public class RoundPreLoadoutPanel extends TPanel {
-    private final TImage background = new TImage(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/std_background_full_screen.png"));
+    private final TImage background = new TImage(R6Constants.STD_BACKGROUND);
 
     public RoundPreLoadoutPanel() {
         super();

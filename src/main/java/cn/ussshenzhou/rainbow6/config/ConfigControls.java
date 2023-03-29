@@ -7,26 +7,15 @@ import cn.ussshenzhou.t88.config.TConfig;
 /**
  * @author USS_Shenzhou
  */
-public record ConfigControls(
-        KeyTrig aim,
-        KeyTrig lean,
-        KeyTrig sprint,
-        KeyTrig crouch,
-        KeyTrig prone,
-        KeyTrig walk
-) implements TConfig {
-
-    public ConfigControls(KeyTrig aim, KeyTrig lean, KeyTrig sprint, KeyTrig crouch, KeyTrig prone, KeyTrig walk) {
-        this.aim = aim;
-        this.lean = lean;
-        this.sprint = sprint;
-        this.crouch = crouch;
-        this.prone = prone;
-        this.walk = walk;
-    }
+public class ConfigControls implements TConfig {
+    public KeyTrig aim = KeyTrig.HOLD;
+    public KeyTrig lean = KeyTrig.HOLD;
+    public KeyTrig sprint = KeyTrig.HOLD;
+    public KeyTrig crouch = KeyTrig.HOLD;
+    public KeyTrig prone = KeyTrig.HOLD;
+    public KeyTrig walk = KeyTrig.HOLD;
 
     public ConfigControls() {
-        this(KeyTrig.HOLD, KeyTrig.HOLD, KeyTrig.HOLD, KeyTrig.HOLD, KeyTrig.HOLD, KeyTrig.HOLD);
     }
 
     @Override

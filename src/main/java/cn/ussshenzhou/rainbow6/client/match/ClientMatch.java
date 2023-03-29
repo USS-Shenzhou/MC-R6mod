@@ -8,6 +8,7 @@ import cn.ussshenzhou.rainbow6.client.gui.screen.RoundBeginMapSceneScreen;
 import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
 import cn.ussshenzhou.rainbow6.config.Map;
 import cn.ussshenzhou.rainbow6.util.Operator;
+import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.rainbow6.util.Side;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import net.minecraft.client.Minecraft;
@@ -27,12 +28,12 @@ public class ClientMatch {
     private static Map map = new Map();
     private static LinkedHashSet<Player> teamOrange;
     private static LinkedHashSet<Player> teamBlue;
-    private static Side side = Side.DEFENDER;
-    private static int bombSiteIndex = 0;
-    private static int currentRound = 0;
+    private static Side side;
+    private static int bombSiteIndex;
+    private static int currentRound;
     private static boolean renderPlayer = true;
     //---dev---
-    private static boolean isInMatch = true;
+    private static boolean isInMatch;
 
     //----------Start a new Match----------
 
@@ -103,7 +104,7 @@ public class ClientMatch {
     }
 
     public static TeamColor getTeamColor() {
-        return teamOrange.contains(minecraft.player) ? TeamColor.ORANGE : TeamColor.BLUE;
+        return R6Constants.TEST ? TeamColor.ORANGE : teamOrange.contains(minecraft.player) ? TeamColor.ORANGE : TeamColor.BLUE;
     }
 
     public static TeamColor getTeamColor(Player player) {
@@ -132,7 +133,7 @@ public class ClientMatch {
     }
 
     public static boolean isInMatch() {
-        return isInMatch;
+        return R6Constants.TEST ? true : isInMatch;
     }
 
     public static void stopRenderPlayer() {
@@ -148,11 +149,11 @@ public class ClientMatch {
     }
 
     public static int getCurrentRoundNumber() {
-        return currentRound;
+        return R6Constants.TEST ? 0 : currentRound;
     }
 
     public static Side getSide() {
-        return side;
+        return R6Constants.TEST ? Side.DEFENDER : side;
     }
 
     public static int getRoundsLeftToExchange() {
@@ -174,9 +175,7 @@ public class ClientMatch {
     }
 
     public static int getNumberInTeam() {
-        //---dev---
-        //return getIndexOf(getAllies(), minecraft.player);
-        return 2;
+        return R6Constants.TEST ? 2 : getIndexOf(getAllies(), minecraft.player);
     }
 
     public static void setBombSiteIndex(int bombSiteIndex) {
@@ -184,7 +183,7 @@ public class ClientMatch {
     }
 
     public static int getBombSiteIndex() {
-        return bombSiteIndex;
+        return R6Constants.TEST ? 0 : bombSiteIndex;
     }
 
     public static int getAttackerAliveAmount() {

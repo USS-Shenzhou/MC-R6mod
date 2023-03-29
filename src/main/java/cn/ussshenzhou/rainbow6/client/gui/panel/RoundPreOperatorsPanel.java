@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * @author USS_Shenzhou
  */
 public class RoundPreOperatorsPanel extends TPanel {
-    private final TImage background = new TImage(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/std_background_full_screen.png"));
+    private final TImage background = new TImage(R6Constants.STD_BACKGROUND);
     private ArrayList<OperatorIconButton> operators = new ArrayList<>();
 
     public RoundPreOperatorsPanel() {
