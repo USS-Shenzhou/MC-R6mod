@@ -48,7 +48,7 @@ public class LevelRendererMixin implements LevelRendererProxy {
             //40 - 216
             //20 - 432
             // x * y = 8640
-            Matrix4f matrix4f = new Matrix4f().ortho(-width, width, height, -height, r6msClipRoof ? 0 : -9999, 9999);
+            Matrix4f matrix4f = new Matrix4f().ortho(-width, width, -height, height, r6msClipRoof ? 0 : -9999, 9999);
             RenderSystem.setProjectionMatrix(matrix4f);
             return matrix4f;
         } else {
@@ -62,7 +62,7 @@ public class LevelRendererMixin implements LevelRendererProxy {
             Window window = Minecraft.getInstance().getWindow();
             float width = r6msCameraZoomFactor * window.getWidth() / window.getHeight();
             float height = r6msCameraZoomFactor;
-            return new Matrix4f().ortho(-width, width, height, -height, r6msClipRoof ? 0 : -9999, 9999);
+            return new Matrix4f().ortho(-width, width, -height, height, r6msClipRoof ? 0 : -9999, 9999);
         } else {
             return m;
         }
