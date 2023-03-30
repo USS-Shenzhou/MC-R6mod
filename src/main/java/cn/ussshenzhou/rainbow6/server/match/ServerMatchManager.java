@@ -2,6 +2,7 @@ package cn.ussshenzhou.rainbow6.server.match;
 
 import cn.ussshenzhou.rainbow6.config.Map;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -24,9 +25,9 @@ public class ServerMatchManager {
         players.forEach(serverPlayer -> PLAYERS_IN_MATCH.put(serverPlayer, match));
     }
 
-    public static void removeMatch(ServerMatch match){
-       REMOVE.add(match);
-       match.forEachPlayer(PLAYERS_IN_MATCH::remove);
+    public static void removeMatch(ServerMatch match) {
+        REMOVE.add(match);
+        match.forEachPlayer(PLAYERS_IN_MATCH::remove);
     }
 
     public static boolean isPlayerInMatch(ServerPlayer player) {
@@ -50,7 +51,13 @@ public class ServerMatchManager {
     }
 
     public static void receiveEvent(ServerPlayer player, Event event) {
-        if (PLAYERS_IN_MATCH.containsKey(player)){
+        if (PLAYERS_IN_MATCH.containsKey(player)) {
+            PLAYERS_IN_MATCH.get(player).receiveEvent(player, event);
+        }
+    }
+
+    public static void receiveLivingEvent(LivingEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player && PLAYERS_IN_MATCH.containsKey(player)) {
             PLAYERS_IN_MATCH.get(player).receiveEvent(player, event);
         }
     }

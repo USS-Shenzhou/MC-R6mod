@@ -11,17 +11,34 @@ import java.util.LinkedList;
  * @author USS_Shenzhou
  */
 public class R6ServerScoreboard {
-    private ServerMatch match;
-    private LinkedList<Side> winnerSides = new LinkedList<>();
-    private LinkedList<LinkedList<Operator>> operators = new LinkedList<>();
-    private LinkedHashMap<ServerPlayer, PlayerData> playerDataMap = new LinkedHashMap<>();
+    protected ServerMatch match;
+    protected LinkedList<Side> winnerSides = new LinkedList<>();
+    protected LinkedList<LinkedList<Operator>> operators = new LinkedList<>();
+    protected LinkedHashMap<ServerPlayer, PlayerData> playerDataMaps = new LinkedHashMap<>();
 
     public R6ServerScoreboard(ServerMatch match) {
         this.match = match;
     }
 
-    public void afterMatch(){
+    public void newRound() {
+        match.forEachPlayer(player -> playerDataMaps.put(player, new PlayerData()));
+    }
+
+    public void preparationStage() {
+        operators.add(new LinkedList<>(match.chosenOperators.values()));
+    }
+
+    public void afterMatch() {
         match = null;
+    }
+
+    public void playerDownedBy(ServerPlayer down, ServerPlayer shooter) {
+        playerDataMaps.get(shooter).addScore(75);
+    }
+
+    public void playerKilledBy(ServerPlayer down, ServerPlayer shooter) {
+        playerDataMaps.get(down).addDeath();
+        playerDataMaps.get(shooter).addScore(100);
     }
 
     public static class PlayerData {
@@ -38,11 +55,11 @@ public class R6ServerScoreboard {
             kills++;
         }
 
-        public void addAssists() {
+        public void addAssist() {
             assists++;
         }
 
-        public void addDeaths() {
+        public void addDeath() {
             deaths++;
         }
     }

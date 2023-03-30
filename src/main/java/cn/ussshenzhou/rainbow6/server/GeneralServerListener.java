@@ -4,6 +4,7 @@ import cn.ussshenzhou.rainbow6.server.match.MatchMaker;
 import cn.ussshenzhou.rainbow6.server.match.ServerMatchManager;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,8 +32,17 @@ public class GeneralServerListener {
 
     @SubscribeEvent
     public static void playerInjured(LivingHurtEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player) {
-            ServerMatchManager.receiveEvent(player, event);
+        if (event.getEntity() instanceof ServerPlayer) {
+            //assist
+            ServerMatchManager.receiveLivingEvent(event);
+        }
+    }
+
+    @SubscribeEvent
+    public static void playerDown(LivingDeathEvent event) {
+        if (event.getEntity() instanceof ServerPlayer) {
+            //down or die
+            ServerMatchManager.receiveLivingEvent(event);
         }
     }
 }

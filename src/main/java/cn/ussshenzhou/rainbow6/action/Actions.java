@@ -9,7 +9,8 @@ import java.util.function.Supplier;
  * @author USS_Shenzhou
  */
 public enum Actions {
-    PRONE(Prone.class, Prone::new);
+    PRONE(Prone.class, Prone::new),
+    DOWN(Down.class, Down::new);
 
     final Class<? extends Action> type;
     final Supplier<? extends Action> constructor;

@@ -8,6 +8,7 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.event.ViewportEvent;
+import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
@@ -20,6 +21,7 @@ import javax.annotation.Nullable;
  *
  * @author USS_Shenzhou
  */
+@AutoRegisterCapability
 public class AnimationCapability {
 
     public static @Nullable AnimationCapability get(Player player) {

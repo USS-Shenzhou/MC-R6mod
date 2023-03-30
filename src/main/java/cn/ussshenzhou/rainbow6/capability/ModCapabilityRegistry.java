@@ -20,7 +20,6 @@ public class ModCapabilityRegistry {
     });
     public static final Capability<AnimationCapability> ANIMATION_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
     });
-
     public static final ResourceLocation ACTION = new ResourceLocation(R6Constants.MOD_ID, "action");
     public static final ResourceLocation ANIMATION = new ResourceLocation(R6Constants.MOD_ID, "animation");
 

@@ -41,6 +41,8 @@ public class ServerMatch {
     RandomSource random = RandomSource.create();
     final R6ServerScoreboard scoreboard = new R6ServerScoreboard(this);
     final LinkedHashMap<ServerPlayer, Operator> chosenOperators = new LinkedHashMap<>();
+    final LinkedHashSet<ServerPlayer> downed = new LinkedHashSet<>();
+    boolean planted = false;
 
     public ServerMatch(Collection<ServerPlayer> players, Map map) {
         //player team randomization should be in MatchMaker

@@ -99,6 +99,8 @@ public class MainMenuScreen extends AbstractR6Screen {
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
         if (pKeyCode == GLFW.GLFW_KEY_ESCAPE && optionsPanel.isVisibleT()) {
             setVisiblePanel(homePanel);
+            headerPanel.getHomeButton().setSelected(true);
+            headerPanel.getOperatorsButton().setSelected(false);
             return true;
         }
         return super.keyPressed(pKeyCode, pScanCode, pModifiers);

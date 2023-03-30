@@ -34,6 +34,7 @@ public class ClientMatch {
     private static boolean renderPlayer = true;
     //---dev---
     private static boolean isInMatch;
+    private static boolean down;
 
     //----------Start a new Match----------
 
@@ -194,5 +195,13 @@ public class ClientMatch {
     public static int getDefenderAliveAmount() {
         //TODO scoreboard
         return 5;
+    }
+
+    public static boolean isDown() {
+        return down;
+    }
+
+    public static void setDown(boolean down) {
+        ClientMatch.down = down;
     }
 }

@@ -1,5 +1,7 @@
 package cn.ussshenzhou.rainbow6.server.match;
 
+import cn.ussshenzhou.rainbow6.action.Actions;
+import cn.ussshenzhou.rainbow6.capability.ActionCapability;
 import cn.ussshenzhou.rainbow6.config.Map;
 import cn.ussshenzhou.rainbow6.mixinproxy.FoodDataProxy;
 import cn.ussshenzhou.rainbow6.network.onlyto.client.*;
@@ -8,6 +10,7 @@ import cn.ussshenzhou.rainbow6.network.onlyto.server.ChooseOperatorPacket;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.RoundPreDonePacket;
 import cn.ussshenzhou.rainbow6.server.DelayedTask;
 import cn.ussshenzhou.rainbow6.util.Operator;
+import cn.ussshenzhou.rainbow6.util.Side;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
@@ -24,12 +27,14 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraftforge.common.util.LogicalSidedProvider;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -87,12 +92,16 @@ public class ServerMatchController {
             //TODO timeout
         });
         match.taskManager.addTask(roundPreTimeout);
+        match.scoreboard.newRound();
     }
 
     /**
-     * Fired by roundPreDone
+     * Fired by
+     *
+     * @see ServerMatchController#roundPreDone(ServerPlayer)
      */
     private void preparationStage() {
+        match.scoreboard.preparationStage();
         //TODO give loadout
         CompoundTag blankTag = new CompoundTag();
         match.forEachPlayer(player -> {
@@ -150,10 +159,16 @@ public class ServerMatchController {
         //TODO remove inside-outside border
     }
 
+    private void roundEnd(Side winner) {
+        //TODO
+    }
+
     private void afterRound() {
         match.attackerSpawns.clear();
         match.preparedPlayers.clear();
         match.chosenOperators.clear();
+        match.downed.clear();
+        match.planted = false;
     }
 
     //----------End Match----------
@@ -166,8 +181,10 @@ public class ServerMatchController {
     }
 
     private void afterMatch() {
-        //Break circular references for GC convenience.
         ServerMatchManager.removeMatch(match);
+        match.scoreboard.afterMatch();
+
+        //Break circular references for GC convenience.
         match = null;
     }
 
@@ -273,7 +290,59 @@ public class ServerMatchController {
 
     public void receiveEvent(ServerPlayer player, Event event) {
         if (event instanceof LivingHurtEvent hurt) {
-            //TODO assist
+            //TODO assist recorder
+        } else if (event instanceof LivingDeathEvent death) {
+            handleLivingDeath(player, death);
+        }
+    }
+
+    private void handleLivingDeath(ServerPlayer player, LivingDeathEvent event) {
+        if (match.downed.contains(player)) {
+            playerDeath(player);
+            match.scoreboard.playerKilledBy(player, (ServerPlayer) event.getSource().getEntity());
+        } else {
+            match.downed.add(player);
+            event.setCanceled(true);
+            player.setHealth(player.getMaxHealth());
+            //bleeding effect
+            match.sendPacketsTo(List.of(player), new PlayerDownPacket());
+            //TODO heal
+            match.scoreboard.playerDownedBy(player, (ServerPlayer) event.getSource().getEntity());
+        }
+    }
+
+    private void playerDeath(ServerPlayer player) {
+        setSpectatorByDeath(player);
+        checkRoundEndByDeath();
+    }
+
+    private void setSpectatorByDeath(ServerPlayer player) {
+        //TODO
+        player.setGameMode(GameType.SPECTATOR);
+    }
+
+    private void checkRoundEndByDeath() {
+        boolean defenderAllDied = match.getDefenders().stream().filter(player ->
+                !(player.isSpectator()) || ActionCapability.get(player).getInstanceOf(Actions.DOWN).isDoing()
+        ).toList().isEmpty();
+        boolean attackerAllDied = match.getAttackers().stream().filter(player ->
+                !(player.isSpectator()) || ActionCapability.get(player).getInstanceOf(Actions.DOWN).isDoing()
+        ).toList().isEmpty();
+        //noinspection IfStatementWithIdenticalBranches
+        if (!match.planted) {
+            if (attackerAllDied){
+                roundEnd(Side.DEFENDER);
+                return;
+            }
+            if (defenderAllDied) {
+                roundEnd(Side.ATTACKER);
+                return;
+            }
+        } else {
+            if (defenderAllDied){
+                roundEnd(Side.ATTACKER);
+                return;
+            }
         }
     }
 }
