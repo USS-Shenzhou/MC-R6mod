@@ -160,7 +160,10 @@ public class ServerMatchController {
     }
 
     private void roundEnd(Side winner) {
+        TeamColor winnerColor = winner == Side.ATTACKER ? match.attackerColor : match.attackerColor.opposite();
+        match.scoreboard.winnerSides.add(winnerColor);
         //TODO
+        afterRound();
     }
 
     private void afterRound() {
@@ -304,7 +307,7 @@ public class ServerMatchController {
             match.downed.add(player);
             event.setCanceled(true);
             player.setHealth(player.getMaxHealth());
-            //bleeding effect
+            //TODO bleeding effect
             match.sendPacketsTo(List.of(player), new PlayerDownPacket());
             //TODO heal
             match.scoreboard.playerDownedBy(player, (ServerPlayer) event.getSource().getEntity());
@@ -312,25 +315,24 @@ public class ServerMatchController {
     }
 
     private void playerDeath(ServerPlayer player) {
+        match.sendPacketsToEveryOne(new PlayerDeathPacket());
         setSpectatorByDeath(player);
         checkRoundEndByDeath();
     }
 
     private void setSpectatorByDeath(ServerPlayer player) {
-        //TODO
+        //TODO spectator mode
         player.setGameMode(GameType.SPECTATOR);
     }
 
     private void checkRoundEndByDeath() {
-        boolean defenderAllDied = match.getDefenders().stream().filter(player ->
-                !(player.isSpectator()) || ActionCapability.get(player).getInstanceOf(Actions.DOWN).isDoing()
-        ).toList().isEmpty();
-        boolean attackerAllDied = match.getAttackers().stream().filter(player ->
-                !(player.isSpectator()) || ActionCapability.get(player).getInstanceOf(Actions.DOWN).isDoing()
-        ).toList().isEmpty();
+        boolean defenderAllDied = match.getDefenders().stream().noneMatch(player ->
+                (!player.isSpectator()) || ActionCapability.get(player).getInstanceOf(Actions.DOWN).isDoing());
+        boolean attackerAllDied = match.getAttackers().stream().noneMatch(player ->
+                (!player.isSpectator()) || ActionCapability.get(player).getInstanceOf(Actions.DOWN).isDoing());
         //noinspection IfStatementWithIdenticalBranches
         if (!match.planted) {
-            if (attackerAllDied){
+            if (attackerAllDied) {
                 roundEnd(Side.DEFENDER);
                 return;
             }
@@ -339,7 +341,7 @@ public class ServerMatchController {
                 return;
             }
         } else {
-            if (defenderAllDied){
+            if (defenderAllDied) {
                 roundEnd(Side.ATTACKER);
                 return;
             }

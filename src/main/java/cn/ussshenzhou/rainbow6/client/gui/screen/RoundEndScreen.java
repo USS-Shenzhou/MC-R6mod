@@ -21,7 +21,7 @@ public class RoundEndScreen extends AbstractR6Screen {
 
     private RoundEndScreen(boolean win) {
         super("RoundEndScreen");
-        team.setForeground(ClientMatch.getTeamColor().getARGB());
+        team.setForeground(ClientMatch.getAllyTeamColor().getARGB());
         team.setFontSize(14);
         team.setHorizontalAlignment(HorizontalAlignment.CENTER);
         this.add(team);

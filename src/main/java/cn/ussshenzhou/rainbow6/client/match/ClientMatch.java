@@ -7,20 +7,21 @@ import cn.ussshenzhou.rainbow6.client.gui.screen.MatchBeginMapSceneScreen;
 import cn.ussshenzhou.rainbow6.client.gui.screen.RoundBeginMapSceneScreen;
 import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
 import cn.ussshenzhou.rainbow6.config.Map;
+import cn.ussshenzhou.rainbow6.server.match.R6ServerScoreboard;
 import cn.ussshenzhou.rainbow6.util.Operator;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.rainbow6.util.Side;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
+import cn.ussshenzhou.t88.gui.HudManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.UUID;
+import java.util.*;
 
 /**
+ * Client does not have seperated scoreboard or something else. All client data in match are handled here.
+ *
  * @author USS_Shenzhou
  */
 public class ClientMatch {
@@ -35,6 +36,8 @@ public class ClientMatch {
     //---dev---
     private static boolean isInMatch;
     private static boolean down;
+    private static LinkedHashMap<Player, R6ServerScoreboard.PlayerScoresBase> playerScores = new LinkedHashMap<>();
+    private static LinkedList<TeamColor> winnerSides = new LinkedList<>();
 
     //----------Start a new Match----------
 
@@ -62,7 +65,7 @@ public class ClientMatch {
 
     public static void newRound(TeamColor attackerColor) {
         currentRound++;
-        side = getTeamColor() == attackerColor ? Side.ATTACKER : Side.DEFENDER;
+        side = getAllyTeamColor() == attackerColor ? Side.ATTACKER : Side.DEFENDER;
         ScreenManager.clearLayers();
         ScreenManager.showNewLayerClearBg(new RoundBeginMapSceneScreen());
         //RoundPrepareScreen will be called by RoundBeginMapSceneScreen
@@ -72,12 +75,26 @@ public class ClientMatch {
     public static void preStage() {
         ScreenManager.clearLayers();
         AutoCloseHud.ifPresentFormerThenRemoveAndAdd(new PromptHud.PrepareStage());
-        //TODO other HUD
+        //TODO other HUDs
     }
 
     public static void actStage() {
         AutoCloseHud.ifPresentFormerThenRemoveAndAdd(new PromptHud.ActStage());
-        //TODO other HUD
+        //TODO other HUDs
+    }
+
+    public static void roundEnd(TeamColor winner) {
+        //TODO other HUDs
+        winnerSides.add(winner);
+        HudManager.remove(ScreenManager.playerInfoBarHud);
+    }
+
+    public static void afterRound() {
+        //TODO
+    }
+
+    public static void afterMatch() {
+        //TODO
     }
 
     //----------Event handler----------
@@ -104,16 +121,16 @@ public class ClientMatch {
         return level == null ? null : level.getPlayerByUUID(playerId);
     }
 
-    public static TeamColor getTeamColor() {
+    public static TeamColor getAllyTeamColor() {
         return R6Constants.TEST ? TeamColor.ORANGE : teamOrange.contains(minecraft.player) ? TeamColor.ORANGE : TeamColor.BLUE;
     }
 
-    public static TeamColor getTeamColor(Player player) {
+    public static TeamColor getAllyTeamColor(Player player) {
         return teamOrange.contains(player) ? TeamColor.ORANGE : TeamColor.BLUE;
     }
 
     public static boolean isAlly(Player player) {
-        return getTeamColor() == getTeamColor(player);
+        return getAllyTeamColor() == getAllyTeamColor(player);
     }
 
     private static <T> int getIndexOf(Collection<T> collection, T t) {
@@ -123,6 +140,18 @@ public class ClientMatch {
             }
         }
         return -1;
+    }
+
+    public static void syncPlayerScore(UUID uuid, R6ServerScoreboard.PlayerScoresBase playerScore) {
+        playerScores.put(getPlayerById(uuid), playerScore);
+    }
+
+    public static LinkedHashSet<Player> getAttackers() {
+        return side == Side.ATTACKER ? getAllies() : getEnemies();
+    }
+
+    public static LinkedHashSet<Player> getDefenders() {
+        return side == Side.DEFENDER ? getAllies() : getEnemies();
     }
 
     public static LinkedHashSet<Player> getAllies() {
@@ -162,13 +191,11 @@ public class ClientMatch {
     }
 
     public static int getAllyScore() {
-        //TODO scoreboard
-        return 0;
+        return R6Constants.TEST ? 0 : (int) winnerSides.stream().filter(s -> s == getAllyTeamColor()).count();
     }
 
     public static int getEnemyScore() {
-        return 0;
-        //TODO scoreboard
+        return R6Constants.TEST ? 0 : (int) winnerSides.stream().filter(s -> s == getAllyTeamColor().opposite()).count();
     }
 
     public static Map getMap() {
@@ -188,13 +215,11 @@ public class ClientMatch {
     }
 
     public static int getAttackerAliveAmount() {
-        //TODO scoreboard
-        return 1;
+        return R6Constants.TEST ? 1 : (int) getAttackers().stream().filter(player -> !player.isSpectator()).count();
     }
 
     public static int getDefenderAliveAmount() {
-        //TODO scoreboard
-        return 5;
+        return R6Constants.TEST ? 5 : (int) getDefenders().stream().filter(player -> !player.isSpectator()).count();
     }
 
     public static boolean isDown() {

@@ -33,8 +33,8 @@ public class IconHelper {
         return new ResourceLocation(R6Constants.MOD_ID, "textures/gui/" +
                 (
                         ClientMatch.getSide() == Side.ATTACKER
-                                ? "attacker" + size + "_" + ClientMatch.getTeamColor().name().toLowerCase()
-                                : "defender" + size + "_" + ClientMatch.getTeamColor().name().toLowerCase()
+                                ? "attacker" + size + "_" + ClientMatch.getAllyTeamColor().name().toLowerCase()
+                                : "defender" + size + "_" + ClientMatch.getAllyTeamColor().name().toLowerCase()
                 )
                 + ".png"
         );
@@ -44,8 +44,8 @@ public class IconHelper {
         return new ResourceLocation(R6Constants.MOD_ID, "textures/gui/" +
                 (
                         ClientMatch.getSide() != Side.ATTACKER
-                                ? "attacker" + size + "_" + ClientMatch.getTeamColor().opposite().name().toLowerCase()
-                                : "defender" + size + "_" + ClientMatch.getTeamColor().opposite().name().toLowerCase()
+                                ? "attacker" + size + "_" + ClientMatch.getAllyTeamColor().opposite().name().toLowerCase()
+                                : "defender" + size + "_" + ClientMatch.getAllyTeamColor().opposite().name().toLowerCase()
                 )
                 + ".png"
         );

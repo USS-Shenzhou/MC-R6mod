@@ -32,7 +32,7 @@ public class PlayerInfoBarHud extends TImage {
     private TTimer timer;
 
     public PlayerInfoBarHud(int countdownTime) {
-        super(new ResourceLocation(R6Constants.MOD_ID, ClientMatch.getTeamColor() == TeamColor.BLUE
+        super(new ResourceLocation(R6Constants.MOD_ID, ClientMatch.getAllyTeamColor() == TeamColor.BLUE
                 ? "textures/gui/round_player_info_blue.png"
                 : "textures/gui/round_player_info_orange.png"
         ));
@@ -41,10 +41,10 @@ public class PlayerInfoBarHud extends TImage {
         this.add(allyIcon);
         this.add(enemyIcon);
         allyScore.setHorizontalAlignment(HorizontalAlignment.CENTER);
-        allyScore.setForeground(ClientMatch.getTeamColor().getARGB());
+        allyScore.setForeground(ClientMatch.getAllyTeamColor().getARGB());
         this.add(allyScore);
         enemyScore.setHorizontalAlignment(HorizontalAlignment.CENTER);
-        enemyScore.setForeground(ClientMatch.getTeamColor().opposite().getARGB());
+        enemyScore.setForeground(ClientMatch.getAllyTeamColor().opposite().getARGB());
         this.add(enemyScore);
         roundCount.setHorizontalAlignment(HorizontalAlignment.CENTER);
         roundCount.setFontSize(3.49f);

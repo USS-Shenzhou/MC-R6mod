@@ -21,7 +21,7 @@ public class RoundBeginMapSceneScreen extends AbstractR6Screen {
     private final TLabel round = new TLabel(Component.translatable("gui.r6ms.match_map_scene.round", ClientMatch.getCurrentRoundNumber()));
     private final TLabel side = new TLabel(Component.translatable(ClientMatch.getSide().getTranslateKey()));
     private final TLabel mapName = new TLabel(Component.literal(ClientMatch.getMap().getName()));
-    private final TImage background = new TImage(ClientMatch.getTeamColor() == TeamColor.BLUE ?
+    private final TImage background = new TImage(ClientMatch.getAllyTeamColor() == TeamColor.BLUE ?
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_begin_map_scene_blue.png")
             : new ResourceLocation(R6Constants.MOD_ID, "textures/gui/round_begin_map_scene_orange.png")
     );
