@@ -1,0 +1,6 @@
+{
+	"parent": "r6ms:item/skin_test",
+	"textures": {
+		"skin": "r6ms:item/texture_testskin"
+	}
+}
