@@ -1,5 +1,6 @@
 package cn.ussshenzhou.rainbow6.skin;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -24,6 +25,7 @@ public class SkinItemOverridesHandler extends ItemOverrides {
         } else {
             var skin = SkinManager.getSkin(ForgeRegistries.ITEMS.getKey(pStack.getItem()), skinName);
             if (skin == null) {
+                LogUtils.getLogger().error("Failed to find skin {} for item {}. This should not happen.", skinName, pStack.getItem());
                 return pModel;
             }
             return modelManager.getModel(skin.getModelLocation());

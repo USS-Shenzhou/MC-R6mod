@@ -18,6 +18,9 @@ public class SkinRegistry {
     public static void setItemModelReroute(ModelEvent.ModifyBakingResult event) {
         var map = event.getModels();
         SkinManager.ITEM_SKINS.keySet().forEach(item -> {
+            if (item.equals(SkinManager.UNIVERSAL_SKIN)) {
+                return;
+            }
             ModelResourceLocation modelResourceLocation = new ModelResourceLocation(item, "inventory");
             BakedModel defaultModel = map.get(modelResourceLocation);
             map.put(modelResourceLocation, new BakedModelWrapper<>(defaultModel) {

@@ -20,7 +20,12 @@ import java.util.List;
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SkinManager {
-    public static final ResourceLocation UNIVERSAL_SKIN = new ResourceLocation(R6Constants.MOD_ID, ".");
+    public static final ResourceLocation UNIVERSAL_SKIN = new ResourceLocation(R6Constants.MOD_ID, ".") {
+        @Override
+        public String getPath() {
+            return "universal";
+        }
+    };
     protected static final HashMap<ResourceLocation, List<Skin>> ITEM_SKINS = new HashMap<>();
     public static final HashMap<Integer, Skin> SKINS = new HashMap<>();
 
@@ -58,6 +63,11 @@ public class SkinManager {
         }));
     }
 
+    //needtest
+    public static void addUniversalSkin(String... skinNames) {
+        Arrays.stream(skinNames).forEach(s -> addSkin(UNIVERSAL_SKIN, s));
+    }
+
     public static Skin fromId(int id) {
         return SKINS.get(id);
     }
@@ -67,7 +77,7 @@ public class SkinManager {
         try {
             skinNameId = SkinIdHelper.SKIN_NAME_ID.get(skinName);
         } catch (NullPointerException ignored) {
-            LogUtils.getLogger().error("Cannot find id for skin {}. If this is a development environment, assign it. This should not happen in product environments.",
+            LogUtils.getLogger().error("Cannot find id for skin {}. If this is a development environment, assign it. This should not happen.",
                     skinName);
             if (R6Constants.TEST) {
                 throw new IllegalStateException();
@@ -78,7 +88,7 @@ public class SkinManager {
         try {
             itemId = SkinIdHelper.ITEM_ID.get(item);
         } catch (NullPointerException ignored) {
-            LogUtils.getLogger().error("Cannot find id for item {}. If this is a development environment, assign it. This should not happen in product environments.",
+            LogUtils.getLogger().error("Cannot find id for item {}. If this is a development environment, assign it. This should not happen.",
                     skinName);
             if (R6Constants.TEST) {
                 throw new IllegalStateException();
@@ -89,6 +99,8 @@ public class SkinManager {
     }
 
     public static @Nullable Skin getSkin(ResourceLocation item, String name) {
-        return ITEM_SKINS.get(item).stream().filter(skin -> skin.skinName.equals(name)).findFirst().orElse(null);
+        return ITEM_SKINS.get(item).stream().filter(skin -> skin.skinName.equals(name)).findFirst().orElse(
+                ITEM_SKINS.get(UNIVERSAL_SKIN).stream().filter(skin -> skin.skinName.equals(name)).findFirst().orElse(null)
+        );
     }
 }

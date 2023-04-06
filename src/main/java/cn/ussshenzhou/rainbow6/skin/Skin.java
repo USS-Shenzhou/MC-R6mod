@@ -19,6 +19,9 @@ public class Skin {
      * 0x0000 0000 item id - skin id
      * <br/>Item-id 00 stands for universal skins.
      * <br/>Skins with the same name but for different items use the same skin-id.
+     * <p/>Attention: Skins-with-the-same-name are different from universal-skins.
+     * <br/>For example, black ice(s) are skins-with-the-same-name, you need to get them one-weapon by one-weapon.
+     * <br/>But jungle is a universal-skin, you just need to get it once then equip it anywhere.
      */
     public final int id;
 
