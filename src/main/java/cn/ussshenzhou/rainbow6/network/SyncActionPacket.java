@@ -9,8 +9,6 @@ import cn.ussshenzhou.t88.network.annotation.NetPacket;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkDirection;
@@ -68,8 +66,9 @@ public class SyncActionPacket {
         if (player == null) {
             return;
         }
-        player.getLevel().getNearbyPlayers(TargetingConditions.forNonCombat(), player, player.getBoundingBox().inflate(16 * 12))
-                .forEach(p -> NetworkHelper.getChannel(SyncActionPacket.class).send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) p), this));
+        /*player.getLevel().getNearbyPlayers(TargetingConditions.forNonCombat(), player, player.getBoundingBox().inflate(16 * 12))
+                .forEach(p -> NetworkHelper.getChannel(SyncActionPacket.class).send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) p), this));*/
+        NetworkHelper.getChannel(SyncActionPacket.class).send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), this);
         ActionCapability actionCapability = ActionCapability.get(player);
         if (actionCapability == null) {
             return;
