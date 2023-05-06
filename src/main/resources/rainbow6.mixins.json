@@ -8,8 +8,7 @@
     "FallbackResourceManagerMixin",
     "FoodDataMixin",
     "ForgeHooksClientAccessor",
-    "PlayerAccessor",
-    "SimpleBakedModelAccessor"
+    "PlayerAccessor"
   ],
   "client": [
     "GameRendererMixin",

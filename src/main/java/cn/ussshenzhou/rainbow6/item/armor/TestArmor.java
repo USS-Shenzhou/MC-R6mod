@@ -1,6 +1,8 @@
 package cn.ussshenzhou.rainbow6.item.armor;
 
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * @author USS_Shenzhou
@@ -10,6 +12,7 @@ public class TestArmor extends BaseR6ArmorItem {
         super(ModArmorMaterials.LEVEL2, slotType, "test");
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public HumanoidModel<?> provideArmorModelForType(Type type) {
         return new TestArmorModel(type);
