@@ -76,21 +76,21 @@ public class PlayerModelTransformer {
      */
     public PlayerModelTransformer rotateRightArm(float angleX, float angleY, float angleZ) {
         ModelPart rightArm = model.rightArm;
-        if (rightArm.visible) {
+        //if (rightArm.visible) {
             setRotations(rightArm, angleX, angleY, angleZ);
-        }
+        //}
         return this;
     }
 
     public PlayerModelTransformer rotateRightArm(float angleX, float angleY, float angleZ, float factor) {
         ModelPart rightArm = model.rightArm;
-        if (rightArm.visible) {
+        //if (rightArm.visible) {
             setRotations(rightArm,
                     Mth.lerp(factor, rightArm.xRot, angleX),
                     Mth.lerp(factor, rightArm.yRot, angleY),
                     Mth.lerp(factor, rightArm.zRot, angleZ)
             );
-        }
+        //}
         return this;
     }
 
@@ -101,21 +101,21 @@ public class PlayerModelTransformer {
      */
     public PlayerModelTransformer rotateLeftArm(float angleX, float angleY, float angleZ) {
         ModelPart leftArm = model.leftArm;
-        if (leftArm.visible) {
+        //if (leftArm.visible) {
             setRotations(leftArm, angleX, angleY, angleZ);
-        }
+        //}
         return this;
     }
 
     public PlayerModelTransformer rotateLeftArm(float angleX, float angleY, float angleZ, float factor) {
         ModelPart leftArm = model.leftArm;
-        if (leftArm.visible) {
+        //if (leftArm.visible) {
             setRotations(leftArm,
                     Mth.lerp(factor, leftArm.xRot, angleX),
                     Mth.lerp(factor, leftArm.yRot, angleY),
                     Mth.lerp(factor, leftArm.zRot, angleZ)
             );
-        }
+        //}
         return this;
     }
 
@@ -126,21 +126,21 @@ public class PlayerModelTransformer {
      */
     public PlayerModelTransformer rotateRightLeg(float angleX, float angleY, float angleZ) {
         ModelPart rightLeg = model.rightLeg;
-        if (rightLeg.visible) {
+        //if (rightLeg.visible) {
             setRotations(rightLeg, angleX, angleY, angleZ);
-        }
+        //}
         return this;
     }
 
     public PlayerModelTransformer rotateRightLeg(float angleX, float angleY, float angleZ, float factor) {
         ModelPart rightLeg = model.rightLeg;
-        if (rightLeg.visible) {
+        //if (rightLeg.visible) {
             setRotations(rightLeg,
                     Mth.lerp(factor, rightLeg.xRot, angleX),
                     Mth.lerp(factor, rightLeg.yRot, angleY),
                     Mth.lerp(factor, rightLeg.zRot, angleZ)
             );
-        }
+        //}
         return this;
     }
 
@@ -151,53 +151,53 @@ public class PlayerModelTransformer {
      */
     public PlayerModelTransformer rotateLeftLeg(float angleX, float angleY, float angleZ) {
         ModelPart leftLeg = model.leftLeg;
-        if (leftLeg.visible) {
+        //if (leftLeg.visible) {
             setRotations(leftLeg, angleX, angleY, angleZ);
-        }
+        //}
         return this;
     }
 
     public PlayerModelTransformer rotateLeftLeg(float angleX, float angleY, float angleZ, float factor) {
         ModelPart leftLeg = model.leftLeg;
-        if (leftLeg.visible) {
+        //if (leftLeg.visible) {
             setRotations(leftLeg,
                     Mth.lerp(factor, leftLeg.xRot, angleX),
                     Mth.lerp(factor, leftLeg.yRot, angleY),
                     Mth.lerp(factor, leftLeg.zRot, angleZ)
             );
-        }
+        //}
         return this;
     }
 
     public PlayerModelTransformer addRotateRightArm(float angleX, float angleY, float angleZ) {
         ModelPart arm = model.rightArm;
-        if (arm.visible) {
+        //if (arm.visible) {
             setRotations(arm, arm.xRot + angleX, arm.yRot + angleY, arm.zRot + angleZ);
-        }
+        //}
         return this;
     }
 
     public PlayerModelTransformer addRotateLeftArm(float angleX, float angleY, float angleZ) {
         ModelPart arm = model.leftArm;
-        if (arm.visible) {
+        //if (arm.visible) {
             setRotations(arm, arm.xRot + angleX, arm.yRot + angleY, arm.zRot + angleZ);
-        }
+        //}
         return this;
     }
 
     public PlayerModelTransformer addRotateRightLeg(float angleX, float angleY, float angleZ) {
         ModelPart leg = model.rightLeg;
-        if (leg.visible) {
+        //if (leg.visible) {
             setRotations(leg, leg.xRot + angleX, leg.yRot + angleY, leg.zRot + angleZ);
-        }
+        //}
         return this;
     }
 
     public PlayerModelTransformer addRotateLeftLeg(float angleX, float angleY, float angleZ) {
         ModelPart leg = model.leftLeg;
-        if (leg.visible) {
+        //if (leg.visible) {
             setRotations(leg, leg.xRot + angleX, leg.yRot + angleY, leg.zRot + angleZ);
-        }
+        //}
         return this;
     }
 
