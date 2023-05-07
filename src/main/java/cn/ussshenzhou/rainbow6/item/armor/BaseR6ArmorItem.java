@@ -48,8 +48,11 @@ public abstract class BaseR6ArmorItem extends ArmorItem {
         this.model = provideArmorModelForType(type);
     }
 
+    /**
+     * Add @OnlyIn(Dist.CLIENT) manually after override.
+     */
     @OnlyIn(Dist.CLIENT)
-    public abstract HumanoidModel<?> provideArmorModelForType(Type slot);
+    public abstract HumanoidModel<?> provideArmorModelForType(Type type);
 
     @OnlyIn(Dist.CLIENT)
     @Override

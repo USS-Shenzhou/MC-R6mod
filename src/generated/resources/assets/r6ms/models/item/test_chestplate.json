@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "r6ms:item/armor/test_bg",
+    "layer1": "r6ms:item/armor/test_chestplate"
+  }
+}

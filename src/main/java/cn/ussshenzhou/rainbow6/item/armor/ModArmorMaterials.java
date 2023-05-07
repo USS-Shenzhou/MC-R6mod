@@ -17,8 +17,6 @@ public enum ModArmorMaterials implements ArmorMaterial {
     LEVEL2("rainbow6:level2", 2, 4, 3, 1, Ingredient.of(Items.IRON_INGOT)),
     LEVEL3("rainbow6:level3", 2, 5, 4, 2, Ingredient.of(Items.NETHERITE_INGOT));
 
-    private static final int[] DURABILITY = new int[]{13, 15, 16, 11};
-
     private final String name;
     private final int helmetArmor;
     private final int chestArmor;

@@ -12,9 +12,13 @@ public class TestArmor extends BaseR6ArmorItem {
         super(ModArmorMaterials.LEVEL2, slotType, "test");
     }
 
-    @OnlyIn(Dist.CLIENT)
+
+    /**
+     * Add @OnlyIn(Dist.CLIENT) manually after override.
+     */
     @Override
+    @OnlyIn(Dist.CLIENT)
     public HumanoidModel<?> provideArmorModelForType(Type type) {
-        return new TestArmorModel(type);
+        return new TestArmorModel(this.type);
     }
 }

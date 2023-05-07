@@ -24,10 +24,10 @@ public class ModItemRegistry {
     public static CreativeModeTab GENERAL_TAB;
     //public static final RegistryObject<SkinTestItem> SKIN_TEST = ITEMS.register("skin_test", SkinTestItem::new);
     public static CreativeModeTab ARMOR_TAB;
-    public static final RegistryObject<TestArmor> TEST_ARMOR_HELMET = ITEMS.register("test_armor_helmet", () -> new TestArmor(ArmorItem.Type.HELMET));
-    public static final RegistryObject<TestArmor> TEST_ARMOR_CHESTPLATE = ITEMS.register("test_armor_chestplate", () -> new TestArmor(ArmorItem.Type.CHESTPLATE));
-    public static final RegistryObject<TestArmor> TEST_ARMOR_LEGGINGS = ITEMS.register("test_armor_leggings", () -> new TestArmor(ArmorItem.Type.LEGGINGS));
-    public static final RegistryObject<TestArmor> TEST_ARMOR_BOOTS = ITEMS.register("test_armor_boots", () -> new TestArmor(ArmorItem.Type.BOOTS));
+    public static final RegistryObject<TestArmor> TEST_ARMOR_HELMET = ITEMS.register("test_helmet", () -> new TestArmor(ArmorItem.Type.HELMET));
+    public static final RegistryObject<TestArmor> TEST_ARMOR_CHESTPLATE = ITEMS.register("test_chestplate", () -> new TestArmor(ArmorItem.Type.CHESTPLATE));
+    public static final RegistryObject<TestArmor> TEST_ARMOR_LEGGINGS = ITEMS.register("test_leggings", () -> new TestArmor(ArmorItem.Type.LEGGINGS));
+    public static final RegistryObject<TestArmor> TEST_ARMOR_BOOTS = ITEMS.register("test_boots", () -> new TestArmor(ArmorItem.Type.BOOTS));
 
     @SubscribeEvent
     public static void putItemsIntoTab(CreativeModeTabEvent.BuildContents event) {
