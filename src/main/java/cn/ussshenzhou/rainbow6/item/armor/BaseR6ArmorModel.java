@@ -70,13 +70,6 @@ public abstract class BaseR6ArmorModel extends HumanoidModel<Player> {
         return LayerDefinition.create(meshdefinition, 64, 64);
     }
 
-    /*private void syncRotation() {
-        //List.of(this.helmet, this.body, this.armL, this.armR, this.legL, this.legR, this.bootL, this.bootR)
-        copyRotation(helmet, this.head);
-        copyRotation(chest, this.body);
-        copyRotation(arm);
-    }*/
-
     private void copyRotationAndRender(ModelPart to, ModelPart from, PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         to.setRotation(from.xRot, from.yRot, from.zRot);
         to.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
