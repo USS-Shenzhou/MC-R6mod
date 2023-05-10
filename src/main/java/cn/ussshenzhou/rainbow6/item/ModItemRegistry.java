@@ -4,10 +4,9 @@ import cn.ussshenzhou.rainbow6.item.armor.BaseR6ArmorItem;
 import cn.ussshenzhou.rainbow6.item.armor.ModItemInventoryModelRegistry;
 import cn.ussshenzhou.rainbow6.item.armor.TestArmor;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -25,9 +25,12 @@ import java.util.function.Supplier;
 public class ModItemRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, R6Constants.MOD_ID);
     public static CreativeModeTab GENERAL_TAB;
+    public static final RegistryObject<Item> OLD_LOGO = ITEMS.register("old_logo", () -> new Item(new Item.Properties()));
     //public static final RegistryObject<SkinTestItem> SKIN_TEST = ITEMS.register("skin_test", SkinTestItem::new);
     public static CreativeModeTab ARMOR_TAB;
     public static LinkedList<RegistryObject<BaseR6ArmorItem>> ARMORS_TO_TAB = new LinkedList<>();
+    public static final RegistryObject<Item> OLD_LOGO_ARMOR = ITEMS.register("old_logo_armor", () -> new Item(new Item.Properties()));
+
 
     public static final RegistryObject<TestArmor> TEST_ARMOR_HELMET = registryAndHasSpecialHandModelArmor("test_helmet", () -> new TestArmor(ArmorItem.Type.HELMET));
     public static final RegistryObject<TestArmor> TEST_ARMOR_CHESTPLATE = registryAndHasSpecialHandModelArmor("test_chestplate", () -> new TestArmor(ArmorItem.Type.CHESTPLATE));
@@ -39,6 +42,7 @@ public class ModItemRegistry {
     public static void putItemsIntoTab(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == GENERAL_TAB) {
             //event.accept(SKIN_TEST);
+            event.accept(TEST_ARMOR_BOOTS);
         } else if (event.getTab() == ARMOR_TAB) {
             ARMORS_TO_TAB.forEach(event::accept);
         }
@@ -46,12 +50,17 @@ public class ModItemRegistry {
 
     @SubscribeEvent
     public static void tabRegistry(CreativeModeTabEvent.Register event) {
-        GENERAL_TAB = event.registerCreativeModeTab(new ResourceLocation(R6Constants.MOD_ID, "general_tab"), builder -> {
+        GENERAL_TAB = event.registerCreativeModeTab(new ResourceLocation(R6Constants.MOD_ID, "general_tab"),
+                builder -> builder
+                        .icon(() -> new ItemStack(OLD_LOGO.get()))
+                        .title(Component.translatable("tab.r6ms.general"))
+        );
+        ARMOR_TAB = event.registerCreativeModeTab(new ResourceLocation(R6Constants.MOD_ID, "armor_tab"), List.of(), List.of(GENERAL_TAB),
+                builder -> builder
+                        .icon(() -> new ItemStack(OLD_LOGO_ARMOR.get()))
+                        .title(Component.translatable("tab.r6ms.armor"))
 
-        });
-        ARMOR_TAB = event.registerCreativeModeTab(new ResourceLocation(R6Constants.MOD_ID, "armor_tab"), builder -> {
-
-        });
+        );
     }
 
     private static <T extends Item> RegistryObject<T> registryAndHasSpecialHandModel(String name, Supplier<T> supplier) {

@@ -59,5 +59,8 @@
   "gui.r6ms.round_end.lose": "第%s回合战败",
 
   "gui.r6ms.options.key_trig.hold": "长按",
-  "gui.r6ms.options.key_trig.toggle": "切换"
+  "gui.r6ms.options.key_trig.toggle": "切换",
+
+  "tab.r6ms.general": "我的六号",
+  "tab.r6ms.armor": "我的六号：盔甲"
 }
