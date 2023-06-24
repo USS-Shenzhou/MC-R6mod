@@ -2,7 +2,7 @@ package cn.ussshenzhou.rainbow6.client.gui.widget;
 
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.*;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +27,7 @@ public class HoverSensitiveImageButton extends TPanel {
         this.text = new TLabel(text1);
         this.button = new TButton(Component.literal(""), onPress) {
             @Override
-            public void renderWidget(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+            public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
                 return;
             }
         };
@@ -82,18 +82,18 @@ public class HoverSensitiveImageButton extends TPanel {
     }
 
     @Override
-    protected void renderChildren(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    protected void renderChildren(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
         for (TWidget tWidget : children) {
             if (tWidget.isVisibleT()) {
                 if (tWidget == text && backgroundImageHovered.isVisibleT()) {
-                    renderText(pPoseStack, pMouseX, pMouseY, pPartialTick);
+                    renderText(graphics, pMouseX, pMouseY, pPartialTick);
                     continue;
                 }
                 if (tWidget == backgroundImageHovered) {
-                    renderBgImageHovered(pPoseStack, pMouseX, pMouseY, pPartialTick);
+                    renderBgImageHovered(graphics, pMouseX, pMouseY, pPartialTick);
                     continue;
                 }
-                tWidget.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+                tWidget.render(graphics, pMouseX, pMouseY, pPartialTick);
             }
         }
     }
@@ -101,7 +101,7 @@ public class HoverSensitiveImageButton extends TPanel {
     /**
      * backgroundImage will be stretched to the size of backgroundImage, then magnified to original.
      */
-    protected void renderBgImageHovered(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    protected void renderBgImageHovered(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
         if (padding != 0 && inTransition && transitionTick < transitionTimeMinus1) {
             float minScaleX = (float) backgroundImage.getWidth() / backgroundImageHovered.getWidth();
             float minScaleY = (float) backgroundImage.getHeight() / backgroundImageHovered.getHeight();
@@ -109,46 +109,46 @@ public class HoverSensitiveImageButton extends TPanel {
             float scaleY = minScaleY + transitionTick / transitionTimeMinus1 * (1 - minScaleY);
             float compensationRelativeX = (1 - scaleX) / (1 - minScaleX) * padding;
             float compensationRelativeY = (1 - scaleY) / (1 - minScaleY) * padding;
-            pPoseStack.pushPose();
+            graphics.pose().pushPose();
             //scale compensation = absolute + relative
-            pPoseStack.translate(
-                    (1 - scaleX) * backgroundImageHovered.getX() + compensationRelativeX,
-                    (1 - scaleY) * backgroundImageHovered.getY() + compensationRelativeY,
+            graphics.pose().translate(
+                    (1 - scaleX) * backgroundImageHovered.getXT() + compensationRelativeX,
+                    (1 - scaleY) * backgroundImageHovered.getYT() + compensationRelativeY,
                     0);
-            pPoseStack.scale(scaleX, scaleY, 1);
-            backgroundImageHovered.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-            pPoseStack.popPose();
+            graphics.pose().scale(scaleX, scaleY, 1);
+            backgroundImageHovered.render(graphics, pMouseX, pMouseY, pPartialTick);
+            graphics.pose().popPose();
             transitionTick += pPartialTick;
         } else {
-            backgroundImageHovered.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+            backgroundImageHovered.render(graphics, pMouseX, pMouseY, pPartialTick);
         }
     }
 
     /**
      * Text will be magnified when focused. To keep text's original shape, scaling will not calculate separately.
      */
-    protected void renderText(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    protected void renderText(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
         float maxScaleX = (float) backgroundImageHovered.getWidth() / backgroundImage.getWidth();
         float maxScaleY = (float) backgroundImageHovered.getHeight() / backgroundImage.getHeight();
         float maxScale = Math.min(maxScaleX, maxScaleY);
         if (padding != 0 && inTransition && transitionTick < transitionTimeMinus1) {
             float scale = 1 + transitionTick / transitionTimeMinus1 * (maxScale - 1);
-            renderTextInternal(pPoseStack, pMouseX, pMouseY, pPartialTick, scale, maxScale);
+            renderTextInternal(graphics, pMouseX, pMouseY, pPartialTick, scale, maxScale);
         } else {
-            renderTextInternal(pPoseStack, pMouseX, pMouseY, pPartialTick, maxScale, maxScale);
+            renderTextInternal(graphics, pMouseX, pMouseY, pPartialTick, maxScale, maxScale);
         }
     }
 
-    public void renderTextInternal(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick, float scale, float maxScale) {
+    public void renderTextInternal(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick, float scale, float maxScale) {
         float compensationRelative = (1 - scale) / (maxScale - 1) * padding;
-        pPoseStack.pushPose();
-        pPoseStack.translate(
-                (1 - scale) * text.getX() + compensationRelative,
-                (1 - scale) * text.getY() + compensationRelative,
+        graphics.pose().pushPose();
+        graphics.pose().translate(
+                (1 - scale) * text.getXT() + compensationRelative,
+                (1 - scale) * text.getYT() + compensationRelative,
                 0);
-        pPoseStack.scale(scale, scale, 1);
-        text.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        pPoseStack.popPose();
+        graphics.pose().scale(scale, scale, 1);
+        text.render(graphics, pMouseX, pMouseY, pPartialTick);
+        graphics.pose().popPose();
     }
 
     public TImage getBackgroundImage() {

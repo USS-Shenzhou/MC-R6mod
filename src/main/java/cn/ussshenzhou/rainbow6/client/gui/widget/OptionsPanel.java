@@ -63,18 +63,18 @@ public class OptionsPanel extends TScrollPanel {
             BufferBuilder bufferbuilder = tesselator.getBuilder();
             RenderSystem.setShader(GameRenderer::getPositionColorShader);
             int l1 = (int)((float)(this.height * this.height) / (float)this.bottomY);
-            l1 = Mth.clamp(l1, 32, this.getY() + this.height - this.getY() - 8);
-            int i2 = (int)this.getScrollAmount() * (this.getY() + this.height - this.getY() - l1) / k1 + this.getY();
-            if (i2 < this.getY()) {
-                i2 = this.getY();
+            l1 = Mth.clamp(l1, 32, this.getYT() + this.height - this.getYT() - 8);
+            int i2 = (int)this.getScrollAmount() * (this.getYT() + this.height - this.getYT() - l1) / k1 + this.getYT();
+            if (i2 < this.getYT()) {
+                i2 = this.getYT();
             }
 
             RenderSystem.enableBlend();
             bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-            bufferbuilder.vertex((double)i, (double)(this.getY() + this.height), 0.0).color(255, 255, 255, 0x33).endVertex();
-            bufferbuilder.vertex((double)j, (double)(this.getY() + this.height), 0.0).color(255, 255, 255, 0x33).endVertex();
-            bufferbuilder.vertex((double)j, (double)this.getY(), 0.0).color(255, 255, 255, 0x33).endVertex();
-            bufferbuilder.vertex((double)i, (double)this.getY(), 0.0).color(255, 255, 255, 0x33).endVertex();
+            bufferbuilder.vertex((double)i, (double)(this.getYT() + this.height), 0.0).color(255, 255, 255, 0x33).endVertex();
+            bufferbuilder.vertex((double)j, (double)(this.getYT() + this.height), 0.0).color(255, 255, 255, 0x33).endVertex();
+            bufferbuilder.vertex((double)j, (double)this.getYT(), 0.0).color(255, 255, 255, 0x33).endVertex();
+            bufferbuilder.vertex((double)i, (double)this.getYT(), 0.0).color(255, 255, 255, 0x33).endVertex();
 
             bufferbuilder.vertex((double)i, (double)(i2 + l1), 0.0).color(255, 255, 255, 0xdd).endVertex();
             bufferbuilder.vertex((double)j, (double)(i2 + l1), 0.0).color(255, 255, 255, 0xdd).endVertex();

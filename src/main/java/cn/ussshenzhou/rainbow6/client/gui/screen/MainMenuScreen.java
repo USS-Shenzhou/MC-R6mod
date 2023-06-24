@@ -9,7 +9,7 @@ import cn.ussshenzhou.rainbow6.client.gui.widget.QueuingForMatchBar;
 import cn.ussshenzhou.t88.gui.HudManager;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import org.lwjgl.glfw.GLFW;
 
 /**
@@ -82,8 +82,8 @@ public class MainMenuScreen extends AbstractR6Screen {
     }
 
     @Override
-    protected void renderBackGround(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        fill(pPoseStack, 0, 0, width, height, 0x80000000);
+    protected void renderBackGround(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+        graphics.fill(0, 0, width, height, 0x80000000);
     }
 
     @Override

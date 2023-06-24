@@ -35,7 +35,7 @@ public class QueuingForMatchBar extends TPanel {
     @Override
     public void layout() {
         gameMode.setBounds((this.width - gameMode.getPreferredSize().x) / 2, 0, gameMode.getPreferredSize().x, this.height);
-        timer.setBounds(gameMode.getX() + gameMode.getSize().x + 5, (this.height - 9) / 2 + 1, 34, 9);
+        timer.setBounds(gameMode.getXT() + gameMode.getSize().x + 5, (this.height - 9) / 2 + 1, 34, 9);
         super.layout();
     }
 

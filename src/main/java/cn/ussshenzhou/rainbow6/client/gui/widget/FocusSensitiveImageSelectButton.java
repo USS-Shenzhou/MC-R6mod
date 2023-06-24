@@ -1,7 +1,7 @@
 package cn.ussshenzhou.rainbow6.client.gui.widget;
 
 import cn.ussshenzhou.t88.gui.widegt.TButton;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +17,7 @@ public class FocusSensitiveImageSelectButton extends HoverSensitiveImageButton{
         this.remove(button);
         this.button = new TButton(Component.literal(""), onPress) {
             @Override
-            public void renderWidget(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+            public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
                 return;
             }
 

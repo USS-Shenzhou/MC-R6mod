@@ -6,7 +6,7 @@ import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -32,8 +32,8 @@ public class AttentionScreen extends AbstractR6Screen {
         panel.detailMessage.setText(detailMessage);
     }
 
-    public static AttentionScreen errorScreen(Component abstractMessage, Component detailMessage){
-        AttentionScreen a = new AttentionScreen(abstractMessage,detailMessage);
+    public static AttentionScreen errorScreen(Component abstractMessage, Component detailMessage) {
+        AttentionScreen a = new AttentionScreen(abstractMessage, detailMessage);
         a.panel.confirmButton.getButton().setOnPress(pButton -> {
             a.onClose(true);
         });
@@ -47,23 +47,23 @@ public class AttentionScreen extends AbstractR6Screen {
     }
 
     @Override
-    protected void renderBackGround(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        fill(pPoseStack, 0, 0, width, height, 0x80000000);
+    protected void renderBackGround(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+        graphics.fill(0, 0, width, height, 0x80000000);
     }
 
     public TLabel getAbstract() {
         return panel.abstractMessage;
     }
 
-    public TLabel getDetail(){
+    public TLabel getDetail() {
         return panel.detailMessage;
     }
 
-    public HoverSensitiveImageButton getConfirm(){
+    public HoverSensitiveImageButton getConfirm() {
         return panel.confirmButton;
     }
 
-    public HoverSensitiveImageButton getCancel(){
+    public HoverSensitiveImageButton getCancel() {
         return panel.cancelButton;
     }
 

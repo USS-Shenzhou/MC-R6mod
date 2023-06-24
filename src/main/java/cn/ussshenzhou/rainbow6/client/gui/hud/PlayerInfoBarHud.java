@@ -12,7 +12,7 @@ import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import cn.ussshenzhou.t88.gui.widegt.TTimer;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -88,14 +88,14 @@ public class PlayerInfoBarHud extends TImage {
     }
 
     @Override
-    public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    public void render(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
         //super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
     }
 
     @Override
-    public void renderTop(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        super.renderTop(pPoseStack, pMouseX, pMouseY, pPartialTick);
+    public void renderTop(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+        super.render(graphics, pMouseX, pMouseY, pPartialTick);
+        super.renderTop(graphics, pMouseX, pMouseY, pPartialTick);
     }
 
     public TeamPlayers getAllies() {

@@ -10,7 +10,7 @@ import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -65,24 +65,24 @@ public class RoundBeginMapSceneScreen extends AbstractR6Screen {
         mapName.setBounds(width - mapName.getPreferredSize().x - 20, 33, mapName.getPreferredSize().x + 20, 21);
         background.setBounds((width - 222) / 2, height / 2 - 21 - 7, 222, 21);
         ally.setBounds(
-                background.getX() + (73 - ally.getPreferredSize().x) / 2,
-                background.getY() + (21 - ally.getPreferredSize().y) / 2,
+                background.getXT() + (73 - ally.getPreferredSize().x) / 2,
+                background.getYT() + (21 - ally.getPreferredSize().y) / 2,
                 ally.getPreferredSize()
         );
         enemy.setBounds(
                 width / 2 + 12 + 24 + (73 - enemy.getPreferredSize().x) / 2,
-                ally.getY(),
+                ally.getYT(),
                 enemy.getPreferredSize()
         );
-        roundsLeftToExchange.setBounds(0, background.getY() + (21 - roundsLeftToExchange.getPreferredSize().y) / 2, width, roundsLeftToExchange.getPreferredSize().y);
-        exchange.setBounds(0, roundsLeftToExchange.getY() - 3, width, 16);
-        allyIcon.setBounds(background.getX() + 79, background.getY() + 3, 15, 15);
-        enemyIcon.setBounds(background.getX() + 127, background.getY() + 3, 15, 15);
+        roundsLeftToExchange.setBounds(0, background.getYT() + (21 - roundsLeftToExchange.getPreferredSize().y) / 2, width, roundsLeftToExchange.getPreferredSize().y);
+        exchange.setBounds(0, roundsLeftToExchange.getYT() - 3, width, 16);
+        allyIcon.setBounds(background.getXT() + 79, background.getYT() + 3, 15, 15);
+        enemyIcon.setBounds(background.getXT() + 127, background.getYT() + 3, 15, 15);
         super.layout();
     }
 
     @Override
-    protected void renderBackGround(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    protected void renderBackGround(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
     }
 
     @Override

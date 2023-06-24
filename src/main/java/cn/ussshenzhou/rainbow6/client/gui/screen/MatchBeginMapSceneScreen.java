@@ -8,7 +8,7 @@ import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -55,22 +55,22 @@ public class MatchBeginMapSceneScreen extends AbstractR6Screen {
         LayoutHelper.BBottomOfA(quickMatch, 0, bomb);
         background.setBounds((width - 222) / 2, height / 2 - 25 - 7, 222, 25);
         ally.setBounds(
-                background.getX() + (82 - ally.getPreferredSize().x) / 2,
-                background.getY() + (25 - ally.getPreferredSize().y) / 2,
+                background.getXT() + (82 - ally.getPreferredSize().x) / 2,
+                background.getYT() + (25 - ally.getPreferredSize().y) / 2,
                 ally.getPreferredSize()
         );
         enemy.setBounds(
                 width / 2 + 22 + (60 - enemy.getPreferredSize().x) / 2,
-                background.getY() + 3 + (19 - enemy.getPreferredSize().y) / 2,
+                background.getYT() + 3 + (19 - enemy.getPreferredSize().y) / 2,
                 enemy.getPreferredSize()
         );
         mapName.setBounds(width - mapName.getPreferredSize().x - 20, 33, mapName.getPreferredSize().x + 20, 21);
-        allyIcon.setBounds(background.getX() + 87, background.getY() + 3, 19, 19);
-        enemyIcon.setBounds(background.getX() + 115, background.getY() + 6, 13, 13);
+        allyIcon.setBounds(background.getXT() + 87, background.getYT() + 3, 19, 19);
+        enemyIcon.setBounds(background.getXT() + 115, background.getYT() + 6, 13, 13);
         super.layout();
     }
 
     @Override
-    protected void renderBackGround(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    protected void renderBackGround(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
     }
 }

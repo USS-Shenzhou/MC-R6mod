@@ -28,7 +28,7 @@ public class ModCapabilityRegistry {
         if (event.getObject() instanceof Player player) {
             event.addCapability(ACTION, new ActionCapability.Provider());
 
-            if (player.getLevel().isClientSide) {
+            if (player.level().isClientSide) {
                 event.addCapability(ANIMATION, new AnimationCapability.Provider());
 
             }

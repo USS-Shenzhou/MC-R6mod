@@ -151,7 +151,7 @@ public class ActionListener {
         if (clientPlayer == null) {
             return;
         }
-        for (Player player : clientPlayer.level.players()) {
+        for (Player player : clientPlayer.level().players()) {
             ActionCapability actionCapability = ActionCapability.get(player);
             if (actionCapability == null) {
                 return;

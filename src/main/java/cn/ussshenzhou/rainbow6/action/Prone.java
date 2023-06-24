@@ -27,7 +27,7 @@ public class Prone extends Action {
     public boolean canStartInClient(Player player, ActionCapability actionCapability, ByteBuffer startInfo) {
         return (KeyInputListener.CRAWL.isPressed()
                 && !player.isInWaterOrBubble()
-                && player.isOnGround()
+                && player.onGround()
         );
     }
 

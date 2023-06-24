@@ -14,9 +14,8 @@ import cn.ussshenzhou.t88.gui.util.Vec2i;
 import cn.ussshenzhou.t88.gui.widegt.TButton;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import cn.ussshenzhou.t88.network.NetworkHelper;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -91,15 +90,12 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
     }
 
     @Override
-    public void renderBackground(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    public void renderBackground(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
         if (map != null) {
-            //GL43.glEnable(GL_DEBUG_OUTPUT);
-            //GL43.glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-            //GL43.glDebugMessageCallback(null,GL43.GL_DEBUG_CALLBACK_USER_PARAM);
-            RenderSystem.setShaderTexture(0, map.getId());
-            blit(pPoseStack, 0, 0, width, height, 0, 0, map.getPixels().getWidth(), map.getPixels().getHeight(), map.getPixels().getWidth(), map.getPixels().getHeight());
+            blitById(graphics, map.getId(), 0, 0, width, height, 0, 0, map.getPixels().getWidth(), map.getPixels().getHeight(), map.getPixels().getWidth(), map.getPixels().getHeight());
+
         }
-        super.renderBackground(pPoseStack, pMouseX, pMouseY, pPartialTick);
+        super.renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
     }
 
     private class SpawnPosButton extends FocusSensitiveImageSelectButton {
@@ -136,7 +132,7 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
             this.remove(this.button);
             this.button = new TButton(Component.literal(""), pButton -> setSelectedPos(spawnPosButton)) {
                 @Override
-                public void renderWidget(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+                public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
                     return;
                 }
 

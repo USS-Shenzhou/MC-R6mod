@@ -4,7 +4,7 @@ import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -36,15 +36,15 @@ public class LoadingScreen extends AbstractR6Screen {
     @Override
     public void tick() {
         LayoutHelper.BRightOfA(mover, -75 + 16, mover);
-        if (mover.getX() > this.width) {
+        if (mover.getXT() > this.width) {
             mover.setBounds(0, height - 12, 75, 12);
         }
         super.tick();
     }
 
     @Override
-    protected void renderBackGround(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        fill(pPoseStack, 0, height - 12, width, height, 0x80000000);
+    protected void renderBackGround(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+        graphics.fill(0, height - 12, width, height, 0x80000000);
     }
 
     public static class WithFullBackground extends LoadingScreen {
@@ -63,9 +63,9 @@ public class LoadingScreen extends AbstractR6Screen {
         }
 
         @Override
-        protected void renderBackGround(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-            background.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-            super.renderBackGround(pPoseStack, pMouseX, pMouseY, pPartialTick);
+        protected void renderBackGround(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+            background.render(graphics, pMouseX, pMouseY, pPartialTick);
+            super.renderBackGround(graphics, pMouseX, pMouseY, pPartialTick);
         }
     }
 }

@@ -2,7 +2,7 @@ package cn.ussshenzhou.rainbow6.client.gui.widget;
 
 import cn.ussshenzhou.t88.gui.event.TWidgetContentUpdatedEvent;
 import cn.ussshenzhou.t88.gui.widegt.TCycleButton;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,7 +19,7 @@ public class HoverSensitiveImageCycleButton<E> extends HoverSensitiveImageButton
         this.remove(this.button);
         this.button = new TCycleButton<E>() {
             @Override
-            public void renderWidget(PoseStack poseStack, int pMouseX, int pMouseY, float pPartialTick) {
+            public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
                 //this.renderString(poseStack, Minecraft.getInstance().font, getForeground());
                 return;
             }

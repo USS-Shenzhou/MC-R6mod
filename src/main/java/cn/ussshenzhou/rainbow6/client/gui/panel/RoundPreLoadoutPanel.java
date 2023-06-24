@@ -3,7 +3,7 @@ package cn.ussshenzhou.rainbow6.client.gui.panel;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 
 /**
  * @author USS_Shenzhou
@@ -24,8 +24,8 @@ public class RoundPreLoadoutPanel extends TPanel {
     }
 
     @Override
-    protected void renderBackground(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        background.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        super.renderBackground(pPoseStack, pMouseX, pMouseY, pPartialTick);
+    protected void renderBackground(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+        background.render(graphics, pMouseX, pMouseY, pPartialTick);
+        super.renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
     }
 }
