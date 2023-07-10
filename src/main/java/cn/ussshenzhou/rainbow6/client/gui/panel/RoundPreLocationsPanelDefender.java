@@ -17,6 +17,7 @@ import cn.ussshenzhou.t88.gui.widegt.TWidget;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -140,13 +141,12 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
     }
 
     @Override
-    public void renderBackground(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+    public void renderBackground(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
         if (map != null) {
             DynamicTextureWithMapData m = map.get(mapIndex);
-            RenderSystem.setShaderTexture(0, m.getId());
-            blit(pPoseStack, 0, 0, width, height, 0, 0, m.getPixels().getWidth(), m.getPixels().getHeight(), m.getPixels().getWidth(), m.getPixels().getHeight());
+            blitById(graphics, m.getId(), 0, 0, width, height, 0, 0, m.getPixels().getWidth(), m.getPixels().getHeight(), m.getPixels().getWidth(), m.getPixels().getHeight());
         }
-        super.renderBackground(pPoseStack, pMouseX, pMouseY, pPartialTick);
+        super.renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
     }
 
     private TImage newBombSiteSign(String aOrb) {
@@ -169,7 +169,7 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
             this.remove(button);
             this.button = new TButton(Component.literal(""), pButton -> setSelectedSite(this)) {
                 @Override
-                public void renderWidget(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+                public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
                     return;
                 }
 
@@ -219,37 +219,38 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
         }
 
         @Override
-        protected void renderChildren(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+        protected void renderChildren(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
             for (TWidget tWidget : children) {
                 if (tWidget.isVisibleT()) {
                     if (tWidget == prefix && backgroundImageHovered.isVisibleT()) {
                         continue;
                     }
                     if (tWidget == text && backgroundImageHovered.isVisibleT()) {
-                        renderText(pPoseStack, pMouseX, pMouseY, pPartialTick);
+                        renderText(graphics, pMouseX, pMouseY, pPartialTick);
                         continue;
                     }
                     if (tWidget == backgroundImageHovered) {
-                        renderBgImageHovered(pPoseStack, pMouseX, pMouseY, pPartialTick);
+                        renderBgImageHovered(graphics, pMouseX, pMouseY, pPartialTick);
                         continue;
                     }
-                    tWidget.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+                    tWidget.render(graphics, pMouseX, pMouseY, pPartialTick);
                 }
             }
         }
 
         @Override
-        public void renderTextInternal(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick, float scale, float maxScale) {
+        public void renderTextInternal(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick, float scale, float maxScale) {
             float compensationRelative = (1 - scale) / (maxScale - 1) * this.getPadding();
-            pPoseStack.pushPose();
-            pPoseStack.translate(
-                    (1 - scale) * text.getX() + compensationRelative,
-                    (1 - scale) * text.getY() + compensationRelative,
+            var poseStack = graphics.pose();
+            poseStack.pushPose();
+            poseStack.translate(
+                    (1 - scale) * text.getXT() + compensationRelative,
+                    (1 - scale) * text.getYT() + compensationRelative,
                     0);
-            pPoseStack.scale(scale, scale, 1);
-            text.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-            prefix.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-            pPoseStack.popPose();
+            poseStack.scale(scale, scale, 1);
+            text.render(graphics, pMouseX, pMouseY, pPartialTick);
+            prefix.render(graphics, pMouseX, pMouseY, pPartialTick);
+            poseStack.popPose();
         }
     }
 }

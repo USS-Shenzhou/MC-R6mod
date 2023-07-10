@@ -133,7 +133,7 @@ public class ServerMatchController {
      * @see ServerPlayer#fudgeSpawnLocation(ServerLevel)
      */
     private void findAndSpawn(ServerPlayer player, BlockPos center) {
-        ServerLevel level = player.getLevel();
+        ServerLevel level = player.serverLevel();
         int radius = 7;
         int diameter = radius * 2 + 1;
         int square = diameter * diameter;
@@ -235,7 +235,7 @@ public class ServerMatchController {
         //pos/rot seems not working, need manual restoring.
         ListTag pos = tag.getList("Pos", 6);
         ListTag rot = tag.getList("Rotation", 5);
-        if (player.getLevel() == serverLevel) {
+        if (player.level() == serverLevel) {
             player.connection.teleport(pos.getDouble(0), pos.getDouble(1), pos.getDouble(2), rot.getFloat(0), rot.getFloat(1));
         } else {
             player.teleportTo(serverLevel, pos.getDouble(0), pos.getDouble(1), pos.getDouble(2), rot.getFloat(0), rot.getFloat(1));

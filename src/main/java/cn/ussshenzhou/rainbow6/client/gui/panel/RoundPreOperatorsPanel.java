@@ -13,6 +13,7 @@ import cn.ussshenzhou.t88.gui.widegt.TPanel;
 import cn.ussshenzhou.t88.gui.widegt.TWidget;
 import cn.ussshenzhou.t88.network.NetworkHelper;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -58,9 +59,9 @@ public class RoundPreOperatorsPanel extends TPanel {
     }
 
     @Override
-    protected void renderBackground(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-        background.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-        super.renderBackground(pPoseStack, pMouseX, pMouseY, pPartialTick);
+    protected void renderBackground(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+        background.render(graphics, pMouseX, pMouseY, pPartialTick);
+        super.renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
     }
 
     public void disableOperator(Operator operator) {
@@ -111,12 +112,12 @@ public class RoundPreOperatorsPanel extends TPanel {
         }
 
         @Override
-        protected void renderText(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
-            this.text.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+        protected void renderText(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
+            this.text.render(graphics, pMouseX, pMouseY, pPartialTick);
         }
 
         @Override
-        protected void renderChildren(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+        protected void renderChildren(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
             for (TWidget tWidget : children) {
                 if (tWidget.isVisibleT()) {
                     if (tWidget == backgroundImage && backgroundImageHovered.isVisibleT()) {
@@ -125,19 +126,19 @@ public class RoundPreOperatorsPanel extends TPanel {
                     if (tWidget == backgroundImageHovered) {
                         continue;
                     }
-                    tWidget.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+                    tWidget.render(graphics, pMouseX, pMouseY, pPartialTick);
                 }
             }
         }
 
         @Override
-        public void renderTop(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+        public void renderTop(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
             if (backgroundImageHovered.isVisibleT()) {
-                renderBgImageHovered(pPoseStack, pMouseX, pMouseY, pPartialTick);
-                backgroundImage.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
-                renderText(pPoseStack, pMouseX, pMouseY, pPartialTick);
+                renderBgImageHovered(graphics, pMouseX, pMouseY, pPartialTick);
+                backgroundImage.render(graphics, pMouseX, pMouseY, pPartialTick);
+                renderText(graphics, pMouseX, pMouseY, pPartialTick);
             }
-            super.renderTop(pPoseStack, pMouseX, pMouseY, pPartialTick);
+            super.renderTop(graphics, pMouseX, pMouseY, pPartialTick);
         }
     }
 }

@@ -3,6 +3,7 @@ package cn.ussshenzhou.rainbow6.mixin;
 import cn.ussshenzhou.rainbow6.mixinproxy.LevelRendererProxy;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.VertexSorting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import org.joml.Matrix4f;
@@ -49,7 +50,8 @@ public class LevelRendererMixin implements LevelRendererProxy {
             //20 - 432
             // x * y = 8640
             Matrix4f matrix4f = new Matrix4f().ortho(-width, width, -height, height, r6msClipRoof ? 0 : -9999, 9999);
-            RenderSystem.setProjectionMatrix(matrix4f);
+            //needtest
+            RenderSystem.setProjectionMatrix(matrix4f, VertexSorting.DISTANCE_TO_ORIGIN);
             return matrix4f;
         } else {
             return m;

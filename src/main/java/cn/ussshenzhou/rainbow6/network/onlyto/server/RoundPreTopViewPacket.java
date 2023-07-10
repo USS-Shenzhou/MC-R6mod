@@ -69,7 +69,7 @@ public class RoundPreTopViewPacket {
     }
 
     public void serverHandler(Supplier<NetworkEvent.Context> context) {
-        if (R6Constants.TEST){
+        if (R6Constants.TEST) {
             ServerPlayer player = context.get().getSender();
             player.connection.teleport(x, y, z, turn ? -90 : 180, 90);
             return;
@@ -85,7 +85,7 @@ public class RoundPreTopViewPacket {
                     //TODO cancel match
                     return;
                 }
-                if (player.getLevel() == serverLevel) {
+                if (player.level() == serverLevel) {
                     player.connection.teleport(x, y, z, turn ? -90 : 180, 90);
                 } else {
                     //TODO need test

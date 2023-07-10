@@ -4,18 +4,15 @@ import cn.ussshenzhou.rainbow6.item.armor.BaseR6ArmorItem;
 import cn.ussshenzhou.rainbow6.item.armor.ModItemInventoryModelRegistry;
 import cn.ussshenzhou.rainbow6.item.armor.TestArmor;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.*;
-import net.minecraftforge.event.CreativeModeTabEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -38,7 +35,7 @@ public class ModItemRegistry {
     public static final RegistryObject<TestArmor> TEST_ARMOR_BOOTS = registryAndHasSpecialHandModelArmor("test_boots", () -> new TestArmor(ArmorItem.Type.BOOTS));
 
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void putItemsIntoTab(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == GENERAL_TAB) {
             //event.accept(SKIN_TEST);
@@ -61,7 +58,7 @@ public class ModItemRegistry {
                         .title(Component.translatable("tab.r6ms.armor"))
 
         );
-    }
+    }*/
 
     private static <T extends Item> RegistryObject<T> registryAndHasSpecialHandModel(String name, Supplier<T> supplier) {
         var o = ITEMS.register(name, supplier);
