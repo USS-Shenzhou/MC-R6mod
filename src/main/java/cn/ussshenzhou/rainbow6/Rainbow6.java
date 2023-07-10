@@ -17,5 +17,6 @@ public class Rainbow6 {
 
         var bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItemRegistry.ITEMS.register(bus);
+        ModItemRegistry.TABS.register(bus);
     }
 }
