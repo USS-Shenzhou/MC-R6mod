@@ -62,5 +62,10 @@
   "gui.r6ms.options.key_trig.toggle": "切换",
 
   "tab.r6ms.general": "我的六号",
-  "tab.r6ms.armor": "我的六号：盔甲"
+  "tab.r6ms.armor": "我的六号：盔甲",
+
+  "commands.rainbow6.map.save": "地图 %s 已保存。",
+  "commands.rainbow6.map.load": "地图 %s 已加载。",
+  "commands.rainbow6.map.create": "地图 %s 已创建并加载。",
+  "commands.rainbow6.map.mismatch": "指定的地图名称 %s 与加载的地图 %s 不匹配。"
 }

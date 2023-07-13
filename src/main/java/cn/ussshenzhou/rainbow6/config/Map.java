@@ -20,6 +20,18 @@ public class Map implements TMultiInstanceConfig {
     public Map() {
     }
 
+    public static final String DIR_NAME = "r6ms_maps";
+
+    @Override
+    public String getChildDirName() {
+        return DIR_NAME;
+    }
+
+    @Override
+    public String getFileName() {
+        return name;
+    }
+
     @SerializedName("map name")
     private String name;
 
@@ -91,11 +103,6 @@ public class Map implements TMultiInstanceConfig {
         buf.writeDouble(scenePos.z);
         buf.writeFloat(sceneDir.x);
         buf.writeFloat(sceneDir.y);
-    }
-
-    @Override
-    public String getFileName() {
-        return name;
     }
 
     public static class BombSite {

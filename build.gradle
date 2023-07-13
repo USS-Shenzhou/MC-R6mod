@@ -163,7 +163,7 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.1.0'
 
     //implementation fg.deobf('curse.maven:t88-663112:4332327-sources-4332329')
-    def t88FileId = '4634634'
+    def t88FileId = '4634867'
     implementation fg.deobf('curse.maven:t88-663112:' + t88FileId)
     annotationProcessor 'curse.maven:t88-663112:' + t88FileId
 
