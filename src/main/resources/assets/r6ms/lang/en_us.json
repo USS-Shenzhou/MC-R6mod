@@ -63,6 +63,7 @@
 
   "tab.r6ms.general": "我的六号",
   "tab.r6ms.armor": "我的六号：盔甲",
+  "tab.r6ms.weapon": "我的六号：武器",
 
   "commands.rainbow6.map.save": "地图 %s 已保存。",
   "commands.rainbow6.map.load": "地图 %s 已加载。",

@@ -16,15 +16,19 @@ For more information, check [**Holo Janeway**](https://holojaneway.uss-shenzhou.
 
 Please make sure you have read the [Statistic data collection instructions](https://holojaneway.uss-shenzhou.cn/r6ms/data_collect). If you can't read Chinese, please contact the developers. Translation will not begin until the first foreigner's message is received.
 
----
-
 跨服务器数据同步服务（CSSS, 或Voyager）虽然由相同开发者提供，但它不是R6MS模组本身的一部分。
 
 *Cross-Server Synchronization Service*, aka *CSSS* or *Voyager*, is not a part of the R6MS mod itself, although it's provided by the same developers.
 
+---
+
 模组中有关改变玩家动作的部分，包括`cn.ussshenzhou.rainbow6.action`包、其他与`Action`有关的类，是在GPLv3下，受[跑酷](https://github.com/alRex-U/ParCool)模组启发、从其复制和由其演绎。
 
-Parts of this mod about changing player model actions and animations, including `cn.ussshenzhou.rainbow6.action` package and other classes about `Action`, are inspired by, copied and interpreted from the [ParCool](https://github.com/alRex-U/ParCool) mod under GPLv3.
+模组中有关枪械的部分，包括`cn.ussshenzhou.rainbow6.gun`包，其他与枪械有关的类，是在GPLv3下，受[MrCrayfish's Gun Mod](https://github.com/MrCrayfish/MrCrayfishGunMod)模组和[Timeless and Classics Guns](https://github.com/ClumsyAlien/TimelessandClassics_Reforged)模组启发、从其复制和由其演绎。
+
+Parts of this mod about changing player model actions and animations, including `cn.ussshenzhou.rainbow6.action` package and other classes about `Action`, are inspired by, copied or interpreted from the [ParCool](https://github.com/alRex-U/ParCool) mod under GPLv3.
+
+Parts of this mod about weapons, including `cn.ussshenzhou.rainbow6.gun` package and other classes about guns, are inspired by, copied or interpreted from the [MrCrayfish's Gun Mod](https://github.com/MrCrayfish/MrCrayfishGunMod) and [Timeless and Classics Guns](https://github.com/ClumsyAlien/TimelessandClassics_Reforged) mod under GPLv3.
 
 ---
 
