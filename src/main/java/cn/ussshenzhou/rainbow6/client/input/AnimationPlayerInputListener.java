@@ -1,35 +1,22 @@
 package cn.ussshenzhou.rainbow6.client.input;
 
-import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import net.minecraft.client.KeyMapping;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+
+import java.util.LinkedHashMap;
 
 /**
  * @author USS_Shenzhou
  */
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class KeyInputListener {
-    @SubscribeEvent
-    public static void onKeyInput(InputEvent.Key event) {
-        if (ModKeyMappingRegistry.MAIN_MENU.consumeClick()) {
-            ScreenManager.openMainMenuScreen();
-        }
-    }
-
-
+public class AnimationPlayerInputListener {
     public static final KeyState CRAWL = new KeyState();
 
-    @SubscribeEvent
-    public static void onClientTick(TickEvent.ClientTickEvent event) {
-        if (event.phase != TickEvent.Phase.START) {
-            return;
-        }
-        recordInMatch(ModKeyMappingRegistry.CRAWL, CRAWL);
+    public static final LinkedHashMap<KeyMapping, KeyState> KEY_STATES = new LinkedHashMap<>() {{
+        put(ModKeyMappingRegistry.CRAWL, CRAWL);
+    }};
+
+    public static void tick() {
+        KEY_STATES.forEach(AnimationPlayerInputListener::recordInMatch);
     }
 
     private static void recordInMatch(KeyMapping keyBinding, KeyState state) {

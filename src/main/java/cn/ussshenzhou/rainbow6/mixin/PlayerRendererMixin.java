@@ -2,7 +2,7 @@ package cn.ussshenzhou.rainbow6.mixin;
 
 
 import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
-import cn.ussshenzhou.rainbow6.client.animation.PlayerModelRotator;
+import cn.ussshenzhou.rainbow6.client.animationplayer.PlayerModelRotator;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;

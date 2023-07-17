@@ -2,8 +2,9 @@ package cn.ussshenzhou.rainbow6.action;
 
 import cn.ussshenzhou.rainbow6.capability.ActionCapability;
 import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
-import cn.ussshenzhou.rainbow6.client.animation.ProneAnimator;
-import cn.ussshenzhou.rainbow6.client.input.KeyInputListener;
+import cn.ussshenzhou.rainbow6.client.animationplayer.ProneAnimator;
+import cn.ussshenzhou.rainbow6.client.input.AnimationPlayerInputListener;
+import cn.ussshenzhou.rainbow6.client.input.InputListener;
 import cn.ussshenzhou.rainbow6.client.input.ModKeyMappingRegistry;
 import cn.ussshenzhou.rainbow6.config.Control;
 import cn.ussshenzhou.t88.config.ConfigHelper;
@@ -25,7 +26,7 @@ public class Prone extends Action {
 
     @Override
     public boolean canStartInClient(Player player, ActionCapability actionCapability, ByteBuffer startInfo) {
-        return (KeyInputListener.CRAWL.isPressed()
+        return (AnimationPlayerInputListener.CRAWL.isPressed()
                 && !player.isInWaterOrBubble()
                 && player.onGround()
         );
@@ -33,7 +34,7 @@ public class Prone extends Action {
 
     @Override
     public boolean canContinueInClient(Player player, ActionCapability actionCapability) {
-        return canContinue(ConfigHelper.getConfigRead(Control.class).prone, ModKeyMappingRegistry.CRAWL.isDown(), KeyInputListener.CRAWL.isPressed());
+        return canContinue(ConfigHelper.getConfigRead(Control.class).prone, ModKeyMappingRegistry.CRAWL.isDown(), AnimationPlayerInputListener.CRAWL.isPressed());
     }
 
     @Override

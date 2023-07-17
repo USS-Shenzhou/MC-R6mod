@@ -2,7 +2,7 @@ package cn.ussshenzhou.rainbow6.action;
 
 import cn.ussshenzhou.rainbow6.capability.ActionCapability;
 import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
-import cn.ussshenzhou.rainbow6.client.animation.ProneAnimator;
+import cn.ussshenzhou.rainbow6.client.animationplayer.ProneAnimator;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;

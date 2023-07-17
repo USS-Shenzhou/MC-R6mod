@@ -1,4 +1,4 @@
-package cn.ussshenzhou.rainbow6.client.animation;
+package cn.ussshenzhou.rainbow6.client.animationplayer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.AnimationUtils;

@@ -1,7 +1,7 @@
 package cn.ussshenzhou.rainbow6.mixin;
 
 import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
-import cn.ussshenzhou.rainbow6.client.animation.PlayerModelTransformer;
+import cn.ussshenzhou.rainbow6.client.animationplayer.PlayerModelTransformer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;

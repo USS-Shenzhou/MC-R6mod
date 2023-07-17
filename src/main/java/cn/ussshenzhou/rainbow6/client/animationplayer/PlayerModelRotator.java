@@ -1,4 +1,4 @@
-package cn.ussshenzhou.rainbow6.client.animation;
+package cn.ussshenzhou.rainbow6.client.animationplayer;
 
 import cn.ussshenzhou.rainbow6.util.VectorUtil;
 import com.mojang.blaze3d.vertex.PoseStack;

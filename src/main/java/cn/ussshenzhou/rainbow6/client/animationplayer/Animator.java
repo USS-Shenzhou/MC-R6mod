@@ -1,4 +1,4 @@
-package cn.ussshenzhou.rainbow6.client.animation;
+package cn.ussshenzhou.rainbow6.client.animationplayer;
 
 import cn.ussshenzhou.rainbow6.capability.ActionCapability;
 import net.minecraft.world.entity.player.Player;

@@ -1,8 +1,8 @@
 package cn.ussshenzhou.rainbow6.capability;
 
-import cn.ussshenzhou.rainbow6.client.animation.Animator;
-import cn.ussshenzhou.rainbow6.client.animation.PlayerModelRotator;
-import cn.ussshenzhou.rainbow6.client.animation.PlayerModelTransformer;
+import cn.ussshenzhou.rainbow6.client.animationplayer.Animator;
+import cn.ussshenzhou.rainbow6.client.animationplayer.PlayerModelRotator;
+import cn.ussshenzhou.rainbow6.client.animationplayer.PlayerModelTransformer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.core.Direction;
