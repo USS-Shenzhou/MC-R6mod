@@ -3,7 +3,7 @@ package cn.ussshenzhou.rainbow6.client.gui.panel;
 import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageCycleButton;
 import cn.ussshenzhou.rainbow6.client.gui.widget.OptionsPanel;
-import cn.ussshenzhou.rainbow6.config.ConfigControls;
+import cn.ussshenzhou.rainbow6.config.Control;
 import cn.ussshenzhou.rainbow6.util.KeyTrig;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.config.ConfigHelper;
@@ -61,39 +61,39 @@ public class MainMenuOptionsPanel extends TPanel {
     private void initControls() {
         initControlsInternal("gui.r6ms.main_menu.options.controls.aim",
                 button -> ConfigHelper.Universal.getConfigWrite(
-                        ConfigControls.class, configControls -> configControls.aim = button.getSelected().getContent()
+                        Control.class, control -> control.aim = button.getSelected().getContent()
                 ),
-                ConfigHelper.Universal.getConfigRead(ConfigControls.class).aim
+                ConfigHelper.Universal.getConfigRead(Control.class).aim
         );
         initControlsInternal("gui.r6ms.main_menu.options.controls.lean",
                 button -> ConfigHelper.Universal.getConfigWrite(
-                        ConfigControls.class, configControls -> configControls.lean = button.getSelected().getContent()
+                        Control.class, control -> control.lean = button.getSelected().getContent()
                 ),
-                ConfigHelper.Universal.getConfigRead(ConfigControls.class).lean
+                ConfigHelper.Universal.getConfigRead(Control.class).lean
         );
         initControlsInternal("gui.r6ms.main_menu.options.controls.sprint",
                 button -> ConfigHelper.Universal.getConfigWrite(
-                        ConfigControls.class, configControls -> configControls.sprint = button.getSelected().getContent()
+                        Control.class, control -> control.sprint = button.getSelected().getContent()
                 ),
-                ConfigHelper.Universal.getConfigRead(ConfigControls.class).sprint
+                ConfigHelper.Universal.getConfigRead(Control.class).sprint
         );
         initControlsInternal("gui.r6ms.main_menu.options.controls.crouch",
                 button -> ConfigHelper.Universal.getConfigWrite(
-                        ConfigControls.class, configControls -> configControls.crouch = button.getSelected().getContent()
+                        Control.class, control -> control.crouch = button.getSelected().getContent()
                 ),
-                ConfigHelper.Universal.getConfigRead(ConfigControls.class).crouch
+                ConfigHelper.Universal.getConfigRead(Control.class).crouch
         );
         initControlsInternal("gui.r6ms.main_menu.options.controls.prone",
                 button -> ConfigHelper.Universal.getConfigWrite(
-                        ConfigControls.class, configControls -> configControls.prone = button.getSelected().getContent()
+                        Control.class, control -> control.prone = button.getSelected().getContent()
                 ),
-                ConfigHelper.Universal.getConfigRead(ConfigControls.class).prone
+                ConfigHelper.Universal.getConfigRead(Control.class).prone
         );
         initControlsInternal("gui.r6ms.main_menu.options.controls.walk",
                 button -> ConfigHelper.Universal.getConfigWrite(
-                        ConfigControls.class, configControls -> configControls.walk = button.getSelected().getContent()
+                        Control.class, control -> control.walk = button.getSelected().getContent()
                 ),
-                ConfigHelper.Universal.getConfigRead(ConfigControls.class).walk
+                ConfigHelper.Universal.getConfigRead(Control.class).walk
         );
     }
 

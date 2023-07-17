@@ -5,7 +5,7 @@ import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
 import cn.ussshenzhou.rainbow6.client.animation.ProneAnimator;
 import cn.ussshenzhou.rainbow6.client.input.KeyInputListener;
 import cn.ussshenzhou.rainbow6.client.input.ModKeyMappingRegistry;
-import cn.ussshenzhou.rainbow6.config.ConfigControls;
+import cn.ussshenzhou.rainbow6.config.Control;
 import cn.ussshenzhou.t88.config.ConfigHelper;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
@@ -33,7 +33,7 @@ public class Prone extends Action {
 
     @Override
     public boolean canContinueInClient(Player player, ActionCapability actionCapability) {
-        return canContinue(ConfigHelper.getConfigRead(ConfigControls.class).prone, ModKeyMappingRegistry.CRAWL.isDown(), KeyInputListener.CRAWL.isPressed());
+        return canContinue(ConfigHelper.getConfigRead(Control.class).prone, ModKeyMappingRegistry.CRAWL.isDown(), KeyInputListener.CRAWL.isPressed());
     }
 
     @Override

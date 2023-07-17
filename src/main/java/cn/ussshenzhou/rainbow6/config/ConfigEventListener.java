@@ -15,7 +15,7 @@ public class ConfigEventListener {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ConfigHelper.Universal.loadConfig(new ConfigControls());
+            ConfigHelper.Universal.loadConfig(new Control());
             MultiInstanceConfigHelper.loadConfigInstances(Map.class, Map.DIR_NAME);
         });
     }

@@ -7,7 +7,7 @@ import cn.ussshenzhou.t88.config.TConfig;
 /**
  * @author USS_Shenzhou
  */
-public class ConfigControls implements TConfig {
+public class Control implements TConfig {
     public KeyTrig aim = KeyTrig.HOLD;
     public KeyTrig lean = KeyTrig.HOLD;
     public KeyTrig sprint = KeyTrig.HOLD;
@@ -15,7 +15,7 @@ public class ConfigControls implements TConfig {
     public KeyTrig prone = KeyTrig.HOLD;
     public KeyTrig walk = KeyTrig.HOLD;
 
-    public ConfigControls() {
+    public Control() {
     }
 
     @Override
