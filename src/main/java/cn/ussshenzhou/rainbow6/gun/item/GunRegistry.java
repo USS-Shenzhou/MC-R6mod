@@ -1,5 +1,6 @@
 package cn.ussshenzhou.rainbow6.gun.item;
 
+import cn.ussshenzhou.rainbow6.gun.GunProperties;
 import cn.ussshenzhou.rainbow6.item.ModItemRegistry;
 import cn.ussshenzhou.rainbow6.item.armor.BaseR6ArmorItem;
 import cn.ussshenzhou.rainbow6.item.armor.ModItemInventoryModelRegistry;
@@ -28,7 +29,7 @@ import java.util.function.Supplier;
 public class GunRegistry {
     public static final DeferredRegister<Item> ITEMS = ModItemRegistry.ITEMS;
 
-    public static final RegistryObject<TestGun> TEST_GUN = ITEMS.register("test_gun", TestGun::new);
+    public static final RegistryObject<TestGun> TEST_GUN = ITEMS.register("test_gun", () -> new TestGun(GunProperties.TEST));
 
     //----------creative tabs----------
 

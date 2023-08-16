@@ -42,11 +42,11 @@ public class R6Constants {
                 }
             }
         } catch (NullPointerException ignored) {
-            try {
+            /*try {
                 LogUtils.getLogger().debug("Client Test: {}", Minecraft.getInstance().gameDirectory);
             } catch (Exception ignored1) {
                 return true;
-            }
+            }*/
         }
         return false;
     }
