@@ -10,7 +10,7 @@ import cn.ussshenzhou.rainbow6.network.onlyto.server.ChooseAttackerSpawnPacket;
 import cn.ussshenzhou.rainbow6.util.MapTopViewHelper;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
-import cn.ussshenzhou.t88.gui.util.Vec2i;
+import org.joml.Vector2i;
 import cn.ussshenzhou.t88.gui.widegt.TButton;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import cn.ussshenzhou.t88.network.NetworkHelper;
@@ -77,7 +77,7 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
             for (int i = 0; i < spawnPosPairs.size(); i++) {
                 buttons[i].setBounds(12, 65 + (23 - 4) * i, 119, 23);
                 SpawnPosSign sign = spawnPosPairs.get(buttons[i]);
-                Vec2i v = map.getScreenXY(sign.pos.getSpawnPosPos().getX(), sign.pos.getSpawnPosPos().getZ());
+                Vector2i v = map.getScreenXY(sign.pos.getSpawnPosPos().getX(), sign.pos.getSpawnPosPos().getZ());
                 sign.setBounds(v.x - 9, v.y - 9, 18, 18);
             }
         }

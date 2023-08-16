@@ -9,7 +9,7 @@ import cn.ussshenzhou.rainbow6.util.MapTopViewHelper;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
-import cn.ussshenzhou.t88.gui.util.Vec2i;
+import org.joml.Vector2i;
 import cn.ussshenzhou.t88.gui.widegt.TButton;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
@@ -100,9 +100,9 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
             for (int i = 0; i < bombSitePairs.size(); i++) {
                 BombSiteButton b = buttons[i];
                 b.setBounds(12, 65 + (23 - 4) * i, 119, 23);
-                Vec2i v1 = map.get(0).getScreenXY(b.site.getSubSite1Pos().getX(), b.site.getSubSite1Pos().getZ());
+                Vector2i v1 = map.get(0).getScreenXY(b.site.getSubSite1Pos().getX(), b.site.getSubSite1Pos().getZ());
                 bombSitePairs.get(b)[0].setBounds(v1.x - 4, v1.y - 7, 8, 14);
-                Vec2i v2 = map.get(0).getScreenXY(b.site.getSubSite2Pos().getX(), b.site.getSubSite2Pos().getZ());
+                Vector2i v2 = map.get(0).getScreenXY(b.site.getSubSite2Pos().getX(), b.site.getSubSite2Pos().getZ());
                 bombSitePairs.get(b)[1].setBounds(v2.x - 4, v2.y - 7, 8, 14);
             }
         }

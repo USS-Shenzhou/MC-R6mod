@@ -25,6 +25,7 @@ public class HoverSensitiveImageButton extends TPanel {
     public HoverSensitiveImageButton(Component text1, Button.OnPress onPress, ResourceLocation backgroundImageLocation, ResourceLocation backgroundImageLocationHovered) {
         super();
         this.text = new TLabel(text1);
+        this.text.setAutoScroll(false);
         this.button = new TButton(Component.literal(""), onPress) {
             @Override
             public void renderWidget(GuiGraphics graphics, int pMouseX, int pMouseY, float pPartialTick) {
