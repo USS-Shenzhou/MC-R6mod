@@ -7,10 +7,10 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 /**
  * @author USS_Shenzhou
  */
-public class GunFireEvent extends PlayerEvent {
+public class GunShotFireEvent extends PlayerEvent {
     private final ItemStack gunStack;
 
-    public GunFireEvent(Player shooter, ItemStack gunStack) {
+    public GunShotFireEvent(Player shooter, ItemStack gunStack) {
         super(shooter);
         this.gunStack = gunStack;
     }
@@ -19,7 +19,7 @@ public class GunFireEvent extends PlayerEvent {
         return gunStack;
     }
 
-    public static class Pre extends GunFireEvent
+    public static class Pre extends GunShotFireEvent
     {
         public Pre(Player shooter, ItemStack gunStack)
         {
@@ -27,7 +27,7 @@ public class GunFireEvent extends PlayerEvent {
         }
     }
 
-    public static class Post extends GunFireEvent
+    public static class Post extends GunShotFireEvent
     {
         public Post(Player shooter, ItemStack gunStack)
         {

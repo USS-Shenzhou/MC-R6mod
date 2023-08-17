@@ -44,25 +44,25 @@ This module is dual-licensed.
 
 **有关非商业性使用的额外许可**
 
-a) 以下的“使用”指的是玩家在Minecraft多人游戏服务器内游玩时获取、与之互动、展示、渲染或播放对应的物品、实体或音效；也包括将前述过程录制为图片或视频，并以公开渠道展示。
+- a) 以下的“使用”指的是玩家在Minecraft多人游戏服务器内游玩时获取、与之互动、展示、渲染或播放对应的物品、实体或音效；也包括将前述过程录制为图片或视频，并以公开渠道展示。
 
-b) 如果你是Minecraft多人游戏服务器所有者，不论你的服务器是盈利还是非盈利性质的，也不论你的服务器是否接入了*Voyager*，本许可证授予你的服务器使用默认武器涂装所对应的模型和图片文件、以及声音文件等通用的美术资源的权利。
+- b) 如果你是Minecraft多人游戏服务器所有者，不论你的服务器是盈利还是非盈利性质的，也不论你的服务器是否接入了*Voyager*，本许可证授予你的服务器使用默认武器涂装所对应的模型和图片文件、以及声音文件等通用的美术资源的权利。
 
-c) 如果你是Minecraft多人游戏服务器所有者，且你的服务器接入了*Voyager*，在向开发者支付事先约定的费用的前提下，本许可证授予你、你的服务器管理员和你的服务器在公开渠道售卖模组提供的武器涂装的权利，也授予你的服务器使用这些武器涂装所对应的模型和图片文件的权利。
+- c) 如果你是Minecraft多人游戏服务器所有者，且你的服务器接入了*Voyager*，在向开发者支付事先约定的费用的前提下，本许可证授予你、你的服务器管理员和你的服务器在公开渠道售卖模组提供的武器涂装的权利，也授予你的服务器使用这些武器涂装所对应的模型和图片文件的权利。
 
 This mod's art assets files are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
 
 **Exceptions about Non-Commercial Use**
 
-a) The term "use" in the following context refers to players getting, interacting with, displaying, rendering, or playing corresponding items, entities, or sound effects while playing on a Minecraft multiplayer server. This also includes recording the aforementioned process as images or videos and showcasing them through public channels.
+- a) The term "use" in the following context refers to players getting, interacting with, displaying, rendering, or playing corresponding items, entities, or sound effects while playing on a Minecraft multiplayer server. This also includes recording the aforementioned process as images or videos and showcasing them through public channels.
 
-b) If you are the owner of a Minecraft multiplayer game server, regardless of whether your server is for-profit or non-profit and regardless of whether your server has access to *Voyager*, this license grants your server the right to use default weapon skins' corresponding models and image files, plus sound files and other common art resources.
+- b) If you are the owner of a Minecraft multiplayer game server, regardless of whether your server is for-profit or non-profit and regardless of whether your server has access to *Voyager*, this license grants your server the right to use default weapon skins' corresponding models and image files, plus sound files and other common art resources.
 
-c) If you are the owner of a Minecraft multiplayer game server and your server has has access to *Voyager*, upon payment of the agreed-upon fees to the developers, this license grants you, your server administrators, and your server the right to sell weapon skins provided by the mod on public channels. It also grants your server the right to use the corresponding models and image files for these weapon skins.
+- c) If you are the owner of a Minecraft multiplayer game server and your server has has access to *Voyager*, upon payment of the agreed-upon fees to the developers, this license grants you, your server administrators, and your server the right to sell weapon skins provided by the mod on public channels. It also grants your server the right to use the corresponding models and image files for these weapon skins.
 
 #### 代码和其余文件|Codes
 
-Copyright 2022 USS_Shenzhou
+Copyright 2023 USS_Shenzhou
 
 本模组是自由软件，你可以再分发之和/或依照由自由软件基金会发布的 GNU 通用公共许可证修改之，无论是版本 3 许可证，还是（按你的决定）任何以后版都可以。
 
@@ -75,7 +75,7 @@ Copyright 2022 USS_Shenzhou
 - a) 作为Minecraft模组的额外授权：如果你通过连接或合并Minecraft修改该程序或者其任何部分，而受到该库许可证（即Minecraft EULA）条款的制约，本程序的许可证授权你输送修改结果的额外权利。修改结果的非源代码形式的相关源代码应当包含本软件的源代码部分。
 - b) 如果你对本软件进行了修改，你在转发修改后的版本时，应当明确说明其修改自本软件，并说明本软件开发者不对修改后的版本提供任何保证。不得使用本软件任一开发者或本软件的的名义来宣传修改后的版本。
 
-Copyright 2022 USS_Shenzhou
+Copyright 2023 USS_Shenzhou
 
 This mod is free software; you can redistribute it and/or modify them under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 
@@ -92,11 +92,11 @@ The protocol is supplemented as described in section 7 of the GNU GPL version 3 
 
 模组中有关改变玩家动作的部分，包括`cn.ussshenzhou.rainbow6.action`包、其他与`Action`有关的类，是在GPLv3下，受[跑酷](https://github.com/alRex-U/ParCool)模组启发、从其复制和由其演绎。
 
-模组中有关枪械的部分，包括`cn.ussshenzhou.rainbow6.gun`包，其他与枪械有关的类，是在GPLv3下，受[MrCrayfish's Gun Mod](https://github.com/MrCrayfish/MrCrayfishGunMod)模组和[Timeless and Classics Guns](https://github.com/ClumsyAlien/TimelessandClassics_Reforged)模组启发、从其复制和由其演绎。
+模组中有关枪械的部分，包括`cn.ussshenzhou.rainbow6.gun`包，其他与枪械有关的类，是在GPLv3下，受[MrCrayfish's Gun Mod](https://github.com/MrCrayfish/MrCrayfishGunMod)模组和/或[Timeless and Classics Guns](https://github.com/ClumsyAlien/TimelessandClassics_Reforged)模组启发、从其复制和由其演绎。
 
 Parts of this mod about changing player model actions and animations, including `cn.ussshenzhou.rainbow6.action` package and other classes about `Action`, are inspired by, copied or interpreted from the [ParCool](https://github.com/alRex-U/ParCool) mod under GPLv3.
 
-Parts of this mod about weapons, including `cn.ussshenzhou.rainbow6.gun` package and other classes about guns, are inspired by, copied or interpreted from the [MrCrayfish's Gun Mod](https://github.com/MrCrayfish/MrCrayfishGunMod) and [Timeless and Classics Guns](https://github.com/ClumsyAlien/TimelessandClassics_Reforged) mod under GPLv3.
+Parts of this mod about weapons, including `cn.ussshenzhou.rainbow6.gun` package and other classes about guns, are inspired by, copied or interpreted from the [MrCrayfish's Gun Mod](https://github.com/MrCrayfish/MrCrayfishGunMod) and/or [Timeless and Classics Guns](https://github.com/ClumsyAlien/TimelessandClassics_Reforged) mod under GPLv3.
 
 ### 其他版权信息|Other Copyright Information
 
