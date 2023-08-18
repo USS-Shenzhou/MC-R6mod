@@ -28,19 +28,19 @@ Please make sure you have read the [Statistic data collection instructions](http
 
 本模组使用双许可证。
 
-- 对位于`/resources/`下的模型、图片、声音等美术资源文件，我们以CC BY-NC-ND 4.0许可证进行授权；
+- 对位于`/resources/`下的模型、图片、声音等美术资源文件，我们以CC BY-NC-SA 4.0许可证进行授权；
 - 对以代码为主的其余文件，我们以GPLv3许可证进行授权。
 
 This module is dual-licensed.
 
-- For art resources such as models, images, sounds, and other art-related files located in `/resources/`, we provide authorization under the CC BY-NC-ND 4.0 license.
+- For art resources such as models, images, sounds, and other art-related files located in `/resources/`, we provide authorization under the CC BY-NC-SA 4.0 license.
 - For the remaining files primarily consisting of code, we provide authorization under the GPLv3 license.
 
 #### 美术资源|Assets
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 
-本模组的美术资源文件采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+本模组的美术资源文件采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
 
 **有关非商业性使用的额外许可**
 
@@ -50,7 +50,7 @@ This module is dual-licensed.
 
 - c) 如果你是Minecraft多人游戏服务器所有者，且你的服务器接入了*Voyager*，在向开发者支付事先约定的费用的前提下，本许可证授予你、你的服务器管理员和你的服务器在公开渠道售卖模组提供的武器涂装的权利，也授予你的服务器使用这些武器涂装所对应的模型和图片文件的权利。
 
-This mod's art assets files are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+This mod's art assets files are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
 **Exceptions about Non-Commercial Use**
 
@@ -90,13 +90,14 @@ The protocol is supplemented as described in section 7 of the GNU GPL version 3 
 
 ### 其他开源信息|Other Open-source Information
 
-模组中有关改变玩家动作的部分，包括`cn.ussshenzhou.rainbow6.action`包、其他与`Action`有关的类，是在GPLv3下，受[跑酷](https://github.com/alRex-U/ParCool)模组启发、从其复制和由其演绎。
+1. 模组中有关改变玩家动作的部分，包括`cn.ussshenzhou.rainbow6.action`包、其他与`Action`有关的类，是在GPLv3下，受[跑酷](https://github.com/alRex-U/ParCool)模组启发、从其复制和由其演绎。
 
-模组中有关枪械的部分，包括`cn.ussshenzhou.rainbow6.gun`包，其他与枪械有关的类，是在GPLv3下，受[MrCrayfish's Gun Mod](https://github.com/MrCrayfish/MrCrayfishGunMod)模组和/或[Timeless and Classics Guns](https://github.com/ClumsyAlien/TimelessandClassics_Reforged)模组启发、从其复制和由其演绎。
+2. 模组中有关枪械的部分，包括`cn.ussshenzhou.rainbow6.gun`包，其他与枪械有关的类，是在GPLv3下，受[MrCrayfish's Gun Mod](https://github.com/MrCrayfish/MrCrayfishGunMod)模组和/或[Timeless and Classics Guns](https://github.com/ClumsyAlien/TimelessandClassics_Reforged)模组启发、从其复制和由其演绎。
 
-Parts of this mod about changing player model actions and animations, including `cn.ussshenzhou.rainbow6.action` package and other classes about `Action`, are inspired by, copied or interpreted from the [ParCool](https://github.com/alRex-U/ParCool) mod under GPLv3.
 
-Parts of this mod about weapons, including `cn.ussshenzhou.rainbow6.gun` package and other classes about guns, are inspired by, copied or interpreted from the [MrCrayfish's Gun Mod](https://github.com/MrCrayfish/MrCrayfishGunMod) and/or [Timeless and Classics Guns](https://github.com/ClumsyAlien/TimelessandClassics_Reforged) mod under GPLv3.
+1. Parts of this mod about changing player model actions and animations, including `cn.ussshenzhou.rainbow6.action` package and other classes about `Action`, are inspired by, copied or interpreted from the [ParCool](https://github.com/alRex-U/ParCool) mod under GPLv3.
+
+2. Parts of this mod about weapons, including `cn.ussshenzhou.rainbow6.gun` package and other classes about guns, are inspired by, copied or interpreted from the [MrCrayfish's Gun Mod](https://github.com/MrCrayfish/MrCrayfishGunMod) and/or [Timeless and Classics Guns](https://github.com/ClumsyAlien/TimelessandClassics_Reforged) mod under GPLv3.
 
 ### 其他版权信息|Other Copyright Information
 
