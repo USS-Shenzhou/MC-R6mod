@@ -1,7 +1,6 @@
 package cn.ussshenzhou.rainbow6.client.input;
 
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
-import cn.ussshenzhou.rainbow6.gun.GunInputHandler;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.TickEvent;
@@ -27,10 +26,5 @@ public class InputListener {
             return;
         }
         AnimationPlayerInputListener.tick();
-    }
-
-    @SubscribeEvent
-    public static void onMouseInput(InputEvent.MouseButton.Pre event) {
-        GunInputHandler.handle(event);
     }
 }

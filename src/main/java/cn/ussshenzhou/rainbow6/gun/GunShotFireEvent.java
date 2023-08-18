@@ -8,30 +8,24 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
  * @author USS_Shenzhou
  */
 public class GunShotFireEvent extends PlayerEvent {
-    private final ItemStack gunStack;
 
-    public GunShotFireEvent(Player shooter, ItemStack gunStack) {
+    public GunShotFireEvent(Player shooter) {
         super(shooter);
-        this.gunStack = gunStack;
-    }
-
-    public ItemStack getGunStack() {
-        return gunStack;
     }
 
     public static class Pre extends GunShotFireEvent
     {
-        public Pre(Player shooter, ItemStack gunStack)
+        public Pre(Player shooter)
         {
-            super(shooter, gunStack);
+            super(shooter);
         }
     }
 
     public static class Post extends GunShotFireEvent
     {
-        public Post(Player shooter, ItemStack gunStack)
+        public Post(Player shooter)
         {
-            super(shooter, gunStack);
+            super(shooter);
         }
     }
 }
