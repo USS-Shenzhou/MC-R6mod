@@ -9,6 +9,7 @@ import cn.ussshenzhou.t88.network.annotation.NetPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
+import org.joml.Vector2f;
 
 import java.util.function.Supplier;
 
@@ -17,22 +18,29 @@ import java.util.function.Supplier;
  */
 @NetPacket
 public class GunShotFirePacket {
+    public final float shooterPitch,shooterYaw ;
 
-    public GunShotFirePacket() {
+    public GunShotFirePacket(Vector2f pitchAndYaw) {
+        this.shooterYaw = pitchAndYaw.x;
+        this.shooterPitch = pitchAndYaw.y;
     }
 
     @Decoder
     public GunShotFirePacket(FriendlyByteBuf buf) {
+        this.shooterPitch = buf.readFloat();
+        this.shooterYaw = buf.readFloat();
     }
 
     @Encoder
     public void write(FriendlyByteBuf buf) {
+        buf.writeFloat(shooterPitch);
+        buf.writeFloat(shooterYaw);
     }
 
     @Consumer
     public void handler(Supplier<NetworkEvent.Context> context) {
         if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-            GunServerHandler.shoot(context.get());
+            GunServerHandler.shoot(this, context.get());
         }
     }
 }

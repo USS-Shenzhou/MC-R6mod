@@ -4,6 +4,7 @@ import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.t88.network.annotation.Consumer;
 import cn.ussshenzhou.t88.network.annotation.Decoder;
 import cn.ussshenzhou.t88.network.annotation.Encoder;
+import cn.ussshenzhou.t88.network.annotation.NetPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -15,6 +16,7 @@ import java.util.function.Supplier;
 /**
  * @author USS_Shenzhou
  */
+@NetPacket
 public class PreparationStagePacket {
 
     public PreparationStagePacket() {
