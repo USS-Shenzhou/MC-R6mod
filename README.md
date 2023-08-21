@@ -94,6 +94,7 @@ The protocol is supplemented as described in section 7 of the GNU GPL version 3 
 
 2. 模组中有关枪械的部分，包括`cn.ussshenzhou.rainbow6.gun`包，其他与枪械有关的类，是在GPLv3下，受[MrCrayfish's Gun Mod](https://github.com/MrCrayfish/MrCrayfishGunMod)模组和/或[Timeless and Classics Guns](https://github.com/ClumsyAlien/TimelessandClassics_Reforged)模组启发、从其复制和由其演绎。
 
+<P></P>
 
 1. Parts of this mod about changing player model actions and animations, including `cn.ussshenzhou.rainbow6.action` package and other classes about `Action`, are inspired by, copied or interpreted from the [ParCool](https://github.com/alRex-U/ParCool) mod under GPLv3.
 
