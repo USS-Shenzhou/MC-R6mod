@@ -1,8 +1,12 @@
 package cn.ussshenzhou.rainbow6.gun;
 
+import cn.ussshenzhou.rainbow6.gun.data.Modifier;
+import cn.ussshenzhou.rainbow6.gun.data.Trigger;
+import cn.ussshenzhou.rainbow6.gun.event.GunShotFireClientEvent;
 import cn.ussshenzhou.rainbow6.gun.item.TestGun;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.GunShotFirePacket;
-import cn.ussshenzhou.rainbow6.util.ClientUtils;
+import cn.ussshenzhou.rainbow6.util.R6Constants;
+import cn.ussshenzhou.rainbow6.util.Utils;
 import cn.ussshenzhou.t88.network.NetworkHelper;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -14,13 +18,14 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.joml.Vector2f;
 import org.lwjgl.glfw.GLFW;
 
 /**
  * @author USS_Shenzhou
  */
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
-public class GunInputListener {
+public class GunClientListener {
 
     private static boolean triggerPulled = false;
 
@@ -33,7 +38,7 @@ public class GunInputListener {
 
     @SubscribeEvent
     public static void handleMouse(InputEvent.MouseButton.Pre event) {
-        if (ClientUtils.isNotInWorld()) {
+        if (Utils.isNotInWorld()) {
             return;
         }
         var minecraft = Minecraft.getInstance();
@@ -70,7 +75,7 @@ public class GunInputListener {
     }
 
     @SubscribeEvent
-    public static void renderTick(TickEvent.RenderTickEvent event) {
+    public static void checkOnRenderTick(TickEvent.RenderTickEvent event) {
         if (event.phase != TickEvent.Phase.START) {
             return;
         }
@@ -88,9 +93,8 @@ public class GunInputListener {
                 return false;
             }
         }
-        //TODO check mag
-
-        return true;
+        //check mag
+        return gunItem.hasAmmoToShoot(gunItemStack);
     }
 
     /**
@@ -105,9 +109,10 @@ public class GunInputListener {
         //noinspection DataFlowIssue
         shooter.setSprinting(false);
 
-        MinecraftForge.EVENT_BUS.post(new GunShotFireEvent.Pre(shooter));
-        NetworkHelper.sendToServer(new GunShotFirePacket());
-        MinecraftForge.EVENT_BUS.post(new GunShotFireEvent.Post(shooter));
+        MinecraftForge.EVENT_BUS.post(new GunShotFireClientEvent.Pre(shooter));
+        NetworkHelper.sendToServer(new GunShotFirePacket(shooter.getXRot(), shooter.getYRot()));
+        //TODO Recoil
+        MinecraftForge.EVENT_BUS.post(new GunShotFireClientEvent.Post(shooter));
     }
 
 }

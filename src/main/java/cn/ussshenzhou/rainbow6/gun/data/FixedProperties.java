@@ -1,10 +1,10 @@
-package cn.ussshenzhou.rainbow6.gun;
+package cn.ussshenzhou.rainbow6.gun.data;
 
 /**
  * @author USS_Shenzhou
  */
 public enum FixedProperties {
-    TEST(new FixedProperty(Trigger.AUTO, 600));
+    TEST(new FixedProperty(Trigger.AUTO, 600, 1, Bolt.CLOSED_BOLT, 25));
 
     private final FixedProperty property;
 

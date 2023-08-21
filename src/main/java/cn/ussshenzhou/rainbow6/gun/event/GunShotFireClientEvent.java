@@ -1,19 +1,18 @@
-package cn.ussshenzhou.rainbow6.gun;
+package cn.ussshenzhou.rainbow6.gun.event;
 
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
 /**
  * @author USS_Shenzhou
  */
-public class GunShotFireEvent extends PlayerEvent {
+public class GunShotFireClientEvent extends PlayerEvent {
 
-    public GunShotFireEvent(Player shooter) {
+    public GunShotFireClientEvent(Player shooter) {
         super(shooter);
     }
 
-    public static class Pre extends GunShotFireEvent
+    public static class Pre extends GunShotFireClientEvent
     {
         public Pre(Player shooter)
         {
@@ -21,7 +20,7 @@ public class GunShotFireEvent extends PlayerEvent {
         }
     }
 
-    public static class Post extends GunShotFireEvent
+    public static class Post extends GunShotFireClientEvent
     {
         public Post(Player shooter)
         {

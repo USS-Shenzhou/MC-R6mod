@@ -18,11 +18,11 @@ import java.util.function.Supplier;
  */
 @NetPacket
 public class GunShotFirePacket {
-    public final float shooterPitch,shooterYaw ;
+    public final float shooterPitch, shooterYaw;
 
-    public GunShotFirePacket(Vector2f pitchAndYaw) {
-        this.shooterYaw = pitchAndYaw.x;
-        this.shooterPitch = pitchAndYaw.y;
+    public GunShotFirePacket(float pitch, float yaw) {
+        this.shooterYaw = pitch;
+        this.shooterPitch = yaw;
     }
 
     @Decoder

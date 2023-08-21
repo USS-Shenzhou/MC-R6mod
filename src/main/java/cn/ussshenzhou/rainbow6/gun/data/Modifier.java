@@ -1,4 +1,4 @@
-package cn.ussshenzhou.rainbow6.gun;
+package cn.ussshenzhou.rainbow6.gun.data;
 
 import net.minecraft.nbt.CompoundTag;
 
@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
  */
 public class Modifier {
 
+    //TODO
     public Modifier() {
 
     }

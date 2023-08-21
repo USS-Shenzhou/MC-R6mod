@@ -1,12 +1,14 @@
-package cn.ussshenzhou.rainbow6.gun;
+package cn.ussshenzhou.rainbow6.gun.data;
 
 /**
  * @author USS_Shenzhou
  */
 public record FixedProperty(
         Trigger trigger,
-        int shotsPerMinute
-
+        int shotsPerMinute,
+        int pellets,
+        Bolt bolt,
+        int magazineCapacity
 ) {
 
     public float shotsPerTick() {

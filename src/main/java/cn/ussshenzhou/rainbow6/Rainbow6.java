@@ -1,5 +1,7 @@
 package cn.ussshenzhou.rainbow6;
 
+import cn.ussshenzhou.rainbow6.gun.entity.ModGunEntityTypeRegistry;
+import cn.ussshenzhou.rainbow6.gun.item.ModGunItemRegistry;
 import cn.ussshenzhou.rainbow6.item.ModItemRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -18,5 +20,6 @@ public class Rainbow6 {
         var bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModItemRegistry.ITEMS.register(bus);
         ModItemRegistry.TABS.register(bus);
+        ModGunEntityTypeRegistry.GUN_ENTITY_TYPES.register(bus);
     }
 }

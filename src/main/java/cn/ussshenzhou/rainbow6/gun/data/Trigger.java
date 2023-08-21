@@ -1,4 +1,4 @@
-package cn.ussshenzhou.rainbow6.gun;
+package cn.ussshenzhou.rainbow6.gun.data;
 
 /**
  * @author USS_Shenzhou
