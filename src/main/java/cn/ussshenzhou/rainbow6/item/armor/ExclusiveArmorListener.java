@@ -20,6 +20,7 @@ public class ExclusiveArmorListener {
 
     @SubscribeEvent
     public static void hideOriginal(RenderPlayerEvent.Pre event) {
+        //FIXME need improve
         var player = event.getEntity();
         PlayerModel<AbstractClientPlayer> model = event.getRenderer().getModel();
         int i = 0;

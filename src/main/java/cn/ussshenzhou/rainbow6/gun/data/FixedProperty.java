@@ -1,5 +1,8 @@
 package cn.ussshenzhou.rainbow6.gun.data;
 
+import net.minecraft.util.Mth;
+import org.joml.Vector2i;
+
 /**
  * @author USS_Shenzhou
  */
@@ -8,7 +11,9 @@ public record FixedProperty(
         int shotsPerMinute,
         int pellets,
         Bolt bolt,
-        int magazineCapacity
+        int magazineCapacity,
+        int basicDamage,
+        Vector2i decayRange
 ) {
 
     public float shotsPerTick() {
