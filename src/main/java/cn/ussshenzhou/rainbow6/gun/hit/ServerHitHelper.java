@@ -21,23 +21,30 @@ public class ServerHitHelper {
             root.addOrReplaceChild("head",
                     ServerCubeListBuilder.create().texOffs(0, 0)
                             .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, ServerCubeDeformation.NONE),
-                    ServerPartPose.offset(0.0F, 0.0F, 0.0F)
+                    ServerPartPose.ZERO
             );
             root.addOrReplaceChild("body",
                     ServerCubeListBuilder.create().texOffs(16, 16)
                             .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, ServerCubeDeformation.NONE),
-                    ServerPartPose.offset(0.0F, 0.0F, 0.0F)
+                    ServerPartPose.ZERO
             );
         });
     }
 
     public static void put(EntityType<?> type, Consumer<ServerPartDefinition> addChildren) {
-        var part = new ServerPartDefinition(ImmutableList.of(), ServerPartPose.ZERO);
-        addChildren.accept(part);
-        ENTITY_PART_MAP.put(type, part);
+        var entityRoot = new ServerPartDefinition(ImmutableList.of(), ServerPartPose.ZERO);
+        addChildren.accept(entityRoot);
+        ENTITY_PART_MAP.put(type, entityRoot);
     }
 
     public static void accept(ServerPlayer sender, EntityType<?> type, ServerPartDefinition head, ServerPartDefinition body) {
-        //TODO
+        boolean isFromOp = sender.hasPermissions(4);
+        if (ENTITY_PART_MAP.containsKey(type) && !isFromOp) {
+            return;
+        }
+        var entityRoot = new ServerPartDefinition(ImmutableList.of(), ServerPartPose.ZERO);
+        entityRoot.children.put("head", head);
+        entityRoot.children.put("body", body);
+        ENTITY_PART_MAP.put(type, entityRoot);
     }
 }

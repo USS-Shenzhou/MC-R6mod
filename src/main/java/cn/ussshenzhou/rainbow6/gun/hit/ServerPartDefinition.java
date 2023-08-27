@@ -9,9 +9,9 @@ import java.util.Map;
  * @author USS_Shenzhou modified from net.minecraft.client.model.*
  */
 public class ServerPartDefinition {
-    private final List<ServerCubeDefinition> cubes;
-    private final ServerPartPose serverPartPose;
-    private final Map<String, ServerPartDefinition> children;
+    protected final List<ServerCubeDefinition> cubes;
+    protected final ServerPartPose serverPartPose;
+    protected final Map<String, ServerPartDefinition> children;
 
     ServerPartDefinition(List<ServerCubeDefinition> pCubes, ServerPartPose pServerPartPose) {
         this.cubes = pCubes;

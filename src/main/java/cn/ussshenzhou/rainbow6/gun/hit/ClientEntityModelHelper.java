@@ -1,6 +1,7 @@
 package cn.ussshenzhou.rainbow6.gun.hit;
 
-import cn.ussshenzhou.rainbow6.network.onlyto.server.UploadEntityModelPacket;
+import cn.ussshenzhou.rainbow6.network.UploadEntityModelPacket;
+import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.network.NetworkHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -19,11 +20,13 @@ import java.util.concurrent.CompletableFuture;
  * @author USS_Shenzhou
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ClientEntityModelListener {
+public class ClientEntityModelHelper {
 
     @SubscribeEvent
     public static void onFinishSetup(EntityRenderersEvent.AddLayers event) {
-        sendModelsToServer();
+        if (R6Constants.TEST) {
+            sendModelsToServer();
+        }
     }
 
     public static void sendModelsToServer() {

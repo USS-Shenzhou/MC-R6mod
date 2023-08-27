@@ -4,7 +4,7 @@ import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
 import cn.ussshenzhou.rainbow6.client.gui.panel.MainMenuHeaderPanel;
 import cn.ussshenzhou.rainbow6.client.gui.panel.MainMenuHomePanel;
 import cn.ussshenzhou.rainbow6.client.gui.panel.MainMenuOperatorsPanel;
-import cn.ussshenzhou.rainbow6.client.gui.panel.MainMenuOptionsPanel;
+import cn.ussshenzhou.rainbow6.client.gui.option.MainMenuOptionsPanel;
 import cn.ussshenzhou.rainbow6.client.gui.widget.QueuingForMatchBar;
 import cn.ussshenzhou.t88.gui.HudManager;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;

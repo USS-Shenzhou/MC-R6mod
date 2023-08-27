@@ -1,5 +1,11 @@
-package cn.ussshenzhou.rainbow6.client.gui.widget;
+package cn.ussshenzhou.rainbow6.client.gui.option;
 
+import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageButton;
+import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageCycleButton;
+import cn.ussshenzhou.rainbow6.util.KeyTrig;
+import cn.ussshenzhou.rainbow6.util.R6Constants;
+import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
+import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.*;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -12,12 +18,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * @author USS_Shenzhou
  */
-public class OptionsPanel extends TScrollPanel {
+public abstract class OptionsPanel extends TScrollPanel {
     private int gap = 1;
     private int unitHeight = 16;
 
@@ -25,7 +33,10 @@ public class OptionsPanel extends TScrollPanel {
         super();
         this.scrollbarGap = 4;
         this.setBackground(0);
+        this.initOptions();
     }
+
+    protected abstract void initOptions();
 
     public void setGap(int gap) {
         this.gap = gap;
@@ -33,6 +44,24 @@ public class OptionsPanel extends TScrollPanel {
 
     public void setUnitHeight(int unitHeight) {
         this.unitHeight = unitHeight;
+    }
+
+    public <T> void addOptionCycleButton(String title, Consumer<TCycleButton<T>> buttonConsumer, List<T> values, T defaultValue) {
+        HoverSensitiveImageCycleButton<T> button = new HoverSensitiveImageCycleButton<>(
+                new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_white.png"),
+                new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button16_hovered.png")
+        );
+        values.forEach(k -> button.getButton().addElement(k, buttonConsumer));
+        button.getButton().select(defaultValue);
+        button.setPadding(R6Constants.PADDING_TINY);
+        button.getText().setHorizontalAlignment(HorizontalAlignment.CENTER);
+        button.getText().setFontSize(R6Constants.FONT_SMALL_3);
+        button.getBackgroundImage().setImageFit(ImageFit.STRETCH);
+        button.getBackgroundImageHovered().setImageFit(ImageFit.STRETCH);
+        OptionsPanel.ConfigUnit unit = new ConfigUnit(title, button);
+        unit.getTitle().setHorizontalAlignment(HorizontalAlignment.RIGHT);
+        unit.getTitle().setFontSize(R6Constants.FONT_SMALL_3);
+        this.add(unit);
     }
 
     @Override
@@ -62,24 +91,24 @@ public class OptionsPanel extends TScrollPanel {
             Tesselator tesselator = Tesselator.getInstance();
             BufferBuilder bufferbuilder = tesselator.getBuilder();
             RenderSystem.setShader(GameRenderer::getPositionColorShader);
-            int l1 = (int)((float)(this.height * this.height) / (float)this.bottomY);
+            int l1 = (int) ((float) (this.height * this.height) / (float) this.bottomY);
             l1 = Mth.clamp(l1, 32, this.getYT() + this.height - this.getYT() - 8);
-            int i2 = (int)this.getScrollAmount() * (this.getYT() + this.height - this.getYT() - l1) / k1 + this.getYT();
+            int i2 = (int) this.getScrollAmount() * (this.getYT() + this.height - this.getYT() - l1) / k1 + this.getYT();
             if (i2 < this.getYT()) {
                 i2 = this.getYT();
             }
 
             RenderSystem.enableBlend();
             bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-            bufferbuilder.vertex((double)i, (double)(this.getYT() + this.height), 0.0).color(255, 255, 255, 0x33).endVertex();
-            bufferbuilder.vertex((double)j, (double)(this.getYT() + this.height), 0.0).color(255, 255, 255, 0x33).endVertex();
-            bufferbuilder.vertex((double)j, (double)this.getYT(), 0.0).color(255, 255, 255, 0x33).endVertex();
-            bufferbuilder.vertex((double)i, (double)this.getYT(), 0.0).color(255, 255, 255, 0x33).endVertex();
+            bufferbuilder.vertex((double) i, (double) (this.getYT() + this.height), 0.0).color(255, 255, 255, 0x33).endVertex();
+            bufferbuilder.vertex((double) j, (double) (this.getYT() + this.height), 0.0).color(255, 255, 255, 0x33).endVertex();
+            bufferbuilder.vertex((double) j, (double) this.getYT(), 0.0).color(255, 255, 255, 0x33).endVertex();
+            bufferbuilder.vertex((double) i, (double) this.getYT(), 0.0).color(255, 255, 255, 0x33).endVertex();
 
-            bufferbuilder.vertex((double)i, (double)(i2 + l1), 0.0).color(255, 255, 255, 0xdd).endVertex();
-            bufferbuilder.vertex((double)j, (double)(i2 + l1), 0.0).color(255, 255, 255, 0xdd).endVertex();
-            bufferbuilder.vertex((double)j, (double)i2, 0.0).color(255, 255, 255, 0xdd).endVertex();
-            bufferbuilder.vertex((double)i, (double)i2, 0.0).color(255, 255, 255, 0xdd).endVertex();
+            bufferbuilder.vertex((double) i, (double) (i2 + l1), 0.0).color(255, 255, 255, 0xdd).endVertex();
+            bufferbuilder.vertex((double) j, (double) (i2 + l1), 0.0).color(255, 255, 255, 0xdd).endVertex();
+            bufferbuilder.vertex((double) j, (double) i2, 0.0).color(255, 255, 255, 0xdd).endVertex();
+            bufferbuilder.vertex((double) i, (double) i2, 0.0).color(255, 255, 255, 0xdd).endVertex();
             tesselator.end();
         }
 

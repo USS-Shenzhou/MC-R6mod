@@ -29,6 +29,9 @@
   "gui.r6ms.main_menu.options.controls.prone": "Prone  ",
   "gui.r6ms.main_menu.options.controls.walk": "Walk  ",
 
+  "gui.r6ms.main_menu.options.operator": "OPERATOR",
+  "gui.r6ms.main_menu.options.operator.upload_model": "Re-upload entity models",
+
 
   "gui.r6ms.pause_screen.button": "Play R6MS",
 

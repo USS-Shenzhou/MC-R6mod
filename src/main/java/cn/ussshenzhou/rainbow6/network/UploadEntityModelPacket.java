@@ -1,5 +1,6 @@
-package cn.ussshenzhou.rainbow6.network.onlyto.server;
+package cn.ussshenzhou.rainbow6.network;
 
+import cn.ussshenzhou.rainbow6.gun.hit.ClientEntityModelHelper;
 import cn.ussshenzhou.rainbow6.gun.hit.ModelUploadHelper;
 import cn.ussshenzhou.rainbow6.gun.hit.ServerHitHelper;
 import cn.ussshenzhou.rainbow6.gun.hit.ServerPartDefinition;
@@ -61,6 +62,13 @@ public class UploadEntityModelPacket {
                 return;
             }
             ServerHitHelper.accept(context.get().getSender(), type, headS, bodyS);
+        } else {
+            clientHandler();
         }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void clientHandler() {
+        ClientEntityModelHelper.sendModelsToServer();
     }
 }
