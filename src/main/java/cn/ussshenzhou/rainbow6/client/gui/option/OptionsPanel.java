@@ -2,7 +2,6 @@ package cn.ussshenzhou.rainbow6.client.gui.option;
 
 import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageButton;
 import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageCycleButton;
-import cn.ussshenzhou.rainbow6.util.KeyTrig;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
@@ -13,12 +12,12 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -28,6 +27,7 @@ import java.util.function.Consumer;
 public abstract class OptionsPanel extends TScrollPanel {
     private int gap = 1;
     private int unitHeight = 16;
+    private static final int DEFAULT_TITLE_BACKGROUND = 0x1affffff;
 
     public OptionsPanel() {
         super();
@@ -46,19 +46,34 @@ public abstract class OptionsPanel extends TScrollPanel {
         this.unitHeight = unitHeight;
     }
 
-    public <T> void addOptionCycleButton(String title, Consumer<TCycleButton<T>> buttonConsumer, List<T> values, T defaultValue) {
+    public <T> ConfigUnit addOptionCycleButton(Component title, Consumer<TCycleButton<T>> pressAction, List<T> values, T defaultValue) {
         HoverSensitiveImageCycleButton<T> button = new HoverSensitiveImageCycleButton<>(
                 new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_white.png"),
                 new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button16_hovered.png")
         );
-        values.forEach(k -> button.getButton().addElement(k, buttonConsumer));
+        values.forEach(k -> button.getButton().addElement(k, pressAction));
         button.getButton().select(defaultValue);
+        OptionsPanel.ConfigUnit unit = new ConfigUnit(title, button);
+        initOptionButton(button, unit);
+        return unit;
+    }
+
+    public ConfigUnit addOptionButton(Component title, Component buttonText, Button.OnPress pressAction) {
+        HoverSensitiveImageButton button = new HoverSensitiveImageButton(buttonText, pressAction,
+                new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_white.png"),
+                new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button16_hovered.png")
+        );
+        OptionsPanel.ConfigUnit unit = new ConfigUnit(title, button);
+        initOptionButton(button, unit);
+        return unit;
+    }
+
+    protected void initOptionButton(HoverSensitiveImageButton button, ConfigUnit unit) {
         button.setPadding(R6Constants.PADDING_TINY);
         button.getText().setHorizontalAlignment(HorizontalAlignment.CENTER);
         button.getText().setFontSize(R6Constants.FONT_SMALL_3);
         button.getBackgroundImage().setImageFit(ImageFit.STRETCH);
         button.getBackgroundImageHovered().setImageFit(ImageFit.STRETCH);
-        OptionsPanel.ConfigUnit unit = new ConfigUnit(title, button);
         unit.getTitle().setHorizontalAlignment(HorizontalAlignment.RIGHT);
         unit.getTitle().setFontSize(R6Constants.FONT_SMALL_3);
         this.add(unit);
@@ -71,11 +86,18 @@ public abstract class OptionsPanel extends TScrollPanel {
             if (t instanceof ConfigUnit unit) {
                 if (i == 0) {
                     children.get(0).setBounds(0, 0, getUsableWidth(), unitHeight);
+                    if (unit.autoBackground) {
+                        unit.title.setBackground(DEFAULT_TITLE_BACKGROUND);
+                    }
                 } else {
                     LayoutHelper.BBottomOfA(children.get(i), gap, children.get(i - 1));
-                }
-                if (i % 2 == 0) {
-                    unit.title.setBackground(0x1affffff);
+                    if (unit.autoBackground) {
+                        if (((ConfigUnit) children.get(i - 1)).title.getBackground() != DEFAULT_TITLE_BACKGROUND) {
+                            unit.title.setBackground(DEFAULT_TITLE_BACKGROUND);
+                        } else {
+                            unit.title.setBackground(0x00000000);
+                        }
+                    }
                 }
             }
         }
@@ -126,8 +148,9 @@ public abstract class OptionsPanel extends TScrollPanel {
     }
 
     public static class ConfigUnit extends TPanel {
-        private TLabel title;
-        private TComponent setter;
+        protected TLabel title;
+        protected TComponent setter;
+        private boolean autoBackground = true;
 
         public ConfigUnit(TLabel title, TComponent setter) {
             this.title = title;
@@ -137,10 +160,11 @@ public abstract class OptionsPanel extends TScrollPanel {
         }
 
         public ConfigUnit(String translatableKeyTitle, TComponent setter) {
-            title = new TLabel(Component.translatable(translatableKeyTitle));
-            this.setter = setter;
-            this.add(title);
-            this.add(setter);
+            this(new TLabel(Component.translatable(translatableKeyTitle)), setter);
+        }
+
+        public ConfigUnit(Component title, TComponent setter) {
+            this(new TLabel(title), setter);
         }
 
         @Override
@@ -156,6 +180,18 @@ public abstract class OptionsPanel extends TScrollPanel {
 
         public TLabel getTitle() {
             return title;
+        }
+
+        public TComponent getSetter() {
+            return setter;
+        }
+
+        public boolean autoBackground() {
+            return autoBackground;
+        }
+
+        public void setAutoBackground(boolean autoBackground) {
+            this.autoBackground = autoBackground;
         }
     }
 }

@@ -1,12 +1,14 @@
 package cn.ussshenzhou.rainbow6.client.gui.option;
 
 import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
+import cn.ussshenzhou.rainbow6.util.ClientUtils;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
@@ -28,7 +30,6 @@ public class MainMenuOptionsPanel extends TPanel {
     private final FocusSensitiveImageSelectButton controls = new FocusSensitiveImageSelectButton(
             Component.translatable("gui.r6ms.main_menu.options.controls"),
             pButton -> selectCategory(this.controls),
-            //needtest align?
             BUTTON_UNSELECTED, BUTTON_SELECTED);
     private final FocusSensitiveImageSelectButton operator = new FocusSensitiveImageSelectButton(
             Component.translatable("gui.r6ms.main_menu.options.operator"),
@@ -40,8 +41,9 @@ public class MainMenuOptionsPanel extends TPanel {
     public MainMenuOptionsPanel() {
         this.add(background);
         initPair(controls, controlsPanel);
-
-        initPair(operator,operatorPanel);
+        if (ClientUtils.isOp()) {
+            initPair(operator, operatorPanel);
+        }
         selectCategory(controls);
     }
 
@@ -76,7 +78,7 @@ public class MainMenuOptionsPanel extends TPanel {
         i = 0;
         categories.forEach(((button, panel) -> {
             if (i == 0) {
-                button.setBounds(22, 14, 50, 14);
+                button.setBounds(22, 14, 60, 14);
             } else {
                 LayoutHelper.BRightOfA(button, -4, categories.keySet().stream().toList().get(i - 1));
             }

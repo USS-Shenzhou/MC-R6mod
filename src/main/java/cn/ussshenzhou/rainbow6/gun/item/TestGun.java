@@ -6,7 +6,6 @@ import cn.ussshenzhou.rainbow6.gun.data.FixedProperty;
 import cn.ussshenzhou.rainbow6.gun.data.Modifier;
 import cn.ussshenzhou.rainbow6.util.Utils;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 

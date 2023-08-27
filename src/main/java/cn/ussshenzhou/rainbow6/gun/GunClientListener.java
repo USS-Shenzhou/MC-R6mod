@@ -5,8 +5,7 @@ import cn.ussshenzhou.rainbow6.gun.data.Trigger;
 import cn.ussshenzhou.rainbow6.gun.event.GunShotFireClientEvent;
 import cn.ussshenzhou.rainbow6.gun.item.TestGun;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.GunShotFirePacket;
-import cn.ussshenzhou.rainbow6.util.R6Constants;
-import cn.ussshenzhou.rainbow6.util.Utils;
+import cn.ussshenzhou.rainbow6.util.ClientUtils;
 import cn.ussshenzhou.t88.network.NetworkHelper;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -18,7 +17,6 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.joml.Vector2f;
 import org.lwjgl.glfw.GLFW;
 
 /**
@@ -38,7 +36,7 @@ public class GunClientListener {
 
     @SubscribeEvent
     public static void handleMouse(InputEvent.MouseButton.Pre event) {
-        if (Utils.isNotInWorld()) {
+        if (ClientUtils.isNotInWorld()) {
             return;
         }
         var minecraft = Minecraft.getInstance();
