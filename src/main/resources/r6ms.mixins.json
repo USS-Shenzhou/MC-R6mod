@@ -14,6 +14,7 @@
     "GameRendererMixin",
     "LevelRendererMixin",
     "MinecraftMixin",
+    "OptionInstanceMixin",
     "PauseScreenMixin",
     "PlayerModelMixin",
     "PlayerRendererMixin"

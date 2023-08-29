@@ -2,7 +2,7 @@ package cn.ussshenzhou.rainbow6.gun;
 
 import cn.ussshenzhou.rainbow6.gun.data.Modifier;
 import cn.ussshenzhou.rainbow6.gun.data.Trigger;
-import cn.ussshenzhou.rainbow6.gun.event.GunShotFireClientEvent;
+import cn.ussshenzhou.rainbow6.event.GunShotFireClientEvent;
 import cn.ussshenzhou.rainbow6.gun.item.TestGun;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.GunShotFirePacket;
 import cn.ussshenzhou.rainbow6.util.ClientUtils;

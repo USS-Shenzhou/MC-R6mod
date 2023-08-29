@@ -3,6 +3,7 @@ package cn.ussshenzhou.rainbow6.client.gui.option;
 import cn.ussshenzhou.rainbow6.config.Control;
 import cn.ussshenzhou.rainbow6.util.KeyTrig;
 import cn.ussshenzhou.t88.config.ConfigHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 
 import java.util.List;
@@ -34,16 +35,20 @@ public class OptionsPanelControls extends OptionsPanel {
                 ConfigHelper.Universal.getConfigRead(Control.class).lean
         );
         addOptionCycleButton(Component.translatable("gui.r6ms.main_menu.options.controls.sprint"),
-                button -> ConfigHelper.Universal.getConfigWrite(
-                        Control.class, control -> control.sprint = button.getSelected().getContent()
-                ),
+                button -> {
+                    var c = button.getSelected().getContent();
+                    ConfigHelper.Universal.getConfigRead(Control.class).sprint = c;
+                    Minecraft.getInstance().options.toggleSprint().set(c == KeyTrig.TOGGLE);
+                },
                 List.of(KeyTrig.values()),
                 ConfigHelper.Universal.getConfigRead(Control.class).sprint
         );
         addOptionCycleButton(Component.translatable("gui.r6ms.main_menu.options.controls.crouch"),
-                button -> ConfigHelper.Universal.getConfigWrite(
-                        Control.class, control -> control.crouch = button.getSelected().getContent()
-                ),
+                button -> {
+                    var c = button.getSelected().getContent();
+                    ConfigHelper.Universal.getConfigRead(Control.class).crouch = c;
+                    Minecraft.getInstance().options.toggleCrouch().set(c == KeyTrig.TOGGLE);
+                },
                 List.of(KeyTrig.values()),
                 ConfigHelper.Universal.getConfigRead(Control.class).crouch
         );
