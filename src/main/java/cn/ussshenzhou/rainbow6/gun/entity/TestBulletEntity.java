@@ -1,9 +1,9 @@
 package cn.ussshenzhou.rainbow6.gun.entity;
 
 import cn.ussshenzhou.rainbow6.gun.data.Modifier;
+import cn.ussshenzhou.rainbow6.gun.hit.ServerHitHelper;
 import cn.ussshenzhou.rainbow6.gun.item.TestGun;
 import cn.ussshenzhou.rainbow6.util.ModDamageSources;
-import com.mojang.logging.LogUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -11,7 +11,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -24,11 +23,11 @@ import javax.annotation.Nullable;
  * @author USS_Shenzhou
  */
 public class TestBulletEntity extends Entity {
-    protected LivingEntity shooter;
-    protected TestGun gun;
-    protected Modifier gunModifier;
+    public LivingEntity shooter;
+    public TestGun gun;
+    public Modifier gunModifier;
     protected int hitCount = 0;
-    protected Vec3 spawnPos;
+    public Vec3 spawnPos;
 
     public static int lifeTime = 6;
     public static int speed = 15;
@@ -85,16 +84,16 @@ public class TestBulletEntity extends Entity {
             }
             case ENTITY -> {
                 hitCount++;
-                var hit = (EntityHitResult) h;
-                var pos = hit.getLocation();
-                var distance = spawnPos.distanceTo(pos);
-                var damage = gunModifier.getDamage(gun.getFixedProperty(), distance);
-                Entity victim = hit.getEntity();
-                hit.getEntity().hurt(ModDamageSources.shot(this.shooter, victim), damage);
-                //TODO head shot
+                if (!level().isClientSide) {
+                    ServerHitHelper.aSyncHit(this, (EntityHitResult) h);
+                }
                 penetrateAfterHit(h);
             }
         }
+    }
+
+    public void hitNonLiving(EntityHitResult hit, float damage) {
+        hit.getEntity().hurt(ModDamageSources.shot(shooter, hit.getEntity()), damage);
     }
 
     protected void penetrateAfterHit(HitResult prevHit) {
@@ -112,6 +111,7 @@ public class TestBulletEntity extends Entity {
             //FIXME This way has a flaw, but acceptable. Use more math to fix it.
             double max = 1 / Mth.absMax(move.x, Mth.absMax(move.y, move.z));
             move = move.multiply(max, max, max).multiply(1.001, 1.001, 1.001);
+            //FIXME fake getLocation
             this.setPos(prevHit.getLocation().add(move));
             checkHit(null);
         }

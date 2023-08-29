@@ -8,7 +8,8 @@
     "FallbackResourceManagerMixin",
     "FoodDataMixin",
     "ForgeHooksClientAccessor",
-    "PlayerAccessor"
+    "PlayerAccessor",
+    "ProjectileUtilMixin"
   ],
   "client": [
     "GameRendererMixin",

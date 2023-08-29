@@ -21,17 +21,17 @@ public class Modifier {
 
     }
 
-    public int getDamage(FixedProperty property, double distance) {
+    public float getDamageDistanceDecayed(FixedProperty property, float distance) {
         int near = property.decayRange().x;
         int far = property.decayRange().y;
         int basicDamage = property.basicDamage();
-        //TODO 0.8
+        //TODO extended barrel 0.8
         float decayFactor = 0.6f;
         if (distance <= near) {
             return basicDamage;
         } else if (distance >= far) {
-            return Math.round(basicDamage * decayFactor);
+            return basicDamage * decayFactor;
         }
-        return Math.round((float) Mth.lerp((distance - near) / (far - near), basicDamage, basicDamage * decayFactor));
+        return Mth.lerp((distance - near) / (far - near), basicDamage, basicDamage * decayFactor);
     }
 }
