@@ -1,6 +1,5 @@
 package cn.ussshenzhou.rainbow6.gun.data;
 
-import net.minecraft.util.Mth;
 import org.joml.Vector2i;
 
 /**
@@ -27,5 +26,9 @@ public record FixedProperty(
     @SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
     public float coolDownMS() {
         return 60 * 1000f / shotsPerMinute;
+    }
+
+    public boolean isShotgun() {
+        return pellets > 1;
     }
 }

@@ -61,8 +61,7 @@ public class ServerHitHelper {
             var hitAt = calculateHitAt(bullet, hit);
             LogUtils.getLogger().warn("{}", hitAt);
             if (hitAt != HitAt.HEAD) {
-                var distance = (float) bullet.spawnPos.distanceTo(hit.getLocation());
-                damage = bullet.gunModifier.getDamageDistanceDecayed(bullet.gun.getFixedProperty(), distance);
+                damage = getDamageDistanceDecayed(bullet, hit);
                 switch (hitAt) {
                     case LIMB -> {
                         //limb
@@ -77,11 +76,18 @@ public class ServerHitHelper {
                     }
                     //no-correction: body, non-exist
                 }
+            } else if (bullet.gun.getFixedProperty().isShotgun()) {
+                damage = getDamageDistanceDecayed(bullet, hit) * 1.5f;
             }
             float f1 = damage;
             bullet.level().getServer().execute(() ->
                     hit.getEntity().hurt(ModDamageSources.shot(bullet.shooter, hit.getEntity()), f1));
         });
+    }
+
+    protected static float getDamageDistanceDecayed(TestBulletEntity bullet, EntityHitResult hit) {
+        var distance = (float) bullet.spawnPos.distanceTo(hit.getLocation());
+        return bullet.gunModifier.getDamageDistanceDecayed(bullet.gun.getFixedProperty(), distance);
     }
 
     /**
