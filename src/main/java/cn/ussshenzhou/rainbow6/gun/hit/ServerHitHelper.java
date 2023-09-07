@@ -34,6 +34,7 @@ public class ServerHitHelper {
                             .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, ServerCubeDeformation.NONE),
                     ServerPartPose.ZERO
             );
+            //TODO accurate limb
         });
     }
 

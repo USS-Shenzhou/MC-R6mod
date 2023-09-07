@@ -77,7 +77,7 @@ public class TestGun extends Item {
     }
 
     @Override
-    public ItemStack getDefaultInstance() {
-        return super.getDefaultInstance();
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return false;
     }
 }
