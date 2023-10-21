@@ -42,23 +42,23 @@ This module is dual-licensed.
 
 本模组的美术资源文件采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
 
-**有关非商业性使用的额外许可**
+**额外许可**
 
 - a) 以下的“使用”指的是玩家在Minecraft多人游戏服务器内游玩时获取、与之互动、展示、渲染或播放对应的物品、实体或音效；也包括将前述过程录制为图片或视频，并以公开渠道展示。
 
 - b) 如果你是Minecraft多人游戏服务器所有者，不论你的服务器是盈利还是非盈利性质的，也不论你的服务器是否接入了*Voyager*，本许可证授予你的服务器使用默认武器涂装所对应的模型和图片文件、以及声音文件等通用的美术资源的权利。
 
-- c) 如果你是Minecraft多人游戏服务器所有者，且你的服务器接入了*Voyager*，在向开发者支付事先约定的费用的前提下，本许可证授予你、你的服务器管理员和你的服务器在公开渠道售卖模组提供的武器涂装的权利，也授予你的服务器使用这些武器涂装所对应的模型和图片文件的权利。
+- c) 如果你是Minecraft多人游戏服务器所有者，且你的服务器接入了*Voyager*，在向开发者支付事先约定的费用的前提下（如果存在），本许可证授予你的服务器在公开渠道售卖模组提供的指定武器涂装的权利，也授予你的服务器使用玩家拥有的武器涂装所对应的模型和图片文件的权利。
 
 This mod's art assets files are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
-**Exceptions about Non-Commercial Use**
+**Exceptions**
 
 - a) The term "use" in the following context refers to players getting, interacting with, displaying, rendering, or playing corresponding items, entities, or sound effects while playing on a Minecraft multiplayer server. This also includes recording the aforementioned process as images or videos and showcasing them through public channels.
 
 - b) If you are the owner of a Minecraft multiplayer game server, regardless of whether your server is for-profit or non-profit and regardless of whether your server has access to *Voyager*, this license grants your server the right to use default weapon skins' corresponding models and image files, plus sound files and other common art resources.
 
-- c) If you are the owner of a Minecraft multiplayer game server and your server has has access to *Voyager*, upon payment of the agreed-upon fees to the developers, this license grants you, your server administrators, and your server the right to sell weapon skins provided by the mod on public channels. It also grants your server the right to use the corresponding models and image files for these weapon skins.
+- c) If you are the owner of a Minecraft multiplayer game server and your server has has access to *Voyager*, upon payment of the agreed-upon fees, if exist, to the developers, this license grants your server the right to sell designated weapon skins provided by the mod on public channels. It also grants your server the right to use the corresponding models and image files of these weapon skins.
 
 #### 代码和其余文件|Codes
 
