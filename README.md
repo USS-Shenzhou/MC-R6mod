@@ -8,7 +8,7 @@
 
 更多信息请在[**Holo Janeway**](https://holojaneway.uss-shenzhou.cn/r6ms)上查看。
 
-请确保你在使用本模组前已经阅读了[统计数据收集说明](https://holojaneway.uss-shenzhou.cn/r6ms/data_collect)。
+请确保你在使用本模组前已经阅读了[个人与统计信息收集政策](https://holojaneway.uss-shenzhou.cn/r6ms/data_collect)。
 
 跨服务器数据同步服务（CSSS, 或Voyager）虽然由相同开发者提供，但它不是R6MS模组本身的一部分。
 
@@ -18,7 +18,7 @@ Trying balancing between Minecraft vanilla style and R6S style.
 
 For more information, check [**Holo Janeway**](https://holojaneway.uss-shenzhou.cn/r6ms).
 
-Please make sure you have read the [Statistic data collection instructions](https://holojaneway.uss-shenzhou.cn/r6ms/data_collect). If you can't read Chinese, please contact the developers. Translation will not begin until the first foreigner's message is received.
+Please make sure you have read the [Personal and Statistic Data Collection Policy](https://holojaneway.uss-shenzhou.cn/r6ms/data_collect). If you can't read Chinese, please contact the developers. Translation will not begin until the first foreigner's message is received.
 
 *Cross-Server Synchronization Service*, aka *CSSS* or *Voyager*, is not a part of the R6MS mod itself, although it's provided by the same developers.
 
@@ -46,19 +46,19 @@ This module is dual-licensed.
 
 - a) 以下的“使用”指的是玩家在Minecraft多人游戏服务器内游玩时获取、与之互动、展示、渲染或播放对应的物品、实体或音效；也包括将前述过程录制为图片或视频，并以公开渠道展示。
 
-- b) 如果你是Minecraft多人游戏服务器所有者，不论你的服务器是盈利还是非盈利性质的，也不论你的服务器是否接入了*Voyager*，本许可证授予你的服务器使用默认武器涂装所对应的模型和图片文件、以及声音文件等通用的美术资源的权利。
+- b) 如果你是Minecraft多人游戏服务器所有者，不论你的服务器是盈利还是非盈利性质的，不论你的服务器是在线还是离线模式，也不论你的服务器是否接入了*Voyager*，本许可证授予你的服务器使用默认武器涂装所对应的模型和图片文件、以及声音文件等通用的美术资源的权利。
 
-- c) 如果你是Minecraft多人游戏服务器所有者，且你的服务器接入了*Voyager*，在向开发者支付事先约定的费用的前提下（如果存在），本许可证授予你的服务器在公开渠道售卖模组提供的指定武器涂装的权利，也授予你的服务器使用玩家拥有的武器涂装所对应的模型和图片文件的权利。
+- c) 如果你是Minecraft多人游戏服务器所有者，且你的服务器接入了*Voyager*，在遵守Voyager最终用户许可协议的情况下，本许可证授予你的服务器在公开渠道售卖模组提供的指定武器涂装的权利，也授予你的服务器使用玩家拥有的武器涂装所对应的模型和图片文件的权利。
 
-This mod's art assets files are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+This mod's art assets files are licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
 **Exceptions**
 
 - a) The term "use" in the following context refers to players getting, interacting with, displaying, rendering, or playing corresponding items, entities, or sound effects while playing on a Minecraft multiplayer server. This also includes recording the aforementioned process as images or videos and showcasing them through public channels.
 
-- b) If you are the owner of a Minecraft multiplayer game server, regardless of whether your server is for-profit or non-profit and regardless of whether your server has access to *Voyager*, this license grants your server the right to use default weapon skins' corresponding models and image files, plus sound files and other common art resources.
+- b) If you are the owner of a Minecraft multiplayer game server, regardless of whether your server is for-profit or non-profit, regardless of whether your server is online mode and regardless of whether your server has access to *Voyager*, this license grants your server the right to use default weapon skins' corresponding models and image files, plus sound files and other common art resources.
 
-- c) If you are the owner of a Minecraft multiplayer game server and your server has has access to *Voyager*, upon payment of the agreed-upon fees, if exist, to the developers, this license grants your server the right to sell designated weapon skins provided by the mod on public channels. It also grants your server the right to use the corresponding models and image files of these weapon skins.
+- c) If you are the owner of a Minecraft multiplayer game server and your server has has access to *Voyager*, this license grants you the right to sell designated weapon skins provided by the mod on public channels, subject to compliance with the Voyager EULA. It also grants your server the right to use the corresponding models and image files of these weapon skins.
 
 #### 代码和其余文件|Codes
 
