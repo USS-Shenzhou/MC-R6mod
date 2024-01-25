@@ -1,8 +1,8 @@
 package cn.ussshenzhou.rainbow6.item.armor;
 
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 /**
  * @author USS_Shenzhou

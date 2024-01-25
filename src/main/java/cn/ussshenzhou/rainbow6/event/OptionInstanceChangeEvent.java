@@ -1,7 +1,7 @@
 package cn.ussshenzhou.rainbow6.event;
 
 import net.minecraft.client.OptionInstance;
-import net.minecraftforge.eventbus.api.Event;
+import net.neoforged.bus.api.Event;
 
 /**
  * @author USS_Shenzhou

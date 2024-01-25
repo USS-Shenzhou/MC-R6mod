@@ -1,9 +1,9 @@
 package cn.ussshenzhou.rainbow6.datagen;
 
 import cn.ussshenzhou.rainbow6.util.R6Constants;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
 
 /**
  * @author USS_Shenzhou

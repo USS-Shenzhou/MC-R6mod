@@ -2,9 +2,9 @@ package cn.ussshenzhou.rainbow6.server.match;
 
 import cn.ussshenzhou.rainbow6.config.Map;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.network.NetworkEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.bus.api.Event;
+import net.neoforged.neoforge.network.NetworkEvent;
 
 import java.util.Collection;
 import java.util.HashMap;

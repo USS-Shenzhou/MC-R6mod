@@ -3,9 +3,9 @@ package cn.ussshenzhou.rainbow6;
 import cn.ussshenzhou.rainbow6.gun.entity.ModGunEntityTypeRegistry;
 import cn.ussshenzhou.rainbow6.gun.item.ModGunItemRegistry;
 import cn.ussshenzhou.rainbow6.item.ModItemRegistry;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 
 /**
  * @author USS_Shenzhou
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class Rainbow6 {
 
     public Rainbow6() {
-        MinecraftForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(this);
         System.setProperty("t88.test_screen_override", "cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen");
 
         var bus = FMLJavaModLoadingContext.get().getModEventBus();

@@ -1,8 +1,6 @@
 package cn.ussshenzhou.rainbow6.action;
 
 import cn.ussshenzhou.rainbow6.capability.ActionCapability;
-import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
-import cn.ussshenzhou.rainbow6.client.animationplayer.ProneAnimator;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
@@ -30,10 +28,11 @@ public class Down extends Action {
 
     @Override
     public void onWorkingTickInClient(Player player, ActionCapability actionCapability) {
-        AnimationCapability animation = AnimationCapability.get(player);
+        //TODO update
+        /*AnimationCapability animation = AnimationCapability.get(player);
         if (animation != null && !animation.hasAnimator()) {
             animation.setAnimator(new ProneAnimator());
-        }
+        }*/
     }
 
     @Override

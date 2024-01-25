@@ -129,7 +129,8 @@ public class MapTopViewHelper {
             return;
         }
         hasRenderedAllChunksOld = false;
-        hasRenderedAllChunks = minecraft.levelRenderer.hasRenderedAllChunks();
+        //TODO check
+        hasRenderedAllChunks = minecraft.levelRenderer.hasRenderedAllSections();
         boolean chunkRenderDoneClaimed = hasRenderedAllChunks && hasRenderedAllChunksOld;
         boolean chunkRenderDoneReally;
         //timeout: 20s
@@ -147,7 +148,7 @@ public class MapTopViewHelper {
             }
             Minecraft.getInstance().execute(() -> {
                 hasRenderedAllChunksOld = hasRenderedAllChunks;
-                hasRenderedAllChunks = minecraft.levelRenderer.hasRenderedAllChunks();
+                hasRenderedAllChunks = minecraft.levelRenderer.hasRenderedAllSections();
             });
             chunkRenderDoneClaimed = hasRenderedAllChunksOld && hasRenderedAllChunks;
             i++;
@@ -162,7 +163,7 @@ public class MapTopViewHelper {
         //needtest Does this really work?
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
-                if (!minecraft.levelRenderer.isChunkCompiled(new BlockPos((int) (centerX) + i * 16, (int) y, (int) (centerZ) + i * 16))) {
+                if (!minecraft.levelRenderer.isSectionCompiled(new BlockPos((int) (centerX) + i * 16, (int) y, (int) (centerZ) + i * 16))) {
                     return false;
                 }
             }

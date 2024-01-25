@@ -1,6 +1,5 @@
 package cn.ussshenzhou.rainbow6.client.animationplayer;
 
-import cn.ussshenzhou.rainbow6.action.Actions;
 import cn.ussshenzhou.rainbow6.capability.ActionCapability;
 import net.minecraft.world.entity.player.Player;
 
@@ -12,7 +11,9 @@ import net.minecraft.world.entity.player.Player;
 public class ProneAnimator extends Animator {
     @Override
     public boolean shouldRemoved(Player player, ActionCapability actionCapability) {
-        return !actionCapability.getInstanceOf(Actions.PRONE).isDoing();
+        //TODO update
+        //return !actionCapability.getInstanceOf(Actions.PRONE).isDoing();
+        return true;
     }
 
     @Override

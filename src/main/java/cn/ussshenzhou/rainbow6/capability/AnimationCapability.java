@@ -1,30 +1,13 @@
 package cn.ussshenzhou.rainbow6.capability;
 
-import cn.ussshenzhou.rainbow6.client.animationplayer.Animator;
-import cn.ussshenzhou.rainbow6.client.animationplayer.PlayerModelRotator;
-import cn.ussshenzhou.rainbow6.client.animationplayer.PlayerModelTransformer;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.core.Direction;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.client.event.ViewportEvent;
-import net.minecraftforge.common.capabilities.AutoRegisterCapability;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
-
 /**
  * This file is copied and modified from com.alrex.parcool.common.capability.impl.Animation under GPLv3.
  *
  * @author USS_Shenzhou
  */
-@AutoRegisterCapability
 public class AnimationCapability {
-
-    public static @Nullable AnimationCapability get(Player player) {
+    //TODO update
+    /*public static @Nullable AnimationCapability get(Player player) {
         LazyOptional<AnimationCapability> optional = player.getCapability(ModCapabilityRegistry.ANIMATION_CAPABILITY);
         return optional.orElse(null);
     }
@@ -101,5 +84,5 @@ public class AnimationCapability {
         public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
             return ModCapabilityRegistry.ANIMATION_CAPABILITY.orEmpty(cap, optional);
         }
-    }
+    }*/
 }

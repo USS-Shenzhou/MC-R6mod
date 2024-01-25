@@ -4,9 +4,9 @@ import cn.ussshenzhou.rainbow6.event.OptionInstanceChangeEvent;
 import cn.ussshenzhou.rainbow6.util.KeyTrig;
 import cn.ussshenzhou.t88.config.ConfigHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
 
 /**
  * @author USS_Shenzhou

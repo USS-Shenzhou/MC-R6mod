@@ -10,13 +10,13 @@ import cn.ussshenzhou.t88.network.NetworkHelper;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.client.event.InputEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.TickEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
 
 /**
@@ -107,10 +107,10 @@ public class GunClientListener {
         //noinspection DataFlowIssue
         shooter.setSprinting(false);
 
-        MinecraftForge.EVENT_BUS.post(new GunShotFireClientEvent.Pre(shooter));
+        NeoForge.EVENT_BUS.post(new GunShotFireClientEvent.Pre(shooter));
         NetworkHelper.sendToServer(new GunShotFirePacket(shooter.getXRot(), shooter.getYRot()));
         //TODO Recoil
-        MinecraftForge.EVENT_BUS.post(new GunShotFireClientEvent.Post(shooter));
+        NeoForge.EVENT_BUS.post(new GunShotFireClientEvent.Post(shooter));
     }
 
 }

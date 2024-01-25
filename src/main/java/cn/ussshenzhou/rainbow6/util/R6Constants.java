@@ -1,14 +1,12 @@
 package cn.ussshenzhou.rainbow6.util;
 
-import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.dedicated.DedicatedServerProperties;
-import net.minecraftforge.common.util.LogicalSidedProvider;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.gametest.ForgeGameTestHooks;
+import net.neoforged.fml.LogicalSide;
+import net.neoforged.neoforge.common.util.LogicalSidedProvider;
+import net.neoforged.neoforge.gametest.GameTestHooks;
 
 import java.lang.management.ManagementFactory;
 
@@ -17,7 +15,7 @@ import java.lang.management.ManagementFactory;
  */
 public class R6Constants {
     public static final String MOD_ID = "r6ms";
-    public static final boolean TEST = ForgeGameTestHooks.isGametestEnabled();
+    public static final boolean TEST = GameTestHooks.isGametestEnabled();
     public static final boolean IS_ONLINE_SERVER = getIsOnLineServer();
 
     private static boolean getIsOnLineServer() {

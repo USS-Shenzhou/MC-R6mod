@@ -8,20 +8,22 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ModelEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * @author USS_Shenzhou
@@ -29,17 +31,18 @@ import java.util.Map;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModItemInventoryModelRegistry {
 
-    public static final LinkedList<RegistryObject<?>> HAVE_SPECIAL_HAND_MODEL = new LinkedList<>();
+    public static final LinkedList<Supplier<? extends Item>> HAVE_SPECIAL_HAND_MODEL = new LinkedList<>();
 
     @SubscribeEvent
     public static void regHandModel(ModelEvent.RegisterAdditional event) {
-        HAVE_SPECIAL_HAND_MODEL.forEach(o -> event.register(new ModelResourceLocation(R6Constants.MOD_ID, o.getId().getPath() + "_hand", "inventory")));
+        //TODO .replace('/', '.') ?
+        HAVE_SPECIAL_HAND_MODEL.forEach(o -> event.register(new ModelResourceLocation(R6Constants.MOD_ID, BuiltInRegistries.ITEM.getKey(o.get()).getPath() + "_hand", "inventory")));
     }
 
     @SubscribeEvent
     public static void replaceOnBake(ModelEvent.ModifyBakingResult event) {
         var models = event.getModels();
-        HAVE_SPECIAL_HAND_MODEL.forEach(o -> changeInventoryModel(models, o.getId().getPath()));
+        HAVE_SPECIAL_HAND_MODEL.forEach(o -> changeInventoryModel(models, BuiltInRegistries.ITEM.getKey(o.get()).getPath()));
     }
 
     private static void changeInventoryModel(Map<ResourceLocation, BakedModel> modelMap, String itemName) {

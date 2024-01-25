@@ -6,12 +6,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
@@ -21,12 +21,12 @@ import java.util.stream.Stream;
 public class ModGunItemRegistry {
     public static final DeferredRegister<Item> GUNS = ModItemRegistry.ITEMS;
 
-    public static final RegistryObject<TestGun> TEST_GUN = GUNS.register("test_gun", () -> new TestGun(FixedProperties.TEST));
+    public static final Supplier<TestGun> TEST_GUN = GUNS.register("test_gun", () -> new TestGun(FixedProperties.TEST));
 
     //----------creative tabs----------
 
     public static final DeferredRegister<CreativeModeTab> GUN_TABS = ModItemRegistry.TABS;
-    public static RegistryObject<CreativeModeTab> WEAPON_TAB = GUN_TABS.register("weapon", () -> CreativeModeTab.builder()
+    public static Supplier<CreativeModeTab> WEAPON_TAB = GUN_TABS.register("weapon", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(ModItemRegistry.OLD_LOGO.get()))
             .title(Component.translatable("tab.r6ms.weapon"))
             .build()
@@ -40,7 +40,7 @@ public class ModGunItemRegistry {
         }
     }
 
-    private static ItemStack initGunTags(RegistryObject<? extends TestGun> registryObject) {
+    private static ItemStack initGunTags(Supplier<? extends TestGun> registryObject) {
         var item = registryObject.get();
         var stack = new ItemStack(item);
         item.additionalTagOnCreativeTab(stack);

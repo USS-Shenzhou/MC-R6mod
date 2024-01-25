@@ -17,7 +17,7 @@ public enum KeyTrig implements ToTranslatableString {
     }
 
     @Override
-    public String toTranslateKey() {
+    public String translateKey() {
         return translateKey;
     }
 }

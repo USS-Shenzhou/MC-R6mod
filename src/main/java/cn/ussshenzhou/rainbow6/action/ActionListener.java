@@ -1,21 +1,8 @@
 package cn.ussshenzhou.rainbow6.action;
 
-import cn.ussshenzhou.rainbow6.capability.ActionCapability;
-import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
-import cn.ussshenzhou.rainbow6.network.SyncActionPacket;
-import cn.ussshenzhou.rainbow6.network.SyncHelper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ViewportEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.fml.common.Mod;
 
 import java.nio.ByteBuffer;
-import java.util.List;
 
 /**
  * This file is copied and modified from com.alrex.parcool.common.action.ActionProcessor under GPLv3.
@@ -28,8 +15,9 @@ public class ActionListener {
     private static final ByteBuffer bufferOfPreState = ByteBuffer.allocate(128);
     private static final ByteBuffer bufferOfStarting = ByteBuffer.allocate(128);
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void animationCapabilityClientTick(TickEvent.PlayerTickEvent event) {
+        //TODO update
         if (event.side == LogicalSide.SERVER) {
             return;
         }
@@ -179,5 +167,5 @@ public class ActionListener {
             return;
         }
         animationCapability.cameraSetup(event, player, actionCapability);
-    }
+    }*/
 }

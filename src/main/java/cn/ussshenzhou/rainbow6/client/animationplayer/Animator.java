@@ -2,7 +2,7 @@ package cn.ussshenzhou.rainbow6.client.animationplayer;
 
 import cn.ussshenzhou.rainbow6.capability.ActionCapability;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.client.event.ViewportEvent;
+import net.neoforged.neoforge.client.event.ViewportEvent;
 
 /**
  * This file is copied and modified from com.alrex.parcool.client.animation.Animator under GPLv3.

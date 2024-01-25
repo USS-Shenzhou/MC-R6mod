@@ -2,16 +2,16 @@ package cn.ussshenzhou.rainbow6.client.gui;
 
 import cn.ussshenzhou.rainbow6.client.gui.screen.MainMenuScreen;
 import cn.ussshenzhou.rainbow6.client.gui.hud.PlayerInfoBarHud;
-import cn.ussshenzhou.rainbow6.mixin.ForgeHooksClientAccessor;
+import cn.ussshenzhou.rainbow6.mixin.ClientHooksAccessor;
 import cn.ussshenzhou.t88.gui.HudManager;
 import cn.ussshenzhou.t88.gui.screen.TScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.client.ClientHooks;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
 
 import java.util.EmptyStackException;
 import java.util.Stack;
@@ -28,7 +28,7 @@ public class ScreenManager {
 
     public static void showNewLayerOverBg(TScreen screen) {
         SCREEN_STACK.push(screen);
-        ForgeHooksClient.pushGuiLayer(Minecraft.getInstance(), screen);
+        ClientHooks.pushGuiLayer(Minecraft.getInstance(), screen);
         initResizeScreen(screen);
     }
 
@@ -56,19 +56,19 @@ public class ScreenManager {
         }
         Screen forgeLayer = null;
         try {
-            forgeLayer = ForgeHooksClientAccessor.getGuiLayers().peek();
+            forgeLayer = ClientHooksAccessor.getGuiLayers().peek();
         } catch (EmptyStackException ignored) {
 
         }
         if (currentLayer == forgeLayer) {
-            ForgeHooksClient.popGuiLayer(minecraft);
+            ClientHooks.popGuiLayer(minecraft);
             if (minecraft.screen != nextLayer) {
-                screenBuffer = ForgeHooksClientAccessor.getGuiLayers();
+                screenBuffer = ClientHooksAccessor.getGuiLayers();
                 minecraft.setScreen(nextLayer);
             }
         } else {
             minecraft.setScreen(nextLayer);
-            ForgeHooksClientAccessor.setGuiLayers(screenBuffer);
+            ClientHooksAccessor.setGuiLayers(screenBuffer);
         }
         if (nextLayer != null) {
             initResizeScreen(nextLayer);

@@ -6,7 +6,7 @@ import cn.ussshenzhou.rainbow6.network.onlyto.server.GunShotFirePacket;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraftforge.network.NetworkEvent;
+import net.neoforged.neoforge.network.NetworkEvent;
 
 /**
  * @author USS_Shenzhou

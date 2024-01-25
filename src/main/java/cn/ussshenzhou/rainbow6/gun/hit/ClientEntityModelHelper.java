@@ -1,24 +1,12 @@
 package cn.ussshenzhou.rainbow6.gun.hit;
 
-import cn.ussshenzhou.rainbow6.network.UploadEntityModelPacket;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
-import cn.ussshenzhou.t88.network.NetworkHelper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 /**
  * @author USS_Shenzhou
@@ -35,9 +23,10 @@ public class ClientEntityModelHelper {
     }
 
     public static void sendModelsToServer() {
-        Map<ModelLayerLocation, LayerDefinition> models = Minecraft.getInstance().getEntityModels().roots;
+        //TODO update
+        /*Map<ModelLayerLocation, LayerDefinition> models = Minecraft.getInstance().getEntityModels().roots;
         CompletableFuture.runAsync(() -> {
-            ForgeRegistries.ENTITY_TYPES.getEntries().forEach(entry -> {
+            NeoForgeRegistries.ENTITY_TYPE.getEntries().forEach(entry -> {
                 if (entry.getValue() == EntityType.PLAYER) {
                     return;
                 }
@@ -54,16 +43,16 @@ public class ClientEntityModelHelper {
                 }
                 NetworkHelper.sendToServer(new UploadEntityModelPacket(type, head, body));
             });
-        });
+        });*/
     }
 
     private static PartDefinition find(String key, PartDefinition parent) {
-        if (parent.children.containsKey(key)) {
+        /*if (parent.children.containsKey(key)) {
             return parent.children.get(key);
         }
         for (PartDefinition p : parent.children.values()) {
             return find(key, p);
-        }
+        }*/
         return null;
     }
 }

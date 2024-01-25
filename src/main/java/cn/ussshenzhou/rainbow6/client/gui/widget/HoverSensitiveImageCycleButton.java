@@ -5,8 +5,8 @@ import cn.ussshenzhou.t88.gui.widegt.TCycleButton;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.bus.api.SubscribeEvent;
 
 /**
  * @author USS_Shenzhou
@@ -25,7 +25,7 @@ public class HoverSensitiveImageCycleButton<E> extends HoverSensitiveImageButton
             }
         };
         this.add(this.button);
-        MinecraftForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -48,7 +48,7 @@ public class HoverSensitiveImageCycleButton<E> extends HoverSensitiveImageButton
 
     @Override
     public void onFinalClose() {
-        MinecraftForge.EVENT_BUS.unregister(this);
+        NeoForge.EVENT_BUS.unregister(this);
         super.onFinalClose();
     }
 }

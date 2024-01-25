@@ -1,12 +1,10 @@
 package cn.ussshenzhou.rainbow6.mixin;
 
-import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
 import cn.ussshenzhou.rainbow6.client.animationplayer.PlayerModelTransformer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -32,7 +30,7 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
 
     @Inject(method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V", at = @At("HEAD"), cancellable = true)
     protected void onSetupAnimHead(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo info) {
-        if (!(entity instanceof Player player)) {
+        /*if (!(entity instanceof Player player)) {
             return;
         }
         PlayerModel<?> model = (PlayerModel<?>) (Object) this;
@@ -57,12 +55,13 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
         if (shouldCancel) {
             transformer = null;
             info.cancel();
-        }
+        }*/
     }
 
     @Inject(method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V", at = @At("TAIL"))
     protected void onSetupAnimTail(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo info) {
-        if (!(entity instanceof Player player)) {
+        //TODO update
+        /*if (!(entity instanceof Player player)) {
             return;
         }
         AnimationCapability animation = AnimationCapability.get(player);
@@ -75,7 +74,7 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
             animation.animatePost(player, transformer);
             transformer.copyFromBodyToWear();
             transformer = null;
-        }
+        }*/
     }
 
 }

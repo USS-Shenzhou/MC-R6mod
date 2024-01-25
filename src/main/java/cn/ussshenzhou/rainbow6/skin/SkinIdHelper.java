@@ -1,10 +1,11 @@
 package cn.ussshenzhou.rainbow6.skin;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.HashMap;
+import java.util.function.Supplier;
 
 /**
  * @author USS_Shenzhou
@@ -16,8 +17,8 @@ public class SkinIdHelper {
         //putItemId(ModItemRegistry.SKIN_TEST, 0x0000);
     }
 
-    private static void putItemId(RegistryObject<? extends Item> item, int id) {
-        SkinIdHelper.ITEM_ID.put(item.getId(), id);
+    private static void putItemId(Supplier<? extends Item> item, int id) {
+        SkinIdHelper.ITEM_ID.put(BuiltInRegistries.ITEM.getKey(item.get()), id);
     }
 
     protected static final HashMap<String, Integer> SKIN_NAME_ID = new HashMap<>();

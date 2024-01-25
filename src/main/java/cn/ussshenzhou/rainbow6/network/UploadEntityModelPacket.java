@@ -13,11 +13,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.NetworkDirection;
+import net.neoforged.neoforge.network.NetworkEvent;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.function.Supplier;
 
@@ -57,7 +57,7 @@ public class UploadEntityModelPacket {
     @Consumer
     public void handler(Supplier<NetworkEvent.Context> context) {
         if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-            var type = ForgeRegistries.ENTITY_TYPES.getValue(typeKey.location());
+            var type = NeoForgeRegistries.ENTITY_TYPES.getValue(typeKey.location());
             if (type == null || type == EntityType.PLAYER) {
                 return;
             }
