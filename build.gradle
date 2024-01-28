@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.80'
+    id 'net.neoforged.gradle.userdev' version '7.0.84'
 }
 
 version = mod_version
@@ -86,18 +86,18 @@ dependencies {
     // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
     // compileOnly "mezz.jei:jei-${mc_version}-forge-api:${jei_version}"
     // runtimeOnly "mezz.jei:jei-${mc_version}-forge:${jei_version}"
-    if (System.getProperty("idea.active")) {
-        implementation("cn.ussshenzhou:t88:0.7.+") {
-            exclude group: "net.minecraftforge", module: "neoforge"
-        }
-        annotationProcessor("cn.ussshenzhou:t88:0.7.+") {
-            exclude group: "net.minecraftforge", module: "neoforge"
-        }
-    } else {
-        def t88FileId = '5047389'
-        implementation fg.deobf('curse.maven:t88-663112:' + t88FileId)
-        annotationProcessor 'curse.maven:t88-663112:' + t88FileId
+    //if (System.getProperty("idea.active")) {
+    implementation("cn.ussshenzhou:t88:0.8.+") {
+        exclude group: "net.minecraftforge", module: "neoforge"
     }
+    annotationProcessor("cn.ussshenzhou:t88:0.8.+") {
+        exclude group: "net.minecraftforge", module: "neoforge"
+    }
+    /*} else {
+        def t88FileId = '5047389'
+        implementation 'curse.maven:t88-663112:' + t88FileId
+        annotationProcessor 'curse.maven:t88-663112:' + t88FileId
+    }*/
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
@@ -120,16 +120,28 @@ dependencies {
 // See https://docs.gradle.org/current/dsl/org.gradle.language.jvm.tasks.ProcessResources.html
 tasks.withType(ProcessResources).configureEach {
     var replaceProperties = [
-            minecraft_version   : minecraft_version, minecraft_version_range: minecraft_version_range,
-            neo_version         : neo_version, neo_version_range: neo_version_range,
-            loader_version_range: loader_version_range,
-            mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-            mod_authors         : mod_authors, mod_description: mod_description,
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description,
     ]
     inputs.properties replaceProperties
 
     filesMatching(['META-INF/mods.toml']) {
         expand replaceProperties + [project: project]
+    }
+}
+
+minecraft {
+    accessTransformers {
+        file('src/main/resources/META-INF/accesstransformer.cfg')
     }
 }
 

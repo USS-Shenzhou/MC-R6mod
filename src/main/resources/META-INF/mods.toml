@@ -62,7 +62,9 @@ mandatory = true
 versionRange = "[0.7,)"
 ordering = "NONE"
 side = "BOTH"
+
 [[accessTransformers]]
 file="META-INF/accesstransformer.cfg"
+
 [[mixins]]
 config="r6ms.mixins.json"

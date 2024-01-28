@@ -1,17 +1,12 @@
 package cn.ussshenzhou.rainbow6.network;
 
 import cn.ussshenzhou.rainbow6.server.match.MatchMaker;
-import cn.ussshenzhou.t88.network.annotation.Consumer;
-import cn.ussshenzhou.t88.network.annotation.Decoder;
-import cn.ussshenzhou.t88.network.annotation.Encoder;
-import cn.ussshenzhou.t88.network.annotation.NetPacket;
+import cn.ussshenzhou.t88.network.annotation.*;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.NetworkDirection;
-import net.neoforged.neoforge.network.NetworkEvent;
-
-import java.util.function.Supplier;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 
 /**
  * @author USS_Shenzhou
@@ -34,23 +29,16 @@ public class MatchMakerChangePacket {
         buf.writeEnum(flag);
     }
 
-    @Consumer
-    public void handler(Supplier<NetworkEvent.Context> context) {
-        if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-            serverHandler(context);
-        } else {
-            clientHandler();
-        }
-    }
-
     @OnlyIn(Dist.CLIENT)
-    public void clientHandler() {
+    @ClientHandler
+    public void clientHandler(PlayPayloadContext context) {
 
     }
 
-    public void serverHandler(Supplier<NetworkEvent.Context> context) {
+    @ServerHandler
+    public void serverHandler(PlayPayloadContext context) {
         switch (flag) {
-            case JOIN -> MatchMaker.addWaiting(context.get().getSender());
+            case JOIN -> MatchMaker.addWaiting((ServerPlayer) context.player().get());
             default -> {
             }
         }

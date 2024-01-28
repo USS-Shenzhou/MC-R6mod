@@ -4,23 +4,20 @@ import cn.ussshenzhou.rainbow6.action.Action;
 import cn.ussshenzhou.rainbow6.action.Actions;
 import cn.ussshenzhou.rainbow6.capability.ActionCapability;
 import cn.ussshenzhou.t88.network.NetworkHelper;
-import cn.ussshenzhou.t88.network.annotation.Consumer;
+import cn.ussshenzhou.t88.network.annotation.ClientHandler;
 import cn.ussshenzhou.t88.network.annotation.NetPacket;
-import com.mojang.logging.LogUtils;
+import cn.ussshenzhou.t88.network.annotation.ServerHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.NetworkDirection;
-import net.neoforged.neoforge.network.NetworkEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 
-import javax.annotation.Nullable;
 import java.nio.ByteBuffer;
 import java.util.UUID;
-import java.util.function.Supplier;
 
 /**
  * This file is copied and modified from com.alrex.parcool.common.network.SyncActionStateMessage under GPLv3.
@@ -36,7 +33,7 @@ public class SyncActionPacket {
     protected byte[] buffer = null;
 
     @cn.ussshenzhou.t88.network.annotation.Encoder
-    public void encode(FriendlyByteBuf packetBuffer) {
+    public void write(FriendlyByteBuf packetBuffer) {
         packetBuffer
                 .writeLong(senderUUID.getMostSignificantBits())
                 .writeLong(senderUUID.getLeastSignificantBits())
@@ -45,33 +42,24 @@ public class SyncActionPacket {
     }
 
     @cn.ussshenzhou.t88.network.annotation.Decoder
-    public static SyncActionPacket decode(FriendlyByteBuf packetBuffer) {
-        SyncActionPacket message = new SyncActionPacket();
-        message.senderUUID = new UUID(packetBuffer.readLong(), packetBuffer.readLong());
+    public SyncActionPacket(FriendlyByteBuf packetBuffer) {
+        this.senderUUID = new UUID(packetBuffer.readLong(), packetBuffer.readLong());
         int size = packetBuffer.readInt();
-        message.buffer = new byte[size];
-        packetBuffer.readBytes(message.buffer);
-        return message;
+        this.buffer = new byte[size];
+        packetBuffer.readBytes(this.buffer);
     }
 
-    @Consumer
-    public void handler(Supplier<NetworkEvent.Context> context) {
-        if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-            serverHandler(context);
-        } else {
-            clientHandler(context);
-        }
-    }
-
-    public void serverHandler(Supplier<NetworkEvent.Context> contextSupplier) {
-        Player player = contextSupplier.get().getSender();
+    @ServerHandler
+    public void serverHandler(PlayPayloadContext context) {
+        Player player = context.player().orElse(null);
         if (player == null) {
             return;
         }
         /*player.getLevel().getNearbyPlayers(TargetingConditions.forNonCombat(), player, player.getBoundingBox().inflate(16 * 12))
                 .forEach(p -> NetworkHelper.getChannel(SyncActionPacket.class).send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) p), this));*/
-        NetworkHelper.getChannel(SyncActionPacket.class).send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), this);
-        ActionCapability actionCapability = ActionCapability.get(player);
+        NetworkHelper.sendTo(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(player),this);
+        //TODO update
+        /*ActionCapability actionCapability = ActionCapability.get(player);
         if (actionCapability == null) {
             return;
         }
@@ -96,11 +84,12 @@ public class SyncActionPacket {
                 }
                 case NORMAL -> action.restoreSynchronizedState(item.getBuffer());
             }
-        }
+        }*/
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void clientHandler(Supplier<NetworkEvent.Context> contextSupplier) {
+    @ClientHandler
+    public void clientHandler(PlayPayloadContext context) {
         Player player;
         //boolean clientSide;
         Level world = Minecraft.getInstance().level;
@@ -111,7 +100,7 @@ public class SyncActionPacket {
         if (player == null || player.isLocalPlayer()) {
             return;
         }
-        ActionCapability actionCapability = ActionCapability.get(player);
+        /*ActionCapability actionCapability = ActionCapability.get(player);
         if (actionCapability == null) {
             return;
         }
@@ -136,7 +125,7 @@ public class SyncActionPacket {
                 }
                 case NORMAL -> action.restoreSynchronizedState(item.getBuffer());
             }
-        }
+        }*/
     }
 
     public static class Encoder {
@@ -202,7 +191,8 @@ public class SyncActionPacket {
             return buffer.position() < buffer.limit();
         }
 
-        @Nullable
+        //TODO update
+        /*@Nullable
         public SyncActionPacket.ActionSyncData getItem() {
             Action action = actionCapability.getInstanceOf(Actions.values()[buffer.getShort()]);
             SyncActionPacket.DataType type = SyncActionPacket.DataType.getFromCode(buffer.get());
@@ -235,7 +225,7 @@ public class SyncActionPacket {
             }
             ByteBuffer buf = ByteBuffer.wrap(array);
             return new SyncActionPacket.ActionSyncData(action, buf, type);
-        }
+        }*/
     }
 
     private enum DataType {

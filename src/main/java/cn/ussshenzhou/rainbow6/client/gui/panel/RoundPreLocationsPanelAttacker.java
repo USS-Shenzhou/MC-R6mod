@@ -62,7 +62,7 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
         });
         spawnPosButton.setSelected(true);
         spawnPosPairs.get(spawnPosButton).setSelected(true);
-        NetworkHelper.getChannel(ChooseAttackerSpawnPacket.class).sendToServer(new ChooseAttackerSpawnPacket(spawnPosPairs.keySet().stream().toList().indexOf(spawnPosButton)));
+        NetworkHelper.sendToServer(new ChooseAttackerSpawnPacket(spawnPosPairs.keySet().stream().toList().indexOf(spawnPosButton)));
         if (noneSelectedBefore) {
             RoundPrepareScreen screen = (RoundPrepareScreen) this.getParentScreen();
             screen.setButtonSelectedAndPanelVisible(screen.getOperatorsButton(), screen.getOperatorsPanel());

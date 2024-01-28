@@ -4,22 +4,17 @@ import cn.ussshenzhou.rainbow6.gun.hit.ClientEntityModelHelper;
 import cn.ussshenzhou.rainbow6.gun.hit.ModelUploadHelper;
 import cn.ussshenzhou.rainbow6.gun.hit.ServerHitHelper;
 import cn.ussshenzhou.rainbow6.gun.hit.ServerPartDefinition;
-import cn.ussshenzhou.t88.network.annotation.Consumer;
-import cn.ussshenzhou.t88.network.annotation.Decoder;
-import cn.ussshenzhou.t88.network.annotation.Encoder;
-import cn.ussshenzhou.t88.network.annotation.NetPacket;
+import cn.ussshenzhou.t88.network.annotation.*;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.NetworkDirection;
-import net.neoforged.neoforge.network.NetworkEvent;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
-
-import java.util.function.Supplier;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 
 /**
  * @author USS_Shenzhou
@@ -54,21 +49,18 @@ public class UploadEntityModelPacket {
         ModelUploadHelper.writePartDefinition(buf, body);
     }
 
-    @Consumer
-    public void handler(Supplier<NetworkEvent.Context> context) {
-        if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-            var type = NeoForgeRegistries.ENTITY_TYPES.getValue(typeKey.location());
-            if (type == null || type == EntityType.PLAYER) {
-                return;
-            }
-            ServerHitHelper.accept(context.get().getSender(), type, headS, bodyS);
-        } else {
-            clientHandler();
+    @ServerHandler
+    public void serverHandler(PlayPayloadContext context) {
+        var type = BuiltInRegistries.ENTITY_TYPE.get(typeKey.location());
+        if (type == EntityType.PLAYER) {
+            return;
         }
+        ServerHitHelper.accept((ServerPlayer) context.player().get(), type, headS, bodyS);
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void clientHandler() {
+    @ClientHandler
+    public void clientHandler(PlayPayloadContext context) {
         ClientEntityModelHelper.sendModelsToServer();
     }
 }

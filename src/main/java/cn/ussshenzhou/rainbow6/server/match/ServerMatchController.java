@@ -1,7 +1,5 @@
 package cn.ussshenzhou.rainbow6.server.match;
 
-import cn.ussshenzhou.rainbow6.action.Actions;
-import cn.ussshenzhou.rainbow6.capability.ActionCapability;
 import cn.ussshenzhou.rainbow6.config.Map;
 import cn.ussshenzhou.rainbow6.mixinproxy.FoodDataProxy;
 import cn.ussshenzhou.rainbow6.network.onlyto.client.*;
@@ -26,11 +24,12 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelData;
+import net.neoforged.bus.api.Event;
+import net.neoforged.fml.LogicalSide;
 import net.neoforged.neoforge.common.util.LogicalSidedProvider;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
-import net.neoforged.bus.api.Event;
-import net.neoforged.fml.LogicalSide;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -249,22 +248,22 @@ public class ServerMatchController {
 
     //----------Network Handle----------
 
-    public <MSG> void receivePacket(MSG packet, NetworkEvent.Context context) {
+    public <MSG> void receivePacket(MSG packet, PlayPayloadContext context) {
         if (packet instanceof ChooseAttackerSpawnPacket chooseAttackerSpawn) {
             attackerChooseSpawn(chooseAttackerSpawn, context);
         } else if (packet instanceof RoundPreDonePacket roundPreDone) {
-            roundPreDone(context.getSender());
+            roundPreDone((ServerPlayer) context.player().get());
         } else if (packet instanceof ChooseOperatorPacket chooseOperator) {
-            chooseOperator(context.getSender(), chooseOperator.operator);
+            chooseOperator((ServerPlayer) context.player().get(), chooseOperator.operator);
         }
     }
 
-    private void attackerChooseSpawn(ChooseAttackerSpawnPacket chooseAttackerSpawn, NetworkEvent.Context context) {
-        if (!match.getAttackers().contains(context.getSender())) {
+    private void attackerChooseSpawn(ChooseAttackerSpawnPacket chooseAttackerSpawn, PlayPayloadContext context) {
+        if (!match.getAttackers().contains(context.player().get())) {
             incorrectPacket(chooseAttackerSpawn, context);
             return;
         }
-        match.attackerSpawns.put(context.getSender(), chooseAttackerSpawn.spawnPosIndex);
+        match.attackerSpawns.put((ServerPlayer) context.player().get(), chooseAttackerSpawn.spawnPosIndex);
     }
 
     private void roundPreDone(ServerPlayer player) {
@@ -280,12 +279,12 @@ public class ServerMatchController {
         match.sendToFriendly(player, new OperatorRevealedPacket(player.getUUID(), operator));
     }
 
-    private <MSG> void incorrectPacket(MSG packet, NetworkEvent.Context context) {
+    private <MSG> void incorrectPacket(MSG packet, PlayPayloadContext context) {
         incorrectPacket(packet, context, "");
     }
 
-    private <MSG> void incorrectPacket(MSG packet, NetworkEvent.Context context, String message) {
-        LogUtils.getLogger().warn("Received unreasonable network packet {} from {}. {}", packet, context.getSender(), message);
+    private <MSG> void incorrectPacket(MSG packet, PlayPayloadContext context, String message) {
+        LogUtils.getLogger().warn("Received unreasonable network packet {} from {}. {}", packet, context.player().get(), message);
     }
 
     //----------Event Handle----------
@@ -325,7 +324,7 @@ public class ServerMatchController {
     }
 
     private void checkRoundEndByDeath() {
-        boolean defenderAllDied = match.getDefenders().stream().noneMatch(player ->
+        /*boolean defenderAllDied = match.getDefenders().stream().noneMatch(player ->
                 (!player.isSpectator()) || ActionCapability.get(player).getInstanceOf(Actions.DOWN).isDoing());
         boolean attackerAllDied = match.getAttackers().stream().noneMatch(player ->
                 (!player.isSpectator()) || ActionCapability.get(player).getInstanceOf(Actions.DOWN).isDoing());
@@ -344,6 +343,6 @@ public class ServerMatchController {
                 roundEnd(Side.ATTACKER);
                 return;
             }
-        }
+        }*/
     }
 }

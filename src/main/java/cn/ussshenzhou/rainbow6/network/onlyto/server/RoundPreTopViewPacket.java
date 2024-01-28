@@ -3,10 +3,7 @@ package cn.ussshenzhou.rainbow6.network.onlyto.server;
 import cn.ussshenzhou.rainbow6.config.Map;
 import cn.ussshenzhou.rainbow6.server.match.ServerMatchManager;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
-import cn.ussshenzhou.t88.network.annotation.Consumer;
-import cn.ussshenzhou.t88.network.annotation.Decoder;
-import cn.ussshenzhou.t88.network.annotation.Encoder;
-import cn.ussshenzhou.t88.network.annotation.NetPacket;
+import cn.ussshenzhou.t88.network.annotation.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -16,12 +13,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.common.util.LogicalSidedProvider;
 import net.neoforged.fml.LogicalSide;
-import net.neoforged.neoforge.network.NetworkDirection;
-import net.neoforged.neoforge.network.NetworkEvent;
-
-import java.util.function.Supplier;
+import net.neoforged.neoforge.common.util.LogicalSidedProvider;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 
 /**
  * @author USS_Shenzhou
@@ -54,28 +48,20 @@ public class RoundPreTopViewPacket {
         buf.writeBoolean(turn);
     }
 
-    @Consumer
-    public void handler(Supplier<NetworkEvent.Context> context) {
-        if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-            serverHandler(context);
-        } else {
-            clientHandler();
-        }
-    }
-
     @OnlyIn(Dist.CLIENT)
-    public void clientHandler() {
+    @ClientHandler
+    public void clientHandler(PlayPayloadContext context) {
 
     }
 
-    public void serverHandler(Supplier<NetworkEvent.Context> context) {
+    @ServerHandler
+    public void serverHandler(PlayPayloadContext context) {
+        ServerPlayer player = (ServerPlayer) context.player().get();
         if (R6Constants.TEST) {
-            ServerPlayer player = context.get().getSender();
             player.connection.teleport(x, y, z, turn ? -90 : 180, 90);
             return;
         }
         try {
-            ServerPlayer player = context.get().getSender();
             Map map = ServerMatchManager.getPlayerMatch(player).getMap();
             if (posCheck(player, map)) {
                 MinecraftServer minecraftServer = (MinecraftServer) LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);

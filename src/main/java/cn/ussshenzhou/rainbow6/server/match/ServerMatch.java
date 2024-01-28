@@ -5,12 +5,11 @@ import cn.ussshenzhou.rainbow6.server.DelayedTaskManager;
 import cn.ussshenzhou.rainbow6.util.Operator;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
 import cn.ussshenzhou.t88.network.NetworkHelper;
-import com.mojang.logging.LogUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.neoforged.bus.api.Event;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -57,33 +56,28 @@ public class ServerMatch {
     //----------Network----------
 
     public <MSG> void sendPacketsTo(Collection<ServerPlayer> players, MSG packet) {
-        SimpleChannel channel = NetworkHelper.getChannel(packet.getClass());
-        if (channel == null) {
-            LogUtils.getLogger().error("Failed to find channel for {}.", packet.getClass().getName());
-            return;
-        }
-        players.forEach(player -> channel.send(PacketDistributor.PLAYER.with(() -> player), packet));
+        players.forEach(player -> NetworkHelper.sendToPlayer(player, packet));
     }
 
     public <MSG> void sendPacketsToEveryOne(MSG packet) {
-        forEachPlayer(player -> NetworkHelper.getChannel(packet.getClass()).send(PacketDistributor.PLAYER.with(() -> player), packet));
+        forEachPlayer(player -> NetworkHelper.sendToPlayer(player, packet));
     }
 
     public <MSG> void sendPacketsToAttackers(MSG packet) {
-        getAttackers().forEach(player -> NetworkHelper.getChannel(packet.getClass()).send(PacketDistributor.PLAYER.with(() -> player), packet));
+        getAttackers().forEach(player -> NetworkHelper.sendToPlayer(player, packet));
     }
 
     public <MSG> void sendPacketsToDefenders(MSG packet) {
-        getDefenders().forEach(player -> NetworkHelper.getChannel(packet.getClass()).send(PacketDistributor.PLAYER.with(() -> player), packet));
+        getDefenders().forEach(player -> NetworkHelper.sendToPlayer(player, packet));
     }
 
-    public <MSG> void receivePacket(MSG packet, NetworkEvent.Context context) {
+    public <MSG> void receivePacket(MSG packet, PlayPayloadContext context) {
         controller.receivePacket(packet, context);
     }
 
     public <MSG> void sendToFriendly(ServerPlayer player, MSG packet) {
         LinkedHashSet<ServerPlayer> target = teamBlue.contains(player) ? teamBlue : teamOrange;
-        target.forEach(p -> NetworkHelper.getChannel(packet.getClass()).send(PacketDistributor.PLAYER.with(() -> p), packet));
+        target.forEach(p -> NetworkHelper.sendToPlayer(p, packet));
     }
 
     //----------Event----------

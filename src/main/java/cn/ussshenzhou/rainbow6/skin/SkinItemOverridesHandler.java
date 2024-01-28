@@ -5,9 +5,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -23,7 +23,7 @@ public class SkinItemOverridesHandler extends ItemOverrides {
         if ("".equals(skinName)) {
             return pModel;
         } else {
-            var skin = SkinManager.getSkin(NeoForgeRegistries.ITEMS.getKey(pStack.getItem()), skinName);
+            var skin = SkinManager.getSkin(BuiltInRegistries.ITEM.getKey(pStack.getItem()), skinName);
             if (skin == null) {
                 LogUtils.getLogger().error("Failed to find skin {} for item {}. This should not happen.", skinName, pStack.getItem());
                 return pModel;

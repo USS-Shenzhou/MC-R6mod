@@ -2,19 +2,14 @@ package cn.ussshenzhou.rainbow6.network.onlyto.client;
 
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.config.Map;
-import cn.ussshenzhou.t88.network.annotation.Consumer;
-import cn.ussshenzhou.t88.network.annotation.Decoder;
-import cn.ussshenzhou.t88.network.annotation.Encoder;
-import cn.ussshenzhou.t88.network.annotation.NetPacket;
+import cn.ussshenzhou.t88.network.annotation.*;
 import net.minecraft.network.FriendlyByteBuf;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.NetworkDirection;
-import net.neoforged.neoforge.network.NetworkEvent;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.function.Supplier;
 
 /**
  * @author USS_Shenzhou
@@ -41,21 +36,15 @@ public class MatchInitPacket {
         buf.writeCollection(playerUuids, FriendlyByteBuf::writeUUID);
     }
 
-    @Consumer
-    public void handler(Supplier<NetworkEvent.Context> context) {
-        if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-            serverHandler();
-        } else {
-            clientHandler();
-        }
-    }
 
     @OnlyIn(Dist.CLIENT)
-    public void clientHandler() {
+    @ClientHandler
+    public void clientHandler(PlayPayloadContext context) {
         ClientMatch.init(map, playerUuids);
     }
 
-    public void serverHandler() {
+    @ServerHandler
+    public void serverHandler(PlayPayloadContext context) {
 
     }
 }

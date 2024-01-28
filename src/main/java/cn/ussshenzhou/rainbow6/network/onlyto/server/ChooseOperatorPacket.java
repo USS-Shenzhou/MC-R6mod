@@ -2,15 +2,11 @@ package cn.ussshenzhou.rainbow6.network.onlyto.server;
 
 import cn.ussshenzhou.rainbow6.server.match.ServerMatchManager;
 import cn.ussshenzhou.rainbow6.util.Operator;
-import cn.ussshenzhou.t88.network.annotation.Consumer;
-import cn.ussshenzhou.t88.network.annotation.Decoder;
-import cn.ussshenzhou.t88.network.annotation.Encoder;
-import cn.ussshenzhou.t88.network.annotation.NetPacket;
+import cn.ussshenzhou.t88.network.annotation.*;
 import net.minecraft.network.FriendlyByteBuf;
-import net.neoforged.neoforge.network.NetworkDirection;
-import net.neoforged.neoforge.network.NetworkEvent;
-
-import java.util.function.Supplier;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 
 /**
  * @author USS_Shenzhou
@@ -33,10 +29,14 @@ public class ChooseOperatorPacket {
         buf.writeEnum(operator);
     }
 
-    @Consumer
-    public void handler(Supplier<NetworkEvent.Context> context) {
-        if (context.get().getDirection().equals(NetworkDirection.PLAY_TO_SERVER)) {
-            ServerMatchManager.receiveNetPacket(this, context.get());
-        }
+    @ServerHandler
+    public void serverHandler(PlayPayloadContext context){
+        ServerMatchManager.receiveNetPacket(this, context);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @ClientHandler
+    public void clientHandler(PlayPayloadContext context) {
+
     }
 }

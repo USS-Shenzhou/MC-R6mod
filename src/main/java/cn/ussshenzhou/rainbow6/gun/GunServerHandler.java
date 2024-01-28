@@ -6,15 +6,15 @@ import cn.ussshenzhou.rainbow6.network.onlyto.server.GunShotFirePacket;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.neoforged.neoforge.network.NetworkEvent;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 
 /**
  * @author USS_Shenzhou
  */
 public class GunServerHandler {
 
-    public static void shoot(GunShotFirePacket packet, NetworkEvent.Context context) {
-        ServerPlayer sender = context.getSender();
+    public static void shoot(GunShotFirePacket packet, PlayPayloadContext context) {
+        ServerPlayer sender = (ServerPlayer) context.player().get();
         if (sender == null || sender.isSpectator()) {
             return;
         }

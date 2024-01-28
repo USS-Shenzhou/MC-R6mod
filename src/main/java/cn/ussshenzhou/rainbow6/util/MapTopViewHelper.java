@@ -79,7 +79,7 @@ public class MapTopViewHelper {
     private static volatile Vec3 playerPos;
 
     public static NativeImage teleportAndTakeScreenshot(float centerX, float y, float centerZ, float cameraZoomFactor, boolean clipRoof, boolean turn) {
-        NetworkHelper.getChannel(RoundPreTopViewPacket.class).sendToServer(new RoundPreTopViewPacket(centerX, y, centerZ, turn));
+        NetworkHelper.sendToServer(new RoundPreTopViewPacket(centerX, y, centerZ, turn));
         minecraft.execute(() -> {
             minecraft.options.cloudStatus().set(CloudStatus.OFF);
             ((LevelRendererProxy) minecraft.levelRenderer).r6msEnableOrthographic(cameraZoomFactor).setR6msClipRoof(clipRoof);

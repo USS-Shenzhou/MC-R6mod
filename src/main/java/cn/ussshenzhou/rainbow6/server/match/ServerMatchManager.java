@@ -2,9 +2,9 @@ package cn.ussshenzhou.rainbow6.server.match;
 
 import cn.ussshenzhou.rainbow6.config.Map;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.bus.api.Event;
-import net.neoforged.neoforge.network.NetworkEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -44,9 +44,9 @@ public class ServerMatchManager {
         MATCHES.forEach(ServerMatch::tick);
     }
 
-    public static <MSG> void receiveNetPacket(MSG packet, NetworkEvent.Context context) {
-        if (PLAYERS_IN_MATCH.containsKey(context.getSender())) {
-            PLAYERS_IN_MATCH.get(context.getSender()).receivePacket(packet, context);
+    public static <MSG> void receiveNetPacket(MSG packet, PlayPayloadContext context) {
+        if (PLAYERS_IN_MATCH.containsKey(context.player().get())) {
+            PLAYERS_IN_MATCH.get(context.player().get()).receivePacket(packet, context);
         }
     }
 
