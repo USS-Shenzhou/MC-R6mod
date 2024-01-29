@@ -86,8 +86,9 @@ public class RoundPreOperatorsPanel extends TPanel {
                     operator.getIcon(52),
                     new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button40_operators.png")
             );
-            this.text.setHorizontalAlignment(HorizontalAlignment.CENTER);
-            this.text.setFontSize(R6Constants.FONT_TINY_2);
+            this.text.setHorizontalAlignment(HorizontalAlignment.CENTER)
+                    .setFontSize(R6Constants.FONT_TINY_2)
+                    .setAutoScroll(false);
             this.setPadding(3);
             this.operator = operator;
         }

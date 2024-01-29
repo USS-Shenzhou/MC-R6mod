@@ -1,4 +1,4 @@
-package cn.ussshenzhou.rainbow6.client.gui.option;
+package cn.ussshenzhou.rainbow6.client.gui.panel.option;
 
 import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.util.ClientUtils;
@@ -8,7 +8,6 @@ import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 

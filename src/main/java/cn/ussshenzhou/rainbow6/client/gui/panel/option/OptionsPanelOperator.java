@@ -1,8 +1,7 @@
-package cn.ussshenzhou.rainbow6.client.gui.option;
+package cn.ussshenzhou.rainbow6.client.gui.panel.option;
 
 import cn.ussshenzhou.rainbow6.gun.hit.ClientEntityModelHelper;
 import cn.ussshenzhou.rainbow6.util.ClientUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 
 /**

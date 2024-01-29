@@ -33,7 +33,8 @@ import java.util.concurrent.CompletableFuture;
 public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
     volatile ArrayList<DynamicTextureWithMapData> map = null;
     LinkedHashMap<BombSiteButton, TImage[]> bombSitePairs = new LinkedHashMap<>();
-    private boolean noneSelected = true;
+    //Do not need now
+    //private boolean noneSelected = true;
 
     public RoundPreLocationsPanelDefender() {
         super(new TLabel(Component.translatable("gui.r6ms.round_prepare.bomb_location")));

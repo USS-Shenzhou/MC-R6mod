@@ -1,4 +1,4 @@
-package cn.ussshenzhou.rainbow6.client.gui.option;
+package cn.ussshenzhou.rainbow6.client.gui.panel.option;
 
 import cn.ussshenzhou.rainbow6.config.Control;
 import cn.ussshenzhou.rainbow6.util.KeyTrig;
