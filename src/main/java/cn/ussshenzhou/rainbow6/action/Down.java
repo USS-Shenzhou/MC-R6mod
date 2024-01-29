@@ -20,12 +20,12 @@ public class Down extends Action {
     }
 
     @Override
-    public boolean canStartInClient(Player player, ActionCapability actionCapability, ByteBuffer startInfo) {
+    public boolean canStart(Player player, ActionCapability actionCapability, ByteBuffer startInfo) {
         return (ClientMatch.isDown());
     }
 
     @Override
-    public boolean canContinueInClient(Player player, ActionCapability actionCapability) {
+    public boolean canContinue(Player player, ActionCapability actionCapability) {
         return ClientMatch.isDown();
     }
 

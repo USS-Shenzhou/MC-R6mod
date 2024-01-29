@@ -60,7 +60,7 @@ public class SyncActionPacket {
         }
         /*player.getLevel().getNearbyPlayers(TargetingConditions.forNonCombat(), player, player.getBoundingBox().inflate(16 * 12))
                 .forEach(p -> NetworkHelper.getChannel(SyncActionPacket.class).send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) p), this));*/
-        NetworkHelper.sendTo(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(player),this);
+        NetworkHelper.sendTo(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(player), this);
         ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
         if (actionCapability == null) {
             return;
@@ -102,7 +102,7 @@ public class SyncActionPacket {
         if (player == null || player.isLocalPlayer()) {
             return;
         }
-        /*ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
+        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
         if (actionCapability == null) {
             return;
         }
@@ -127,7 +127,7 @@ public class SyncActionPacket {
                 }
                 case NORMAL -> action.restoreSynchronizedState(item.getBuffer());
             }
-        }*/
+        }
     }
 
     public static class Encoder {

@@ -82,7 +82,7 @@ public class ActionListener {
 
             if (player.isLocalPlayer()) {
                 if (action.isDoing()) {
-                    boolean canContinue = action.canContinueInClient(player, actionCapability);
+                    boolean canContinue = action.canContinue(player, actionCapability);
                     if (!canContinue) {
                         action.setDoing(false);
                         action.onStopInLocalClient(player);
@@ -91,7 +91,7 @@ public class ActionListener {
                     }
                 } else {
                     bufferOfStarting.clear();
-                    boolean start = action.canStartInClient(player, actionCapability, bufferOfStarting);
+                    boolean start = action.canStart(player, actionCapability, bufferOfStarting);
                     bufferOfStarting.flip();
                     if (start) {
                         action.setDoing(true);

@@ -3,6 +3,8 @@ package cn.ussshenzhou.rainbow6.capability;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.capabilities.EntityCapability;
@@ -19,21 +21,14 @@ public class ModCapabilities {
     public static final EntityCapability<ActionCapability, Void> ACTION_CAPABILITY = EntityCapability.createVoid(ACTION, ActionCapability.class);
     public static final EntityCapability<AnimationCapability, Void> ANIMATION_CAPABILITY = EntityCapability.createVoid(ANIMATION, AnimationCapability.class);
 
-    /*@SubscribeEvent
-    public static void attachCapability(AttachCapabilitiesEvent<Entity> event) {
-        if (event.getObject() instanceof Player player) {
-            event.addCapability(ACTION, new ActionCapability.Provider());
-
-            if (player.level().isClientSide) {
-                event.addCapability(ANIMATION, new AnimationCapability.Provider());
-
-            }
-        }
-    }*/
-
     @SubscribeEvent
     public static void registerCapability(RegisterCapabilitiesEvent event) {
         event.registerEntity(ACTION_CAPABILITY, EntityType.PLAYER, (player, nothing) -> new ActionCapability());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void registerCapabilityClient(RegisterCapabilitiesEvent event) {
         event.registerEntity(ANIMATION_CAPABILITY, EntityType.PLAYER, (player, nothing) -> new AnimationCapability());
     }
 }
