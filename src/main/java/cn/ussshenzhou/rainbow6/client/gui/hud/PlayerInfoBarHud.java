@@ -41,14 +41,17 @@ public class PlayerInfoBarHud extends TImage {
         this.add(enemies);
         this.add(allyIcon);
         this.add(enemyIcon);
-        allyScore.setHorizontalAlignment(HorizontalAlignment.CENTER);
-        allyScore.setForeground(ClientMatch.getAllyTeamColor().getARGB());
+        allyScore.setHorizontalAlignment(HorizontalAlignment.CENTER)
+                .setAutoScroll(false)
+                .setForeground(ClientMatch.getAllyTeamColor().getARGB());
         this.add(allyScore);
-        enemyScore.setHorizontalAlignment(HorizontalAlignment.CENTER);
-        enemyScore.setForeground(ClientMatch.getAllyTeamColor().opposite().getARGB());
+        enemyScore.setHorizontalAlignment(HorizontalAlignment.CENTER)
+                .setAutoScroll(false)
+                .setForeground(ClientMatch.getAllyTeamColor().opposite().getARGB());
         this.add(enemyScore);
-        roundCount.setHorizontalAlignment(HorizontalAlignment.CENTER);
-        roundCount.setFontSize(3.49f);
+        roundCount.setHorizontalAlignment(HorizontalAlignment.CENTER)
+                .setAutoScroll(false)
+                .setFontSize(R6Constants.FONT_TINY_2);
         this.add(roundCount);
         timer = TTimer.newTimerCountDown(countdownTime);
         timer.setHorizontalAlignment(HorizontalAlignment.CENTER);
@@ -56,8 +59,6 @@ public class PlayerInfoBarHud extends TImage {
         timer.setKeepDigitsLength(false);
         timer.setShowUpto(TTimer.TimeCategory.MIN);
         this.add(timer);
-
-        roundCount.setBorder(new Border(0xffff0000,-1));
     }
 
     @Override
