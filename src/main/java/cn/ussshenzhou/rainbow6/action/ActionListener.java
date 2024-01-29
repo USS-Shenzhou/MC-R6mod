@@ -2,6 +2,7 @@ package cn.ussshenzhou.rainbow6.action;
 
 import cn.ussshenzhou.rainbow6.capability.ActionCapability;
 import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
+import cn.ussshenzhou.rainbow6.capability.ModCapabilities;
 import cn.ussshenzhou.rainbow6.network.SyncActionPacket;
 import cn.ussshenzhou.rainbow6.network.SyncHelper;
 import net.minecraft.client.Minecraft;
@@ -30,35 +31,28 @@ public class ActionListener {
 
     @SubscribeEvent
     public static void animationCapabilityClientTick(TickEvent.PlayerTickEvent event) {
-        //TODO update
-        /*if (event.side == LogicalSide.SERVER) {
-            return;
-        }
-        if (event.phase == TickEvent.Phase.START) {
-            return;
-        }
-        if (event.side != LogicalSide.CLIENT) {
+        if (event.side == LogicalSide.SERVER || event.phase == TickEvent.Phase.START) {
             return;
         }
         Player player = event.player;
-        AnimationCapability animationCapability = AnimationCapability.get(player);
+        AnimationCapability animationCapability = player.getCapability(ModCapabilities.ANIMATION_CAPABILITY);
         if (animationCapability == null) {
             return;
         }
-        ActionCapability actionCapability = ActionCapability.get(player);
+        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
         if (actionCapability == null) {
             return;
         }
-        animationCapability.tick(player, actionCapability);*/
+        animationCapability.tick(player, actionCapability);
     }
 
-    /*@SubscribeEvent
+    @SubscribeEvent
     public static void onTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
             return;
         }
         Player player = event.player;
-        ActionCapability actionCapability = ActionCapability.get(player);
+        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
         if (actionCapability == null) {
             return;
         }
@@ -147,13 +141,13 @@ public class ActionListener {
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public void onRenderTick(TickEvent.RenderTickEvent event) {
+    public static void onRenderTick(TickEvent.RenderTickEvent event) {
         Player clientPlayer = Minecraft.getInstance().player;
         if (clientPlayer == null) {
             return;
         }
         for (Player player : clientPlayer.level().players()) {
-            ActionCapability actionCapability = ActionCapability.get(player);
+            ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
             if (actionCapability == null) {
                 return;
             }
@@ -166,19 +160,19 @@ public class ActionListener {
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public void onViewRender(ViewportEvent.ComputeCameraAngles event) {
+    public static void onViewRender(ViewportEvent.ComputeCameraAngles event) {
         Player player = Minecraft.getInstance().player;
         if (player == null) {
             return;
         }
-        ActionCapability actionCapability = ActionCapability.get(player);
+        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
         if (actionCapability == null) {
             return;
         }
-        AnimationCapability animationCapability = AnimationCapability.get(player);
+        AnimationCapability animationCapability = player.getCapability(ModCapabilities.ANIMATION_CAPABILITY);
         if (animationCapability == null) {
             return;
         }
         animationCapability.cameraSetup(event, player, actionCapability);
-    }*/
+    }
 }

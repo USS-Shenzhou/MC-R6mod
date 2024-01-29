@@ -7,9 +7,16 @@ import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -97,9 +104,7 @@ public abstract class OptionsPanel extends TScrollPanel {
         super.layout();
     }
 
-    //TODO update
-    /*@Override
-    protected void renderScrollBar() {
+    /*protected void renderScrollBar() {
         int k1 = this.getMaxScroll();
         if (k1 > 0) {
             int i = this.getScrollBarX();

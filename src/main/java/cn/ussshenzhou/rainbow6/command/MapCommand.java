@@ -6,6 +6,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -189,8 +190,7 @@ public class MapCommand {
     private static void checkMap(CommandContext<CommandSourceStack> context) {
         String mapName = context.getArgument("name", String.class);
         if (!mapName.equals(mapCache.getName())) {
-            //TODO update
-            //throw new CommandRuntimeException(Component.translatable("commands.rainbow6.map.mismatch", mapName, mapCache.getName()));
+            context.getSource().sendFailure(Component.translatable("commands.rainbow6.map.mismatch", mapName, mapCache.getName()));
         }
     }
 

@@ -325,9 +325,9 @@ public class ServerMatchController {
 
     private void checkRoundEndByDeath() {
         /*boolean defenderAllDied = match.getDefenders().stream().noneMatch(player ->
-                (!player.isSpectator()) || ActionCapability.get(player).getInstanceOf(Actions.DOWN).isDoing());
+                (!player.isSpectator()) || player.getCapability(ModCapabilities.ACTION_CAPABILITY).getInstanceOf(Actions.DOWN).isDoing());
         boolean attackerAllDied = match.getAttackers().stream().noneMatch(player ->
-                (!player.isSpectator()) || ActionCapability.get(player).getInstanceOf(Actions.DOWN).isDoing());
+                (!player.isSpectator()) || player.getCapability(ModCapabilities.ACTION_CAPABILITY).getInstanceOf(Actions.DOWN).isDoing());
         //noinspection IfStatementWithIdenticalBranches
         if (!match.planted) {
             if (attackerAllDied) {

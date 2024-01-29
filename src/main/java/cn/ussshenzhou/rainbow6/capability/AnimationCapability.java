@@ -1,16 +1,19 @@
 package cn.ussshenzhou.rainbow6.capability;
 
+import cn.ussshenzhou.rainbow6.client.animationplayer.Animator;
+import cn.ussshenzhou.rainbow6.client.animationplayer.PlayerModelRotator;
+import cn.ussshenzhou.rainbow6.client.animationplayer.PlayerModelTransformer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.client.event.ViewportEvent;
+
 /**
  * This file is copied and modified from com.alrex.parcool.common.capability.impl.Animation under GPLv3.
  *
  * @author USS_Shenzhou
  */
 public class AnimationCapability {
-    //TODO update
-    /*public static @Nullable AnimationCapability get(Player player) {
-        LazyOptional<AnimationCapability> optional = player.getCapability(ModCapabilityRegistry.ANIMATION_CAPABILITY);
-        return optional.orElse(null);
-    }
 
     private Animator animator = null;
 
@@ -22,12 +25,12 @@ public class AnimationCapability {
         if (animator == null) {
             return false;
         }
-        ActionCapability actionCapability = ActionCapability.get(player);
+        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
         return animator.animatePre(player, actionCapability, modelTransformer);
     }
 
     public void animatePost(Player player, PlayerModelTransformer modelTransformer) {
-        ActionCapability actionCapability = ActionCapability.get(player);
+        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
         if (actionCapability == null) {
             return;
         }
@@ -38,7 +41,7 @@ public class AnimationCapability {
     }
 
     public void applyRotate(AbstractClientPlayer player, PlayerModelRotator rotator) {
-        ActionCapability actionCapability = ActionCapability.get(player);
+        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
         if (actionCapability == null) {
             return;
         }
@@ -75,14 +78,4 @@ public class AnimationCapability {
     public void removeAnimator() {
         animator = null;
     }
-
-    public static class Provider implements ICapabilityProvider {
-        private final AnimationCapability instance = new AnimationCapability();
-        private final LazyOptional<AnimationCapability> optional = LazyOptional.of(() -> instance);
-
-        @Override
-        public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-            return ModCapabilityRegistry.ANIMATION_CAPABILITY.orEmpty(cap, optional);
-        }
-    }*/
 }

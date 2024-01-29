@@ -21,7 +21,7 @@ import net.neoforged.neoforge.network.handling.PlayPayloadContext;
  */
 @NetPacket
 public class UploadEntityModelPacket {
-    public final ResourceKey<EntityType<?>> typeKey;
+    public final EntityType<?> typeKey;
 
     @OnlyIn(Dist.CLIENT)
     private PartDefinition head, body;
@@ -29,7 +29,7 @@ public class UploadEntityModelPacket {
     public ServerPartDefinition headS, bodyS;
 
     @OnlyIn(Dist.CLIENT)
-    public UploadEntityModelPacket(ResourceKey<EntityType<?>> typeKey, PartDefinition head, PartDefinition body) {
+    public UploadEntityModelPacket(EntityType<?> typeKey, PartDefinition head, PartDefinition body) {
         this.typeKey = typeKey;
         this.head = head;
         this.body = body;
@@ -37,25 +37,24 @@ public class UploadEntityModelPacket {
 
     @Decoder
     public UploadEntityModelPacket(FriendlyByteBuf buf) {
-        typeKey = buf.readResourceKey(Registries.ENTITY_TYPE);
+        typeKey = BuiltInRegistries.ENTITY_TYPE.byId(buf.readInt());
         headS = ModelUploadHelper.readServerPartDefinition(buf);
         bodyS = ModelUploadHelper.readServerPartDefinition(buf);
     }
 
     @Encoder
     public void write(FriendlyByteBuf buf) {
-        buf.writeResourceKey(typeKey);
+        buf.writeInt(BuiltInRegistries.ENTITY_TYPE.getId(typeKey));
         ModelUploadHelper.writePartDefinition(buf, head);
         ModelUploadHelper.writePartDefinition(buf, body);
     }
 
     @ServerHandler
     public void serverHandler(PlayPayloadContext context) {
-        var type = BuiltInRegistries.ENTITY_TYPE.get(typeKey.location());
-        if (type == EntityType.PLAYER) {
+        if (typeKey == EntityType.PLAYER) {
             return;
         }
-        ServerHitHelper.accept((ServerPlayer) context.player().get(), type, headS, bodyS);
+        ServerHitHelper.accept((ServerPlayer) context.player().get(), typeKey, headS, bodyS);
     }
 
     @OnlyIn(Dist.CLIENT)

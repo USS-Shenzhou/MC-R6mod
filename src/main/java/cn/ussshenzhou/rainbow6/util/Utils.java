@@ -1,6 +1,9 @@
 package cn.ussshenzhou.rainbow6.util;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,5 +25,13 @@ public class Utils {
                 return remappingFunction.apply(i);
             }
         });
+    }
+
+    public static ResourceLocation toResourceLocation(EntityType<?> entityType) {
+        return BuiltInRegistries.ENTITY_TYPE.getKey(entityType);
+    }
+
+    public static EntityType<?> toEntityType(ResourceLocation location){
+        return BuiltInRegistries.ENTITY_TYPE.get(location);
     }
 }

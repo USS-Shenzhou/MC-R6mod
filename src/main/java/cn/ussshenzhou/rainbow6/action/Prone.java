@@ -1,6 +1,9 @@
 package cn.ussshenzhou.rainbow6.action;
 
 import cn.ussshenzhou.rainbow6.capability.ActionCapability;
+import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
+import cn.ussshenzhou.rainbow6.capability.ModCapabilities;
+import cn.ussshenzhou.rainbow6.client.animationplayer.ProneAnimator;
 import cn.ussshenzhou.rainbow6.client.input.AnimationPlayerInputListener;
 import cn.ussshenzhou.rainbow6.client.input.ModKeyMappingRegistry;
 import cn.ussshenzhou.rainbow6.config.Control;
@@ -36,11 +39,10 @@ public class Prone extends Action {
 
     @Override
     public void onWorkingTickInClient(Player player, ActionCapability actionCapability) {
-        //TODO update
-        /*AnimationCapability animation = AnimationCapability.get(player);
+        AnimationCapability animation = player.getCapability(ModCapabilities.ANIMATION_CAPABILITY);
         if (animation != null && !animation.hasAnimator()) {
             animation.setAnimator(new ProneAnimator());
-        }*/
+        }
     }
 
     @Override

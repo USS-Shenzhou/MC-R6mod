@@ -3,10 +3,12 @@ package cn.ussshenzhou.rainbow6.network;
 import cn.ussshenzhou.rainbow6.action.Action;
 import cn.ussshenzhou.rainbow6.action.Actions;
 import cn.ussshenzhou.rainbow6.capability.ActionCapability;
+import cn.ussshenzhou.rainbow6.capability.ModCapabilities;
 import cn.ussshenzhou.t88.network.NetworkHelper;
 import cn.ussshenzhou.t88.network.annotation.ClientHandler;
 import cn.ussshenzhou.t88.network.annotation.NetPacket;
 import cn.ussshenzhou.t88.network.annotation.ServerHandler;
+import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
@@ -16,6 +18,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 
+import javax.annotation.Nullable;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
@@ -58,8 +61,7 @@ public class SyncActionPacket {
         /*player.getLevel().getNearbyPlayers(TargetingConditions.forNonCombat(), player, player.getBoundingBox().inflate(16 * 12))
                 .forEach(p -> NetworkHelper.getChannel(SyncActionPacket.class).send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) p), this));*/
         NetworkHelper.sendTo(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(player),this);
-        //TODO update
-        /*ActionCapability actionCapability = ActionCapability.get(player);
+        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
         if (actionCapability == null) {
             return;
         }
@@ -84,7 +86,7 @@ public class SyncActionPacket {
                 }
                 case NORMAL -> action.restoreSynchronizedState(item.getBuffer());
             }
-        }*/
+        }
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -100,7 +102,7 @@ public class SyncActionPacket {
         if (player == null || player.isLocalPlayer()) {
             return;
         }
-        /*ActionCapability actionCapability = ActionCapability.get(player);
+        /*ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
         if (actionCapability == null) {
             return;
         }
@@ -191,8 +193,7 @@ public class SyncActionPacket {
             return buffer.position() < buffer.limit();
         }
 
-        //TODO update
-        /*@Nullable
+        @Nullable
         public SyncActionPacket.ActionSyncData getItem() {
             Action action = actionCapability.getInstanceOf(Actions.values()[buffer.getShort()]);
             SyncActionPacket.DataType type = SyncActionPacket.DataType.getFromCode(buffer.get());
@@ -225,7 +226,7 @@ public class SyncActionPacket {
             }
             ByteBuffer buf = ByteBuffer.wrap(array);
             return new SyncActionPacket.ActionSyncData(action, buf, type);
-        }*/
+        }
     }
 
     private enum DataType {
