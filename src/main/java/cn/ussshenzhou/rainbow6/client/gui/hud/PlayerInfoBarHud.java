@@ -5,6 +5,7 @@ import cn.ussshenzhou.rainbow6.util.IconHelper;
 import cn.ussshenzhou.rainbow6.util.Operator;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.rainbow6.util.TeamColor;
+import cn.ussshenzhou.t88.gui.util.Border;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
@@ -55,6 +56,8 @@ public class PlayerInfoBarHud extends TImage {
         timer.setKeepDigitsLength(false);
         timer.setShowUpto(TTimer.TimeCategory.MIN);
         this.add(timer);
+
+        roundCount.setBorder(new Border(0xffff0000,-1));
     }
 
     @Override

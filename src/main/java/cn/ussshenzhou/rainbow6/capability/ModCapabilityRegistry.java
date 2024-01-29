@@ -5,7 +5,7 @@ import net.neoforged.fml.common.Mod;
 /**
  * @author USS_Shenzhou
  */
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
+//@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModCapabilityRegistry {
     //TODO update
     /*public static final Capability<ActionCapability> ACTION_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {

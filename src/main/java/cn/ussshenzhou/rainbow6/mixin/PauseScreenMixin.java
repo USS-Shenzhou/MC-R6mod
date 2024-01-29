@@ -5,13 +5,17 @@ import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageButton1;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
+import net.minecraft.client.gui.layouts.GridLayout;
+import net.minecraft.client.gui.layouts.LayoutElement;
 import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import org.checkerframework.checker.units.qual.A;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
@@ -49,5 +53,10 @@ public class PauseScreenMixin extends Screen {
     @Inject(method = "tick",at = @At("RETURN"))
     private void tickR6msButton(CallbackInfo ci){
         r6msInitiateR6msButton.tickT();
+    }
+
+    @Redirect(method = "createPauseMenu",at= @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/layouts/GridLayout$RowHelper;addChild(Lnet/minecraft/client/gui/layouts/LayoutElement;I)Lnet/minecraft/client/gui/layouts/LayoutElement;",ordinal = 0))
+    private <T extends LayoutElement> T r6msRemoveModsButton(GridLayout.RowHelper instance, T pChild, int pOccupiedColumns){
+        return null;
     }
 }

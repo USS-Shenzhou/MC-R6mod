@@ -13,7 +13,6 @@ import net.neoforged.neoforge.common.NeoForge;
 public class Rainbow6 {
 
     public Rainbow6(IEventBus bus) {
-        NeoForge.EVENT_BUS.register(this);
         System.setProperty("t88.test_screen_override", "cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen");
 
         ModItemRegistry.ITEMS.register(bus);

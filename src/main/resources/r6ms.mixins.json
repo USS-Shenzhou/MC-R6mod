@@ -8,7 +8,6 @@
     "ClientHooksAccessor",
     "FallbackResourceManagerMixin",
     "FoodDataMixin",
-    "ForgeHooksClientAccessor",
     "PlayerAccessor",
     "ProjectileUtilMixin"
   ],

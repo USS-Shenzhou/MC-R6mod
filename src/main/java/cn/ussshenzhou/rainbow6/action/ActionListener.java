@@ -1,8 +1,21 @@
 package cn.ussshenzhou.rainbow6.action;
 
+import cn.ussshenzhou.rainbow6.capability.ActionCapability;
+import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
+import cn.ussshenzhou.rainbow6.network.SyncActionPacket;
+import cn.ussshenzhou.rainbow6.network.SyncHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.LogicalSide;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.ViewportEvent;
+import net.neoforged.neoforge.event.TickEvent;
 
 import java.nio.ByteBuffer;
+import java.util.List;
 
 /**
  * This file is copied and modified from com.alrex.parcool.common.action.ActionProcessor under GPLv3.
@@ -15,10 +28,10 @@ public class ActionListener {
     private static final ByteBuffer bufferOfPreState = ByteBuffer.allocate(128);
     private static final ByteBuffer bufferOfStarting = ByteBuffer.allocate(128);
 
-    /*@SubscribeEvent
+    @SubscribeEvent
     public static void animationCapabilityClientTick(TickEvent.PlayerTickEvent event) {
         //TODO update
-        if (event.side == LogicalSide.SERVER) {
+        /*if (event.side == LogicalSide.SERVER) {
             return;
         }
         if (event.phase == TickEvent.Phase.START) {
@@ -36,10 +49,10 @@ public class ActionListener {
         if (actionCapability == null) {
             return;
         }
-        animationCapability.tick(player, actionCapability);
+        animationCapability.tick(player, actionCapability);*/
     }
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void onTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
             return;
