@@ -14,7 +14,7 @@ import org.lwjgl.glfw.GLFW;
  * @author USS_Shenzhou
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ModKeyMappingRegistry {
+public class ModKeyMappings {
 
     private static final String CATEGORY = "key.r6ms.category";
 
@@ -26,7 +26,7 @@ public class ModKeyMappingRegistry {
     //needcheck crawl or something else?
     public static final KeyMapping CRAWL = new KeyMapping(
             "key.r6ms.crawl", KeyConflictContext.IN_GAME, KeyModifier.NONE,
-            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_Z, CATEGORY
+            InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_C, CATEGORY
     );
 
     public static final KeyMapping FIRE = new KeyMapping(

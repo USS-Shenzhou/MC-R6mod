@@ -1,8 +1,8 @@
 package cn.ussshenzhou.rainbow6.mixin;
 
-import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
-import cn.ussshenzhou.rainbow6.capability.ModCapabilities;
+import cn.ussshenzhou.rainbow6.dataattachment.AnimationData;
 import cn.ussshenzhou.rainbow6.client.animationplayer.PlayerModelTransformer;
+import cn.ussshenzhou.rainbow6.dataattachment.DataUtils;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -25,7 +26,8 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
     @Shadow
     @Final
     private boolean slim;
-    private PlayerModelTransformer transformer = null;
+    @Unique
+    private PlayerModelTransformer r6msTransformer = null;
 
     public PlayerModelMixin(ModelPart pRoot) {
         super(pRoot);
@@ -37,7 +39,7 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
             return;
         }
         PlayerModel<?> model = (PlayerModel<?>) (Object) this;
-        transformer = new PlayerModelTransformer(
+        r6msTransformer = new PlayerModelTransformer(
                 player,
                 model,
                 slim,
@@ -47,16 +49,13 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
                 netHeadYaw,
                 headPitch
         );
-        transformer.reset();
+        r6msTransformer.reset();
 
-        AnimationCapability animation = player.getCapability(ModCapabilities.ANIMATION_CAPABILITY);
-        if (animation == null) {
-            return;
-        }
-        boolean shouldCancel = animation.animatePre(player, transformer);
-        transformer.copyFromBodyToWear();
+        AnimationData animation = DataUtils.getAnimationData(player);
+        boolean shouldCancel = animation.animatePre(player, r6msTransformer);
+        r6msTransformer.copyFromBodyToWear();
         if (shouldCancel) {
-            transformer = null;
+            r6msTransformer = null;
             info.cancel();
         }
     }
@@ -66,16 +65,12 @@ public abstract class PlayerModelMixin<T extends LivingEntity> extends HumanoidM
         if (!(entity instanceof Player player)) {
             return;
         }
-        AnimationCapability animation = player.getCapability(ModCapabilities.ANIMATION_CAPABILITY);
-        if (animation == null) {
-            transformer = null;
-            return;
-        }
+        AnimationData animation = DataUtils.getAnimationData(player);
 
-        if (transformer != null) {
-            animation.animatePost(player, transformer);
-            transformer.copyFromBodyToWear();
-            transformer = null;
+        if (r6msTransformer != null) {
+            animation.animatePost(player, r6msTransformer);
+            r6msTransformer.copyFromBodyToWear();
+            r6msTransformer = null;
         }
     }
 

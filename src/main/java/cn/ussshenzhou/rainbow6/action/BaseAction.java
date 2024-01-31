@@ -1,6 +1,6 @@
 package cn.ussshenzhou.rainbow6.action;
 
-import cn.ussshenzhou.rainbow6.capability.ActionCapability;
+import cn.ussshenzhou.rainbow6.dataattachment.ActionData;
 import cn.ussshenzhou.rainbow6.config.Control;
 import cn.ussshenzhou.rainbow6.util.KeyTrig;
 import cn.ussshenzhou.t88.config.ConfigHelper;
@@ -16,13 +16,13 @@ import java.nio.ByteBuffer;
  *
  * @author USS_Shenzhou
  */
-public abstract class Action {
+public abstract class BaseAction {
     private boolean doing = false;
     private int doingTick = 0;
     private int notDoingTick = 0;
     private final Actions actionEnum;
 
-    public Action(Actions actionEnum) {
+    public BaseAction(Actions actionEnum) {
         this.actionEnum = actionEnum;
     }
 
@@ -55,23 +55,23 @@ public abstract class Action {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public abstract boolean canStart(Player player, ActionCapability capability, ByteBuffer startInfo);
+    public abstract boolean canStart(Player player, ActionData actionData, ByteBuffer startInfo);
 
     @OnlyIn(Dist.CLIENT)
-    public abstract boolean canContinue(Player player, ActionCapability capability);
+    public abstract boolean canContinue(Player player, ActionData actionData);
 
-    public void onStart(Player player, ActionCapability capability) {
+    public void onStart(Player player, ActionData actionData) {
     }
 
-    public void onStartInServer(Player player, ActionCapability capability, ByteBuffer startInfo) {
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void onStartInOtherClient(Player player, ActionCapability capability, ByteBuffer startInfo) {
+    public void onStartInServer(Player player, ActionData actionData, ByteBuffer startInfo) {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void onStartInLocalClient(Player player, ActionCapability capability, ByteBuffer startInfo) {
+    public void onStartInOtherClient(Player player, ActionData actionData, ByteBuffer startInfo) {
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void onStartInLocalClient(Player player, ActionData actionData, ByteBuffer startInfo) {
     }
 
     public void onStop(Player player) {
@@ -86,32 +86,32 @@ public abstract class Action {
     public void onStopInLocalClient(Player player) {
     }
 
-    public void onWorkingTick(Player player, ActionCapability capability) {
+    public void onWorkingTick(Player player, ActionData actionData) {
     }
 
-    public void onWorkingTickInServer(Player player, ActionCapability capability) {
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void onWorkingTickInClient(Player player, ActionCapability capability) {
+    public void onWorkingTickInServer(Player player, ActionData actionData) {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void onWorkingTickInLocalClient(Player player, ActionCapability capability) {
-    }
-
-    public void onTick(Player player, ActionCapability capability) {
-    }
-
-    public void onServerTick(Player player, ActionCapability capability) {
+    public void onWorkingTickInClient(Player player, ActionData actionData) {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void onClientTick(Player player, ActionCapability capability) {
+    public void onWorkingTickInLocalClient(Player player, ActionData actionData) {
+    }
+
+    public void onTick(Player player, ActionData actionData) {
+    }
+
+    public void onServerTick(Player player, ActionData actionData) {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void onRenderTick(TickEvent.RenderTickEvent event, Player player, ActionCapability capability) {
+    public void onClientTick(Player player, ActionData actionData) {
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void onRenderTick(TickEvent.RenderTickEvent event, Player player, ActionData actionData) {
     }
 
     public void restoreSynchronizedState(ByteBuffer buffer) {

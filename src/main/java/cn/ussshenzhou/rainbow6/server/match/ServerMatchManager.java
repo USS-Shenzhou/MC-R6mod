@@ -2,6 +2,7 @@ package cn.ussshenzhou.rainbow6.server.match;
 
 import cn.ussshenzhou.rainbow6.config.Map;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.Event;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.network.handling.PlayPayloadContext;
@@ -44,9 +45,13 @@ public class ServerMatchManager {
         MATCHES.forEach(ServerMatch::tick);
     }
 
+    @SuppressWarnings("SuspiciousMethodCalls")
     public static <MSG> void receiveNetPacket(MSG packet, PlayPayloadContext context) {
-        if (PLAYERS_IN_MATCH.containsKey(context.player().get())) {
-            PLAYERS_IN_MATCH.get(context.player().get()).receivePacket(packet, context);
+        if (context.player().isPresent()){
+            Player player = context.player().get();
+            if (PLAYERS_IN_MATCH.containsKey(player)) {
+                PLAYERS_IN_MATCH.get(player).receivePacket(packet, context);
+            }
         }
     }
 

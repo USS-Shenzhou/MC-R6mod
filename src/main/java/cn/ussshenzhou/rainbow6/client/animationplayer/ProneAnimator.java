@@ -1,7 +1,8 @@
 package cn.ussshenzhou.rainbow6.client.animationplayer;
 
 import cn.ussshenzhou.rainbow6.action.Actions;
-import cn.ussshenzhou.rainbow6.capability.ActionCapability;
+import cn.ussshenzhou.rainbow6.dataattachment.ActionData;
+import cn.ussshenzhou.rainbow6.dataattachment.DataUtils;
 import net.minecraft.world.entity.player.Player;
 
 /**
@@ -11,12 +12,12 @@ import net.minecraft.world.entity.player.Player;
  */
 public class ProneAnimator extends Animator {
     @Override
-    public boolean shouldRemoved(Player player, ActionCapability actionCapability) {
-        return !actionCapability.getInstanceOf(Actions.PRONE).isDoing();
+    public boolean shouldRemoved(Player player, ActionData actionData) {
+        return !DataUtils.getInstanceOf(actionData, Actions.PRONE).isDoing();
     }
 
     @Override
-    public void animatePost(Player player, ActionCapability actionCapability, PlayerModelTransformer transformer) {
+    public void animatePost(Player player, ActionData actionData, PlayerModelTransformer transformer) {
         float factor = (float) Math.sin(transformer.getLimbSwing() / 10 * Math.PI);
         transformer
                 .rotateLeftArm((float) Math.toRadians(-15), 0, (float) Math.toRadians(-120 - 25 * factor))

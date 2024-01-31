@@ -12,7 +12,7 @@ public class AnimationPlayerInputListener {
     public static final KeyState CRAWL = new KeyState();
 
     public static final LinkedHashMap<KeyMapping, KeyState> KEY_STATES = new LinkedHashMap<>() {{
-        put(ModKeyMappingRegistry.CRAWL, CRAWL);
+        put(ModKeyMappings.CRAWL, CRAWL);
     }};
 
     public static void tick() {

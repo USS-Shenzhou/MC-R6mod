@@ -12,25 +12,25 @@ public enum Actions {
     PRONE(Prone.class, Prone::new),
     DOWN(Down.class, Down::new);
 
-    final Class<? extends Action> type;
-    final Supplier<? extends Action> constructor;
+    final Class<? extends BaseAction> type;
+    final Supplier<? extends BaseAction> constructor;
 
-    private Actions(Class<? extends Action> type, Supplier<? extends Action> constructor) {
+    private Actions(Class<? extends BaseAction> type, Supplier<? extends BaseAction> constructor) {
         this.constructor = constructor;
         this.type = type;
     }
 
-    public static List<Action> getAllNewAction() {
-        ArrayList<Action> list = new ArrayList<>();
+    public static List<BaseAction> getAllNewAction() {
+        ArrayList<BaseAction> list = new ArrayList<>();
         Arrays.stream(values()).forEach(a -> list.add(a.constructor.get()));
         return list;
     }
 
-    public Supplier<? extends Action> getConstructor() {
+    public Supplier<? extends BaseAction> getConstructor() {
         return constructor;
     }
 
-    public static short indexOf(Action action) {
-        return (short) Arrays.stream(values()).toList().indexOf(action.getActionEnum());
+    public static short indexOf(BaseAction baseAction) {
+        return (short) Arrays.stream(values()).toList().indexOf(baseAction.getActionEnum());
     }
 }

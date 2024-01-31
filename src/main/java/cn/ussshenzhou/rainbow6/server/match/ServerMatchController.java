@@ -1,6 +1,8 @@
 package cn.ussshenzhou.rainbow6.server.match;
 
+import cn.ussshenzhou.rainbow6.action.Actions;
 import cn.ussshenzhou.rainbow6.config.Map;
+import cn.ussshenzhou.rainbow6.dataattachment.DataUtils;
 import cn.ussshenzhou.rainbow6.mixinproxy.FoodDataProxy;
 import cn.ussshenzhou.rainbow6.network.onlyto.client.*;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.ChooseAttackerSpawnPacket;
@@ -324,10 +326,10 @@ public class ServerMatchController {
     }
 
     private void checkRoundEndByDeath() {
-        /*boolean defenderAllDied = match.getDefenders().stream().noneMatch(player ->
-                (!player.isSpectator()) || player.getCapability(ModCapabilities.ACTION_CAPABILITY).getInstanceOf(Actions.DOWN).isDoing());
+        boolean defenderAllDied = match.getDefenders().stream().noneMatch(player ->
+                (!player.isSpectator()) || DataUtils.getInstanceOf(player, Actions.DOWN).isDoing());
         boolean attackerAllDied = match.getAttackers().stream().noneMatch(player ->
-                (!player.isSpectator()) || player.getCapability(ModCapabilities.ACTION_CAPABILITY).getInstanceOf(Actions.DOWN).isDoing());
+                (!player.isSpectator()) || DataUtils.getInstanceOf(player, Actions.DOWN).isDoing());
         //noinspection IfStatementWithIdenticalBranches
         if (!match.planted) {
             if (attackerAllDied) {
@@ -343,6 +345,6 @@ public class ServerMatchController {
                 roundEnd(Side.ATTACKER);
                 return;
             }
-        }*/
+        }
     }
 }

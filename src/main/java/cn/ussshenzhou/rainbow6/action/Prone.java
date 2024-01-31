@@ -1,14 +1,12 @@
 package cn.ussshenzhou.rainbow6.action;
 
-import cn.ussshenzhou.rainbow6.capability.ActionCapability;
-import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
-import cn.ussshenzhou.rainbow6.capability.ModCapabilities;
+import cn.ussshenzhou.rainbow6.dataattachment.ActionData;
+import cn.ussshenzhou.rainbow6.dataattachment.AnimationData;
 import cn.ussshenzhou.rainbow6.client.animationplayer.ProneAnimator;
 import cn.ussshenzhou.rainbow6.client.input.AnimationPlayerInputListener;
-import cn.ussshenzhou.rainbow6.client.input.ModKeyMappingRegistry;
-import cn.ussshenzhou.rainbow6.config.Control;
+import cn.ussshenzhou.rainbow6.client.input.ModKeyMappings;
+import cn.ussshenzhou.rainbow6.dataattachment.DataUtils;
 import cn.ussshenzhou.rainbow6.util.KeyTrig;
-import cn.ussshenzhou.t88.config.ConfigHelper;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 
@@ -19,7 +17,7 @@ import java.nio.ByteBuffer;
  *
  * @author USS_Shenzhou
  */
-public class Prone extends Action {
+public class Prone extends BaseAction {
     public boolean toggleStatus = false;
 
     public Prone() {
@@ -27,7 +25,7 @@ public class Prone extends Action {
     }
 
     @Override
-    public boolean canStart(Player player, ActionCapability actionCapability, ByteBuffer startInfo) {
+    public boolean canStart(Player player, ActionData actionData, ByteBuffer startInfo) {
         return (AnimationPlayerInputListener.CRAWL.isPressed()
                 && !player.isInWaterOrBubble()
                 && player.onGround()
@@ -35,7 +33,7 @@ public class Prone extends Action {
     }
 
     @Override
-    public void onClientTick(Player player, ActionCapability capability) {
+    public void onClientTick(Player player, ActionData capability) {
         if (player.isLocalPlayer()) {
             if (getConfig().prone == KeyTrig.TOGGLE) {
                 if (AnimationPlayerInputListener.CRAWL.isPressed()) {
@@ -48,23 +46,23 @@ public class Prone extends Action {
     }
 
     @Override
-    public boolean canContinue(Player player, ActionCapability actionCapability) {
+    public boolean canContinue(Player player, ActionData actionData) {
         //return canContinue(ConfigHelper.getConfigRead(Control.class).prone, ModKeyMappingRegistry.CRAWL.isDown(), AnimationPlayerInputListener.CRAWL.isPressed());
-        return ((getConfig().prone == KeyTrig.HOLD && ModKeyMappingRegistry.CRAWL.isDown())
+        return ((getConfig().prone == KeyTrig.HOLD && ModKeyMappings.CRAWL.isDown())
                 || (getConfig().prone == KeyTrig.TOGGLE && toggleStatus))
                 && !player.onClimbable();
     }
 
     @Override
-    public void onWorkingTickInClient(Player player, ActionCapability actionCapability) {
-        AnimationCapability animation = player.getCapability(ModCapabilities.ANIMATION_CAPABILITY);
-        if (animation != null && !animation.hasAnimator()) {
+    public void onWorkingTickInClient(Player player, ActionData actionData) {
+        AnimationData animation = DataUtils.getAnimationData(player);
+        if (!animation.hasAnimator()) {
             animation.setAnimator(new ProneAnimator());
         }
     }
 
     @Override
-    public void onWorkingTick(Player player, ActionCapability actionCapability) {
+    public void onWorkingTick(Player player, ActionData actionData) {
         player.setSprinting(false);
         player.setPose(Pose.SWIMMING);
     }

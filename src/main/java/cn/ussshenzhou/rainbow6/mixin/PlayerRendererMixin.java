@@ -1,10 +1,10 @@
 package cn.ussshenzhou.rainbow6.mixin;
 
 
-import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
-import cn.ussshenzhou.rainbow6.capability.ModCapabilities;
+import cn.ussshenzhou.rainbow6.dataattachment.AnimationData;
 import cn.ussshenzhou.rainbow6.client.animationplayer.PlayerModelRotator;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
+import cn.ussshenzhou.rainbow6.dataattachment.DataUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -33,10 +33,7 @@ public class PlayerRendererMixin {
      */
     @Inject(method = "setupRotations(Lnet/minecraft/client/player/AbstractClientPlayer;Lcom/mojang/blaze3d/vertex/PoseStack;FFF)V", at = @At("HEAD"))
     protected void onSetupRotations(AbstractClientPlayer player, PoseStack stack, float pAgeInTicks, float pRotationYaw, float pPartialTicks, CallbackInfo ci) {
-        AnimationCapability animation = player.getCapability(ModCapabilities.ANIMATION_CAPABILITY);
-        if (animation == null) {
-            return;
-        }
+        AnimationData animation = DataUtils.getAnimationData(player);
         PlayerModelRotator rotator = new PlayerModelRotator(stack, player, Minecraft.getInstance().getFrameTime());
         animation.applyRotate(player, rotator);
     }

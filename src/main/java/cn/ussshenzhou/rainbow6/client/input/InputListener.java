@@ -15,7 +15,7 @@ public class InputListener {
 
     @SubscribeEvent
     public static void onKeyInput(InputEvent.Key event) {
-        if (ModKeyMappingRegistry.MAIN_MENU.consumeClick()) {
+        if (ModKeyMappings.MAIN_MENU.consumeClick()) {
             ScreenManager.openMainMenuScreen();
         }
     }

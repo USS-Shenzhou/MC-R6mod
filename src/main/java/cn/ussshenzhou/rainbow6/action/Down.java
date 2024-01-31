@@ -1,8 +1,8 @@
 package cn.ussshenzhou.rainbow6.action;
 
-import cn.ussshenzhou.rainbow6.capability.ActionCapability;
-import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
-import cn.ussshenzhou.rainbow6.capability.ModCapabilities;
+import cn.ussshenzhou.rainbow6.dataattachment.ActionData;
+import cn.ussshenzhou.rainbow6.dataattachment.AnimationData;
+import cn.ussshenzhou.rainbow6.dataattachment.DataUtils;
 import cn.ussshenzhou.rainbow6.client.animationplayer.ProneAnimator;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import net.minecraft.world.entity.Pose;
@@ -13,32 +13,32 @@ import java.nio.ByteBuffer;
 /**
  * @author USS_Shenzhou
  */
-public class Down extends Action {
+public class Down extends BaseAction {
 
     public Down() {
         super(Actions.DOWN);
     }
 
     @Override
-    public boolean canStart(Player player, ActionCapability actionCapability, ByteBuffer startInfo) {
+    public boolean canStart(Player player, ActionData actionData, ByteBuffer startInfo) {
         return (ClientMatch.isDown());
     }
 
     @Override
-    public boolean canContinue(Player player, ActionCapability actionCapability) {
+    public boolean canContinue(Player player, ActionData actionData) {
         return ClientMatch.isDown();
     }
 
     @Override
-    public void onWorkingTickInClient(Player player, ActionCapability actionCapability) {
-        AnimationCapability animation = player.getCapability(ModCapabilities.ANIMATION_CAPABILITY);
-        if (animation != null && !animation.hasAnimator()) {
+    public void onWorkingTickInClient(Player player, ActionData actionData) {
+        AnimationData animation = DataUtils.getAnimationData(player);
+        if (!animation.hasAnimator()) {
             animation.setAnimator(new ProneAnimator());
         }
     }
 
     @Override
-    public void onWorkingTick(Player player, ActionCapability actionCapability) {
+    public void onWorkingTick(Player player, ActionData actionData) {
         player.setSprinting(false);
         player.setPose(Pose.SWIMMING);
     }

@@ -1,8 +1,6 @@
 package cn.ussshenzhou.rainbow6.action;
 
-import cn.ussshenzhou.rainbow6.capability.ActionCapability;
-import cn.ussshenzhou.rainbow6.capability.AnimationCapability;
-import cn.ussshenzhou.rainbow6.capability.ModCapabilities;
+import cn.ussshenzhou.rainbow6.dataattachment.*;
 import cn.ussshenzhou.rainbow6.network.SyncActionPacket;
 import cn.ussshenzhou.rainbow6.network.SyncHelper;
 import net.minecraft.client.Minecraft;
@@ -16,7 +14,6 @@ import net.neoforged.neoforge.client.event.ViewportEvent;
 import net.neoforged.neoforge.event.TickEvent;
 
 import java.nio.ByteBuffer;
-import java.util.List;
 
 /**
  * This file is copied and modified from com.alrex.parcool.common.action.ActionProcessor under GPLv3.
@@ -35,15 +32,9 @@ public class ActionListener {
             return;
         }
         Player player = event.player;
-        AnimationCapability animationCapability = player.getCapability(ModCapabilities.ANIMATION_CAPABILITY);
-        if (animationCapability == null) {
-            return;
-        }
-        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
-        if (actionCapability == null) {
-            return;
-        }
-        animationCapability.tick(player, actionCapability);
+        AnimationData animationData = DataUtils.getAnimationData(player);
+        ActionData actionData = DataUtils.getActionData(player);
+        animationData.tick(player, actionData);
     }
 
     @SubscribeEvent
@@ -52,85 +43,81 @@ public class ActionListener {
             return;
         }
         Player player = event.player;
-        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
-        if (actionCapability == null) {
-            return;
-        }
-        List<Action> actions = actionCapability.getActions();
+        ActionData actionData = DataUtils.getActionData(player);
         boolean needSync = event.side == LogicalSide.CLIENT && player.isLocalPlayer();
         SyncActionPacket.Encoder builder = SyncActionPacket.Encoder.reset();
-        for (Action action : actions) {
+        for (BaseAction baseAction : actionData.actions) {
             if (needSync) {
                 bufferOfPreState.clear();
-                action.saveSynchronizedState(bufferOfPreState);
+                baseAction.saveSynchronizedState(bufferOfPreState);
                 bufferOfPreState.flip();
             }
-            if (action.isDoing()) {
-                action.setDoingTick(action.getDoingTick() + 1);
-                action.setNotDoingTick(0);
+            if (baseAction.isDoing()) {
+                baseAction.setDoingTick(baseAction.getDoingTick() + 1);
+                baseAction.setNotDoingTick(0);
             } else {
-                action.setDoingTick(0);
-                action.setNotDoingTick(action.getNotDoingTick() + 1);
+                baseAction.setDoingTick(0);
+                baseAction.setNotDoingTick(baseAction.getNotDoingTick() + 1);
             }
 
-            action.onTick(player, actionCapability);
+            baseAction.onTick(player, actionData);
             if (event.side == LogicalSide.CLIENT) {
-                action.onClientTick(player, actionCapability);
+                baseAction.onClientTick(player, actionData);
             } else {
-                action.onServerTick(player, actionCapability);
+                baseAction.onServerTick(player, actionData);
             }
 
             if (player.isLocalPlayer()) {
-                if (action.isDoing()) {
-                    boolean canContinue = action.canContinue(player, actionCapability);
+                if (baseAction.isDoing()) {
+                    boolean canContinue = baseAction.canContinue(player, actionData);
                     if (!canContinue) {
-                        action.setDoing(false);
-                        action.onStopInLocalClient(player);
-                        action.onStop(player);
-                        builder.appendFinishMsg(actionCapability, action);
+                        baseAction.setDoing(false);
+                        baseAction.onStopInLocalClient(player);
+                        baseAction.onStop(player);
+                        builder.appendFinishMsg(actionData, baseAction);
                     }
                 } else {
                     bufferOfStarting.clear();
-                    boolean start = action.canStart(player, actionCapability, bufferOfStarting);
+                    boolean start = baseAction.canStart(player, actionData, bufferOfStarting);
                     bufferOfStarting.flip();
                     if (start) {
-                        action.setDoing(true);
-                        action.onStartInLocalClient(player, actionCapability, bufferOfStarting);
+                        baseAction.setDoing(true);
+                        baseAction.onStartInLocalClient(player, actionData, bufferOfStarting);
                         bufferOfStarting.rewind();
-                        action.onStart(player, actionCapability);
-                        builder.appendStartData(actionCapability, action, bufferOfStarting);
+                        baseAction.onStart(player, actionData);
+                        builder.appendStartData(actionData, baseAction, bufferOfStarting);
                     }
                 }
             }
 
-            if (action.isDoing()) {
-                action.onWorkingTick(player, actionCapability);
+            if (baseAction.isDoing()) {
+                baseAction.onWorkingTick(player, actionData);
                 if (event.side == LogicalSide.CLIENT) {
-                    action.onWorkingTickInClient(player, actionCapability);
+                    baseAction.onWorkingTickInClient(player, actionData);
                     if (player.isLocalPlayer()) {
-                        action.onWorkingTickInLocalClient(player, actionCapability);
+                        baseAction.onWorkingTickInLocalClient(player, actionData);
                     }
                 } else {
-                    action.onWorkingTickInServer(player, actionCapability);
+                    baseAction.onWorkingTickInServer(player, actionData);
                 }
             }
 
             if (needSync) {
                 bufferOfPostState.clear();
-                action.saveSynchronizedState(bufferOfPostState);
+                baseAction.saveSynchronizedState(bufferOfPostState);
                 bufferOfPostState.flip();
 
                 if (bufferOfPostState.limit() == bufferOfPreState.limit()) {
                     while (bufferOfPreState.hasRemaining()) {
                         if (bufferOfPostState.get() != bufferOfPreState.get()) {
                             bufferOfPostState.rewind();
-                            builder.appendSyncData(actionCapability, action, bufferOfPostState);
+                            builder.appendSyncData(actionData, baseAction, bufferOfPostState);
                             break;
                         }
                     }
                 } else {
                     bufferOfPostState.rewind();
-                    builder.appendSyncData(actionCapability, action, bufferOfPostState);
+                    builder.appendSyncData(actionData, baseAction, bufferOfPostState);
                 }
             }
         }
@@ -147,13 +134,9 @@ public class ActionListener {
             return;
         }
         for (Player player : clientPlayer.level().players()) {
-            ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
-            if (actionCapability == null) {
-                return;
-            }
-            List<Action> actions = actionCapability.getActions();
-            for (Action action : actions) {
-                action.onRenderTick(event, player, actionCapability);
+            ActionData actionData = DataUtils.getActionData(player);
+            for (BaseAction baseAction : actionData.actions) {
+                baseAction.onRenderTick(event, player, actionData);
             }
         }
     }
@@ -165,14 +148,8 @@ public class ActionListener {
         if (player == null) {
             return;
         }
-        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
-        if (actionCapability == null) {
-            return;
-        }
-        AnimationCapability animationCapability = player.getCapability(ModCapabilities.ANIMATION_CAPABILITY);
-        if (animationCapability == null) {
-            return;
-        }
-        animationCapability.cameraSetup(event, player, actionCapability);
+        ActionData actionData = DataUtils.getActionData(player);
+        AnimationData animationData = DataUtils.getAnimationData(player);
+        animationData.cameraSetup(event, player, actionData);
     }
 }

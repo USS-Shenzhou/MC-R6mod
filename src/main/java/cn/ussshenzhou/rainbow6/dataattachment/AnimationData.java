@@ -1,4 +1,4 @@
-package cn.ussshenzhou.rainbow6.capability;
+package cn.ussshenzhou.rainbow6.dataattachment;
 
 import cn.ussshenzhou.rainbow6.client.animationplayer.Animator;
 import cn.ussshenzhou.rainbow6.client.animationplayer.PlayerModelRotator;
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.client.event.ViewportEvent;
  *
  * @author USS_Shenzhou
  */
-public class AnimationCapability {
+public class AnimationData {
 
     private Animator animator = null;
 
@@ -25,33 +25,26 @@ public class AnimationCapability {
         if (animator == null) {
             return false;
         }
-        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
-        return animator.animatePre(player, actionCapability, modelTransformer);
+        return animator.animatePre(player, DataUtils.getActionData(player), modelTransformer);
     }
 
     public void animatePost(Player player, PlayerModelTransformer modelTransformer) {
-        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
-        if (actionCapability == null) {
-            return;
-        }
+        ActionData actionData = DataUtils.getActionData(player);
         if (animator == null) {
             return;
         }
-        animator.animatePost(player, actionCapability, modelTransformer);
+        animator.animatePost(player, actionData, modelTransformer);
     }
 
     public void applyRotate(AbstractClientPlayer player, PlayerModelRotator rotator) {
-        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
-        if (actionCapability == null) {
-            return;
-        }
+        ActionData actionData = DataUtils.getActionData(player);
         if (animator == null) {
             return;
         }
-        animator.rotate(player, actionCapability, rotator);
+        animator.rotate(player, actionData, rotator);
     }
 
-    public void cameraSetup(ViewportEvent.ComputeCameraAngles event, Player player, ActionCapability actionCapability) {
+    public void cameraSetup(ViewportEvent.ComputeCameraAngles event, Player player, ActionData actionData) {
         if (animator == null) {
             return;
         }
@@ -59,13 +52,13 @@ public class AnimationCapability {
         ) {
             return;
         }
-        animator.onCameraSetUp(event, player, actionCapability);
+        animator.onCameraSetUp(event, player, actionData);
     }
 
-    public void tick(Player player, ActionCapability actionCapability) {
+    public void tick(Player player, ActionData actionData) {
         if (animator != null) {
             animator.tick();
-            if (animator.shouldRemoved(player, actionCapability)) {
+            if (animator.shouldRemoved(player, actionData)) {
                 animator = null;
             }
         }

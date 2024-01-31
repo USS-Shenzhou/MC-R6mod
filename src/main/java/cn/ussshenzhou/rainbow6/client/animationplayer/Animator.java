@@ -1,6 +1,6 @@
 package cn.ussshenzhou.rainbow6.client.animationplayer;
 
-import cn.ussshenzhou.rainbow6.capability.ActionCapability;
+import cn.ussshenzhou.rainbow6.dataattachment.ActionData;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.client.event.ViewportEvent;
 
@@ -20,14 +20,14 @@ public abstract class Animator {
         return tick;
     }
 
-    public abstract boolean shouldRemoved(Player player, ActionCapability actionCapability);
+    public abstract boolean shouldRemoved(Player player, ActionData actionData);
 
     /**
      * @return You should return true if you want to cancel vanilla animation to control all about rendering
      */
     public boolean animatePre(
             Player player,
-            ActionCapability actionCapability,
+            ActionData actionData,
             PlayerModelTransformer transformer
     ) {
         return false;
@@ -39,14 +39,14 @@ public abstract class Animator {
      */
     public void animatePost(
             Player player,
-            ActionCapability actionCapability,
+            ActionData actionData,
             PlayerModelTransformer transformer
     ) {
     }
 
     public void rotate(
             Player player,
-            ActionCapability actionCapability,
+            ActionData actionData,
             PlayerModelRotator rotator
     ) {
     }
@@ -54,7 +54,7 @@ public abstract class Animator {
     public void onCameraSetUp(
             ViewportEvent.ComputeCameraAngles event,
             Player clientPlayer,
-            ActionCapability actionCapability
+            ActionData actionData
     ) {
     }
 }

@@ -1,9 +1,9 @@
 package cn.ussshenzhou.rainbow6.network;
 
-import cn.ussshenzhou.rainbow6.action.Action;
+import cn.ussshenzhou.rainbow6.action.BaseAction;
 import cn.ussshenzhou.rainbow6.action.Actions;
-import cn.ussshenzhou.rainbow6.capability.ActionCapability;
-import cn.ussshenzhou.rainbow6.capability.ModCapabilities;
+import cn.ussshenzhou.rainbow6.dataattachment.ActionData;
+import cn.ussshenzhou.rainbow6.dataattachment.DataUtils;
 import cn.ussshenzhou.t88.network.NetworkHelper;
 import cn.ussshenzhou.t88.network.annotation.ClientHandler;
 import cn.ussshenzhou.t88.network.annotation.NetPacket;
@@ -61,30 +61,27 @@ public class SyncActionPacket {
         /*player.getLevel().getNearbyPlayers(TargetingConditions.forNonCombat(), player, player.getBoundingBox().inflate(16 * 12))
                 .forEach(p -> NetworkHelper.getChannel(SyncActionPacket.class).send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) p), this));*/
         NetworkHelper.sendTo(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(player), this);
-        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
-        if (actionCapability == null) {
-            return;
-        }
+        ActionData actionData = DataUtils.getActionData(player);
 
-        SyncActionPacket.Decoder decoder = new SyncActionPacket.Decoder(this.buffer, actionCapability);
+        Decoder decoder = new Decoder(this.buffer, actionData);
         while (decoder.hasNext()) {
-            SyncActionPacket.ActionSyncData item = decoder.getItem();
+            ActionSyncData item = decoder.getItem();
             if (item == null) {
                 continue;
             }
-            Action action = item.getAction();
+            BaseAction baseAction = item.getAction();
             switch (item.getType()) {
                 case START -> {
-                    action.setDoing(true);
-                    action.onStartInServer(player, actionCapability, item.getBuffer());
-                    action.onStart(player, actionCapability);
+                    baseAction.setDoing(true);
+                    baseAction.onStartInServer(player, actionData, item.getBuffer());
+                    baseAction.onStart(player, actionData);
                 }
                 case FINISH -> {
-                    action.setDoing(false);
-                    action.onStopInServer(player);
-                    action.onStop(player);
+                    baseAction.setDoing(false);
+                    baseAction.onStopInServer(player);
+                    baseAction.onStop(player);
                 }
-                case NORMAL -> action.restoreSynchronizedState(item.getBuffer());
+                case NORMAL -> baseAction.restoreSynchronizedState(item.getBuffer());
             }
         }
     }
@@ -102,36 +99,33 @@ public class SyncActionPacket {
         if (player == null || player.isLocalPlayer()) {
             return;
         }
-        ActionCapability actionCapability = player.getCapability(ModCapabilities.ACTION_CAPABILITY);
-        if (actionCapability == null) {
-            return;
-        }
+        ActionData actionData = DataUtils.getActionData(player);
 
-        SyncActionPacket.Decoder decoder = new SyncActionPacket.Decoder(this.buffer, actionCapability);
+        SyncActionPacket.Decoder decoder = new SyncActionPacket.Decoder(this.buffer, actionData);
         while (decoder.hasNext()) {
             SyncActionPacket.ActionSyncData item = decoder.getItem();
             if (item == null) {
                 continue;
             }
-            Action action = item.getAction();
+            BaseAction baseAction = item.getAction();
             switch (item.getType()) {
                 case START -> {
-                    action.setDoing(true);
-                    action.onStartInOtherClient(player, actionCapability, item.getBuffer());
-                    action.onStart(player, actionCapability);
+                    baseAction.setDoing(true);
+                    baseAction.onStartInOtherClient(player, actionData, item.getBuffer());
+                    baseAction.onStart(player, actionData);
                 }
                 case FINISH -> {
-                    action.setDoing(false);
-                    action.onStopInOtherClient(player);
-                    action.onStop(player);
+                    baseAction.setDoing(false);
+                    baseAction.onStopInOtherClient(player);
+                    baseAction.onStop(player);
                 }
-                case NORMAL -> action.restoreSynchronizedState(item.getBuffer());
+                case NORMAL -> baseAction.restoreSynchronizedState(item.getBuffer());
             }
         }
     }
 
     public static class Encoder {
-        private static final Encoder instance = new Encoder();
+        private static final Encoder INSTANCE = new Encoder();
 
         private Encoder() {
         }
@@ -139,20 +133,23 @@ public class SyncActionPacket {
         private final ByteBuffer buffer = ByteBuffer.allocate(1024);
 
         public static Encoder reset() {
-            instance.buffer.clear();
-            return instance;
+            INSTANCE.buffer.clear();
+            return INSTANCE;
         }
 
-        public Encoder appendSyncData(ActionCapability actionCapability, Action action, ByteBuffer actionBuffer) {
-            return append(SyncActionPacket.DataType.NORMAL, actionCapability, action, actionBuffer);
+        @SuppressWarnings("UnusedReturnValue")
+        public Encoder appendSyncData(ActionData actionData, BaseAction baseAction, ByteBuffer actionBuffer) {
+            return append(SyncActionPacket.DataType.NORMAL, actionData, baseAction, actionBuffer);
         }
 
-        public Encoder appendStartData(ActionCapability actionCapability, Action action, ByteBuffer actionBuffer) {
-            return append(SyncActionPacket.DataType.START, actionCapability, action, actionBuffer);
+        @SuppressWarnings("UnusedReturnValue")
+        public Encoder appendStartData(ActionData actionData, BaseAction baseAction, ByteBuffer actionBuffer) {
+            return append(SyncActionPacket.DataType.START, actionData, baseAction, actionBuffer);
         }
 
-        public Encoder appendFinishMsg(ActionCapability actionCapability, Action action) {
-            short id = Actions.indexOf(action);
+        @SuppressWarnings("UnusedReturnValue")
+        public Encoder appendFinishMsg(ActionData actionData, BaseAction baseAction) {
+            short id = Actions.indexOf(baseAction);
             if (id < 0) {
                 return this;
             }
@@ -162,8 +159,8 @@ public class SyncActionPacket {
             return this;
         }
 
-        private Encoder append(SyncActionPacket.DataType type, ActionCapability actionCapability, Action action, ByteBuffer actionBuffer) {
-            short id = Actions.indexOf(action);
+        private Encoder append(SyncActionPacket.DataType type, ActionData actionData, BaseAction baseAction, ByteBuffer actionBuffer) {
+            short id = Actions.indexOf(baseAction);
             if (id < 0) {
                 return this;
             }
@@ -182,11 +179,11 @@ public class SyncActionPacket {
 
     private static class Decoder {
         ByteBuffer buffer;
-        ActionCapability actionCapability;
+        ActionData actionData;
 
-        Decoder(byte[] buf, ActionCapability actionCapability) {
+        Decoder(byte[] buf, ActionData actionData) {
             buffer = ByteBuffer.wrap(buf);
-            this.actionCapability = actionCapability;
+            this.actionData = actionData;
         }
 
         public boolean hasNext() {
@@ -195,13 +192,13 @@ public class SyncActionPacket {
 
         @Nullable
         public SyncActionPacket.ActionSyncData getItem() {
-            Action action = actionCapability.getInstanceOf(Actions.values()[buffer.getShort()]);
+            BaseAction baseAction = DataUtils.getInstanceOf(actionData, Actions.values()[buffer.getShort()]);
             SyncActionPacket.DataType type = SyncActionPacket.DataType.getFromCode(buffer.get());
             int bufferSize = buffer.getInt();
             if (bufferSize > 1024) {
                 StringBuilder msgBuilder = new StringBuilder();
                 msgBuilder.append("Synchronization failed. demanded buffer size is too large\n")
-                        .append(action)
+                        .append(baseAction)
                         .append(":Sync_Type")
                         .append(type)
                         .append('\n')
@@ -221,11 +218,11 @@ public class SyncActionPacket {
             }
             byte[] array = new byte[bufferSize];
             buffer.get(array);
-            if (action == null) {
+            if (baseAction == null) {
                 return null;
             }
             ByteBuffer buf = ByteBuffer.wrap(array);
-            return new SyncActionPacket.ActionSyncData(action, buf, type);
+            return new SyncActionPacket.ActionSyncData(baseAction, buf, type);
         }
     }
 
@@ -250,12 +247,12 @@ public class SyncActionPacket {
     }
 
     private static class ActionSyncData {
-        Action action;
+        BaseAction baseAction;
         ByteBuffer buffer;
         DataType type;
 
-        public ActionSyncData(Action action, ByteBuffer buffer, DataType type) {
-            this.action = action;
+        public ActionSyncData(BaseAction baseAction, ByteBuffer buffer, DataType type) {
+            this.baseAction = baseAction;
             this.buffer = buffer;
             this.type = type;
         }
@@ -264,8 +261,8 @@ public class SyncActionPacket {
             return type;
         }
 
-        public Action getAction() {
-            return action;
+        public BaseAction getAction() {
+            return baseAction;
         }
 
         public ByteBuffer getBuffer() {
