@@ -1,20 +1,25 @@
 package cn.ussshenzhou.rainbow6.client.gui.panel;
 
+import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
 import cn.ussshenzhou.rainbow6.client.gui.screen.MainMenuScreen;
-import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
-import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageButton;
+import cn.ussshenzhou.rainbow6.client.gui.screen.OptionsScreen;
+import cn.ussshenzhou.t88.gui.advanced.TFocusSensitiveImageSelectButton;
+import cn.ussshenzhou.t88.gui.advanced.THoverSensitiveImageButton;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.ClientHooks;
+import net.neoforged.neoforge.common.NeoForge;
 
 /**
  * @author USS_Shenzhou
  */
 public class MainMenuHeaderPanel extends TPanel {
-    private final FocusSensitiveImageSelectButton homeButton = new FocusSensitiveImageSelectButton(
+    public final TFocusSensitiveImageSelectButton homeButton = new TFocusSensitiveImageSelectButton(
             Component.translatable("gui.r6ms.main_menu.home"),
             pButton -> {
                 MainMenuScreen mainMenu = getMainMenuScreen();
@@ -24,7 +29,7 @@ public class MainMenuHeaderPanel extends TPanel {
             R6Constants.PLACEHOLDER_IMAGE,
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button18_cutout_selected.png")
     );
-    private final FocusSensitiveImageSelectButton operatorsButton = new FocusSensitiveImageSelectButton(
+    public final TFocusSensitiveImageSelectButton operatorsButton = new TFocusSensitiveImageSelectButton(
             Component.translatable("gui.r6ms.main_menu.operators"),
             pButton -> {
                 MainMenuScreen mainMenu = getMainMenuScreen();
@@ -35,13 +40,12 @@ public class MainMenuHeaderPanel extends TPanel {
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button18_cutout_selected.png")
     );
 
-    private final HoverSensitiveImageButton optionsButton = new HoverSensitiveImageButton(
+    public final TFocusSensitiveImageSelectButton optionsButton = new TFocusSensitiveImageSelectButton(
             Component.empty(),
             pButton -> {
-                MainMenuScreen mainMenu = getMainMenuScreen();
-                mainMenu.setVisiblePanel(mainMenu.optionsPanel);
                 getHomeButton().setSelected(false);
                 getOperatorsButton().setSelected(false);
+                ScreenManager.showNewLayerOverBg(new OptionsScreen());
             },
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_options.png"),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_options_hovered.png")
@@ -60,7 +64,7 @@ public class MainMenuHeaderPanel extends TPanel {
         optionsButton.setBackground(0x33ffffff);
     }
 
-    private MainMenuScreen getMainMenuScreen(){
+    private MainMenuScreen getMainMenuScreen() {
         return ((MainMenuScreen) getParentScreen());
     }
 
@@ -72,11 +76,11 @@ public class MainMenuHeaderPanel extends TPanel {
         super.layout();
     }
 
-    public FocusSensitiveImageSelectButton getHomeButton() {
+    public TFocusSensitiveImageSelectButton getHomeButton() {
         return homeButton;
     }
 
-    public FocusSensitiveImageSelectButton getOperatorsButton() {
+    public TFocusSensitiveImageSelectButton getOperatorsButton() {
         return operatorsButton;
     }
 }

@@ -1,9 +1,10 @@
 package cn.ussshenzhou.rainbow6.client.gui.panel;
 
+import cn.ussshenzhou.rainbow6.client.gui.GuiUtil;
 import cn.ussshenzhou.rainbow6.client.gui.screen.MainMenuScreen;
 import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
-import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
-import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageButton;
+import cn.ussshenzhou.t88.gui.advanced.TFocusSensitiveImageSelectButton;
+import cn.ussshenzhou.t88.gui.advanced.THoverSensitiveImageButton;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
@@ -15,39 +16,39 @@ import net.minecraft.resources.ResourceLocation;
  * @author USS_Shenzhou
  */
 public class MainMenuHomePanel extends TPanel {
-    private final HoverSensitiveImageButton playButton = new HoverSensitiveImageButton(
+    private final THoverSensitiveImageButton playButton = new THoverSensitiveImageButton(
             Component.translatable("gui.r6ms.main_menu.home.play"),
             pButton -> {
                 //TODO open modeSelectPanel
                 RoundPrepareScreen.newRoundPrepareScreenAndShow();
 
             },
-            new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+            GuiUtil.buttonStdUnhovered(),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")
     );
     /**
      * TODO This should be PlayLastPlayedModeButton. To simplify, we make it just start quick match.
      */
-    private final HoverSensitiveImageButton playQuickMatchButton = new HoverSensitiveImageButton(
+    private final THoverSensitiveImageButton playQuickMatchButton = new THoverSensitiveImageButton(
             Component.translatable("gui.r6ms.main_menu.home.play_quick_match"),
             pButton -> {
                 startQueuing();
             },
-            new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+            GuiUtil.buttonStdUnhovered(),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png"));
-    private final FocusSensitiveImageSelectButton queuing = new FocusSensitiveImageSelectButton(
+    private final TFocusSensitiveImageSelectButton queuing = new TFocusSensitiveImageSelectButton(
             Component.translatable("gui.r6ms.main_menu.home.queuing"),
             pButton -> {
             },
-            new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+            GuiUtil.buttonStdUnhovered(),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")
     );
-    private final HoverSensitiveImageButton cancelButton = new HoverSensitiveImageButton(
+    private final THoverSensitiveImageButton cancelButton = new THoverSensitiveImageButton(
             Component.translatable("gui.r6ms.main_menu.home.cancel_match"),
             pButton -> {
                 stopQueuing();
             },
-            new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+            GuiUtil.buttonStdUnhovered(),
             new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button38_hovered.png")) {
         @Override
         public void tickT() {
@@ -57,10 +58,11 @@ public class MainMenuHomePanel extends TPanel {
     };
 
     public MainMenuHomePanel() {
-        playButton.setPadding(R6Constants.PADDING_STD);
+        playButton.setPadding(R6Constants.PADDING_STD)
+                .getText().setHorizontalAlignment(HorizontalAlignment.LEFT);
         this.add(playButton);
-        playQuickMatchButton.setPadding(R6Constants.PADDING_STD);
-        playQuickMatchButton.getText().setFontSize(R6Constants.FONT_SMALL_3);
+        playQuickMatchButton.setPadding(R6Constants.PADDING_STD)
+                .getText().setFontSize(R6Constants.FONT_SMALL_3).setHorizontalAlignment(HorizontalAlignment.LEFT);
         this.add(playQuickMatchButton);
         queuing.setPadding(R6Constants.PADDING_STD);
         queuing.setSelected(true);

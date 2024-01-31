@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.ClientHooks;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
@@ -22,7 +23,7 @@ import java.util.Stack;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ScreenManager {
     private static final Stack<TScreen> SCREEN_STACK = new Stack<>();
-    public static MainMenuScreen mainMenuScreenBuffer = null;
+    public static MainMenuScreen mainMenuScreen = null;
     private static Stack<Screen> screenBuffer = new Stack<>();
     public static PlayerInfoBarHud playerInfoBarHud = null;
 
@@ -91,18 +92,19 @@ public class ScreenManager {
     }
 
     @SubscribeEvent
-    public static void onPlayerOut(PlayerEvent.PlayerLoggedOutEvent event) {
+    public static void onPlayerOut(ClientPlayerNetworkEvent.LoggingOut event) {
         SCREEN_STACK.clear();
-        mainMenuScreenBuffer = null;
+        mainMenuScreen = null;
         screenBuffer.clear();
     }
 
     public static void openMainMenuScreen() {
-        if (mainMenuScreenBuffer == null) {
-            showNewLayerClearBg(new MainMenuScreen());
+        if (mainMenuScreen == null) {
+            mainMenuScreen = new MainMenuScreen();
+            showNewLayerClearBg(mainMenuScreen);
         } else {
-            showNewLayerClearBg(mainMenuScreenBuffer);
-            HudManager.remove(mainMenuScreenBuffer.queuingForMatchBar);
+            showNewLayerClearBg(mainMenuScreen);
+            HudManager.remove(mainMenuScreen.queuingForMatchBar);
         }
     }
 }

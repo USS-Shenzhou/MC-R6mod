@@ -1,12 +1,14 @@
 package cn.ussshenzhou.rainbow6.client.gui.panel;
 
 import cn.ussshenzhou.rainbow6.client.gui.DynamicTextureWithMapData;
+import cn.ussshenzhou.rainbow6.client.gui.GuiUtil;
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
-import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
+import cn.ussshenzhou.t88.gui.advanced.TFocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.config.Map;
 import cn.ussshenzhou.rainbow6.util.MapTopViewHelper;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
+import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import org.joml.Vector2i;
@@ -14,8 +16,6 @@ import cn.ussshenzhou.t88.gui.widegt.TButton;
 import cn.ussshenzhou.t88.gui.widegt.TImage;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import cn.ussshenzhou.t88.gui.widegt.TWidget;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -100,7 +100,7 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
             BombSiteButton[] buttons = bombSitePairs.keySet().toArray(new BombSiteButton[0]);
             for (int i = 0; i < bombSitePairs.size(); i++) {
                 BombSiteButton b = buttons[i];
-                b.setBounds(12, 65 + (23 - 4) * i, 119, 23);
+                b.setBounds(12, 65 + (23 - 4) * i, GuiUtil.button23PreferredSize());
                 Vector2i v1 = map.get(0).getScreenXY(b.site.getSubSite1Pos().getX(), b.site.getSubSite1Pos().getZ());
                 bombSitePairs.get(b)[0].setBounds(v1.x - 4, v1.y - 7, 8, 14);
                 Vector2i v2 = map.get(0).getScreenXY(b.site.getSubSite2Pos().getX(), b.site.getSubSite2Pos().getZ());
@@ -154,7 +154,7 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
         return new TImage(new ResourceLocation(R6Constants.MOD_ID, "textures/gui/bomb_site14_" + aOrb + ".png"));
     }
 
-    public class BombSiteButton extends FocusSensitiveImageSelectButton {
+    public class BombSiteButton extends TFocusSensitiveImageSelectButton {
         private boolean enable = true;
         private final TLabel prefix = new TLabel(Component.literal(Minecraft.getInstance().options.forceUnicodeFont().get() ? " ◎ " : " ⭘ "));
         private final Map.BombSite site;
@@ -163,7 +163,7 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
             super(Component.translatable("    " + site.getSubSite1Name() + "\n    " + site.getSubSite2Name()),
                     pButton -> {
                     },
-                    new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+                    GuiUtil.buttonStdUnhovered(),
                     new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button23_hovered.png"));
             prefix.setFontSize(R6Constants.FONT_SMALL_3);
             this.add(prefix);
@@ -204,7 +204,9 @@ public class RoundPreLocationsPanelDefender extends RoundPreLocationsPanel {
             this.setPadding(R6Constants.PADDING_STD);
             this.getBackgroundImage().setAlpha(0.5f);
             this.getBackgroundImage().setImageFit(ImageFit.STRETCH);
-            this.getText().setFontSize(R6Constants.FONT_SMALL_3);
+            this.getText()
+                    .setFontSize(R6Constants.FONT_SMALL_3)
+                    .setHorizontalAlignment(HorizontalAlignment.LEFT);
             this.site = site;
         }
 

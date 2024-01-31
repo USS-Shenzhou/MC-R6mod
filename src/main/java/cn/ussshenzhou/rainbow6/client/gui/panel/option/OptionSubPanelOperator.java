@@ -7,8 +7,8 @@ import net.minecraft.network.chat.Component;
 /**
  * @author USS_Shenzhou
  */
-public class OptionsPanelOperator extends OptionsPanel {
-    public OptionsPanelOperator() {
+public class OptionSubPanelOperator extends OptionSubPanel {
+    public OptionSubPanelOperator() {
         super();
     }
 

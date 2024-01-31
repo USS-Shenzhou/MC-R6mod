@@ -1,14 +1,16 @@
 package cn.ussshenzhou.rainbow6.client.gui.panel;
 
 import cn.ussshenzhou.rainbow6.client.gui.DynamicTextureWithMapData;
+import cn.ussshenzhou.rainbow6.client.gui.GuiUtil;
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
 import cn.ussshenzhou.rainbow6.client.gui.screen.RoundPrepareScreen;
-import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
+import cn.ussshenzhou.t88.gui.advanced.TFocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.config.Map;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.ChooseAttackerSpawnPacket;
 import cn.ussshenzhou.rainbow6.util.MapTopViewHelper;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
+import cn.ussshenzhou.t88.gui.util.HorizontalAlignment;
 import cn.ussshenzhou.t88.gui.util.ImageFit;
 import org.joml.Vector2i;
 import cn.ussshenzhou.t88.gui.widegt.TButton;
@@ -75,7 +77,7 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
         if (map != null) {
             SpawnPosButton[] buttons = spawnPosPairs.keySet().toArray(new SpawnPosButton[0]);
             for (int i = 0; i < spawnPosPairs.size(); i++) {
-                buttons[i].setBounds(12, 65 + (23 - 4) * i, 119, 23);
+                buttons[i].setBounds(12, 65 + (23 - 4) * i, GuiUtil.button23PreferredSize());
                 SpawnPosSign sign = spawnPosPairs.get(buttons[i]);
                 Vector2i v = map.getScreenXY(sign.pos.getSpawnPosPos().getX(), sign.pos.getSpawnPosPos().getZ());
                 sign.setBounds(v.x - 9, v.y - 9, 18, 18);
@@ -98,17 +100,17 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
         super.renderBackground(graphics, pMouseX, pMouseY, pPartialTick);
     }
 
-    private class SpawnPosButton extends FocusSensitiveImageSelectButton {
+    private class SpawnPosButton extends TFocusSensitiveImageSelectButton {
 
         public SpawnPosButton(Map.SpawnPos pos) {
             super(Component.translatable(Minecraft.getInstance().options.forceUnicodeFont().get() ? " ◎ " : " ⭘ " + pos.getSpawnPosName()),
                     pButton -> setSelectedPos((SpawnPosButton) ((TButton) pButton).getParent()),
-                    new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+                    GuiUtil.buttonStdUnhovered(),
                     new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button23_hovered.png"));
             this.setPadding(R6Constants.PADDING_STD);
             this.getBackgroundImage().setAlpha(0.5f);
             this.getBackgroundImage().setImageFit(ImageFit.STRETCH);
-            this.getText().setFontSize(R6Constants.FONT_SMALL_3);
+            this.getText().setFontSize(R6Constants.FONT_SMALL_3).setHorizontalAlignment(HorizontalAlignment.LEFT);
         }
 
         @Override
@@ -118,7 +120,7 @@ public class RoundPreLocationsPanelAttacker extends RoundPreLocationsPanel {
         }
     }
 
-    public class SpawnPosSign extends FocusSensitiveImageSelectButton {
+    public class SpawnPosSign extends TFocusSensitiveImageSelectButton {
         private final Map.SpawnPos pos;
         private boolean relatedHover = false;
 

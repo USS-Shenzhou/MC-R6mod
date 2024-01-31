@@ -1,8 +1,8 @@
 package cn.ussshenzhou.rainbow6.client.gui.screen;
 
-import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageButton;
-import cn.ussshenzhou.rainbow6.client.gui.widget.HoverSensitiveImageButton1;
+import cn.ussshenzhou.rainbow6.client.gui.GuiUtil;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
+import cn.ussshenzhou.t88.gui.advanced.THoverSensitiveImageButton;
 import cn.ussshenzhou.t88.gui.util.LayoutHelper;
 import cn.ussshenzhou.t88.gui.widegt.TLabel;
 import cn.ussshenzhou.t88.gui.widegt.TPanel;
@@ -59,29 +59,29 @@ public class AttentionScreen extends AbstractR6Screen {
         return panel.detailMessage;
     }
 
-    public HoverSensitiveImageButton getConfirm() {
+    public THoverSensitiveImageButton getConfirm() {
         return panel.confirmButton;
     }
 
-    public HoverSensitiveImageButton getCancel() {
+    public THoverSensitiveImageButton getCancel() {
         return panel.cancelButton;
     }
 
     private class Panel extends TPanel {
         private final TLabel abstractMessage = new TLabel();
         private final TLabel detailMessage = new TLabel();
-        private final HoverSensitiveImageButton confirmButton = new HoverSensitiveImageButton1(
+        private final THoverSensitiveImageButton confirmButton = new THoverSensitiveImageButton(
                 Component.translatable("gui.r6ms.confirm"),
                 pButton -> {
                 },
-                new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+                GuiUtil.buttonStdUnhovered(),
                 new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_17_hovered.png")
         );
-        private final HoverSensitiveImageButton cancelButton = new HoverSensitiveImageButton1(
+        private final THoverSensitiveImageButton cancelButton = new THoverSensitiveImageButton(
                 Component.translatable("gui.r6ms.cancel"),
                 pButton -> {
                 },
-                new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_std_unhovered.png"),
+                GuiUtil.buttonStdUnhovered(),
                 new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button_17_hovered.png")
         );
 

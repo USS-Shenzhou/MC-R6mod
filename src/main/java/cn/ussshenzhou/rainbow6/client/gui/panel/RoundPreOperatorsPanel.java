@@ -1,6 +1,6 @@
 package cn.ussshenzhou.rainbow6.client.gui.panel;
 
-import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
+import cn.ussshenzhou.t88.gui.advanced.TFocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.network.onlyto.server.ChooseOperatorPacket;
 import cn.ussshenzhou.rainbow6.util.Operator;
@@ -76,7 +76,7 @@ public class RoundPreOperatorsPanel extends TPanel {
         }
     }
 
-    public static class OperatorIconButton extends FocusSensitiveImageSelectButton {
+    public static class OperatorIconButton extends TFocusSensitiveImageSelectButton {
         Operator operator;
 
         public OperatorIconButton(Operator operator) {

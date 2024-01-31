@@ -11,9 +11,9 @@ import java.util.List;
 /**
  * @author USS_Shenzhou
  */
-public class OptionsPanelControls extends OptionsPanel {
+public class OptionSubPanelControls extends OptionSubPanel {
 
-    public OptionsPanelControls() {
+    public OptionSubPanelControls() {
         super();
     }
 

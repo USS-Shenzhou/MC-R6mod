@@ -3,7 +3,7 @@ package cn.ussshenzhou.rainbow6.client.gui.screen;
 import cn.ussshenzhou.rainbow6.client.gui.ScreenManager;
 import cn.ussshenzhou.rainbow6.client.gui.hud.PlayerInfoBarHud;
 import cn.ussshenzhou.rainbow6.client.gui.panel.*;
-import cn.ussshenzhou.rainbow6.client.gui.widget.FocusSensitiveImageSelectButton;
+import cn.ussshenzhou.t88.gui.advanced.TFocusSensitiveImageSelectButton;
 import cn.ussshenzhou.rainbow6.client.match.ClientMatch;
 import cn.ussshenzhou.rainbow6.util.R6Constants;
 import cn.ussshenzhou.rainbow6.util.Side;
@@ -27,26 +27,26 @@ public class RoundPrepareScreen extends AbstractR6Screen {
     private final TLabel header = new TLabel(Component.literal(ClientMatch.getMap().getName() + "  "));
     private static final ResourceLocation UNSELECTED_BUTTON = new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button18_cutout_unselected14.png");
     private static final ResourceLocation SELECTED_BUTTON = new ResourceLocation(R6Constants.MOD_ID, "textures/gui/button18_cutout_selected_centered.png");
-    private final FocusSensitiveImageSelectButton locationsButton = new FocusSensitiveImageSelectButton(
+    private final TFocusSensitiveImageSelectButton locationsButton = new TFocusSensitiveImageSelectButton(
             Component.translatable("gui.r6ms.round_prepare.locations"),
             pButton -> {
-                setButtonSelectedAndPanelVisible((FocusSensitiveImageSelectButton) ((TButton) pButton).getParent(), getLocationsPanel());
+                setButtonSelectedAndPanelVisible((TFocusSensitiveImageSelectButton) ((TButton) pButton).getParent(), getLocationsPanel());
             },
             UNSELECTED_BUTTON,
             SELECTED_BUTTON
     );
-    private final FocusSensitiveImageSelectButton operatorsButton = new FocusSensitiveImageSelectButton(
+    private final TFocusSensitiveImageSelectButton operatorsButton = new TFocusSensitiveImageSelectButton(
             Component.translatable("gui.r6ms.round_prepare.operators"),
             pButton -> {
-                setButtonSelectedAndPanelVisible((FocusSensitiveImageSelectButton) ((TButton) pButton).getParent(), getOperatorsPanel());
+                setButtonSelectedAndPanelVisible((TFocusSensitiveImageSelectButton) ((TButton) pButton).getParent(), getOperatorsPanel());
             },
             UNSELECTED_BUTTON,
             SELECTED_BUTTON
     );
-    private final FocusSensitiveImageSelectButton loadoutButton = new FocusSensitiveImageSelectButton(
+    private final TFocusSensitiveImageSelectButton loadoutButton = new TFocusSensitiveImageSelectButton(
             Component.translatable("gui.r6ms.round_prepare.loadout"),
             pButton -> {
-                setButtonSelectedAndPanelVisible((FocusSensitiveImageSelectButton) ((TButton) pButton).getParent(), getLoadoutPanel());
+                setButtonSelectedAndPanelVisible((TFocusSensitiveImageSelectButton) ((TButton) pButton).getParent(), getLoadoutPanel());
             },
             UNSELECTED_BUTTON,
             SELECTED_BUTTON
@@ -57,7 +57,6 @@ public class RoundPrepareScreen extends AbstractR6Screen {
 
     protected RoundPrepareScreen() {
         super("RoundPrepareScreen");
-        initiatePlayerInfoBar();
         locationsPanel = ClientMatch.getSide() == Side.ATTACKER
                 ? new RoundPreLocationsPanelAttacker()
                 : new RoundPreLocationsPanelDefender();
@@ -89,11 +88,14 @@ public class RoundPrepareScreen extends AbstractR6Screen {
         CompletableFuture.runAsync(() -> {
             while (!a.locationsPanel.isReady()) {
             }
-            Minecraft.getInstance().execute(() -> loadingScreen.onClose(true));
+            Minecraft.getInstance().execute(() -> {
+                loadingScreen.onClose(true);
+                initiatePlayerInfoBar();
+            });
         });
     }
 
-    private void initiatePlayerInfoBar() {
+    private static void initiatePlayerInfoBar() {
         ScreenManager.playerInfoBarHud = new PlayerInfoBarHud(40);
         HudManager.add(ScreenManager.playerInfoBarHud);
     }
@@ -110,7 +112,7 @@ public class RoundPrepareScreen extends AbstractR6Screen {
         super.layout();
     }
 
-    public void setButtonSelectedAndPanelVisible(FocusSensitiveImageSelectButton button, TPanel tPanel) {
+    public void setButtonSelectedAndPanelVisible(TFocusSensitiveImageSelectButton button, TPanel tPanel) {
         Stream.of(locationsButton, operatorsButton, loadoutButton).forEach(b -> b.setSelected(false));
         button.setSelected(true);
         Stream.of(locationsPanel, operatorsPanel, loadoutPanel).forEach(b -> b.setVisibleT(false));
@@ -129,15 +131,15 @@ public class RoundPrepareScreen extends AbstractR6Screen {
         return loadoutPanel;
     }
 
-    public FocusSensitiveImageSelectButton getLocationsButton() {
+    public TFocusSensitiveImageSelectButton getLocationsButton() {
         return locationsButton;
     }
 
-    public FocusSensitiveImageSelectButton getOperatorsButton() {
+    public TFocusSensitiveImageSelectButton getOperatorsButton() {
         return operatorsButton;
     }
 
-    public FocusSensitiveImageSelectButton getLoadoutButton() {
+    public TFocusSensitiveImageSelectButton getLoadoutButton() {
         return loadoutButton;
     }
 }

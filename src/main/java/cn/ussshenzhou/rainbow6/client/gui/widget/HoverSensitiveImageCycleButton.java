@@ -1,5 +1,6 @@
 package cn.ussshenzhou.rainbow6.client.gui.widget;
 
+import cn.ussshenzhou.t88.gui.advanced.THoverSensitiveImageButton;
 import cn.ussshenzhou.t88.gui.event.TWidgetContentUpdatedEvent;
 import cn.ussshenzhou.t88.gui.widegt.TCycleButton;
 import net.minecraft.client.gui.GuiGraphics;
@@ -11,7 +12,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 /**
  * @author USS_Shenzhou
  */
-public class HoverSensitiveImageCycleButton<E> extends HoverSensitiveImageButton {
+public class HoverSensitiveImageCycleButton<E> extends THoverSensitiveImageButton {
 
     public HoverSensitiveImageCycleButton(ResourceLocation backgroundImageLocation, ResourceLocation backgroundImageLocationHovered) {
         super(Component.literal(""), pButton -> {

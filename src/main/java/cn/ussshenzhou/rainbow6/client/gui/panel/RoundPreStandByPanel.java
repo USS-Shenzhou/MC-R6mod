@@ -5,6 +5,6 @@ import cn.ussshenzhou.t88.gui.widegt.TPanel;
 /**
  * @author USS_Shenzhou
  */
-public class RoundPreOperatorInfoPanel extends TPanel {
+public class RoundPreStandByPanel extends TPanel {
     //TODO
 }

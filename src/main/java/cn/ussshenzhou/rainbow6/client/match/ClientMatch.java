@@ -54,8 +54,8 @@ public class ClientMatch {
     }
 
     private static void notifyGui() {
-        ScreenManager.mainMenuScreenBuffer.queuingForMatchBar.showGetQueued();
-        ScreenManager.mainMenuScreenBuffer.stopQueuing();
+        ScreenManager.mainMenuScreen.queuingForMatchBar.showGetQueued();
+        ScreenManager.mainMenuScreen.stopQueuing();
         ScreenManager.clearLayers();
         ScreenManager.showNewLayerClearBg(new MatchBeginMapSceneScreen());
         //TODO disable food hud
